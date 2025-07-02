@@ -1,0 +1,18 @@
+.interview{
+    position: absolute;
+    top: 12vh;
+    left: 20vw;
+    width: 79vw;
+    height: 83vh;
+    border-radius: 2vw;
+    overflow: auto;
+    padding: 1vw; 
+}
+.interview::-webkit-scrollbar{
+    display: none;
+}
+.interview h1{
+    font-size: 2vw;
+    font-family: inter;
+    color: #200b43;
+}
