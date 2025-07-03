@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import LoginPage from "./Components/LogIn/login";
+import LoginPage from "./Components/LogIn/Login";
 import Dashboard from "./Pages/AdminSidePages/Dashboard/Dashboard";
 import QuestionCreation from "./Pages/AdminSidePages/QuestionsCreation/QuestionCreation";
 import QuestionsManage from "./Pages/AdminSidePages/ManageQuestions/ManageQuestion";
