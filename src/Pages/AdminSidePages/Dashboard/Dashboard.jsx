@@ -16,16 +16,16 @@ const Dashboard = () => {
         <h2>Welcome to Admin Panel</h2>
         <div className="dashboard-buttons">
           <button
-            onClick={() => navigate("/questionCreation")}
+            onClick={() => navigate("/manageQuestion")}
             className="btn dashboard-btn"
           >
-            Go to Create Questions
+            Go to Questions Manage
           </button>
           <button
-            onClick={() => navigate("/managecareers")}
+            onClick={() => navigate("/manageQuestion")}
             className="btn dashboard-btn"
           >
-            Go to Careers Manage
+            Go to Users Manage
           </button>
           <button onClick={handleLogout} className="btn logout-btn">
             Sign Out

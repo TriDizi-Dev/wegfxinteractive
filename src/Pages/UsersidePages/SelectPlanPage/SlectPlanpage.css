@@ -1,0 +1,109 @@
+.plan-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 92vh;
+}
+
+.plan-container {
+    background-color: #1b1449;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    text-align: center;
+    width: 90%;
+    max-width: 500px;
+}
+
+.plan-container h2 {
+    margin-bottom: 25px;
+    color: aliceblue;
+}
+
+.plans {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.plan-card {
+    flex: 1 1 40%;
+    background-color: #2c2267;
+    padding: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.plan-card:hover {
+    background-color: #3a2e88;
+}
+
+.plan-card.active {
+    border: 2px solid #ff9d8d;
+    background-color: #3a2e88;
+}
+
+.plan-card h3 {
+    margin: 0;
+    font-size: 20px;
+     color: aliceblue;
+}
+
+.plan-card p {
+    font-size: 16px;
+    margin-top: 10px;
+     color: aliceblue;
+}
+
+.proceed-btn {
+    background-color: #ff9d8d;
+    color: #000;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.proceed-btn:hover {
+    background-color: #ff806b;
+}
+
+@media (max-width: 600px) {
+    .plan-container {
+        padding: 25px;
+    }
+
+    .plans {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .plan-card {
+        flex: 1 1 100%;
+        width: 100%;
+    }
+
+    .plan-card h3 {
+        font-size: 18px;
+    }
+
+    .plan-card p {
+        font-size: 14px;
+    }
+
+    .proceed-btn {
+        width: 100%;
+        font-size: 15px;
+        padding: 12px;
+    }
+
+    .plan-container h2 {
+        font-size: 20px;
+    }
+}

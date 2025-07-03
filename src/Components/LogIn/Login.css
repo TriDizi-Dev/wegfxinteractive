@@ -2,7 +2,7 @@
 
 
 .login-wrapper {
-  min-height: 98vh;
+  min-height: 92vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,7 +39,7 @@
 }
 
 .form-group input {
-  width: 100%;
+  width: 94%;
   padding: 12px;
   border: none;
   border-radius: 10px;
@@ -78,7 +78,45 @@
   cursor: pointer;
   font-size: 1.2rem;
 }
+.btn-google {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1rem;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+}
 
+.btn-google:hover {
+  background-color: #357ae8;
+}
+.or-divider {
+  text-align: center;
+  margin: 1rem 0;
+  position: relative;
+  font-size: 0.9rem;
+  color: #777;
+}
+.signup-toggle {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.toggle-button {
+  background: none;
+  border: none;
+  color: #937cb4;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.toggle-button:hover {
+  text-decoration: underline;
+}
 /* Mobile responsive styles */
 @media (max-width: 480px) {
   .login-container {

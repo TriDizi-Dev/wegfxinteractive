@@ -11,10 +11,41 @@ import {
   Typography,
 } from "@mui/material";
 import "./QuestionCreation.css";
-import { useState } from "react";
-import { database, push, ref, set, auth } from "../../../Firebase/firebase"; // adjust path if needed
+import { useEffect, useState } from "react";
+import {
+  database,
+  push,
+  ref,
+  set,
+  auth,
+  get,
+  update,
+} from "../../../Firebase/firebase"; // adjust path if needed
+import { useNavigate, useParams } from "react-router-dom";
 
 const QuestionCreation = () => {
+  const { id } = useParams(); // will be undefined for create
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (id) {
+      const fetchQuestion = async () => {
+        try {
+          const snapshot = await get(ref(database, `questions/${id}`));
+          if (snapshot.exists()) {
+            setData(snapshot.val());
+          } else {
+            setError("Question not found.");
+          }
+        } catch (err) {
+          console.error("Error fetching question:", err);
+          setError("Failed to load question.");
+        }
+      };
+      fetchQuestion();
+    }
+  }, [id]);
+
   const [data, setData] = useState({
     question: "",
     option1: "",
@@ -51,44 +82,36 @@ const QuestionCreation = () => {
     if (!validateData()) return;
     const user = auth.currentUser;
     if (!user) {
-      setError("You must be logged in to submit a question.");
+      setError("You must be logged in.");
       return;
     }
 
-    const questionsRef = ref(database, "questions"); // 'questions' is your collection path
-    const newQuestionRef = push(questionsRef); // create a new unique key
-
     try {
-      await set(newQuestionRef, {
-        question: data.question,
-        option1: data.option1,
-        option2: data.option2,
-        option3: data.option3,
-        option4: data.option4,
-        answer: data.answer,
-        question_type: data.question_type,
+      const questionsRef = id
+        ? ref(database, `questions/${id}`)
+        : push(ref(database, "questions"));
+
+      const payload = {
+        ...data,
         createdBy: {
           uid: user.uid,
           email: user.email,
         },
-      });
+      };
 
-      // Reset form after successful save
-      setData({
-        question: "",
-        option1: "",
-        option2: "",
-        option3: "",
-        option4: "",
-        answer: "",
-        question_type: "",
-      });
+      if (id) {
+        await update(questionsRef, payload);
+        alert("Question updated successfully!");
+      } else {
+        await set(questionsRef, payload);
+        alert("Question created successfully!");
+      }
 
       setError("");
-      alert("Question saved successfully!"); // You can replace this with your popup
-    } catch (error) {
-      console.error("Error saving question:", error);
-      setError("Failed to save question. Please try again.");
+      navigate("/manageQuestion"); // redirect back to list
+    } catch (err) {
+      console.error("Error saving/updating question:", err);
+      setError("Operation failed. Try again.");
     }
   };
 
@@ -176,8 +199,8 @@ const QuestionCreation = () => {
                   required
                 />
               </Grid>
-              <Grid item xs={6}>
-                <FormControl fullWidth required>
+              <Grid item  xs={12} sm={6}>
+                <FormControl required>
                   <InputLabel id="type-label">Question Type</InputLabel>
                   <Select
                     labelId="type-label"
@@ -188,6 +211,9 @@ const QuestionCreation = () => {
                   >
                     <MenuItem value="Technical">Technical</MenuItem>
                     <MenuItem value="NonTechnical">Non-Technical</MenuItem>
+                    <MenuItem value="GeneralKnowledge">
+                      GeneralKnowledge
+                    </MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
@@ -206,97 +232,6 @@ const QuestionCreation = () => {
           </Grid>
         </Box>
       </Container>
-      {/* <h1>Upload Designs</h1> */}
-      {/* <Container>
-        <Box sx={{ display: "flex", gap: "2vw", marginTop: "2vh" }}>
-          <Box sx={{ width: "30vw" }}>
-            <input
-              accept="image/*"
-              style={{ display: "none" }}
-              id="design-upload"
-              type="file"
-              onChange={handleDesignUpload}
-            />
-            <label htmlFor="design-upload">
-              <Button
-                variant="contained"
-                component="span"
-                style={{ color: "#ffffff", backgroundColor: "#937CB4" }}
-              >
-                <CloudUploadIcon />
-                Upload Design
-              </Button>
-            </label>
-
-            {MainImgdata.image_URL && (
-              <div>
-                <img
-                  src={MainImgdata.image_URL}
-                  alt="Design"
-                  width="100"
-                  height="50"
-                />
-              </div>
-            )}
-          </Box>
-
-          <Box sx={{ width: "60vw" }}>
-            <input
-              accept="image/*"
-              style={{ display: "none" }}
-              id="assets-upload"
-              type="file"
-              onChange={handleAssetsUpload}
-              multiple
-            />
-            <label htmlFor="assets-upload">
-              <Button
-                variant="contained"
-                component="span"
-                style={{ color: "#ffffff", backgroundColor: "#937CB4" }}
-              >
-                <CloudUploadIcon />
-                Upload Assets
-              </Button>
-            </label>
-
-            {AssetsData.image_URL.length > 0 && (
-              <Box
-                sx={{
-                  display: "flex",
-                  gap: 1,
-                  mt: 2,
-                  width: "65vw",
-                  flexWrap: "wrap",
-                }}
-              >
-                {AssetsData.image_URL.map((img, index) => (
-                  <img
-                    key={index}
-                    src={img}
-                    alt={`Asset ${index}`}
-                    width="100"
-                    height="50"
-                  />
-                ))}
-              </Box>
-            )}
-          </Box>
-        </Box>
-        <Button
-          variant="contained"
-          size="large"
-          onClick={uploadImages}
-          style={{
-            color: "#ffffff",
-            backgroundColor: "#937CB4",
-            marginTop: "2vh",
-          }}
-        >
-          Submit
-        </Button>
-      </Container> */}
-      {/* <SeccessComponent ref={popupRef} /> */}
     </div>
   );
 };
