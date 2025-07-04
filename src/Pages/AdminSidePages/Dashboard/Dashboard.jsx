@@ -1,34 +1,72 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Dashboard.css";
 import { useNavigate } from "react-router-dom";
+import { auth, database } from "../../../Firebase/firebase";
+import { ref, get } from "firebase/database";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const [adminEmail, setAdminEmail] = useState("");
+
+  useEffect(() => {
+    const fetchAdminInfo = async () => {
+      const user = auth.currentUser;
+
+      if (user) {
+        const snapshot = await get(ref(database, `users/${user.uid}`));
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          if (data.role === "admin") {
+            setAdminEmail(data.email || user.email);
+          } else {
+            navigate("/"); // Redirect non-admin users
+          }
+        } else {
+          navigate("/"); // Redirect if user info is missing
+        }
+      } else {
+        navigate("/"); // Not logged in
+      }
+    };
+
+    fetchAdminInfo();
+  }, [navigate]);
 
   const handleLogout = () => {
-    sessionStorage.removeItem("authToken");
+    try {
+      sessionStorage.removeItem("authToken");
+      localStorage.removeItem("authToken");
+      sessionStorage.removeItem("userType");
+      localStorage.removeItem("userType");
+    } catch (e) {
+      console.warn("Failed to clear session/local storage:", e);
+    }
     navigate("/");
   };
 
   return (
     <div className="dashboard-wrapper">
       <div className="dashboard-container">
-        <h2>Welcome to Admin Panel</h2>
+        <h2> Admin Dashboard</h2>
+        {adminEmail && (
+          <p className="admin-email"> Logged in as: <strong>{adminEmail}</strong></p>
+        )}
+
         <div className="dashboard-buttons">
           <button
             onClick={() => navigate("/manageQuestion")}
             className="btn dashboard-btn"
           >
-            Go to Questions Manage
+           Manage Questions
           </button>
           <button
             onClick={() => navigate("/userDetails")}
             className="btn dashboard-btn"
           >
-            Go to Users Manage
+             View Users
           </button>
           <button onClick={handleLogout} className="btn logout-btn">
-            Sign Out
+             Sign Out
           </button>
         </div>
       </div>

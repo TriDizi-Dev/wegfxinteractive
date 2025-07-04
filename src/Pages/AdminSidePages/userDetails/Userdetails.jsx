@@ -69,7 +69,9 @@ const UserDetails = () => {
         .filter(([uid]) => uid !== auth.currentUser?.uid)
         .map(([uid, user]) => (
           <div key={uid} className="user-card">
-            <h2 className="user-email">📧 {user.email}</h2>
+            <h2 className="user-email" title={user.email}>
+              📧 {user.email}
+            </h2>
 
             <div className="info-grid">
               <div>
@@ -125,8 +127,9 @@ const UserDetails = () => {
                           <strong>
                             {moment(result.date).format("DD MMM YYYY, h:mm A")}
                           </strong>{" "}
-                          — ✅ {result.correctAnswers} / {result.totalQuestions}{" "}
-                          correct, ❌ {result.wrongAnswers} wrong
+                          — ✅ {result.correctAnswers} /{" "}
+                          {result.totalQuestions} correct, ❌ {result.wrongAnswers} wrong,
+                          🧮 Total Score: {(result.correctAnswers)*10}
                         </li>
                       ))}
                     </ul>

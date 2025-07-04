@@ -4,6 +4,10 @@ import {
   Box,
   Button,
   IconButton,
+  useMediaQuery,
+  Card,
+  CardContent,
+  Typography,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
@@ -13,86 +17,7 @@ import { useEffect, useState } from "react";
 
 const QuestionsManage = () => {
   const navigate = useNavigate();
-
-  const columns = [
-    {
-      field: "question",
-      headerName: "Question",
-      flex: 1,
-      cellClassName: "name-column--cell",
-      headerClassName: "super-app-theme--header",
-      align: "center",
-      headerAlign: "center",
-    },
-    {
-      field: "option1",
-      headerName: "Option 1",
-      flex: 1,
-      cellClassName: "name-column--cell",
-      headerClassName: "super-app-theme--header",
-      align: "center",
-      headerAlign: "center",
-    },
-    {
-      field: "option2",
-      headerName: "Option 2",
-      flex: 1,
-      headerClassName: "super-app-theme--header",
-      align: "center",
-      headerAlign: "center",
-    },
-    {
-      field: "option3",
-      headerName: "Option 3",
-      flex: 1,
-      headerClassName: "super-app-theme--header",
-      align: "center",
-      headerAlign: "center",
-    },
-    {
-      field: "option4",
-      headerName: "Option 4",
-      flex: 1,
-      headerClassName: "super-app-theme--header",
-      align: "center",
-      headerAlign: "center",
-    },
-    {
-      field: "question_type",
-      headerName: "Type",
-      flex: 1,
-      headerClassName: "super-app-theme--header",
-      align: "center",
-      headerAlign: "center",
-    },
-    {
-      field: "answer",
-      headerName: "Answer",
-      flex: 1,
-      headerClassName: "super-app-theme--header",
-      align: "center",
-      headerAlign: "center",
-    },
-    {
-      field: "actions",
-      headerName: "Actions",
-      flex: 1,
-      align: "center",
-      headerAlign: "center",
-      headerClassName: "super-app-theme--header",
-      renderCell: (params) => (
-        <Box display="flex" gap={1}>
-          <IconButton onClick={() => deleteQuestion(params.row.id)}>
-            <DeleteIcon sx={{ "&:active": { color: "#FFBF00" } }} />
-          </IconButton>
-          <IconButton component={Link} to={`/questionCreation/${params.row.id}`}>
-            <EditIcon />
-          </IconButton>
-        </Box>
-      ),
-    },
-  ];
-
+  const isMobile = useMediaQuery("(max-width: 768px)");
   const [rows, setRows] = useState([]);
 
   useEffect(() => {
@@ -121,6 +46,41 @@ const QuestionsManage = () => {
     }
   };
 
+  const columns = [
+    {
+      field: "question",
+      headerName: "Question",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+      headerClassName: "super-app-theme--header",
+    },
+    { field: "option1", headerName: "Option 1", flex: 1, headerAlign: "center", align: "center", headerClassName: "super-app-theme--header" },
+    { field: "option2", headerName: "Option 2", flex: 1, headerAlign: "center", align: "center", headerClassName: "super-app-theme--header" },
+    { field: "option3", headerName: "Option 3", flex: 1, headerAlign: "center", align: "center", headerClassName: "super-app-theme--header" },
+    { field: "option4", headerName: "Option 4", flex: 1, headerAlign: "center", align: "center", headerClassName: "super-app-theme--header" },
+    { field: "question_type", headerName: "Type", flex: 1, headerAlign: "center", align: "center", headerClassName: "super-app-theme--header" },
+    { field: "answer", headerName: "Answer", flex: 1, headerAlign: "center", align: "center", headerClassName: "super-app-theme--header" },
+    {
+      field: "actions",
+      headerName: "Actions",
+      flex: 1,
+      align: "center",
+      headerAlign: "center",
+      headerClassName: "super-app-theme--header",
+      renderCell: (params) => (
+        <Box display="flex" gap={1}>
+          <IconButton onClick={() => deleteQuestion(params.row.id)}>
+            <DeleteIcon sx={{ "&:active": { color: "#FFBF00" } }} />
+          </IconButton>
+          <IconButton component={Link} to={`/questionCreation/${params.row.id}`}>
+            <EditIcon />
+          </IconButton>
+        </Box>
+      ),
+    },
+  ];
+
   return (
     <div className="Question_Main_container">
       <Box
@@ -128,10 +88,9 @@ const QuestionsManage = () => {
         justifyContent="space-between"
         alignItems="center"
         padding="1.5rem"
+        flexWrap="wrap"
       >
-        <h2 style={{ color: "#4b3c69", margin: 0, fontSize: "1.5rem" }}>
-          Manage Interview Questions
-        </h2>
+        <h2 className="manage-title">Manage Interview Questions</h2>
         <Button
           variant="contained"
           onClick={() => navigate("/questionCreation")}
@@ -146,52 +105,86 @@ const QuestionsManage = () => {
             "&:hover": {
               backgroundColor: "#7a64a6",
             },
+            marginTop: { xs: "1rem", md: 0 },
           }}
         >
           + Create Question
         </Button>
       </Box>
 
-      <Box
-        m="1rem auto"
-        height="70vh"
-        width="95%"
-        borderRadius="12px"
-        sx={{
-          
-          "& .MuiDataGrid-columnHeaders": {
-            borderBottom: "none",
-          },
-          "& .MuiDataGrid-cell": {
-            borderBottom: "1px solid #eee",
-            fontSize: "13px",
-          },
-          "& .MuiDataGrid-footerContainer": {
-            borderTop: "none",
-            backgroundColor: "#f1eef6",
-          },
-          "& .MuiDataGrid-row:hover": {
-            backgroundColor: "#f8f4ff",
-          },
-          "& .MuiIconButton-root:hover": {
-            backgroundColor: "#f3eaff",
-            transform: "scale(1.05)",
-            transition: "0.2s ease-in-out",
-          },
-        }}
-      >
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          getRowId={(row) => row.id}
-          rowHeight={40}
-          sx={{
-            textTransform: "capitalize",
-            backgroundColor: "#fff",
-            borderRadius: "12px",
-          }}
-        />
-      </Box>
+      {!isMobile ? (
+        <Box m="1rem auto" height="70vh" width="95%" borderRadius="12px">
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            getRowId={(row) => row.id}
+            rowHeight={40}
+            sx={{
+              textTransform: "capitalize",
+              backgroundColor: "#fff",
+              borderRadius: "12px",
+              "& .MuiDataGrid-columnHeaders": {
+                backgroundColor: "#937cb4 !important",
+                color: "#ffffff !important",
+                fontWeight: "bold",
+                fontSize: "14px",
+              },
+              "& .MuiDataGrid-cell": {
+                fontSize: "13px",
+              },
+              "& .MuiDataGrid-footerContainer": {
+                backgroundColor: "#f1eef6",
+              },
+              "& .MuiDataGrid-row:hover": {
+                backgroundColor: "#f8f4ff",
+              },
+              "& .MuiIconButton-root:hover": {
+                backgroundColor: "#f3eaff",
+                transform: "scale(1.05)",
+                transition: "0.2s ease-in-out",
+              },
+            }}
+          />
+        </Box>
+      ) : (
+        <Box m="1rem auto" width="95%">
+          {rows.map((row) => (
+            <Card key={row.id} sx={{ marginBottom: "1rem", background: "#fff3fc" }}>
+              <CardContent>
+                <Typography variant="subtitle1" fontWeight={600}>
+                  Q: {row.question}
+                </Typography>
+                <Typography variant="body2">1. {row.option1}</Typography>
+                <Typography variant="body2">2. {row.option2}</Typography>
+                <Typography variant="body2">3. {row.option3}</Typography>
+                <Typography variant="body2">4. {row.option4}</Typography>
+                <Typography variant="body2" fontWeight="bold" mt={1}>
+                  Type: {row.question_type} | Answer: {row.answer}
+                </Typography>
+                <Box display="flex" gap={2} mt={2}>
+                  <Button
+                    onClick={() => deleteQuestion(row.id)}
+                    variant="outlined"
+                    color="error"
+                    size="small"
+                  >
+                    Delete
+                  </Button>
+                  <Button
+                    component={Link}
+                    to={`/questionCreation/${row.id}`}
+                    variant="outlined"
+                    color="primary"
+                    size="small"
+                  >
+                    Edit
+                  </Button>
+                </Box>
+              </CardContent>
+            </Card>
+          ))}
+        </Box>
+      )}
     </div>
   );
 };

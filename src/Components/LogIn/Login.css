@@ -1,23 +1,22 @@
 /* Base styles */
 
-
 .login-wrapper {
   min-height: 92vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #050038;
+  background-color: #f5f0fa; /* light lavender background */
   padding: 20px;
 }
 
 .login-container {
-  background-color: #0e0b46;
+  background-color: #ffffff; /* white box */
   padding: 40px 30px;
   border-radius: 20px;
   width: 100%;
   max-width: 400px;
-  color: #fff;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  color: #3d3d3d;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
 .login-container h2 {
@@ -25,6 +24,7 @@
   margin-bottom: 30px;
   font-size: 28px;
   font-weight: 700;
+  color: #4b2aad; /* deep purple */
 }
 
 .form-group {
@@ -36,15 +36,16 @@
   margin-bottom: 8px;
   font-weight: 500;
   font-size: 15px;
+  color: #4b2aad;
 }
 
 .form-group input {
   width: 94%;
   padding: 12px;
-  border: none;
+  border: 1px solid #ccc;
   border-radius: 10px;
   font-size: 16px;
-  background-color: #fff;
+  background-color: #f9f9f9;
   color: #000;
 }
 
@@ -55,15 +56,16 @@
   font-weight: bold;
   border: none;
   border-radius: 10px;
-  background-color: #fdbdb3;
-  color: #050038;
+  background-color: #a78bfa; /* soft purple */
+  color: white;
   cursor: pointer;
   transition: 0.3s ease;
 }
 
 .btn-login:hover {
-  background-color: #f9a89d;
+  background-color: #8b69f4; /* darker hover */
 }
+
 .password-wrapper {
   position: relative;
 }
@@ -77,7 +79,9 @@
   border: none;
   cursor: pointer;
   font-size: 1.2rem;
+  color: #4b2aad;
 }
+
 .btn-google {
   width: 100%;
   padding: 0.75rem;
@@ -85,14 +89,16 @@
   background-color: #4285f4;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 10px;
   font-weight: 600;
   cursor: pointer;
+  font-size: 16px;
 }
 
 .btn-google:hover {
   background-color: #357ae8;
 }
+
 .or-divider {
   text-align: center;
   margin: 1rem 0;
@@ -100,6 +106,7 @@
   font-size: 0.9rem;
   color: #777;
 }
+
 .signup-toggle {
   text-align: center;
   margin-top: 1rem;
@@ -108,7 +115,7 @@
 .toggle-button {
   background: none;
   border: none;
-  color: #937cb4;
+  color: #6b46c1;
   font-weight: 600;
   cursor: pointer;
   font-size: 0.95rem;
@@ -117,6 +124,14 @@
 .toggle-button:hover {
   text-decoration: underline;
 }
+
+.error-message {
+  color: #e53935;
+  font-size: 0.9rem;
+  margin: 10px 0;
+  text-align: center;
+}
+
 /* Mobile responsive styles */
 @media (max-width: 480px) {
   .login-container {
@@ -132,7 +147,8 @@
     font-size: 15px;
   }
 
-  .btn-login {
+  .btn-login,
+  .btn-google {
     padding: 12px;
     font-size: 15px;
   }

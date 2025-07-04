@@ -132,7 +132,7 @@ const QuestionCreation = () => {
               item
               xs={12}
               sx={{
-                width: "100%",
+                width: "90%",
               }}
             >
               <TextField
@@ -209,10 +209,10 @@ const QuestionCreation = () => {
                     onChange={onChangeHandler}
                     label="Type"
                   >
-                    <MenuItem value="Technical">Technical</MenuItem>
-                    <MenuItem value="NonTechnical">Non-Technical</MenuItem>
-                    <MenuItem value="GeneralKnowledge">
-                      GeneralKnowledge
+                    <MenuItem value="3-5th-Grade">3-5th Grade</MenuItem>
+                    <MenuItem value="6-10th-Grade"> 6-10th Grade</MenuItem>
+                    <MenuItem value="General-Knowledge">
+                       General Knowledge
                     </MenuItem>
                   </Select>
                 </FormControl>

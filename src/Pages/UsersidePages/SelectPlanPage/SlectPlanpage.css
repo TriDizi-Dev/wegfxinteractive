@@ -1,109 +1,125 @@
+/* 🌟 Overall Wrapper */
 .plan-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 92vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 92vh;
+  background: linear-gradient(to bottom, #f0f4ff, #d6e0ff);
+  padding: 20px;
 }
 
+/* 📦 Card Container */
 .plan-container {
-    background-color: #1b1449;
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-    text-align: center;
-    width: 90%;
-    max-width: 500px;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  width: 90%;
+  max-width: 500px;
+  color: #2e2e3a;
 }
 
 .plan-container h2 {
-    margin-bottom: 25px;
-    color: aliceblue;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+  color: #3c3f88;
+  font-weight: 700;
 }
 
+/* 💳 Plan Cards */
 .plans {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
 }
 
 .plan-card {
-    flex: 1 1 40%;
-    background-color: #2c2267;
-    padding: 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.3s ease;
-    border: 2px solid transparent;
+  flex: 1 1 40%;
+  background-color: #f8f9ff;
+  padding: 20px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
 }
 
 .plan-card:hover {
-    background-color: #3a2e88;
+  background-color: #eef0ff;
 }
 
 .plan-card.active {
-    border: 2px solid #ff9d8d;
-    background-color: #3a2e88;
+  border: 2px solid #a66cff;
+  background-color: #f0eaff;
+  box-shadow: 0 0 10px rgba(166, 108, 255, 0.4);
 }
 
 .plan-card h3 {
-    margin: 0;
-    font-size: 20px;
-     color: aliceblue;
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #3c3f88;
 }
 
 .plan-card p {
-    font-size: 16px;
-    margin-top: 10px;
-     color: aliceblue;
+  font-size: 1rem;
+  margin-top: 10px;
+  color: #60668a;
 }
 
+/* 🚀 Proceed Button */
 .proceed-btn {
-    background-color: #ff9d8d;
-    color: #000;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.2s ease;
+  background: linear-gradient(to right, #6c63ff, #a66cff);
+  color: #fff;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  box-shadow: 0 4px 15px rgba(108, 99, 255, 0.4);
 }
 
 .proceed-btn:hover {
-    background-color: #ff806b;
+  background: linear-gradient(to right, #5a52e8, #9057f5);
 }
 
+/* 📱 Mobile Responsive */
 @media (max-width: 600px) {
-    .plan-container {
-        padding: 25px;
-    }
+  .plan-container {
+    padding: 25px 20px;
+  }
 
-    .plans {
-        flex-direction: column;
-        align-items: center;
-    }
+  .plans {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
 
-    .plan-card {
-        flex: 1 1 100%;
-        width: 100%;
-    }
+  .plan-card {
+    flex: 1 1 100%;
+    width: 100%;
+  }
 
-    .plan-card h3 {
-        font-size: 18px;
-    }
+  .plan-card h3 {
+    font-size: 1.1rem;
+  }
 
-    .plan-card p {
-        font-size: 14px;
-    }
+  .plan-card p {
+    font-size: 0.95rem;
+  }
 
-    .proceed-btn {
-        width: 100%;
-        font-size: 15px;
-        padding: 12px;
-    }
+  .proceed-btn {
+    width: 100%;
+    font-size: 1rem;
+    padding: 14px;
+  }
 
-    .plan-container h2 {
-        font-size: 20px;
-    }
+  .plan-container h2 {
+    font-size: 1.5rem;
+  }
 }

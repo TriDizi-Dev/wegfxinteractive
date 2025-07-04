@@ -4,6 +4,8 @@ import { ref, get, child, set, push, onValue } from "firebase/database";
 import { auth, database } from "../../../Firebase/firebase";
 import "./Quiz.css";
 import { useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
+
 const QuizComponent = () => {
   const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState("");
@@ -16,13 +18,22 @@ const QuizComponent = () => {
   const [score, setScore] = useState(0);
   const [resultsSaved, setResultsSaved] = useState(false);
   const [history, setHistory] = useState([]);
+  const [userEmail, setUserEmail] = useState("");
 
-  // ...existing states...
   const [planEndTime, setPlanEndTime] = useState(null);
   const [timeLeft, setTimeLeft] = useState("");
   const navigate = useNavigate();
 
-  // 🔽 Fetch and watch plan on mount
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        navigate("/"); // Navigate to home or login page
+      })
+      .catch((error) => {
+        console.error("Sign out failed:", error);
+      });
+  };
+
   useEffect(() => {
     const uid = auth.currentUser?.uid;
     if (!uid) return;
@@ -89,9 +100,22 @@ const QuizComponent = () => {
     };
     fetchCategories();
   }, []);
+
   useEffect(() => {
     fetchHistory();
   }, []);
+
+  useEffect(() => {
+    const uid = auth.currentUser?.uid;
+    if (!uid) return;
+    const userRef = ref(database, `users/${uid}`);
+    get(userRef).then((snap) => {
+      if (snap.exists()) {
+        setUserEmail(snap.val().email);
+      }
+    });
+  }, []);
+
   const fetchQuestions = async (selectedCategory) => {
     setLoading(true);
     const uid = auth.currentUser?.uid;
@@ -109,7 +133,6 @@ const QuizComponent = () => {
       const attempted = attemptedSnapshot.exists()
         ? Object.values(attemptedSnapshot.val())
         : [];
-
       const all = [];
       snapshot.forEach((childSnap) => {
         const q = { ...childSnap.val(), id: childSnap.key };
@@ -118,10 +141,9 @@ const QuizComponent = () => {
         }
       });
 
-      // 🟡 If no new questions left, allow reattempt by clearing previous attempts
       if (all.length === 0) {
-        await set(attemptedRef, {}); // Clear attempted questions for this category
-        attemptedSnapshot = await get(attemptedRef); // Refresh the snapshot
+        await set(attemptedRef, {});
+        attemptedSnapshot = await get(attemptedRef);
         const retryList = [];
         snapshot.forEach((childSnap) => {
           const q = { ...childSnap.val(), id: childSnap.key };
@@ -169,16 +191,16 @@ const QuizComponent = () => {
         questionId
       );
     }
+  };
 
-    setTimeout(() => {
-      if (currentIndex < questions.length - 1) {
-        setCurrentIndex((prev) => prev + 1);
-        setSelectedOption("");
-        setFeedback("");
-      } else {
-        setQuizOver(true);
-      }
-    }, 1500);
+  const handleNextQuestion = () => {
+    if (currentIndex < questions.length - 1) {
+      setCurrentIndex((prev) => prev + 1);
+      setSelectedOption("");
+      setFeedback("");
+    } else {
+      setQuizOver(true);
+    }
   };
 
   useEffect(() => {
@@ -195,6 +217,7 @@ const QuizComponent = () => {
           totalQuestions: questions.length,
           correctAnswers: score,
           wrongAnswers: questions.length - score,
+          totalScore: score * 10,
           date: new Date().toISOString(),
         });
         setResultsSaved(true);
@@ -237,6 +260,13 @@ const QuizComponent = () => {
         <div className="quiz-timer">
           Plan Expires In: <span>{timeLeft}</span>
         </div>
+        <div className="quiz-header">
+          <div className="quiz-user">👤 {userEmail}</div>
+          <button className="signout-btn" onClick={handleLogout}>
+            🚪 Sign Out
+          </button>
+        </div>
+
         <div className="quiz-container">
           <h2>Select a Category</h2>
           <div className="category-buttons">
@@ -258,7 +288,8 @@ const QuizComponent = () => {
               {history.map((res, idx) => (
                 <div className="history-item" key={idx}>
                   <div className="history-date">
-                    {new Date(res.date).toLocaleString()}
+                    <span>{new Date(res.date).toLocaleString()}</span>
+                    <span className="score">{res.totalScore} pts</span>
                   </div>
                   <div className="history-details">
                     <span className="category">{res.category}</span>
@@ -283,7 +314,13 @@ const QuizComponent = () => {
         <div className="quiz-timer">
           Plan Expires In: <span>{timeLeft}</span>
         </div>
+        <div className="user-score-header">
+          <span className="username">{userEmail}</span>
+        </div>
         <h2>Quiz Completed 🎉</h2>
+        {/* <p>
+          <strong>User:</strong> {userEmail}
+        </p> */}
         <p>
           <strong>Category:</strong> {category}
         </p>
@@ -295,6 +332,9 @@ const QuizComponent = () => {
         </p>
         <p>
           <strong>Wrong Answers:</strong> {questions.length - score}
+        </p>
+        <p>
+          <strong>Total Score:</strong> {score * 10} pts
         </p>
 
         <button
@@ -318,9 +358,30 @@ const QuizComponent = () => {
       <div className="quiz-timer">
         Plan Expires In: <span>{timeLeft}</span>
       </div>
+      {/* Back Button */}
+      <button
+        className="back-button"
+        onClick={() => {
+          setCategory("");
+          setQuestions([]);
+          setCurrentIndex(0);
+          setSelectedOption("");
+          setQuizOver(false);
+          setFeedback("");
+        }}
+      >
+        ←
+      </button>
+
+      <div className="user-score-header">
+        <span className="username">{userEmail}</span>
+        <span className="score">{score * 10} pts</span>
+      </div>
+
       <h3 className="question-title">
         ({currentIndex + 1}/{questions?.length}) {q?.question}
       </h3>
+
       <div className="options-container">
         {options.map((opt, index) => (
           <button
@@ -340,6 +401,21 @@ const QuizComponent = () => {
             {opt}
           </button>
         ))}
+      </div>
+
+      {feedback && (
+        <div className={`feedback-message ${feedback}`}>
+          {feedback === "correct" ? "Correct! 🎉" : "Wrong ❌"}
+        </div>
+      )}
+      <div className="next-question-btn_main">
+        <button
+          className="next-question-btn"
+          onClick={handleNextQuestion}
+          disabled={!selectedOption}
+        >
+          Next Question
+        </button>
       </div>
     </div>
   );
