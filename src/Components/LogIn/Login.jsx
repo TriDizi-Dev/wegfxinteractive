@@ -8,6 +8,7 @@ import {
   signInWithPopup,
   signInWithRedirect,
   getRedirectResult,
+  fetchSignInMethodsForEmail,
 } from "firebase/auth";
 import { ref, set, get } from "firebase/database";
 import { GrView } from "react-icons/gr";
@@ -23,11 +24,12 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
-  // 🔁 Handle Google Redirect Result
   useEffect(() => {
+    auth.useDeviceLanguage();
+
     getRedirectResult(auth)
       .then(async (result) => {
-        if (result) {
+        if (result?.user) {
           const uid = result.user.uid;
           const userRef = ref(database, `users/${uid}`);
           const snapshot = await get(userRef);
@@ -54,8 +56,8 @@ const LoginPage = () => {
         }
       })
       .catch((error) => {
-        console.error("Google redirect error:", error);
-        setError("Google Sign-In Failed (Redirect)");
+        console.error("Google redirect error:", error.code, error.message);
+        setError("Google Sign-In Failed (Redirect): " + error.message);
       });
   }, []);
 
@@ -63,14 +65,22 @@ const LoginPage = () => {
     e.preventDefault();
     setError("");
 
+    const trimmedEmail = email.trim();
+    const trimmedPassword = password.trim();
+
+    if (!trimmedEmail || !trimmedPassword) {
+      setError("Email and password are required.");
+      return;
+    }
+
     try {
       let userCredential;
 
       if (userType === "admin") {
         userCredential = await signInWithEmailAndPassword(
           auth,
-          email,
-          password
+          trimmedEmail,
+          trimmedPassword
         );
         const uid = userCredential.user.uid;
         const snapshot = await get(ref(database, `users/${uid}`));
@@ -88,17 +98,26 @@ const LoginPage = () => {
         return;
       }
 
-      // User Signup/Login
       if (isSignup) {
         try {
+          const existingMethods = await fetchSignInMethodsForEmail(
+            auth,
+            trimmedEmail
+          );
+
+          if (existingMethods.length > 0) {
+            setError("Email already exists. Please log in.");
+            return;
+          }
+
           userCredential = await createUserWithEmailAndPassword(
             auth,
-            email,
-            password
+            trimmedEmail,
+            trimmedPassword
           );
           const uid = userCredential.user.uid;
           await set(ref(database, `users/${uid}`), {
-            email,
+            email: trimmedEmail,
             role: "user",
           });
         } catch (signupErr) {
@@ -106,6 +125,8 @@ const LoginPage = () => {
             setError("User already exists. Please log in.");
           } else if (signupErr.code === "auth/weak-password") {
             setError("Password should be at least 6 characters.");
+          } else if (signupErr.code === "auth/invalid-email") {
+            setError("Please enter a valid email address.");
           } else {
             console.error(signupErr);
             setError("Signup failed. Try again.");
@@ -115,8 +136,8 @@ const LoginPage = () => {
       } else {
         userCredential = await signInWithEmailAndPassword(
           auth,
-          email,
-          password
+          trimmedEmail,
+          trimmedPassword
         );
         const uid = userCredential.user.uid;
         const snapshot = await get(ref(database, `users/${uid}`));
@@ -138,9 +159,8 @@ const LoginPage = () => {
       const planSnap = await get(planRef);
 
       if (planSnap.exists()) {
-        const planData = planSnap.val();
         const now = Date.now();
-        if (now < planData.endTime) {
+        if (now < planSnap.val().endTime) {
           navigate("/quiz");
         } else {
           navigate("/slectPlanpage");
@@ -150,59 +170,75 @@ const LoginPage = () => {
       }
     } catch (err) {
       console.error(err);
-      setError(
-        isSignup
-          ? "Signup failed. Try again."
-          : "Login failed. Check credentials."
-      );
-    }
-  };
-
-  const handleGoogleLogin = async () => {
-    try {
-      const provider = new GoogleAuthProvider();
-
-      if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
-        // On mobile use redirect
-        await signInWithRedirect(auth, provider);
+      if (err.code === "auth/invalid-email") {
+        setError("Invalid email format.");
+      } else if (err.code === "auth/user-not-found") {
+        setError("User not found. Please sign up.");
+      } else if (err.code === "auth/wrong-password") {
+        setError("Incorrect password. Try again.");
       } else {
-        // Desktop popup
-        const result = await signInWithPopup(auth, provider);
-        const uid = result.user.uid;
-
-        const userRef = ref(database, `users/${uid}`);
-        const snapshot = await get(userRef);
-
-        if (!snapshot.exists()) {
-          await set(userRef, {
-            email: result.user.email,
-            role: "user",
-          });
-        }
-
-        sessionStorage.setItem("authToken", await result.user.getIdToken());
-        sessionStorage.setItem("userType", "user");
-
-        const planRef = ref(database, `users/${uid}/plan`);
-        const planSnap = await get(planRef);
-        const now = Date.now();
-
-        if (planSnap.exists() && now < planSnap.val().endTime) {
-          navigate("/quiz");
-        } else {
-          navigate("/slectPlanpage");
-        }
+        setError(
+          isSignup
+            ? "Signup failed. Try again."
+            : "Login failed. Check your credentials."
+        );
       }
-    } catch (err) {
-      console.error("Google sign-in error:", err);
-      setError("Google Sign-In Failed");
     }
   };
+
+const handleGoogleLogin = async () => {
+  try {
+    const provider = new GoogleAuthProvider();
+
+    if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+      await signInWithRedirect(auth, provider);
+    } else {
+      const result = await signInWithPopup(auth, provider);
+      const email = result.user.email;
+
+      const methods = await fetchSignInMethodsForEmail(auth, email);
+      if (methods.includes("password")) {
+        setError(
+          "This email is already registered with Email/Password. Please use that method to log in."
+        );
+        await auth.signOut();
+        return;
+      }
+
+      const uid = result.user.uid;
+      const userRef = ref(database, `users/${uid}`);
+      const snapshot = await get(userRef);
+
+      if (!snapshot.exists()) {
+        await set(userRef, {
+          email,
+          role: "user",
+        });
+      }
+
+      sessionStorage.setItem("authToken", await result.user.getIdToken());
+      sessionStorage.setItem("userType", "user");
+
+      const planRef = ref(database, `users/${uid}/plan`);
+      const planSnap = await get(planRef);
+      const now = Date.now();
+
+      if (planSnap.exists() && now < planSnap.val().endTime) {
+        navigate("/quiz");
+      } else {
+        navigate("/slectPlanpage");
+      }
+    }
+  } catch (err) {
+    console.error("Google sign-in error:", err);
+    setError("Google Sign-In Failed");
+  }
+};
+  
 
   return (
     <div className="login-wrapper">
       <div className="login-container">
-        {/* User/Admin Toggle */}
         <div className="user-type-toggle">
           <label>
             <input
