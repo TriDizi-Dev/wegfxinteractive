@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.css";
 import { auth, database } from "../../Firebase/firebase";
 import {
@@ -6,6 +6,8 @@ import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
 } from "firebase/auth";
 import { ref, set, get } from "firebase/database";
 import { GrView } from "react-icons/gr";
@@ -21,6 +23,42 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
+  // 🔁 Handle Google Redirect Result
+  useEffect(() => {
+    getRedirectResult(auth)
+      .then(async (result) => {
+        if (result) {
+          const uid = result.user.uid;
+          const userRef = ref(database, `users/${uid}`);
+          const snapshot = await get(userRef);
+
+          if (!snapshot.exists()) {
+            await set(userRef, {
+              email: result.user.email,
+              role: "user",
+            });
+          }
+
+          sessionStorage.setItem("authToken", await result.user.getIdToken());
+          sessionStorage.setItem("userType", "user");
+
+          const planRef = ref(database, `users/${uid}/plan`);
+          const planSnap = await get(planRef);
+          const now = Date.now();
+
+          if (planSnap.exists() && now < planSnap.val().endTime) {
+            navigate("/quiz");
+          } else {
+            navigate("/slectPlanpage");
+          }
+        }
+      })
+      .catch((error) => {
+        console.error("Google redirect error:", error);
+        setError("Google Sign-In Failed (Redirect)");
+      });
+  }, []);
+
   const handleLoginOrSignup = async (e) => {
     e.preventDefault();
     setError("");
@@ -29,7 +67,6 @@ const LoginPage = () => {
       let userCredential;
 
       if (userType === "admin") {
-        // Admin Login Only
         userCredential = await signInWithEmailAndPassword(
           auth,
           email,
@@ -84,7 +121,6 @@ const LoginPage = () => {
         const uid = userCredential.user.uid;
         const snapshot = await get(ref(database, `users/${uid}`));
 
-        // Prevent admins from logging in through user mode
         if (snapshot.exists() && snapshot.val().role === "admin") {
           setError("Admins must log in through the Admin tab.");
           return;
@@ -125,35 +161,37 @@ const LoginPage = () => {
   const handleGoogleLogin = async () => {
     try {
       const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-      const uid = result.user.uid;
 
-      const userRef = ref(database, `users/${uid}`);
-      const snapshot = await get(userRef);
+      if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+        // On mobile use redirect
+        await signInWithRedirect(auth, provider);
+      } else {
+        // Desktop popup
+        const result = await signInWithPopup(auth, provider);
+        const uid = result.user.uid;
 
-      if (!snapshot.exists()) {
-        await set(userRef, {
-          email: result.user.email,
-          role: "user",
-        });
-      }
+        const userRef = ref(database, `users/${uid}`);
+        const snapshot = await get(userRef);
 
-      sessionStorage.setItem("authToken", await result.user.getIdToken());
-      sessionStorage.setItem("userType", "user");
+        if (!snapshot.exists()) {
+          await set(userRef, {
+            email: result.user.email,
+            role: "user",
+          });
+        }
 
-      const planRef = ref(database, `users/${uid}/plan`);
-      const planSnap = await get(planRef);
+        sessionStorage.setItem("authToken", await result.user.getIdToken());
+        sessionStorage.setItem("userType", "user");
 
-      if (planSnap.exists()) {
-        const planData = planSnap.val();
+        const planRef = ref(database, `users/${uid}/plan`);
+        const planSnap = await get(planRef);
         const now = Date.now();
-        if (now < planData.endTime) {
+
+        if (planSnap.exists() && now < planSnap.val().endTime) {
           navigate("/quiz");
         } else {
           navigate("/slectPlanpage");
         }
-      } else {
-        navigate("/slectPlanpage");
       }
     } catch (err) {
       console.error("Google sign-in error:", err);
@@ -200,7 +238,6 @@ const LoginPage = () => {
             : "User Login"}
         </h2>
 
-        {/* Login/Signup Form */}
         <form onSubmit={handleLoginOrSignup}>
           <div className="form-group">
             <label>Email</label>
@@ -244,7 +281,6 @@ const LoginPage = () => {
           </button>
         </form>
 
-        {/* Signup toggle + Google Login (for users only) */}
         {userType === "user" && (
           <>
             <div className="signup-toggle">
