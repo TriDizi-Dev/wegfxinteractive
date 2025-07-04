@@ -188,3 +188,9 @@
   box-shadow: 0 0 10px rgba(0,0,0,0.08);
   z-index: 1000;
 }
+@media screen and (max-width: 720px) {
+.quiz-history {
+
+  width: 80vw;
+}
+  }
