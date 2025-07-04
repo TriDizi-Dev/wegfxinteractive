@@ -22,7 +22,7 @@ const Dashboard = () => {
             Go to Questions Manage
           </button>
           <button
-            onClick={() => navigate("/manageQuestion")}
+            onClick={() => navigate("/userDetails")}
             className="btn dashboard-btn"
           >
             Go to Users Manage

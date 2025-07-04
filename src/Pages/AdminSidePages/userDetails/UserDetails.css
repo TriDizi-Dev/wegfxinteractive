@@ -1,0 +1,62 @@
+
+.admin-wrapper {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+}
+
+.admin-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  text-align: center;
+  color: #333;
+}
+
+.user-card {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 25px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.08);
+}
+
+.user-email {
+  font-size: 20px;
+  color: #0066cc;
+  margin-bottom: 15px;
+}
+
+.info-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 20px;
+}
+
+.info-grid p {
+  margin: 6px 0;
+}
+
+.quiz-section h3 {
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.quiz-category {
+  font-weight: bold;
+  margin-top: 10px;
+  color: #333;
+}
+
+.quiz-section ul {
+  padding-left: 20px;
+  margin-top: 5px;
+}
+
+.quiz-section li {
+  margin: 4px 0;
+}

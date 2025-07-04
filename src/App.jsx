@@ -5,6 +5,7 @@ import QuestionCreation from "./Pages/AdminSidePages/QuestionsCreation/QuestionC
 import QuestionsManage from "./Pages/AdminSidePages/ManageQuestions/ManageQuestion";
 import SlectPlanpage from "./Pages/UsersidePages/SelectPlanPage/SlectPlanpage";
 import QuizComponent from "./Pages/UsersidePages/QuizComponet/Quiz";
+import UserDetails from "./Pages/AdminSidePages/userDetails/Userdetails";
 
 function Layout() {
   return (
@@ -17,6 +18,7 @@ function Layout() {
         <Route path="/questionCreation/:id" element={<QuestionCreation />} />
         <Route path="/slectPlanpage" element={<SlectPlanpage />} />
         <Route path="/quiz" element={<QuizComponent />} />
+        <Route path="/userDetails" element={<UserDetails />} />
       </Routes>
     </>
   );
