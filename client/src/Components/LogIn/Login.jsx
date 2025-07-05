@@ -1,5 +1,5 @@
-// UserLoginPage.jsx
 import React, { useEffect, useState } from "react";
+import cartoonImage from "../../assets/home/cartoon.png";
 import { useNavigate } from "react-router-dom";
 import {
   signInWithEmailAndPassword,
@@ -10,14 +10,12 @@ import {
   getRedirectResult,
   fetchSignInMethodsForEmail,
   signOut,
-  
 } from "firebase/auth";
-import { ref, set, get, database,auth } from "../../Firebase/firebase";
+import { ref, set, get, database, auth } from "../../Firebase/firebase";
 import { GrView } from "react-icons/gr";
 import { BiHide } from "react-icons/bi";
 import "./Login.css";
 
-// Helper function
 const setStorageItem = (key, value) => {
   try {
     sessionStorage.setItem(key, value);
@@ -189,48 +187,54 @@ const LoginPage = () => {
 
   return (
     <div className="login-wrapper">
-      <div className="login-container">
-        <h2>{isSignup ? "User Signup" : "User Login"}</h2>
-
-        <form onSubmit={handleUserLoginSignup}>
-          <div className="form-group">
-            <label>Email</label>
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-          </div>
-
-          <div className="form-group">
-            <label>Password</label>
-            <div className="password-wrapper">
-              <input
-                type={showPassword ? "text" : "password"}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <button type="button" onClick={() => setShowPassword(!showPassword)} className="toggle-password">
-                {showPassword ? <GrView /> : <BiHide />}
-              </button>
-            </div>
-          </div>
-
-          {error && <p className="error-message">{error}</p>}
-
-          <button type="submit" className="btn-login">
-            {isSignup ? "Sign Up" : "Login"}
-          </button>
-        </form>
-
-        <div className="signup-toggle">
-          <button type="button" onClick={() => setIsSignup(!isSignup)} className="toggle-button">
-            {isSignup ? "Switch to Login" : "Switch to Signup"}
-          </button>
+      <div className="login-box">
+        <div className="login-left">
+          <img src={cartoonImage} alt="Cartoon" className="cartoon-touch" />
         </div>
 
-        <div className="or-divider">OR</div>
+        <div className="login-right">
+          <h2>{isSignup ? "User Signup" : "User Login"}</h2>
 
-        <button className="btn-google" onClick={handleGoogleLogin}>
-          Continue with Google
-        </button>
+          <form onSubmit={handleUserLoginSignup}>
+            <div className="form-group">
+              <label>Email</label>
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+            </div>
+
+            <div className="form-group">
+              <label>Password</label>
+              <div className="password-wrapper">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <button type="button" onClick={() => setShowPassword(!showPassword)} className="toggle-password">
+                  {showPassword ? <GrView /> : <BiHide />}
+                </button>
+              </div>
+            </div>
+
+            {error && <p className="error-message">{error}</p>}
+
+            <button type="submit" className="btn-login">
+              {isSignup ? "Sign Up" : "Login"}
+            </button>
+          </form>
+
+          <div className="signup-toggle">
+            <button type="button" onClick={() => setIsSignup(!isSignup)} className="toggle-button">
+              {isSignup ? "Switch to Login" : "Switch to Signup"}
+            </button>
+          </div>
+
+          <div className="or-divider">OR</div>
+
+          <button className="btn-google" onClick={handleGoogleLogin}>
+            Continue with Google
+          </button>
+        </div>
       </div>
     </div>
   );
