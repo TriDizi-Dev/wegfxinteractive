@@ -47,6 +47,39 @@
   margin: 0;
   font-size: 1.5rem;
 }
+/* 🔹 Category Count Container */
+.category-count-container {
+  padding: 1rem 1.5rem;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content:  space-between;
+  margin: 0 auto;
+  width: 92%;
+}
+
+/* 🔹 Title for the Count Section */
+.category-count-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #4b3c69;
+  margin-bottom: 0.8rem;
+}
+
+/* 🔹 Each Category Count Item */
+.category-count-item {
+  display: inline-block;
+  margin-right: 1.2rem;
+  font-size: 14px;
+  color: #333;
+  background-color: #f3eaff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
 
 /* ✅ Mobile Responsive Enhancements */
 @media (max-width: 768px) {
@@ -80,6 +113,16 @@
     flex-direction: column;
     align-items: flex-start;
   }
+   .category-count-container {
+    padding: 0.8rem 1rem;
+    flex-direction: column;
+  }
+
+  .category-count-item {
+    font-size: 13px;
+    margin-right: 1rem;
+    padding: 0.3rem 0.7rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -103,5 +146,15 @@
     flex-direction: column;
     align-items: flex-start;
     font-size: 11px;
+  }
+    .category-count-title {
+    font-size: 1rem;
+  }
+
+  .category-count-item {
+    font-size: 12px;
+    margin-right: 0.8rem;
+    margin-bottom: 0.4rem;
+    display: inline-block;
   }
 }

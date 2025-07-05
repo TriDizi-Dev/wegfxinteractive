@@ -19,6 +19,7 @@ const QuestionsManage = () => {
   const navigate = useNavigate();
   const isMobile = useMediaQuery("(max-width: 768px)");
   const [rows, setRows] = useState([]);
+  const [categoryCounts, setCategoryCounts] = useState({});
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -31,6 +32,14 @@ const QuestionsManage = () => {
           ...value,
         }));
         setRows(formattedData);
+
+        // 👉 Calculate category-wise counts
+        const counts = {};
+        formattedData.forEach((q) => {
+          const type = q.question_type || "Unknown";
+          counts[type] = (counts[type] || 0) + 1;
+        });
+        setCategoryCounts(counts);
       }
     };
 
@@ -41,6 +50,17 @@ const QuestionsManage = () => {
     try {
       await remove(ref(database, `questions/${id}`));
       setRows((prev) => prev.filter((row) => row.id !== id));
+
+      // Update category counts
+      setCategoryCounts((prev) => {
+        const deletedRow = rows.find((row) => row.id === id);
+        if (!deletedRow) return prev;
+        const category = deletedRow.question_type || "Unknown";
+        const newCounts = { ...prev };
+        newCounts[category] = (newCounts[category] || 1) - 1;
+        if (newCounts[category] <= 0) delete newCounts[category];
+        return newCounts;
+      });
     } catch (error) {
       console.error("Error deleting question:", error);
     }
@@ -55,12 +75,54 @@ const QuestionsManage = () => {
       align: "center",
       headerClassName: "super-app-theme--header",
     },
-    { field: "option1", headerName: "Option 1", flex: 1, headerAlign: "center", align: "center", headerClassName: "super-app-theme--header" },
-    { field: "option2", headerName: "Option 2", flex: 1, headerAlign: "center", align: "center", headerClassName: "super-app-theme--header" },
-    { field: "option3", headerName: "Option 3", flex: 1, headerAlign: "center", align: "center", headerClassName: "super-app-theme--header" },
-    { field: "option4", headerName: "Option 4", flex: 1, headerAlign: "center", align: "center", headerClassName: "super-app-theme--header" },
-    { field: "question_type", headerName: "Type", flex: 1, headerAlign: "center", align: "center", headerClassName: "super-app-theme--header" },
-    { field: "answer", headerName: "Answer", flex: 1, headerAlign: "center", align: "center", headerClassName: "super-app-theme--header" },
+    {
+      field: "option1",
+      headerName: "Option 1",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+      headerClassName: "super-app-theme--header",
+    },
+    {
+      field: "option2",
+      headerName: "Option 2",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+      headerClassName: "super-app-theme--header",
+    },
+    {
+      field: "option3",
+      headerName: "Option 3",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+      headerClassName: "super-app-theme--header",
+    },
+    {
+      field: "option4",
+      headerName: "Option 4",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+      headerClassName: "super-app-theme--header",
+    },
+    {
+      field: "question_type",
+      headerName: "Type",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+      headerClassName: "super-app-theme--header",
+    },
+    {
+      field: "answer",
+      headerName: "Answer",
+      flex: 1,
+      headerAlign: "center",
+      align: "center",
+      headerClassName: "super-app-theme--header",
+    },
     {
       field: "actions",
       headerName: "Actions",
@@ -73,7 +135,10 @@ const QuestionsManage = () => {
           <IconButton onClick={() => deleteQuestion(params.row.id)}>
             <DeleteIcon sx={{ "&:active": { color: "#FFBF00" } }} />
           </IconButton>
-          <IconButton component={Link} to={`/questionCreation/${params.row.id}`}>
+          <IconButton
+            component={Link}
+            to={`/questionCreation/${params.row.id}`}
+          >
             <EditIcon />
           </IconButton>
         </Box>
@@ -89,6 +154,7 @@ const QuestionsManage = () => {
         alignItems="center"
         padding="1.5rem"
         flexWrap="wrap"
+        marginTop="-2vw"
       >
         <h2 className="manage-title">Manage Interview Questions</h2>
         <Button
@@ -112,8 +178,19 @@ const QuestionsManage = () => {
         </Button>
       </Box>
 
+      <Box className="category-count-container">
+        <Typography className="category-count-title">
+          Category-wise Question Count
+        </Typography>
+        {Object.entries(categoryCounts).map(([cat, count]) => (
+          <span className="category-count-item" key={cat}>
+            {cat}: {count}
+          </span>
+        ))}
+      </Box>
+
       {!isMobile ? (
-        <Box m="1rem auto" height="70vh" width="95%" borderRadius="12px">
+        <Box m="1rem auto" height="66vh" width="95%" borderRadius="12px">
           <DataGrid
             rows={rows}
             columns={columns}
@@ -149,7 +226,10 @@ const QuestionsManage = () => {
       ) : (
         <Box m="1rem auto" width="95%">
           {rows.map((row) => (
-            <Card key={row.id} sx={{ marginBottom: "1rem", background: "#fff3fc" }}>
+            <Card
+              key={row.id}
+              sx={{ marginBottom: "1rem", background: "#fff3fc" }}
+            >
               <CardContent>
                 <Typography variant="subtitle1" fontWeight={600}>
                   Q: {row.question}

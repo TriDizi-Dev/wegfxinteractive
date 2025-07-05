@@ -1,10 +1,10 @@
-// QuizComponent.jsx
 import React, { useEffect, useState } from "react";
-import { ref, get, child, set, push, onValue } from "firebase/database";
-import { auth, database } from "../../../Firebase/firebase";
+import { ref, get, child, set, push } from "firebase/database";
+import { database, auth } from "../../../Firebase/firebase";
 import "./Quiz.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { signOut } from "firebase/auth";
+import { useAuth } from "../../../Components/AuthContext";
 
 const QuizComponent = () => {
   const [categories, setCategories] = useState([]);
@@ -22,22 +22,14 @@ const QuizComponent = () => {
 
   const [planEndTime, setPlanEndTime] = useState(null);
   const [timeLeft, setTimeLeft] = useState("");
+
+  const { currentUser, loading: authLoading } = useAuth();
   const navigate = useNavigate();
 
-  const handleLogout = () => {
-    signOut(auth)
-      .then(() => {
-        navigate("/"); // Navigate to home or login page
-      })
-      .catch((error) => {
-        console.error("Sign out failed:", error);
-      });
-  };
+  const uid = currentUser?.uid;
 
   useEffect(() => {
-    const uid = auth.currentUser?.uid;
     if (!uid) return;
-
     const planRef = ref(database, `users/${uid}/plan`);
     get(planRef).then((snapshot) => {
       if (snapshot.exists()) {
@@ -45,7 +37,42 @@ const QuizComponent = () => {
         setPlanEndTime(planData.endTime);
       }
     });
+  }, [uid]);
+
+  useEffect(() => {
+    if (!uid) return;
+    const userRef = ref(database, `users/${uid}`);
+    get(userRef).then((snap) => {
+      if (snap.exists()) {
+        const data = snap.val();
+        setUserEmail(data.email);
+      }
+    });
+  }, [uid]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const snapshot = await get(ref(database, "questions"));
+        const categorySet = new Set();
+        if (snapshot.exists()) {
+          snapshot.forEach((childSnap) => {
+            const data = childSnap.val();
+            if (data.question_type) categorySet.add(data.question_type);
+          });
+        }
+        setCategories([...categorySet]);
+      } catch (error) {
+        console.error("Failed to fetch categories", error);
+      }
+    };
+    fetchCategories();
   }, []);
+
+  useEffect(() => {
+    if (!uid) return;
+    fetchHistory();
+  }, [uid]);
 
   useEffect(() => {
     if (!planEndTime) return;
@@ -82,115 +109,94 @@ const QuizComponent = () => {
     return () => clearInterval(interval);
   }, [planEndTime]);
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const snapshot = await get(ref(database, "questions"));
-        const categorySet = new Set();
-        if (snapshot.exists()) {
-          snapshot.forEach((childSnap) => {
-            const data = childSnap.val();
-            if (data.question_type) categorySet.add(data.question_type);
-          });
-        }
-        setCategories([...categorySet]);
-      } catch (error) {
-        console.error("Failed to fetch categories", error);
-      }
-    };
-    fetchCategories();
-  }, []);
-
-  useEffect(() => {
-    fetchHistory();
-  }, []);
-
-  useEffect(() => {
-    const uid = auth.currentUser?.uid;
-    if (!uid) return;
-    const userRef = ref(database, `users/${uid}`);
-    get(userRef).then((snap) => {
-      if (snap.exists()) {
-        setUserEmail(snap.val().email);
-      }
-    });
-  }, []);
-
-  const fetchQuestions = async (selectedCategory) => {
-    setLoading(true);
-    const uid = auth.currentUser?.uid;
-    if (!uid) return;
-
-    try {
-      const dbRef = ref(database);
-      const snapshot = await get(child(dbRef, "questions"));
-      const attemptedRef = child(
-        dbRef,
-        `users/${uid}/attemptedQuestions/${selectedCategory}`
-      );
-      let attemptedSnapshot = await get(attemptedRef);
-
-      const attempted = attemptedSnapshot.exists()
-        ? Object.values(attemptedSnapshot.val())
-        : [];
-      const all = [];
-      snapshot.forEach((childSnap) => {
-        const q = { ...childSnap.val(), id: childSnap.key };
-        if (q.question_type === selectedCategory && !attempted.includes(q.id)) {
-          all.push(q);
-        }
+  const handleLogout = () => {
+    signOut(auth)
+      .then(() => {
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error("Sign out failed:", error);
       });
-
-      if (all.length === 0) {
-        await set(attemptedRef, {});
-        attemptedSnapshot = await get(attemptedRef);
-        const retryList = [];
-        snapshot.forEach((childSnap) => {
-          const q = { ...childSnap.val(), id: childSnap.key };
-          if (q.question_type === selectedCategory) {
-            retryList.push(q);
-          }
-        });
-        const reshuffled = retryList
-          .sort(() => 0.5 - Math.random())
-          .slice(0, 30);
-        setQuestions(reshuffled);
-      } else {
-        const shuffled = all.sort(() => 0.5 - Math.random()).slice(0, 30);
-        setQuestions(shuffled);
-      }
-
-      setCurrentIndex(0);
-      setScore(0);
-      setSelectedOption("");
-      setQuizOver(false);
-      setFeedback("");
-      setResultsSaved(false);
-    } catch (error) {
-      console.error("Failed to load questions", error);
-    }
-
-    setLoading(false);
   };
 
+const fetchQuestions = async (selectedCategory) => {
+  setLoading(true);
+  if (!uid) return;
+
+  try {
+    const dbRef = ref(database);
+    const questionsSnap = await get(child(dbRef, "questions"));
+
+    if (!questionsSnap.exists()) {
+      console.error("No questions found.");
+      setLoading(false);
+      return;
+    }
+
+    // Step 1: Get all questions in this category
+    const allQuestions = [];
+    questionsSnap.forEach((childSnap) => {
+      const data = childSnap.val();
+      if (data.question_type === selectedCategory) {
+        allQuestions.push({ ...data, id: childSnap.key });
+      }
+    });
+
+    const totalAvailable = allQuestions.length;
+
+    // Step 2: Get user's attempted questions
+    const attemptedRef = child(dbRef, `users/${uid}/attemptedQuestions/${selectedCategory}`);
+    const attemptedSnap = await get(attemptedRef);
+    const attempted = attemptedSnap.exists() ? Object.values(attemptedSnap.val()) : [];
+
+    // Step 3: If all questions are attempted, reset
+    let unattempted;
+    if (attempted.length >= totalAvailable) {
+      // 🔄 Reset for new cycle
+      await set(attemptedRef, {});
+      unattempted = [...allQuestions];
+    } else {
+      // 🔍 Filter out attempted questions
+      unattempted = allQuestions.filter((q) => !attempted.includes(q.id));
+    }
+
+    // Step 4: Shuffle and pick 30 questions
+    const shuffled = unattempted
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 30);
+
+    setQuestions(shuffled);
+    setCurrentIndex(0);
+    setScore(0);
+    setSelectedOption("");
+    setQuizOver(false);
+    setFeedback("");
+    setResultsSaved(false);
+  } catch (error) {
+    console.error("Failed to load questions", error);
+  }
+
+  setLoading(false);
+};
+
+
+
   const handleAnswer = async (option) => {
-    if (selectedOption) return;
+    if (selectedOption || !uid) return;
+
+    const currentQuestion = questions[currentIndex];
+    const isCorrect = option === currentQuestion?.answer;
     setSelectedOption(option);
-    const isCorrect = option === questions[currentIndex]?.answer;
     setFeedback(isCorrect ? "correct" : "wrong");
     if (isCorrect) setScore((prev) => prev + 1);
 
-    const uid = auth.currentUser?.uid;
-    const questionId = questions[currentIndex]?.id;
-    if (uid && questionId && category) {
-      await set(
-        ref(
-          database,
-          `users/${uid}/attemptedQuestions/${category}/${questionId}`
-        ),
-        questionId
-      );
-    }
+    await set(
+      ref(
+        database,
+        `users/${uid}/attemptedQuestions/${category}/${currentQuestion.id}`
+      ),
+      currentQuestion.id
+    );
   };
 
   const handleNextQuestion = () => {
@@ -203,34 +209,32 @@ const QuizComponent = () => {
     }
   };
 
-  useEffect(() => {
-    const saveResults = async () => {
-      if (!quizOver || resultsSaved) return;
-      const uid = auth.currentUser?.uid;
-      if (!uid) return;
+  const saveResults = async () => {
+    if (!quizOver || resultsSaved || !uid) return;
 
-      try {
-        const resultRef = push(
-          ref(database, `users/${uid}/quizResults/${category}`)
-        );
-        await set(resultRef, {
-          totalQuestions: questions.length,
-          correctAnswers: score,
-          wrongAnswers: questions.length - score,
-          totalScore: score * 10,
-          date: new Date().toISOString(),
-        });
-        setResultsSaved(true);
-        fetchHistory();
-      } catch (err) {
-        console.error("Error saving quiz results:", err);
-      }
-    };
+    try {
+      const resultRef = push(
+        ref(database, `users/${uid}/quizResults/${category}`)
+      );
+      await set(resultRef, {
+        totalQuestions: questions.length,
+        correctAnswers: score,
+        wrongAnswers: questions.length - score,
+        totalScore: score * 10,
+        date: new Date().toISOString(),
+      });
+      setResultsSaved(true);
+      fetchHistory();
+    } catch (err) {
+      console.error("Error saving quiz results:", err);
+    }
+  };
+
+  useEffect(() => {
     saveResults();
-  }, [quizOver, resultsSaved]);
+  }, [quizOver]);
 
   const fetchHistory = async () => {
-    const uid = auth.currentUser?.uid;
     if (!uid) return;
     try {
       const snap = await get(ref(database, `users/${uid}/quizResults`));
@@ -254,6 +258,10 @@ const QuizComponent = () => {
     fetchQuestions(cat);
   };
 
+  if (authLoading) return <div>Loading user...</div>;
+  if (!currentUser) return <Navigate to="/" />;
+
+  // Render Category Selection
   if (!category) {
     return (
       <>
@@ -267,7 +275,7 @@ const QuizComponent = () => {
           </button>
         </div>
 
-        <div className="quiz-container">
+        <div className="quiz-container margin_allign">
           <h2>Select a Category</h2>
           <div className="category-buttons">
             {categories.length === 0 ? (
@@ -281,6 +289,7 @@ const QuizComponent = () => {
             )}
           </div>
         </div>
+
         {history.length > 0 && (
           <div className="quiz-history">
             <h3 className="history-title">📚 Your Quiz History</h3>
@@ -318,9 +327,6 @@ const QuizComponent = () => {
           <span className="username">{userEmail}</span>
         </div>
         <h2>Quiz Completed 🎉</h2>
-        {/* <p>
-          <strong>User:</strong> {userEmail}
-        </p> */}
         <p>
           <strong>Category:</strong> {category}
         </p>
@@ -336,16 +342,7 @@ const QuizComponent = () => {
         <p>
           <strong>Total Score:</strong> {score * 10} pts
         </p>
-
-        <button
-          onClick={() => {
-            setCategory("");
-            setQuestions([]);
-            setCurrentIndex(0);
-          }}
-        >
-          Take Another Quiz
-        </button>
+        <button onClick={() => setCategory("")}>Take Another Quiz</button>
       </div>
     );
   }
@@ -354,11 +351,10 @@ const QuizComponent = () => {
   const options = [q?.option1, q?.option2, q?.option3, q?.option4];
 
   return (
-    <div className="quiz-container">
+    <div className="quiz-container margin_Top_boarder">
       <div className="quiz-timer">
         Plan Expires In: <span>{timeLeft}</span>
       </div>
-      {/* Back Button */}
       <button
         className="back-button"
         onClick={() => {
@@ -408,6 +404,7 @@ const QuizComponent = () => {
           {feedback === "correct" ? "Correct! 🎉" : "Wrong ❌"}
         </div>
       )}
+
       <div className="next-question-btn_main">
         <button
           className="next-question-btn"

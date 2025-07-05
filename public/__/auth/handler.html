@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Loading...</title>
+    <script src="/__/firebase/9.6.10/firebase-app.js"></script>
+    <script src="/__/firebase/9.6.10/firebase-auth.js"></script>
+    <script src="/__/firebase/init.js"></script>
+  </head>
+  <body>
+    <script>
+      // Automatically completes the login and redirects back to app
+      firebase.auth().getRedirectResult().then(function(result) {
+        if (result.user) {
+          // Optional: Save a flag or log something
+        }
+        window.location.href = "/"; // Redirect to home or login route
+      }).catch(function(error) {
+        console.error("Redirect error:", error);
+        window.location.href = "/login"; // Fallback
+      });
+    </script>
+  </body>
+</html>

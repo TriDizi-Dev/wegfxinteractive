@@ -7,18 +7,80 @@ import SlectPlanpage from "./Pages/UsersidePages/SelectPlanPage/SlectPlanpage";
 import QuizComponent from "./Pages/UsersidePages/QuizComponet/Quiz";
 import UserDetails from "./Pages/AdminSidePages/userDetails/Userdetails";
 
+// ✅ Import protection components
+import {
+  RoleBasedRoute,
+  PlanBasedRoute,
+  PrivateRoute,
+} from "./Components/protectedRoute";
+
 function Layout() {
   return (
     <>
       <Routes>
-        <Route path="/" element={<LoginPage />}></Route>
-        <Route path="/dashboard" element={<Dashboard />}></Route>
-        <Route path="/manageQuestion" element={<QuestionsManage />}></Route>
-        <Route path="/questionCreation" element={<QuestionCreation />} />
-        <Route path="/questionCreation/:id" element={<QuestionCreation />} />
-        <Route path="/slectPlanpage" element={<SlectPlanpage />} />
-        <Route path="/quiz" element={<QuizComponent />} />
-        <Route path="/userDetails" element={<UserDetails />} />
+        <Route path="/" element={<LoginPage />} />
+
+        {/* ✅ Admin Protected Routes */}
+        <Route
+          path="/dashboard"
+          element={
+            <RoleBasedRoute requiredRole="admin">
+              <Dashboard />
+            </RoleBasedRoute>
+          }
+        />
+        <Route
+          path="/manageQuestion"
+          element={
+            <RoleBasedRoute requiredRole="admin">
+              <QuestionsManage />
+            </RoleBasedRoute>
+          }
+        />
+        <Route
+          path="/questionCreation"
+          element={
+            <RoleBasedRoute requiredRole="admin">
+              <QuestionCreation />
+            </RoleBasedRoute>
+          }
+        />
+        <Route
+          path="/questionCreation/:id"
+          element={
+            <RoleBasedRoute requiredRole="admin">
+              <QuestionCreation />
+            </RoleBasedRoute>
+          }
+        />
+        <Route
+          path="/userDetails"
+          element={
+            <RoleBasedRoute requiredRole="admin">
+              <UserDetails />
+            </RoleBasedRoute>
+          }
+        />
+
+        {/* ✅ Plan Protected User Routes */}
+        <Route
+          path="/quiz"
+          element={
+            <PlanBasedRoute>
+              <QuizComponent />
+            </PlanBasedRoute>
+          }
+        />
+
+        {/* ✅ Logged-in Users only (e.g., plan selection page) */}
+        <Route
+          path="/slectPlanpage"
+          element={
+            <PrivateRoute>
+              <SlectPlanpage />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </>
   );
@@ -26,9 +88,9 @@ function Layout() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <Layout />
-    </BrowserRouter>
+      <BrowserRouter>
+        <Layout />
+      </BrowserRouter>
   );
 }
 
