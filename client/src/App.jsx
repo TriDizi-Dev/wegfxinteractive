@@ -13,8 +13,13 @@ import {
   PlanBasedRoute,
   PrivateRoute,
 } from "./Components/protectedRoute";
+import { useAuth } from "./Components/AuthContext";
+import PaymentSuccess from "./Pages/UsersidePages/PaymentSucces/paymentsucces";
 
 function Layout() {
+  const { loading } = useAuth();
+
+  if (loading) return <div>🔄 Loading...</div>;
   return (
     <>
       <Routes>
@@ -81,6 +86,12 @@ function Layout() {
             </PrivateRoute>
           }
         />
+        <Route
+          path="/payment-success"
+          element={
+              <PaymentSuccess />
+          }
+        />
       </Routes>
     </>
   );
@@ -88,9 +99,9 @@ function Layout() {
 
 function App() {
   return (
-      <BrowserRouter>
-        <Layout />
-      </BrowserRouter>
+    <BrowserRouter>
+      <Layout />
+    </BrowserRouter>
   );
 }
 
