@@ -55,7 +55,8 @@ console.log(payload,"payloadpayload");
     );
 
     const response = await axios.post(
-      "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay",
+      // "https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay",
+      "https://api.phonepe.com/apis/pg/checkout/v2/pay",
       { request: base64Payload },
       {
         headers: {

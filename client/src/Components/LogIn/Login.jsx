@@ -1,6 +1,6 @@
+// UserLoginPage.jsx
 import React, { useEffect, useState } from "react";
-import "./Login.css";
-import { auth, database } from "../../Firebase/firebase";
+import { useNavigate } from "react-router-dom";
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -10,68 +10,29 @@ import {
   getRedirectResult,
   fetchSignInMethodsForEmail,
   signOut,
+  
 } from "firebase/auth";
-import { ref, set, get } from "firebase/database";
+import { ref, set, get, database,auth } from "../../Firebase/firebase";
 import { GrView } from "react-icons/gr";
 import { BiHide } from "react-icons/bi";
-import { useNavigate } from "react-router-dom";
+import "./Login.css";
 
-// Helper function: sessionStorage fallback
+// Helper function
 const setStorageItem = (key, value) => {
   try {
     sessionStorage.setItem(key, value);
-  } catch (err) {
-    console.warn("SessionStorage failed, using localStorage instead.");
+  } catch {
     localStorage.setItem(key, value);
   }
 };
 
 const LoginPage = () => {
-  const [userType, setUserType] = useState("user");
   const [isSignup, setIsSignup] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   auth.useDeviceLanguage();
-
-  //   getRedirectResult(auth)
-  //     .then(async (result) => {
-  //       if (result?.user) {
-  //         const uid = result.user.uid;
-  //         const userRef = ref(database, `users/${uid}`);
-  //         const snapshot = await get(userRef);
-
-  //         if (!snapshot.exists()) {
-  //           await set(userRef, {
-  //             email: result.user.email,
-  //             role: "user",
-  //           });
-  //         }
-
-  //         const token = await result.user.getIdToken();
-  //         setStorageItem("authToken", token);
-  //         setStorageItem("userType", "user");
-
-  //         const planRef = ref(database, `users/${uid}/plan`);
-  //         const planSnap = await get(planRef);
-  //         const now = Date.now();
-
-  //         if (planSnap.exists() && now < planSnap.val().endTime) {
-  //           navigate("/quiz");
-  //         } else {
-  //           navigate("/slectPlanpage");
-  //         }
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error("Google redirect error:", error.code, error.message);
-  //       setError("Google Sign-In Failed (Redirect): " + error.message);
-  //     });
-  // }, []);
 
   useEffect(() => {
     let isMounted = true;
@@ -80,8 +41,6 @@ const LoginPage = () => {
     const handleRedirect = async () => {
       try {
         const result = await getRedirectResult(auth);
-        console.log("🔁 Google Redirect Result:", result);
-
         if (!isMounted || !result?.user) return;
 
         const uid = result.user.uid;
@@ -110,20 +69,17 @@ const LoginPage = () => {
         }
       } catch (error) {
         console.error("Google redirect error:", error.code, error.message);
-        if (isMounted) {
-          setError("Google Sign-In Failed (Redirect): " + error.message);
-        }
+        if (isMounted) setError("Google Sign-In Failed: " + error.message);
       }
     };
 
     handleRedirect();
-
     return () => {
       isMounted = false;
     };
   }, []);
 
-  const handleLoginOrSignup = async (e) => {
+  const handleUserLoginSignup = async (e) => {
     e.preventDefault();
     setError("");
 
@@ -138,59 +94,22 @@ const LoginPage = () => {
     try {
       let userCredential;
 
-      if (userType === "admin") {
-        userCredential = await signInWithEmailAndPassword(
-          auth,
-          trimmedEmail,
-          trimmedPassword
-        );
-
-        const uid = userCredential.user.uid;
-        const snapshot = await get(ref(database, `users/${uid}`));
-
-        if (snapshot.exists() && snapshot.val().role === "admin") {
-          const token = await userCredential.user.getIdToken();
-          setStorageItem("authToken", token);
-          setStorageItem("userType", "admin");
-          navigate("/dashboard");
-        } else {
-          setError("You are not authorized as admin.");
-        }
-        return;
-      }
-
       if (isSignup) {
-        const existingMethods = await fetchSignInMethodsForEmail(
-          auth,
-          trimmedEmail
-        );
-
+        const existingMethods = await fetchSignInMethodsForEmail(auth, trimmedEmail);
         if (existingMethods.length > 0) {
           setError("Email already exists. Please log in.");
           return;
         }
 
-        userCredential = await createUserWithEmailAndPassword(
-          auth,
-          trimmedEmail,
-          trimmedPassword
-        );
-
-        const uid = userCredential.user.uid;
-        await set(ref(database, `users/${uid}`), {
+        userCredential = await createUserWithEmailAndPassword(auth, trimmedEmail, trimmedPassword);
+        await set(ref(database, `users/${userCredential.user.uid}`), {
           email: trimmedEmail,
           role: "user",
         });
       } else {
-        userCredential = await signInWithEmailAndPassword(
-          auth,
-          trimmedEmail,
-          trimmedPassword
-        );
+        userCredential = await signInWithEmailAndPassword(auth, trimmedEmail, trimmedPassword);
 
-        const uid = userCredential.user.uid;
-        const snapshot = await get(ref(database, `users/${uid}`));
-
+        const snapshot = await get(ref(database, `users/${userCredential.user.uid}`));
         if (snapshot.exists() && snapshot.val().role === "admin") {
           setError("Admins must log in through the Admin tab.");
           return;
@@ -213,19 +132,10 @@ const LoginPage = () => {
       }
     } catch (err) {
       console.error(err);
-      if (err.code === "auth/invalid-email") {
-        setError("Invalid email format.");
-      } else if (err.code === "auth/user-not-found") {
-        setError("User not found. Please sign up.");
-      } else if (err.code === "auth/wrong-password") {
-        setError("Incorrect password. Try again.");
-      } else {
-        setError(
-          isSignup
-            ? "Signup failed. Try again."
-            : "Login failed. Check your credentials."
-        );
-      }
+      if (err.code === "auth/invalid-email") setError("Invalid email format.");
+      else if (err.code === "auth/user-not-found") setError("User not found. Please sign up.");
+      else if (err.code === "auth/wrong-password") setError("Incorrect password.");
+      else setError(isSignup ? "Signup failed." : "Login failed.");
     }
   };
 
@@ -233,7 +143,6 @@ const LoginPage = () => {
     try {
       const provider = new GoogleAuthProvider();
 
-      // Mobile redirect
       if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
         await signInWithRedirect(auth, provider);
       } else {
@@ -242,9 +151,7 @@ const LoginPage = () => {
 
         const methods = await fetchSignInMethodsForEmail(auth, email);
         if (methods.includes("password")) {
-          setError(
-            "This email is already registered with Email/Password. Please use that method to log in."
-          );
+          setError("This email is already registered with Email/Password.");
           await signOut(auth);
           return;
         }
@@ -283,51 +190,12 @@ const LoginPage = () => {
   return (
     <div className="login-wrapper">
       <div className="login-container">
-        <div className="user-type-toggle">
-          <label>
-            <input
-              type="radio"
-              value="user"
-              checked={userType === "user"}
-              onChange={() => {
-                setUserType("user");
-                setIsSignup(false);
-              }}
-            />
-            User
-          </label>
-          <label>
-            <input
-              type="radio"
-              value="admin"
-              checked={userType === "admin"}
-              onChange={() => {
-                setUserType("admin");
-                setIsSignup(false);
-              }}
-            />
-            Admin
-          </label>
-        </div>
+        <h2>{isSignup ? "User Signup" : "User Login"}</h2>
 
-        <h2>
-          {userType === "admin"
-            ? "Admin Login"
-            : isSignup
-            ? "User Signup"
-            : "User Login"}
-        </h2>
-
-        <form onSubmit={handleLoginOrSignup}>
+        <form onSubmit={handleUserLoginSignup}>
           <div className="form-group">
             <label>Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              required
-            />
+            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
           </div>
 
           <div className="form-group">
@@ -337,14 +205,9 @@ const LoginPage = () => {
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password"
                 required
               />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="toggle-password"
-              >
+              <button type="button" onClick={() => setShowPassword(!showPassword)} className="toggle-password">
                 {showPassword ? <GrView /> : <BiHide />}
               </button>
             </div>
@@ -353,33 +216,21 @@ const LoginPage = () => {
           {error && <p className="error-message">{error}</p>}
 
           <button type="submit" className="btn-login">
-            {userType === "admin"
-              ? "Login as Admin"
-              : isSignup
-              ? "Sign Up"
-              : "Login"}
+            {isSignup ? "Sign Up" : "Login"}
           </button>
         </form>
 
-        {userType === "user" && (
-          <>
-            <div className="signup-toggle">
-              <button
-                type="button"
-                onClick={() => setIsSignup(!isSignup)}
-                className="toggle-button"
-              >
-                {isSignup ? "Switch to Login" : "Switch to Signup"}
-              </button>
-            </div>
+        <div className="signup-toggle">
+          <button type="button" onClick={() => setIsSignup(!isSignup)} className="toggle-button">
+            {isSignup ? "Switch to Login" : "Switch to Signup"}
+          </button>
+        </div>
 
-            <div className="or-divider">OR</div>
+        <div className="or-divider">OR</div>
 
-            <button className="btn-google" onClick={handleGoogleLogin}>
-              Continue with Google
-            </button>
-          </>
-        )}
+        <button className="btn-google" onClick={handleGoogleLogin}>
+          Continue with Google
+        </button>
       </div>
     </div>
   );

@@ -15,6 +15,7 @@ import {
 } from "./Components/protectedRoute";
 import { useAuth } from "./Components/AuthContext";
 import PaymentSuccess from "./Pages/UsersidePages/PaymentSucces/paymentsucces";
+import AdminLoginPage from "./Components/LogIn/AdminLogin";
 
 function Layout() {
   const { loading } = useAuth();
@@ -24,6 +25,7 @@ function Layout() {
     <>
       <Routes>
         <Route path="/" element={<LoginPage />} />
+        <Route path="/admin-login" element={<AdminLoginPage />} />
 
         {/* ✅ Admin Protected Routes */}
         <Route
@@ -86,12 +88,7 @@ function Layout() {
             </PrivateRoute>
           }
         />
-        <Route
-          path="/payment-success"
-          element={
-              <PaymentSuccess />
-          }
-        />
+        <Route path="/payment-success" element={<PaymentSuccess />} />
       </Routes>
     </>
   );
