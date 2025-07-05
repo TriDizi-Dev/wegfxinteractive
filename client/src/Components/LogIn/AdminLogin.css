@@ -1,0 +1,208 @@
+/* 🌍 Reset root elements */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* 🌌 Page Wrapper */
+.login-wrapper {
+  height: 100vh;
+  width: 100vw;
+  background: radial-gradient(circle at top left, #ede7f6, #d6d0f5, #e0dcff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  animation: fadeInPage 0.8s ease-out;
+}
+
+@keyframes fadeInPage {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 🧱 Login Box */
+.login-container {
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(108, 99, 255, 0.1);
+  padding: 3rem 2.5rem;
+  width: 100%;
+  max-width: 450px;
+  max-height: 100%;
+  box-sizing: border-box;
+  animation: floatUp 0.6s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.login-container::before {
+  content: "";
+  position: absolute;
+  top: -80px;
+  left: -80px;
+  width: 180px;
+  height: 180px;
+  background: rgba(166, 108, 255, 0.08);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+/* 🖋️ Title */
+.login-container h2 {
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #4b2aad;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* 🧩 Form Group */
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+  position: relative;
+  z-index: 1;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+  color: #4b2aad;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1.5px solid #ccc;
+  border-radius: 12px;
+  background-color: #f8f6ff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  border-color: #a66cff;
+  outline: none;
+  background-color: #f1efff;
+  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
+}
+
+/* 👁 Password Wrapper */
+.password-wrapper {
+  position: relative;
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  color: #5e35b1;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.toggle-password:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* 🔔 Error */
+.error-message {
+  color: #d32f2f;
+  background-color: #ffebee;
+  padding: 0.75rem;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* 🚀 Animated Login Button */
+.btn-login {
+  width: 100%;
+  padding: 0.9rem;
+  background: linear-gradient(120deg, #6c63ff, #a66cff);
+  border: none;
+  border-radius: 15px;
+  color: white;
+  font-size: 1.05rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(108, 99, 255, 0.3);
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.btn-login::after {
+  content: "";
+  position: absolute;
+  left: -100%;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: skewX(-30deg);
+  transition: left 0.5s ease;
+}
+
+.btn-login:hover {
+  background: linear-gradient(120deg, #5a52e8, #9057f5);
+  transform: translateY(-2px);
+}
+
+.btn-login:hover::after {
+  left: 200%;
+}
+
+/* 📱 Mobile Styles */
+@media (max-width: 500px) {
+  .login-wrapper {
+    padding: 1rem;
+    align-items: flex-start;
+  }
+
+  .login-container {
+    padding: 2rem 1.2rem;
+    margin-top: 10vh;
+  }
+
+  .login-container h2 {
+    font-size: 1.5rem;
+  }
+
+  .btn-login {
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+}

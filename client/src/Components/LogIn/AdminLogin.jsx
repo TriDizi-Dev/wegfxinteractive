@@ -1,14 +1,10 @@
-// AdminLoginPage.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  signInWithEmailAndPassword,
-  
-} from "firebase/auth";
-import { ref, get, database,auth } from "../../Firebase/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { ref, get, database, auth } from "../../Firebase/firebase";
 import { GrView } from "react-icons/gr";
 import { BiHide } from "react-icons/bi";
-import "./Login.css";
+import "./AdminLogin.css";
 
 const setStorageItem = (key, value) => {
   try {
@@ -59,7 +55,13 @@ const AdminLoginPage = () => {
         <form onSubmit={handleAdminLogin}>
           <div className="form-group">
             <label>Email</label>
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+            <input
+              type="email"
+              placeholder="admin@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
           </div>
 
           <div className="form-group">
@@ -67,11 +69,16 @@ const AdminLoginPage = () => {
             <div className="password-wrapper">
               <input
                 type={showPassword ? "text" : "password"}
+                placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
-              <button type="button" onClick={() => setShowPassword(!showPassword)} className="toggle-password">
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="toggle-password"
+              >
                 {showPassword ? <GrView /> : <BiHide />}
               </button>
             </div>
