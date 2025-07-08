@@ -1,1 +1,3 @@
 /*    /index.html   200
+
+/__/auth/*  https://<your-project>.firebaseapp.com/__/auth/:splat  200

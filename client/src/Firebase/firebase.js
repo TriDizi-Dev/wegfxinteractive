@@ -15,13 +15,14 @@ import {
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyCRKz_5ZmbCT7psixGIKJr_FJA1a5GjOkE",
-  authDomain: "interactive-5c598.firebaseapp.com",
+  // authDomain: "interactive-5c598.firebaseapp.com",
+  authDomain: "wegfxinteractive.netlify.app",
   databaseURL: "https://interactive-5c598-default-rtdb.firebaseio.com",
   projectId: "interactive-5c598",
   storageBucket: "interactive-5c598.firebasestorage.app",
   messagingSenderId: "480894110668",
   appId: "1:480894110668:web:ebe0c9a78b22c56981eb69",
-  measurementId: "G-PNF4TSSTSP"
+  measurementId: "G-PNF4TSSTSP",
 };
 
 // Initialize Firebase
