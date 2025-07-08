@@ -1,14 +1,22 @@
 
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
 
-/* 🌌 Page Wrapper */
+
 .login-wrapper {
-  height: 96vh;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   background: radial-gradient(circle at top left, #ede7f6, #d6d0f5, #e0dcff);
   display: flex;
   justify-content: center;
   align-items: center;
-  /* overflow: hidden; */
+  overflow: hidden;
   animation: fadeInPage 0.8s ease-out;
 }
 
@@ -23,7 +31,7 @@
   }
 }
 
-/* 🧱 Login Box */
+
 .login-container {
   background: #ffffff;
   border-radius: 20px;
@@ -31,11 +39,11 @@
   padding: 3rem 2.5rem;
   width: 100%;
   max-width: 450px;
-  /* max-height: 100%; */
+  max-height: 100%;
   box-sizing: border-box;
   animation: floatUp 0.6s ease-out;
   position: relative;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 @keyframes floatUp {
@@ -61,7 +69,7 @@
   z-index: 0;
 }
 
-/* 🖋️ Title */
+
 .login-container h2 {
   margin-bottom: 2rem;
   font-size: 1.8rem;
@@ -72,7 +80,7 @@
   z-index: 1;
 }
 
-/* 🧩 Form Group */
+
 .form-group {
   margin-bottom: 1.5rem;
   text-align: left;
@@ -88,7 +96,7 @@
 }
 
 .form-group input {
-  width: 94%;
+  width: 100%;
   padding: 0.85rem 1rem;
   border: 1.5px solid #ccc;
   border-radius: 12px;
@@ -104,7 +112,7 @@
   box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
 }
 
-/* 👁 Password Wrapper */
+
 .password-wrapper {
   position: relative;
 }
@@ -126,7 +134,7 @@
   transform: translateY(-50%) scale(1.1);
 }
 
-/* 🔔 Error */
+
 .error-message {
   color: #d32f2f;
   background-color: #ffebee;
@@ -138,7 +146,6 @@
   font-weight: 500;
 }
 
-/* 🚀 Animated Login Button */
 .btn-login {
   width: 100%;
   padding: 0.9rem;
@@ -153,7 +160,7 @@
   transition: all 0.3s ease;
   position: relative;
   z-index: 1;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .btn-login::after {
@@ -166,7 +173,6 @@
   background: rgba(255, 255, 255, 0.2);
   transform: skewX(-30deg);
   transition: left 0.5s ease;
-  opacity: 0;
 }
 
 .btn-login:hover {
@@ -175,11 +181,9 @@
 }
 
 .btn-login:hover::after {
-  left: 0%;
-  opacity: 1;
+  left: 200%;
 }
 
-/* 📱 Mobile Styles */
 @media (max-width: 500px) {
   .login-wrapper {
     padding: 1rem;
