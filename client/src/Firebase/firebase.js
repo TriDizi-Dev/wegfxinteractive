@@ -26,7 +26,7 @@ const firebaseConfig = {
   authDomain:
     window.location.hostname === "localhost"
       ? "interactive-5c598.firebaseapp.com"
-      : "https://wegfxinteractive.netlify.app",
+      : "wegfxinteractive.netlify.app",
 
   databaseURL: "https://interactive-5c598-default-rtdb.firebaseio.com",
   projectId: "interactive-5c598",
