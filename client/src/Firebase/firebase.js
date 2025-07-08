@@ -1,6 +1,14 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set, push, get, remove, update  } from "firebase/database";
+import {
+  getDatabase,
+  ref,
+  set,
+  push,
+  get,
+  remove,
+  update,
+} from "firebase/database";
 import { getAuth } from "firebase/auth";
 import {
   getStorage,
@@ -21,7 +29,7 @@ const firebaseConfig = {
   storageBucket: "interactive-5c598.firebasestorage.app",
   messagingSenderId: "480894110668",
   appId: "1:480894110668:web:ebe0c9a78b22c56981eb69",
-  measurementId: "G-PNF4TSSTSP"
+  measurementId: "G-PNF4TSSTSP",
 };
 
 // Initialize Firebase
@@ -44,5 +52,4 @@ export {
   storageRef,
   uploadBytes,
   getDownloadURL,
-  
 };

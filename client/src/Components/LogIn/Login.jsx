@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import cartoonImage from "../../assets/home/cartoon.png";
 import { useNavigate } from "react-router-dom";
 import {
@@ -30,26 +30,25 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [redirectHandled, setRedirectHandled] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    let isMounted = true;
-    auth.useDeviceLanguage();
+  // ✅ Handle Google Redirect login (even if useEffect doesn't fire)
+  if (!redirectHandled && sessionStorage.getItem("googleRedirect") === "true") {
+    setRedirectHandled(true);
+    sessionStorage.removeItem("googleRedirect");
 
-    const handleRedirect = async () => {
-      try {
-        const result = await getRedirectResult(auth);
-        if (!isMounted || !result?.user) return;
-
+    getRedirectResult(auth)
+      .then(async (result) => {
+        if (!result?.user) return;
         const uid = result.user.uid;
+        const email = result.user.email;
+
         const userRef = ref(database, `users/${uid}`);
         const snapshot = await get(userRef);
 
         if (!snapshot.exists()) {
-          await set(userRef, {
-            email: result.user.email,
-            role: "user",
-          });
+          await set(userRef, { email, role: "user" });
         }
 
         const token = await result.user.getIdToken();
@@ -65,17 +64,12 @@ const LoginPage = () => {
         } else {
           navigate("/slectPlanpage");
         }
-      } catch (error) {
-        console.error("Google redirect error:", error.code, error.message);
-        if (isMounted) setError("Google Sign-In Failed: " + error.message);
-      }
-    };
-
-    handleRedirect();
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+      })
+      .catch((err) => {
+        console.error("Google Sign-In Failed:", err);
+        setError("Google Sign-In Failed");
+      });
+  }
 
   const handleUserLoginSignup = async (e) => {
     e.preventDefault();
@@ -140,8 +134,10 @@ const LoginPage = () => {
   const handleGoogleLogin = async () => {
     try {
       const provider = new GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: "select_account" });
 
       if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+        sessionStorage.setItem("googleRedirect", "true");
         await signInWithRedirect(auth, provider);
       } else {
         const result = await signInWithPopup(auth, provider);
@@ -159,10 +155,7 @@ const LoginPage = () => {
         const snapshot = await get(userRef);
 
         if (!snapshot.exists()) {
-          await set(userRef, {
-            email,
-            role: "user",
-          });
+          await set(userRef, { email, role: "user" });
         }
 
         const token = await result.user.getIdToken();
@@ -181,7 +174,7 @@ const LoginPage = () => {
       }
     } catch (err) {
       console.error("Google sign-in error:", err);
-      setError("Google Sign-In Failed");
+      setError("Google Sign-In Failed.");
     }
   };
 
@@ -198,7 +191,12 @@ const LoginPage = () => {
           <form onSubmit={handleUserLoginSignup}>
             <div className="form-group">
               <label>Email</label>
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
             </div>
 
             <div className="form-group">
@@ -210,7 +208,11 @@ const LoginPage = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
-                <button type="button" onClick={() => setShowPassword(!showPassword)} className="toggle-password">
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="toggle-password"
+                >
                   {showPassword ? <GrView /> : <BiHide />}
                 </button>
               </div>
