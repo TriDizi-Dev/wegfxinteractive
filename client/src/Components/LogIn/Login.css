@@ -208,6 +208,7 @@
   .login-box {
     flex-direction: column;
     max-width: 95%;
+    overflow: visible;
   }
 
   .login-left {

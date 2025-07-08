@@ -1,6 +1,14 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, set, push, get, remove, update  } from "firebase/database";
+import {
+  getDatabase,
+  ref,
+  set,
+  push,
+  get,
+  remove,
+  update,
+} from "firebase/database";
 import { getAuth } from "firebase/auth";
 import {
   getStorage,
@@ -15,8 +23,11 @@ import {
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyCRKz_5ZmbCT7psixGIKJr_FJA1a5GjOkE",
-  // authDomain: "interactive-5c598.firebaseapp.com",
-  authDomain: "wegfxinteractive.netlify.app",
+  authDomain:
+    window.location.hostname === "localhost"
+      ? "interactive-5c598.firebaseapp.com"
+      : "https://wegfxinteractive.netlify.app",
+
   databaseURL: "https://interactive-5c598-default-rtdb.firebaseio.com",
   projectId: "interactive-5c598",
   storageBucket: "interactive-5c598.firebasestorage.app",
@@ -45,5 +56,4 @@ export {
   storageRef,
   uploadBytes,
   getDownloadURL,
-  
 };

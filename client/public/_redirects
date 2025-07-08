@@ -1,3 +1,4 @@
-/*    /index.html   200
+/__/auth/*    /__/auth/:splat    200
 
-/__/auth/*  https://<your-project>.firebaseapp.com/__/auth/:splat  200
+# ✅ Fallback to React app for all other routes
+/*            /index.html        200
