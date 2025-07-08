@@ -23,11 +23,7 @@ import {
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyCRKz_5ZmbCT7psixGIKJr_FJA1a5GjOkE",
-  authDomain:
-    window.location.hostname === "localhost"
-      ? "interactive-5c598.firebaseapp.com"
-      : "wegfxinteractive.netlify.app",
-
+  authDomain: "interactive-5c598.firebaseapp.com",
   databaseURL: "https://interactive-5c598-default-rtdb.firebaseio.com",
   projectId: "interactive-5c598",
   storageBucket: "interactive-5c598.firebasestorage.app",
