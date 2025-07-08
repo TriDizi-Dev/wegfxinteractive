@@ -1,5 +1,6 @@
 .login-wrapper {
   min-height: 100vh;
+  max-width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -51,6 +52,8 @@
   padding: 40px 30px;
   color: #3d3d3d;
   box-sizing: border-box;
+  overflow: hidden;
+  max-height: 100%;
 }
 
 .login-right h2 {
@@ -192,11 +195,42 @@
   text-align: center;
 }
 
+/* ✅ Desktop - Hide scrollbars completely */
+@media (min-width: 992px) {
+  .login-wrapper {
+    overflow: hidden;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+  }
+
+  * {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  *::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ✅ Mobile - allow vertical scroll only */
 @media (max-width: 991px) {
+  .login-wrapper {
+    align-items: flex-start;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    min-height: 100vh;
+  }
+
   .login-box {
     flex-direction: column;
     max-width: 95%;
-    overflow: visible;
+    height: auto;
   }
 
   .login-left {
@@ -212,14 +246,14 @@
   .login-right {
     width: 100%;
     padding: 30px 20px;
+    max-height: unset;
+    overflow-y: auto;
   }
 
   .login-right h2 {
     font-size: 24px;
   }
 }
-
-
 
 @media (max-width: 576px) {
   .login-right h2 {

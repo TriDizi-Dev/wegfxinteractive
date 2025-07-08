@@ -186,6 +186,7 @@ const LoginPage = () => {
         </div>
 
         <div className="login-right">
+        
           <h2>{isSignup ? "User Signup" : "User Login"}</h2>
 
           <form onSubmit={handleUserLoginSignup}>

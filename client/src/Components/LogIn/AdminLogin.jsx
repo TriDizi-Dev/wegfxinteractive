@@ -4,7 +4,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { ref, get, database, auth } from "../../Firebase/firebase";
 import { GrView } from "react-icons/gr";
 import { BiHide } from "react-icons/bi";
-import "./AdminLogin.css";
+import "./AdminLoginPage.css";
 
 const setStorageItem = (key, value) => {
   try {
@@ -39,7 +39,6 @@ const AdminLoginPage = () => {
         setError("You are not authorized as admin.");
       }
     } catch (err) {
-      console.error(err);
       if (err.code === "auth/invalid-email") setError("Invalid email format.");
       else if (err.code === "auth/user-not-found") setError("Admin not found.");
       else if (err.code === "auth/wrong-password") setError("Incorrect password.");
@@ -48,48 +47,49 @@ const AdminLoginPage = () => {
   };
 
   return (
-    <div className="login-wrapper">
-      <div className="login-container">
-        <h2>Admin Login</h2>
-
-        <form onSubmit={handleAdminLogin}>
-          <div className="form-group">
-            <label>Email</label>
-            <input
-              type="email"
-              placeholder="admin@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Password</label>
-            <div className="password-wrapper">
+    <div className="admin-page-scope">
+      <div className="admin-login-wrapper">
+        <div className="admin-login-container">
+          <h2 className="admin-login-heading">Admin Login</h2>
+          <form onSubmit={handleAdminLogin}>
+            <div className="admin-form-group">
+              <label>Email</label>
               <input
-                type={showPassword ? "text" : "password"}
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                type="email"
+                placeholder="admin@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="toggle-password"
-              >
-                {showPassword ? <GrView /> : <BiHide />}
-              </button>
             </div>
-          </div>
 
-          {error && <p className="error-message">{error}</p>}
+            <div className="admin-form-group">
+              <label>Password</label>
+              <div className="admin-password-wrapper">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="admin-toggle-password"
+                >
+                  {showPassword ? <GrView /> : <BiHide />}
+                </button>
+              </div>
+            </div>
 
-          <button type="submit" className="btn-login">
-            Login as Admin
-          </button>
-        </form>
+            {error && <p className="admin-error-message">{error}</p>}
+
+            <button type="submit" className="admin-btn-login">
+              Login as Admin
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
