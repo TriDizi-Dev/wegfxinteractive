@@ -6,7 +6,7 @@
   height: 92vh;
   background: linear-gradient(to bottom, #f0f4ff, #d6e0ff);
   padding: 20px;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .plan-container {
@@ -83,7 +83,7 @@
   font-weight: bold;
   cursor: pointer;
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
   box-shadow: 0 4px 15px rgba(108, 99, 255, 0.4);
   transition: background 0.3s ease;
 }
