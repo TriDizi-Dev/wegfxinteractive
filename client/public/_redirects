@@ -1,4 +1,2 @@
 /__/auth/*    /__/auth/:splat    200
-
-# ✅ Fallback to React app for all other routes
 /*            /index.html        200
