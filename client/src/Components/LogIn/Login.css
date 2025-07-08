@@ -1,58 +1,60 @@
-
+/* 🌌 Page Wrapper */
 .login-wrapper {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f5f0fa;
   padding: 20px;
+  background-color: #f5f0fa;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
-
+/* 📦 Main Login Container */
 .login-box {
   display: flex;
   flex-direction: row;
   background-color: white;
   border-radius: 20px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  /* overflow: hidden; */
   max-width: 1000px;
   width: 100%;
-  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
+/* 🖼 Cartoon Left */
 .login-left {
-  position: relative;
-  width: 30%;
-  background-color: transparent;
+  width: 35%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
-  padding: 0 0 0 10px;
-  /* overflow: visible; */
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .cartoon-touch {
   width: 100%;
-  max-width: 320px;
-  transform: translateX(30px);
+  max-width: 280px;
   animation: cartoonPop 2s ease-in-out infinite;
   pointer-events: none;
 }
 
 @keyframes cartoonPop {
   0%, 100% {
-    transform: translateX(30px) scale(1);
+    transform: scale(1);
   }
   50% {
-    transform: translateX(35px) scale(1.02);
+    transform: scale(1.03);
   }
 }
 
+/* 📝 Login Right Side */
 .login-right {
-  width: 60%;
+  width: 65%;
   padding: 40px 30px;
   color: #3d3d3d;
+  box-sizing: border-box;
 }
 
 .login-right h2 {
@@ -63,8 +65,10 @@
   color: #4b2aad;
 }
 
+/* 🧩 Form Group */
 .form-group {
   margin-bottom: 20px;
+  position: relative;
 }
 
 .form-group label {
@@ -76,31 +80,36 @@
 }
 
 .form-group input {
-  width: 94%;
-  padding: 12px;
+  width: 100%;
+  padding: 12px 44px 12px 12px;
   border: 1px solid #ccc;
   border-radius: 10px;
   font-size: 16px;
   background-color: #f9f9f9;
   color: #000;
+  box-sizing: border-box;
 }
 
+/* 👁 Password Toggle */
 .password-wrapper {
   position: relative;
 }
 
 .toggle-password {
   position: absolute;
-  right: 10px;
+  right: 14px;
   top: 50%;
   transform: translateY(-50%);
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: #4b2aad;
+  z-index: 2;
+  padding: 0;
 }
 
+/* 🚀 Login Button */
 .btn-login {
   width: 100%;
   padding: 14px;
@@ -108,19 +117,22 @@
   font-weight: bold;
   border: none;
   border-radius: 10px;
-  background-color: #a78bfa;
+  background: linear-gradient(135deg, #a78bfa, #8b69f4);
   color: white;
   cursor: pointer;
   transition: 0.3s ease;
+  box-shadow: 0 6px 18px rgba(108, 99, 255, 0.2);
 }
 
 .btn-login:hover {
-  background-color: #8b69f4;
+  background: linear-gradient(135deg, #8b69f4, #6a4cf4);
+  transform: translateY(-1px);
 }
 
+/* 🔵 Google Button */
 .btn-google {
   width: 100%;
-  padding: 0.75rem;
+  padding: 12px;
   margin-top: 1rem;
   background-color: #4285f4;
   color: white;
@@ -129,20 +141,14 @@
   font-weight: 600;
   cursor: pointer;
   font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
 .btn-google:hover {
   background-color: #357ae8;
 }
 
-.or-divider {
-  text-align: center;
-  margin: 1rem 0;
-  position: relative;
-  font-size: 0.9rem;
-  color: #777;
-}
-
+/* 🔄 Toggle Signup/Login */
 .signup-toggle {
   text-align: center;
   margin-top: 1rem;
@@ -155,12 +161,41 @@
   font-weight: 600;
   cursor: pointer;
   font-size: 0.95rem;
+  transition: text-decoration 0.2s ease;
 }
 
 .toggle-button:hover {
   text-decoration: underline;
 }
 
+/* ➖ Divider */
+.or-divider {
+  text-align: center;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  color: #777;
+  position: relative;
+}
+
+.or-divider::before,
+.or-divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background: #ccc;
+}
+
+.or-divider::before {
+  left: 0;
+}
+
+.or-divider::after {
+  right: 0;
+}
+
+/* 🚨 Error Message */
 .error-message {
   color: #e53935;
   font-size: 0.9rem;
@@ -168,10 +203,11 @@
   text-align: center;
 }
 
+/* 📱 Tablet Responsive */
 @media (max-width: 991px) {
   .login-box {
     flex-direction: column;
-    max-width: 90%;
+    max-width: 95%;
   }
 
   .login-left {
@@ -181,8 +217,7 @@
   }
 
   .cartoon-touch {
-    max-width: 220px;
-    transform: translateX(0px);
+    max-width: 200px;
   }
 
   .login-right {
@@ -191,18 +226,17 @@
   }
 
   .login-right h2 {
-    font-size: 26px;
+    font-size: 24px;
   }
 }
 
-
+/* 📱 Mobile Responsive */
 @media (max-width: 576px) {
   .login-right h2 {
-    font-size: 22px;
+    font-size: 20px;
   }
 
   .form-group input {
-    width: 100%;
     font-size: 14px;
   }
 

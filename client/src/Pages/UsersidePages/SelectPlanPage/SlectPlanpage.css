@@ -6,7 +6,8 @@
   height: 92vh;
   background: linear-gradient(to bottom, #f0f4ff, #d6e0ff);
   padding: 20px;
-  /* overflow: hidden; */
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .plan-container {
@@ -21,6 +22,7 @@
   animation: fadeInUp 0.8s ease;
 }
 
+/* 🎯 Heading */
 .plan-heading {
   margin-bottom: 25px;
   font-size: 1.9rem;
@@ -28,7 +30,6 @@
   font-weight: 700;
 }
 
-/* 💳 Plan Cards */
 .plans {
   display: flex;
   justify-content: space-between;
@@ -37,8 +38,9 @@
   margin-bottom: 30px;
 }
 
+
 .plan-card {
-  flex: 1 1 40%;
+  flex: 1 1 45%;
   background-color: #f8f9ff;
   padding: 20px;
   border-radius: 12px;
@@ -47,6 +49,7 @@
   border: 2px solid transparent;
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
   transform: scale(1);
+  box-sizing: border-box;
 }
 
 .plan-card:hover {
@@ -73,6 +76,7 @@
   color: #60668a;
 }
 
+
 .proceed-btn {
   background: linear-gradient(to right, #6c63ff, #a66cff);
   color: #fff;
@@ -83,48 +87,12 @@
   font-weight: bold;
   cursor: pointer;
   position: relative;
-  /* overflow: hidden; */
   box-shadow: 0 4px 15px rgba(108, 99, 255, 0.4);
   transition: background 0.3s ease;
 }
 
 .proceed-btn:hover {
   background: linear-gradient(to right, #5a52e8, #9057f5);
-}
-
-@media (max-width: 600px) {
-  .plan-container {
-    padding: 25px 20px;
-  }
-
-  .plans {
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .plan-card {
-    flex: 1 1 100%;
-    width: 100%;
-  }
-
-  .plan-card h3 {
-    font-size: 1.1rem;
-  }
-
-  .plan-card p {
-    font-size: 0.95rem;
-  }
-
-  .proceed-btn {
-    width: 100%;
-    font-size: 1rem;
-    padding: 14px;
-  }
-
-  .plan-heading {
-    font-size: 1.6rem;
-  }
 }
 
 @keyframes fadeInUp {
@@ -188,5 +156,63 @@
     width: 300px;
     height: 300px;
     opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .plan-container {
+    padding: 30px 25px;
+  }
+
+  .plan-card {
+    flex: 1 1 100%;
+    width: 100%;
+  }
+
+  .plans {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .plan-heading {
+    font-size: 1.6rem;
+  }
+
+  .plan-card h3 {
+    font-size: 1.2rem;
+  }
+
+  .plan-card p {
+    font-size: 0.95rem;
+  }
+
+  .proceed-btn {
+    width: 100%;
+    font-size: 1rem;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .plan-container {
+    padding: 24px 18px;
+  }
+
+  .plan-heading {
+    font-size: 1.5rem;
+  }
+
+  .plan-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .plan-card p {
+    font-size: 0.9rem;
+  }
+
+  .proceed-btn {
+    font-size: 0.95rem;
+    padding: 12px;
   }
 }
