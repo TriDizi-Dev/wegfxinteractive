@@ -96,7 +96,7 @@ const helmet = require("helmet");
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = 5000;
 const salt_key = "f8de9bcc-c6f5-4ae2-bcf9-ff84151eab67";
 const merchant_id = "SU2507081620336428452705";
 
