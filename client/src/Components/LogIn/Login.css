@@ -195,7 +195,6 @@
   text-align: center;
 }
 
-
 @media (min-width: 992px) {
   .login-wrapper {
     overflow: hidden;
@@ -216,13 +215,12 @@
   }
 }
 
-
 @media (max-width: 991px) {
   .login-wrapper {
     align-items: flex-start;
     overflow-y: auto;
     overflow-x: hidden;
-    padding-top: 20px;
+    padding-top: 200px;
     padding-bottom: 40px;
     min-height: 100vh;
   }
@@ -236,7 +234,6 @@
   .login-left {
     width: 100%;
     justify-content: center;
-    padding: 20px 0;
   }
 
   .cartoon-touch {
@@ -245,7 +242,6 @@
 
   .login-right {
     width: 100%;
-    padding: 30px 20px;
     max-height: unset;
     overflow-y: auto;
   }
@@ -256,6 +252,14 @@
 }
 
 @media (max-width: 576px) {
+  .login-left {
+    display: none;
+  }
+
+  .cartoon-touch {
+    display: none;
+  }
+
   .login-right h2 {
     font-size: 20px;
   }
@@ -268,13 +272,6 @@
   .btn-google {
     font-size: 14px;
     padding: 12px;
-  }
-
-  .cartoon-touch {
-    max-width: 250px;
-    max-height: 250px;
-    margin-right: 50px;
-    margin-top: 10px;
   }
 
   .toggle-password {

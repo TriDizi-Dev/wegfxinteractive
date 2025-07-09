@@ -161,7 +161,7 @@
   .admin-login-wrapper {
     overflow-y: auto;
     align-items: flex-start;
-    padding: 1rem;
+    padding-top: 7rem;
     height: auto;
     min-height: 100vh;
   }
