@@ -181,6 +181,10 @@ app.post("/payment-callback", (req, res) => {
   res.status(200).send("Callback received.");
 });
 
+app.get("/", (req, res) => {
+  res.send("✅ Payment API is running!");
+});
+
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on http://localhost:${PORT}`);
 });
