@@ -195,7 +195,7 @@
   text-align: center;
 }
 
-/* ✅ Desktop - Hide scrollbars completely */
+
 @media (min-width: 992px) {
   .login-wrapper {
     overflow: hidden;
@@ -216,13 +216,13 @@
   }
 }
 
-/* ✅ Mobile - allow vertical scroll only */
+
 @media (max-width: 991px) {
   .login-wrapper {
     align-items: flex-start;
     overflow-y: auto;
     overflow-x: hidden;
-    padding-top: 40px;
+    padding-top: 20px;
     padding-bottom: 40px;
     min-height: 100vh;
   }
@@ -271,8 +271,10 @@
   }
 
   .cartoon-touch {
-    max-width: 300px;
-    margin-top: 20px;
+    max-width: 250px;
+    max-height: 250px;
+    margin-right: 50px;
+    margin-top: 10px;
   }
 
   .toggle-password {
