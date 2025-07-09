@@ -199,10 +199,10 @@ dotenv.config();
 
 const app = express();
 const PORT = 5000;
-const salt_key = "05ad3adc-857d-439a-aff4-2ee07d9028f9"; // Replace with your sandbox salt key
-const merchant_id = "M22YOQGB6C5LL"; // Replace with your sandbox merchant ID
-// const salt_key = "f8de9bcc-c6f5-4ae2-bcf9-ff84151eab67"; // Replace with your sandbox salt key
-// const merchant_id = "SU2507081620336428452705"; // Replace with your sandbox merchant ID
+// const salt_key = "05ad3adc-857d-439a-aff4-2ee07d9028f9"; // Replace with your sandbox salt key
+// const merchant_id = "M22YOQGB6C5LL"; // Replace with your sandbox merchant ID
+const salt_key = "f8de9bcc-c6f5-4ae2-bcf9-ff84151eab67"; // Replace with your sandbox salt key
+const merchant_id = "SU2507081620336428452705"; // Replace with your sandbox merchant ID
 const SUCCESS_URL = "https://think.wegfx.com/payment-success"; // Success redirect URL
 const FAILURE_URL = "https://think.wegfx.com/"; // Failure redirect URL
 
