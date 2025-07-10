@@ -1,5 +1,7 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-// import Loginpage from "../src/Componentsfrist/Login/Loginpage"
+ import { BrowserRouter, Route, Routes } from "react-router-dom";
+ import Pie from "./Components_Last/Piechart/Piechart";
+ import Kids from "./Components_Last/Kids/Kids";
+  import Price from "./Components_Last/Price/Price";
 import LoginPage from "./Components/LogIn/Login";
 import SignupPage from "./Components/LogIn/Signup"
 import Dashboard from "./Pages/AdminSidePages/Dashboard/Dashboard";
@@ -9,8 +11,8 @@ import SlectPlanpage from "./Pages/UsersidePages/SelectPlanPage/SlectPlanpage";
 import QuizComponent from "./Pages/UsersidePages/QuizComponet/Quiz";
 import UserDetails from "./Pages/AdminSidePages/userDetails/Userdetails";
 
-// ✅ Import protection components
-import {
+ //✅ Import protection components
+ import {
   RoleBasedRoute,
   PlanBasedRoute,
   PrivateRoute,
@@ -39,7 +41,7 @@ function Layout() {
             </RoleBasedRoute>
           }
         />
-        <Route
+         <Route
           path="/manageQuestion"
           element={
             <RoleBasedRoute requiredRole="admin">
@@ -92,7 +94,11 @@ function Layout() {
           }
         />
         <Route path="/payment-success" element={<PaymentSuccess />} />
-      </Routes>
+        <Route path="/pie" element={<Pie />} />
+        <Route path="/kids" element={<Kids />} />
+        <Route path="/price" element={<Price />} />
+
+       </Routes>
     </>
   );
 }
