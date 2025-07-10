@@ -70,7 +70,7 @@ import React, { useEffect, useState } from "react";
 // import "../../assets/Pieimages/Picture1.png";
 import "./Piechart.css"; // Make sure this path is correct for your CSS file
 // import logo from '../../assets/Pieimages/Think.png';
-import Think from "../../assets/Pieimages/Think1.png"; // Import your logo image
+import Think from "../../assets/Pieimages/Think1b.png"; // Import your logo image
 import { auth, database } from "../../Firebase/firebase";
 import { ref, get, set } from "firebase/database";
 import { useNavigate } from "react-router-dom";

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./Kids.css";
-import girl from "../../assets/Pieimages/girl.png";
-import boy1 from "../../assets/Pieimages/boy1.png";
-import boy2 from "../../assets/Pieimages/boy2.png";
+import girl from "../../assets/Pieimages/girlb.png";
+import boy1 from "../../assets/Pieimages/boy1b.png";
+import boy2 from "../../assets/Pieimages/boy2b.png";
 import Think from "../../assets/Pieimages/Think1.png";
 import { useNavigate } from "react-router-dom";
 import { auth, database } from "../../Firebase/firebase";

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Price.css";
-import mobile from "../../assets/Pieimages/mobile.png";
+import mobile from "../../assets/Pieimages/phone.png";
 import Think from "../../assets/Pieimages/Think1.png";
 import { auth, database } from "../../Firebase/firebase";
 import { ref, get, set } from "firebase/database";
@@ -82,7 +82,7 @@ function Price() {
       </header>
 
       <main className="main-content">
-        <img src={Think} alt="Think1" className="logo" />
+        <img src={Think} alt="Think1" className="logo1" />
         <h2 className="section-heading">
           <span className="foundation-text">Foundation Thinkers</span> ({userdata?.ageGroup})
         </h2>
