@@ -95,8 +95,8 @@ function Layout() {
         />
         <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/pie" element={<Pie />} />
-        <Route path="/kids" element={<Kids />} />
-        <Route path="/price" element={<Price />} />
+        <Route path="/select-age-group" element={<Kids />} />
+        <Route path="/plans" element={<Price />} />
 
        </Routes>
     </>

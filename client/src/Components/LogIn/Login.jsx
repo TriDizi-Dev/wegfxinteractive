@@ -110,7 +110,8 @@ const LoginPage = () => {
       if (planSnap.exists() && now < planSnap.val().endTime) {
         navigate("/quiz");
       } else {
-        navigate("/slectPlanpage");
+        // navigate("/slectPlanpage");
+        navigate("/select-age-group");
       }
     } catch (err) {
       console.error(err);

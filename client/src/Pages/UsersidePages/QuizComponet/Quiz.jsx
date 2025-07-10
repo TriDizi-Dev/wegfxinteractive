@@ -37,7 +37,7 @@ const QuizComponent = () => {
         setPlanEndTime(planData.endTime);
       }
     });
-  }, [uid]);
+  }, []);
 
   useEffect(() => {
     if (!uid) return;
