@@ -73,9 +73,9 @@ function Layout() {
         <Route
           path="/quiz"
           element={
-            <PlanBasedRoute>
+            // <PlanBasedRoute>
               <QuizComponent />
-            </PlanBasedRoute>
+            // </PlanBasedRoute>
           }
         />
 
