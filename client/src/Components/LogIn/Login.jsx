@@ -182,27 +182,27 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="login-wrapper">
-      <div className="login-box">
-        <div className="login-left">
-          <img src={image2} alt="Cartoon" className="cartoon-touch" />
-          <img src={image3} className="image_3"/>
+    <div className="login_container">
+      <div className="login_box">
+        <div className="login-leftside">
+          <img src={image2} alt="Cartoon" className="boy_image" />
+          <img src={image3} className="image_shape"/>
         <h2>
-          Unleash the <span className="star-text">Star</span> Within!
+          Unleash the <span className="star">Star</span> Within!
         </h2>
         <p>
           Boost your child’s confidence and social skills to unlock lifelong success.
         </p>
         </div>
 
-        <div className="login-right">
+        <div className="login-rightside">
           <div className="head">
           <img src={image4} className="logo"/>
           <h2>{isSignup ? "User Signup" : "User Login"}</h2> 
           </div>
 
           <form onSubmit={handleUserLoginSignup}>
-            <div className="form-group">
+            <div className="form-login">
               <label>Email</label>
               <input
                 type="email"
@@ -212,7 +212,7 @@ const LoginPage = () => {
               />
             </div>
 
-            <div className="form-group">
+            <div className="form-login">
               <label>Password</label>
               <div className="password-wrapper">
                 <input
@@ -231,7 +231,7 @@ const LoginPage = () => {
               </div>
             </div>
             <div>
-              <p>create an account ?<b className="sign" onClick={() => navigate("/sign")}>Sign Up</b></p>
+              <p>Create an account ?<b className="login" onClick={() => navigate("/sign")}>Sign Up</b></p>
               <p>Forget Password</p>
             </div>
 
