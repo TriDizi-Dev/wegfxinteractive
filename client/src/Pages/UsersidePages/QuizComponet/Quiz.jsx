@@ -9,13 +9,10 @@ import think from "../../../assets/home/Think.png";
 import ribbon from "../../../assets/home/congratulation.png";
 import trophy from "../../../assets/home/trophy.png";
 import { auth, database } from "../../../Firebase/firebase";
+import { CgProfile } from "react-icons/cg";
 
 const QuizComponent = () => {
   const { currentUser, loading: authLoading } = useAuth();
-
-  const [userEmail, setUserEmail] = useState("");
-  const [ageRange, setAgeRange] = useState(""); // Placeholder for future use
-  const [userName, setUserName] = useState("");
   const [category, setCategory] = useState("Maths");
   const [categories, setCategories] = useState([]);
   const [questions, setQuestions] = useState([]);
@@ -27,7 +24,7 @@ const QuizComponent = () => {
   const [loading, setLoading] = useState(true);
 
   console.log(currentUser, "currentUsercurrentUser");
-    const [Userdata, setUserdata] = useState({});
+  const [Userdata, setUserdata] = useState({});
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -47,12 +44,6 @@ const QuizComponent = () => {
 
   useEffect(() => {
     if (!currentUser) return;
-
-    // Fetch user info
-    setUserEmail(currentUser.email);
-    // setUserName(currentUser.displayName || "Raj Kumar");
-
-    // Fetch categories
     get(ref(database, "questions")).then((snapshot) => {
       const catSet = new Set();
       const questionsArray = [];
@@ -120,17 +111,19 @@ const QuizComponent = () => {
     >
       {/* HEADER */}
       <div className="quiz-header">
-        <img src={logo} alt="logo" className="quiz-logo" />
+        {/* <img src={logo} alt="logo" className="quiz-logo" /> */}
         <div className="quiz-header-center">
           <img src={think} alt="Think" className="think-logo" />
           <div className="quiz-header-text">
-            <h2>Future - Ready Thinkers</h2>
-            <p>{Userdata?.ageGroup || 0} years</p>
+            <h2>{Userdata?.ageGroup?.title}</h2>
+            <p>Age {Userdata?.ageGroup?.age || 0} years</p>
           </div>
         </div>
         <div className="quiz-user-info">
-          <div className="user-avatar"></div>
           <span>{Userdata.name}</span>
+          <div className="user-avatar">
+            <CgProfile />
+          </div>
         </div>
       </div>
 
@@ -139,7 +132,9 @@ const QuizComponent = () => {
         {categories.map((cat, i) => (
           <button
             key={i}
-            className={`quiz-tab ${cat === category ? "active" : ""}`}
+            className={`quiz-tab color-${i % 6} ${
+              cat === category ? "active" : ""
+            }`}
             onClick={() => fetchQuestions(cat)}
           >
             {cat}
@@ -153,12 +148,18 @@ const QuizComponent = () => {
       ) : quizOver ? (
         <div className="quiz-congrats">
           <img src={ribbon} className="congrats-banner" alt="congrats" />
-          <img src={trophy} className="trophy-image" alt="trophy" />
-          <h2>You Completed the Objectives</h2>
-          <p className="user-name">Name : {Userdata.name}</p>
-          <p className="score">
-            Score : {score * 10} / {questions.length * 10}
-          </p>
+          <div className="Quiz_Complete_Buttom_Section">
+            <div>
+              <h2>You Completed the Objectives</h2>
+              <p className="user-name">Name : {Userdata.name}</p>
+              <p className="score">
+                Score : {score * 10} / {questions.length * 10}
+              </p>
+            </div>
+            <div>
+              <img src={trophy} className="trophy-image" alt="trophy" />
+            </div>
+          </div>
           <button className="restart-btn" onClick={handleRestart}>
             Restart
           </button>

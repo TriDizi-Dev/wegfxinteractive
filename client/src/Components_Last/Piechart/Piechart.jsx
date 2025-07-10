@@ -144,8 +144,8 @@ function Pie() {
             <p className="learning-message">Let's make learning awesome!</p>
 
             <div className="foundation-section">
-              <p className="foundation-title">Foundation Thinkers</p>
-              <p className="age-range">{Userdata?.ageGroup} years</p>
+              <p className="foundation-title">{Userdata?.ageGroup?.title}</p>
+              <p className="age-range">Age {Userdata?.ageGroup?.age} years</p>
               <div className="input-group">
                 {/* <select
                   className="age-group-dropdown"

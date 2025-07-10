@@ -84,7 +84,7 @@ function Price() {
       <main className="main-content">
         <img src={Think} alt="Think1" className="logo1" />
         <h2 className="section-heading">
-          <span className="foundation-text">Foundation Thinkers</span> ({userdata?.ageGroup})
+          <span className="foundation-text">{userdata?.ageGroup?.title}</span> (Age {userdata?.ageGroup?.age})
         </h2>
 
         <div className="content-area">
