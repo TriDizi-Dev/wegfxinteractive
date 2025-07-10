@@ -209,11 +209,14 @@ const QuestionCreation = () => {
                     onChange={onChangeHandler}
                     label="Type"
                   >
-                    <MenuItem value="3-5th-Grade">3-5th Grade</MenuItem>
-                    <MenuItem value="6-10th-Grade"> 6-10th Grade</MenuItem>
-                    <MenuItem value="General-Knowledge">
-                       General Knowledge
+                    <MenuItem value="English">English</MenuItem>
+                    <MenuItem value="Maths">Maths</MenuItem>
+                    <MenuItem value="Social">
+                       Social
                     </MenuItem>
+                    <MenuItem value="Science">Science</MenuItem>
+                    <MenuItem value="Computers">Computers</MenuItem>
+                    <MenuItem value="GK">GK</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
