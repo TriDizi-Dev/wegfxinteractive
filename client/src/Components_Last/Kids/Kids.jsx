@@ -39,6 +39,7 @@ function Kids() {
     navigate("/plans"); // 👈 change this route if needed
   };
 
+  
   return (
     <div className="kids">
       <header className="header1">
@@ -59,8 +60,8 @@ function Kids() {
         </div>
       </header>
 
-      <div className="main-content">
-        <img src={Think} alt="Think1" />
+      <div className="main-container">
+        <img src={Think} alt="Think1" className="thinkimage" />
         <h2 className="tagline">
           Empowering <span className="highlight-blue">kids</span> to step out
           boldly into the future!
