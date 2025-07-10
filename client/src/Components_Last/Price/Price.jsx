@@ -4,9 +4,9 @@ import mobile from '../../assets/Pieimages/mobile.png';
 import Think from '../../assets/Pieimages/Think1.png'// Import your image    
 function Price() {
     return (
-      <div className="app-container">
+      <div className="cost">
        <header className="app-header">
-          <span className="logo-placeholder">A People's Advertising Company</span>
+          <span className="logo-placeholder">A Purple'd Advertising Company</span>
           <div className="user-profile">
             <span>Raj Kumar</span>
             <div className="avatar-circle">
@@ -19,7 +19,7 @@ function Price() {
 
       <main className="main-content">
         {/* <h1 className="main-title">Think</h1> */}
-        <img src={Think} alt="Think1" className="think-logo-image" />
+        <img src={Think} alt="Think1" className="logo" />
 
         <h2 className="section-heading">
           <span className="foundation-text">Foundation Thinkers</span> (Ages 5-8)

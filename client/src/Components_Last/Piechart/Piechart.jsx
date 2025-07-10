@@ -91,7 +91,7 @@ function Pie() {
       <div className="app-container">
         {/* Header */}
         <header className="app-header">
-          <span className="logo-placeholder">A People's Advertising Company</span>
+          <span className="logo-placeholder">A Purple'd Advertising Company</span>
           <div className="user-profile">
             <span>Raj Kumar</span>
             <div className="avatar-circle">

@@ -10,9 +10,9 @@ function Kids() {
       <header className="header1">
         <div className="company-logo">
           {/* Assuming a logo image or text here */}
-          <p>A People's Advertising Company</p>
+          <p>A Purple'd Advertising Company</p>
         </div>
-        <div className="user-profile">
+        <div className="user-profile2">
             <span>Raj Kumar</span>
             <div className="avatar-circle">
               <svg viewBox="0 0 24 24" fill="currentColor" className="avatar-icon">

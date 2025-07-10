@@ -9,7 +9,7 @@
   background-size: cover;
   background-repeat: no-repeat;
 height: fit-content;
-border: 2px solid;
+/* border: 2px solid; */
 overflow: auto;
 }
 
@@ -25,15 +25,18 @@ overflow: auto;
   font-size: 1.17vw; /* 14px */
   color: #666;
   margin: 0;
+  transform: translate(1vw, 1vw);
 }
 
-.user-profile {
+.user-profile2 {
   display: flex;
   align-items: center;
+ transform: translate(80vw, 0vw);
   gap: 0.83vw; /* 10px */
+
 }
 
-.user-profile span {
+.user-profile2 span {
   font-weight: bold;
   color: #333;
   margin: 0vw 3vw;

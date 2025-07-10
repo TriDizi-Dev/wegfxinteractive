@@ -110,6 +110,7 @@ h1 {
               align-items: center;
               gap: 0.69vw;
               font-weight: bold;
+              transform: translate(0vw, 0vw);
           }
 
           .avatar-circle {
@@ -203,7 +204,7 @@ h1 {
 
           .foundation-title {
               font-size: 2.5vw; /* Larger size */
-              font-weight: bold;
+              /* font-weight: bold; */
               color: #d80707;
               margin: 0vw 4vw;
           }
@@ -226,11 +227,12 @@ h1 {
           }
 
           .age-group-dropdown {
-              padding: 0.83vw 1.39vw;
+              padding: 0.5666vw 1.39vw;
               border: 0.069vw solid #ccc;
+              background-color: rgb(221, 207, 207);
               border-radius: 8px;
               font-size: 1.5vw;
-              background-color: white;
+              /* background-color: white; */
               cursor: pointer;
               box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
               width: 100%; /* Full width for mobile */
@@ -239,7 +241,7 @@ h1 {
           }
 
           .start-button {
-              padding: 1.04vw 2.78vw;
+              padding: 0.5vw 2.78vw;
               background-color: #28a745; /* Green button */
               color: white;
               border: none;
