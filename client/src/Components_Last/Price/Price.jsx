@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Price.css';
-import mobile from '../../assets/Pieimages/mobile.png'; 
-import Think from '../../assets/Pieimages/Think1.png'// Import your image    
+import mobile from '../../assets/Pieimages/phone.png'; 
+import Think from '../../assets/Pieimages/Think1b.png'// Import your image    
 function Price() {
     return (
       <div className="cost">

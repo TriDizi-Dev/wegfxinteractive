@@ -52,6 +52,7 @@ overflow: auto;
 
 .main-content {
   text-align: center;
+  transform: translate(0vw, -3vw);
 }
 
 .main-title {
@@ -63,7 +64,7 @@ overflow: auto;
 }
 
 .section-heading {
-  font-size: 2.5vw;
+  font-size: 1.5vw;
   color: #555;
   margin-bottom: 3.33vw;
 }
@@ -71,15 +72,18 @@ overflow: auto;
 .foundation-text {
   color: #dc3545;
   font-weight: bold;
+  font-size: 2vw;
 }
-
+.foundation-text span{
+     font-size: 1.5vw;
+}
 .content-area {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 4.17vw;
   flex-wrap: wrap;
-  margin-top: 2.5vw;
+  margin-top: -1.5vw;
 }
 
 .image-section {
@@ -106,8 +110,8 @@ overflow: auto;
 }
 
 .price-card {
-  width: 15vw;
-  height: 16.67vw;
+  width: 12vw;
+  height: 12vw;
   border-radius: 1.25vw;
   color: white;
   display: flex;
@@ -134,7 +138,7 @@ overflow: auto;
 }
 
 .plan-name {
-  font-size: 2vw;
+  font-size: 1vw;
   margin-top: 0;
   margin-bottom: 0.83vw;
   font-weight: bold;
@@ -146,7 +150,7 @@ overflow: auto;
 }
 
 .price-value {
-  font-size: 4vw;
+  font-size: 1.5vw;
   font-weight: bold;
 }
 

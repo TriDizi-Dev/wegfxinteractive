@@ -70,9 +70,11 @@ overflow: auto;
 }
 
 .tagline {
-  font-size: 2.5vw; /* 30px */
+  font-size: 2.2vw; /* 30px */
  color: #c95115;
   margin-bottom: 6.67vw; /* 80px */
+  letter-spacing: 0vw;
+  letter-spacing: 0vw; /* 1px */
 }
 
 .highlight-blue {
@@ -86,6 +88,7 @@ overflow: auto;
   justify-content: space-around;
   gap: 2.5vw; /* 30px */
   flex-wrap: wrap;
+  margin: -5vw 0vw;
 }
 
 .thinker-card {
@@ -111,7 +114,7 @@ overflow: auto;
 }
 
 .thinker-title {
-  font-size: 2vw; /* 24px */
+  font-size: 1.5vw; /* 24px */
   font-weight: bold;
   margin-bottom: 0.83vw; /* 10px */
 }
@@ -200,5 +203,8 @@ overflow: auto;
   }
   .company-logo p{
     margin: 21vw;
+  }
+  .user-profile2{
+    transform: translate(0vw, 0vw);
   }
 }

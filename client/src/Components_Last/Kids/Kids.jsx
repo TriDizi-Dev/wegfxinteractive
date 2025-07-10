@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import './Kids.css';
-import girl from '../../assets/Pieimages/girl.png';
-import boy1 from '../../assets/Pieimages/boy1.png';
-import boy2 from '../../assets/Pieimages/boy2.png'; 
-import Think from '../../assets/Pieimages/Think1.png'// Import your image
+import girl from '../../assets/Pieimages/girlb.png';
+import boy1 from '../../assets/Pieimages/boy1b.png';
+import boy2 from '../../assets/Pieimages/boy2b.png'; 
+import Think from '../../assets/Pieimages/Think1b.png'// Import your image
 function Kids() {
     return(
        <div className="kids">
