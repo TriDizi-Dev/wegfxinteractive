@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import image2 from "../../assets/Login/image2.png";
 import image1 from "../../assets/Login/image1.jpg"
-import image4 from "../../assets/Login/image4.png"
 import image3 from "../../assets/Login/image3.png"
+import image4 from "../../assets/Login/image4.png"
 import { useNavigate } from "react-router-dom";
 import {
   signInWithEmailAndPassword,
@@ -17,7 +17,7 @@ import {
 import { ref, set, get, database, auth } from "../../Firebase/firebase";
 import { GrView } from "react-icons/gr";
 import { BiHide } from "react-icons/bi";
-import "./Login.css";
+import "./Signup.css";
 
 const setStorageItem = (key, value) => {
   try {
@@ -27,10 +27,12 @@ const setStorageItem = (key, value) => {
   }
 };
 
-const LoginPage = () => {
+const SignupPage= () => {
   const [isSignup, setIsSignup] = useState(false);
   const [email, setEmail] = useState("");
+  const [name, setName] =useState("");
   const [password, setPassword] = useState("");
+  const [confirm, setConfirm]=useState("");
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [redirectHandled, setRedirectHandled] = useState(false);
@@ -49,6 +51,21 @@ const LoginPage = () => {
 
         const userRef = ref(database, `users/${uid}`);
         const snapshot = await get(userRef);
+//   const [formData, setFormData] = useState({
+//     name: "",
+//     email: "",
+//     password: "",
+//     confirmPassword: "",
+//   });
+
+//    const handleChange = (e) => {
+//     setFormData({ ...formData, [e.target.name]: e.target.value });
+//   };
+
+//   const handleSignup = (e) => {
+//     e.preventDefault();
+//     console.log("Form Submitted:", formData);
+//   };
 
         if (!snapshot.exists()) {
           await set(userRef, { email, role: "user" });
@@ -184,24 +201,37 @@ const LoginPage = () => {
   return (
     <div className="login-wrapper">
       <div className="login-box">
-        <div className="login-left">
+        <div className="signup-left">
           <img src={image2} alt="Cartoon" className="cartoon-touch" />
           <img src={image3} className="image_3"/>
         <h2>
           Unleash the <span className="star-text">Star</span> Within!
         </h2>
         <p>
-          Boost your child’s confidence and social skills to unlock lifelong success.
+          Boost your child’s confidence  and social skills to unlock lifelong success.
         </p>
         </div>
 
-        <div className="login-right">
-          <div className="head">
-          <img src={image4} className="logo"/>
-          <h2>{isSignup ? "User Signup" : "User Login"}</h2> 
-          </div>
+        <div className="signup-right">
+            <div className="heading">
+                <img src={image4} className="logeimage"/>
+                <h3>Create an account</h3>
+            </div>
+        
+          {/* <h2>{isSignup ? "User Signup" : "User Login"}</h2> */}
+          
 
           <form onSubmit={handleUserLoginSignup}>
+            <div className="form-group">
+            <label>Name</label>
+          <input
+            type="text"
+            name="name"
+            value={name}
+                onChange={(e) => setName(e.target.value)}
+            required
+          />
+          </div>
             <div className="form-group">
               <label>Email</label>
               <input
@@ -221,42 +251,43 @@ const LoginPage = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
-                <button
+                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   className="toggle-password"
                 >
                   {showPassword ? <GrView /> : <BiHide />}
                 </button>
-              </div>
+            </div>
+                <div className="form-group">
+                  <label>Confirm Password</label>
+                 <input
+                    type="password"
+                 name="confirmPassword"
+                // value={formData.confirmPassword}
+                  // onChange={handleChange}
+                   value={confirm}
+                  onChange={(e) => setConfirm(e.target.value)}
+                 required
+                 />
+                </div>
             </div>
             <div>
-              <p>create an account ?<b className="sign" onClick={() => navigate("/sign")}>Sign Up</b></p>
-              <p>Forget Password</p>
+               <p>
+      Already have an account?{" "}
+      <b className="sign" onClick={() => navigate("/")}>Login</b></p>
             </div>
 
             {error && <p className="error-message">{error}</p>}
 
-            <button type="submit" className="btn-login">
-              {isSignup ? "Sign Up" : "Login"}
+            <button type="submit" className="btn-Sinup">
+              {isSignup ? "Login" : "Sign Up"}
             </button>
           </form>
-
-          {/* <div className="signup-toggle">
-            <button type="button" onClick={() => setIsSignup(!isSignup)} className="toggle-button">
-              {isSignup ? "Switch to Login" : "Switch to Signup"}
-            </button>
           </div>
-
-          <div className="or-divider">OR</div> */}
-
-          {/* <button className="btn-google" onClick={handleGoogleLogin}>
-            Continue with Google
-          </button> */}
-        </div>
       </div>
     </div>
   );
 };
 
-export default LoginPage;
+export default SignupPage;

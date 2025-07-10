@@ -1,0 +1,163 @@
+.form-group label{
+  color: white;
+  margin-top: vw;
+}
+.logeimage{
+  width: 10vw;
+}
+.heading{
+  display: flex;
+}
+.heading h3{
+    padding-left: 4vw;
+}
+.signup-right {
+      background-color: #0072ce;
+  border-radius: 3vw;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  /* max-width: 50vw; */
+  width: 29vw;
+  color: white;
+  margin-left: 10vw;
+  height: 43vw;
+  margin-top: 2vw;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 1vw 3vw rgba(0, 0, 0, 0.15)
+}
+.btn-Sinup{
+     width: 100%;
+  padding: 1.1vw;
+  font-size: 1.2vw;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.8vw;
+  background-color: #10b153;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0.5vw 1.5vw rgba(108, 99, 255, 0.2);
+}
+.signup-left{
+  width: 27vw;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  padding: 1.5vw;
+  box-sizing: border-box;
+  position: relative;
+}
+.signup-left h2 {
+  font-size: 2.2vw;
+  font-weight: 400;
+  color: #1e1e7a;
+  margin-bottom: 1vw;
+  margin-top: -10vw;
+  position:relative;
+}
+.signup-left p{
+  position: relative;
+}
+.star-text {
+  color: #c62828; /* red */
+  position: relative;
+}
+@media (max-width: 768px) {
+  .login-wrapper {
+    flex-direction: column;
+    height: auto;
+    padding: 5vw 2vw;
+    width: 100vw;
+  }
+
+  .login-box {
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+  }
+
+  .login-left,
+  .login-right {
+    width: 90vw;
+    margin: 2vw 0;
+  }
+
+  .singup-left h2,
+  .signup-right h2 {
+    font-size: 6vw;
+    text-align: center;
+    margin: 4vw 0;
+  }
+
+  .cartoon-touch {
+    /* width: 30vw;
+    margin-top: 5vw;
+    margin-left: 0;
+    position: relative; */
+    display: none;
+  }
+
+  .image_3 {
+    /* width: 50vw;
+    margin-top: 10vw;
+    margin-left: 0;
+    position: relative; */
+    display: none;
+  }
+
+  .text-bubble {
+    padding: 4vw;
+    border-radius: 4vw;
+    width: 90vw;
+  }
+
+  .signup-left h2,p{
+    display: none;
+  }
+  .text-bubble p {
+    font-size: 4vw;
+    width: 100%;
+  }
+
+  .form-group {
+    margin-bottom: 4vw;
+  }
+
+  .form-group label {
+    font-size: 3.5vw;
+  }
+
+  .form-group input {
+    font-size: 3.8vw;
+    padding: 3vw;
+    border-radius: 2vw;
+  }
+
+  .heading h3{
+    padding-left: 10vw;
+  }
+
+  .toggle-password {
+    font-size: 4vw;
+    right: 3vw;
+  }
+
+  .btn-Sinup{
+    font-size: 4vw;
+    padding: 3vw;
+    border-radius: 2vw;
+    width: 70vw;
+    height: 10vw;
+  }
+
+  .logeimage {
+    width: 20vw;
+  }
+
+  .signup-right {
+    padding: 3vw;
+    height: auto;
+    border-radius: 4vw;
+    margin-left: -4vw;
+    width: 80vw;
+  }
+}
