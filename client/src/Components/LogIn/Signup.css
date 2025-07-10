@@ -47,8 +47,8 @@ gap: 10vw;
 .image_3{
   height: auto;
   margin-top: 28vw;
-  width: 34vw;
-  margin-left: -7vw;
+  width: 34.5vw;
+  margin-left: -6vw;
   position: relative;
 }
 .star-text{
@@ -119,9 +119,11 @@ gap: 10vw;
   position:relative;
 }
 
-.signup-left p {
+.signup-left h3 {
   position: relative;
   margin-left: -1vw;
+  font-size: 1.5vw;
+  font-weight: 400;
 }
 
 .star-text {
@@ -144,11 +146,6 @@ gap: 10vw;
     width: 100vw;
   }
 
-  .login-left,
-  .login-right {
-    width: 90vw;
-    margin: 2vw 0;
-  }
 
   .singup-left h2,
   .signup-right h2 {
@@ -179,11 +176,12 @@ gap: 10vw;
     width: 90vw;
   }
 
-  .signup-left h2,
-  p {
+  .signup-left h2,h3 {
     display: none;
   }
-
+  .signup-right p{
+    color: #fff;
+  }
   .text-bubble p {
     font-size: 4vw;
     width: 100%;
@@ -216,7 +214,7 @@ gap: 10vw;
     font-size: 4vw;
     padding: 3vw;
     border-radius: 2vw;
-    width: 70vw;
+    width: 80vw;
     height: 10vw;
   }
 
@@ -228,7 +226,10 @@ gap: 10vw;
     padding: 3vw;
     height: auto;
     border-radius: 4vw;
-    margin-left: -4vw;
+    margin-top: 10vw;
     width: 80vw;
+    margin-bottom: 26vw;
+    margin-left: -8vw;
+
   }
 }
