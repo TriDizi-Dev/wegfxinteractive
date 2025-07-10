@@ -1,0 +1,280 @@
+
+
+ .app-container {
+  width: 100%;
+  max-width: 100vw;
+  padding: 1.67vw;
+  box-sizing: border-box;
+ /* background: linear-gradient(to right, #e6f7ff, #ccf2ff, #b3ecff, #99e6ff, #80dfff); */
+  height: 100vh;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 4.17vw;
+}
+
+.company-logo p {
+  font-size: 1.17vw;
+  color: #666;
+  margin: 0;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.83vw;
+}
+
+.user-profile span {
+  font-weight: bold;
+  color: #333;
+}
+
+.avatar {
+  width: 2.5vw;
+  height: 2.5vw;
+  background-color: #9932cc;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.5vw;
+}
+
+.main-content {
+  text-align: center;
+}
+
+.main-title {
+  font-family: 'Georgia', serif;
+  font-size: 6.67vw;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1.67vw;
+}
+
+.section-heading {
+  font-size: 2.5vw;
+  color: #555;
+  margin-bottom: 3.33vw;
+}
+
+.foundation-text {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.content-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4.17vw;
+  flex-wrap: wrap;
+  margin-top: 2.5vw;
+}
+
+.image-section {
+  flex-shrink: 0;
+}
+
+.payment-illustration {
+  margin: -17vw ;
+  height: 35vw;
+  display: block;
+}
+
+.pricing-section {
+  text-align: left;
+}
+
+.pricing-plans {
+  display: flex;
+  gap: 1.67vw;
+  margin-bottom: 2.5vw;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-left: 9vw;
+}
+
+.price-card {
+  width: 15vw;
+  height: 16.67vw;
+  border-radius: 1.25vw;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.25vw;
+  box-sizing: border-box;
+  box-shadow: 0 0.42vw 1.25vw rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.price-card:hover {
+  transform: translateY(-0.42vw);
+}
+
+.plan-label {
+  font-size: 1.17vw;
+  margin-bottom: 0.42vw;
+  text-transform: uppercase;
+  font-weight: bold;
+  opacity: 0.8;
+}
+
+.plan-name {
+  font-size: 2vw;
+  margin-top: 0;
+  margin-bottom: 0.83vw;
+  font-weight: bold;
+}
+
+.price {
+  font-size: 1.33vw;
+  margin-bottom: 0.42vw;
+}
+
+.price-value {
+  font-size: 4vw;
+  font-weight: bold;
+}
+
+.duration {
+  font-size: 1.33vw;
+  margin-top: 0.42vw;
+}
+
+.trial-pack {
+  background-color: red;
+}
+
+.recommended {
+  background-color: #007bff;
+}
+
+.super-saver {
+  background-color: rgba(4, 4, 29, 0.89);
+}
+
+.flexible-options-text {
+  font-size: 1.33vw;
+  color: #666;
+  margin-bottom: 1.25vw;
+   margin-left: 11vw; 
+}
+
+.payment-options {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin: 0vw 11vw;
+}
+
+.payment-options li {
+  font-size: 1.33vw;
+  color: #444;
+  margin-bottom: 0.67vw;
+  line-height: 1.4;
+}
+
+@media (max-width: 992px) {
+  .content-area {
+    flex-direction: column;
+    gap: 2.5vw;
+  }
+
+  .image-section {
+    order: 2;
+  }
+
+  .pricing-section {
+    order: 1;
+    text-align: center;
+  }
+
+  .pricing-plans {
+    justify-content: center;
+  }
+
+  .flexible-options-text,
+  .payment-options {
+    text-align: center;
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    margin-bottom: 2.5vw;
+  }
+
+  .user-profile {
+    margin-top: 1.25vw;
+  }
+
+  .main-title {
+    font-size: 5vw;
+  }
+
+  .section-heading {
+    font-size: 2vw;
+    margin-bottom: 2.5vw;
+  }
+
+  .pricing-plans {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .price-card {
+    width: 20.83vw;
+    height: auto;
+    padding: 1.67vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-title {
+    font-size: 10.75vw;
+  }
+
+  .section-heading {
+    font-size: 5.67vw;
+  }
+
+  .payment-illustration {
+    max-width: 72vw;
+        height: 48vw;
+  }
+
+  .price-card {
+    width: 33vw;
+        height: 27vw;
+        margin: 3vw 1vw;
+    }
+  .plan-name{
+    font-size: 5vw;
+  }
+  .plan-label{
+    font-size: 3vw;
+  }
+  .price {
+    font-size: 6vw;
+  }
+
+  .price-value {
+    font-size: 6vw;
+    
+  }
+  .duration {
+    font-size: 6vw;
+  } 
+}
