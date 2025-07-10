@@ -69,7 +69,12 @@ function Kids() {
         <div className="thinker-sections">
           <div
             className="thinker-card"
-            onClick={() => handleAgeGroupSelect("Age 5–8")}
+            onClick={() =>
+              handleAgeGroupSelect({
+                age: "5–8",
+                title: "Foundation Thinkers",
+              })
+            }
           >
             <img
               src={girl}
@@ -87,7 +92,12 @@ function Kids() {
 
           <div
             className="thinker-card"
-            onClick={() => handleAgeGroupSelect("Age 9–12")}
+            onClick={() =>
+              handleAgeGroupSelect({
+                age: "9–12",
+                title: "Explorative Thinkers",
+              })
+            }
           >
             <img
               src={boy1}
@@ -105,7 +115,12 @@ function Kids() {
 
           <div
             className="thinker-card"
-            onClick={() => handleAgeGroupSelect("Age 13–16")}
+            onClick={() =>
+              handleAgeGroupSelect({
+                age: "13–16",
+                title: "Future - Ready Thinkers",
+              })
+            }
           >
             <img
               src={boy2}
