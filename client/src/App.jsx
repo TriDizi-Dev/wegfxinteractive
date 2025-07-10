@@ -28,10 +28,10 @@ function Layout() {
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route path="/admin-login" element={<AdminLoginPage />} />
-        <Route path="/sign" element={<SignupPage/>}/>
+        <Route path="/sign-up" element={<SignupPage/>}/>
 
         {/* ✅ Admin Protected Routes */}
-        // <Route
+         <Route
           path="/dashboard"
           element={
             <RoleBasedRoute requiredRole="admin">
@@ -47,7 +47,7 @@ function Layout() {
             </RoleBasedRoute>
           }
         />
-        // <Route
+         <Route
           path="/questionCreation"
           element={
             <RoleBasedRoute requiredRole="admin">
@@ -73,7 +73,7 @@ function Layout() {
         />
 
         {/* ✅ Plan Protected User Routes */}
-        // <Route
+         <Route
           path="/quiz"
           element={
             <PlanBasedRoute>
@@ -83,7 +83,7 @@ function Layout() {
         />
 
         {/* ✅ Logged-in Users only (e.g., plan selection page) */}
-//         <Route
+         <Route
           path="/slectPlanpage"
           element={
             <PrivateRoute>
@@ -106,17 +106,5 @@ function App() {
 }
 
 export default App;
-// const App=()=>{
-//   return(
-//     <>
-//     <BrowserRouter>
-//     <Routes>
-//       <Route path="/" element={<Loginpage/>}/>
-//     </Routes>
-//     </BrowserRouter>
-//     </>
-//   )
-// }
 
-// export default App;
 

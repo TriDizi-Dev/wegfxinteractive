@@ -1,32 +1,41 @@
-.form-group label{
+.form-group label {
   color: white;
-  margin-top: vw;
+  /* margin-top: vw; */
 }
-.logeimage{
+
+.logeimage {
   width: 10vw;
 }
-.heading{
+
+.heading {
   display: flex;
 }
-.heading h3{
-    padding-left: 4vw;
+
+.heading h3 {
+  padding-left: 4vw;
 }
+.login-box{
+display: flex;
+gap: 10vw;
+}
+
 .signup-right {
-      background-color: #0072ce;
+  background-color: #0072ce;
   border-radius: 3vw;
-  padding-left: 2vw;
-  padding-right: 2vw;
+  padding: 2vw;
+  /* padding-right: 2vw; */
   /* max-width: 50vw; */
   width: 29vw;
   color: white;
-  margin-left: 10vw;
-  height: 43vw;
+  /* margin-left: 10vw; */
+  height: fit-content;
   margin-top: 2vw;
   font-family: 'Segoe UI', sans-serif;
   box-shadow: 0 1vw 3vw rgba(0, 0, 0, 0.15)
 }
-.btn-Sinup{
-     width: 100%;
+
+.btn-Sinup {
+  width: 100%;
   padding: 1.1vw;
   font-size: 1.2vw;
   font-weight: bold;
@@ -37,30 +46,36 @@
   cursor: pointer;
   box-shadow: 0 0.5vw 1.5vw rgba(108, 99, 255, 0.2);
 }
-.signup-left{
+
+.signup-left {
   width: 27vw;
   /* display: flex; */
   justify-content: center;
   align-items: center;
-  padding: 1.5vw;
+  /* padding: 1.5vw; */
   box-sizing: border-box;
   position: relative;
 }
+
 .signup-left h2 {
   font-size: 2.2vw;
   font-weight: 400;
   color: #1e1e7a;
   margin-bottom: 1vw;
   margin-top: -10vw;
-  position:relative;
-}
-.signup-left p{
   position: relative;
 }
+
+.signup-left p {
+  position: relative;
+}
+
 .star-text {
-  color: #c62828; /* red */
+  color: #c62828;
+  /* red */
   position: relative;
 }
+
 @media (max-width: 768px) {
   .login-wrapper {
     flex-direction: column;
@@ -110,9 +125,11 @@
     width: 90vw;
   }
 
-  .signup-left h2,p{
+  .signup-left h2,
+  p {
     display: none;
   }
+
   .text-bubble p {
     font-size: 4vw;
     width: 100%;
@@ -132,7 +149,7 @@
     border-radius: 2vw;
   }
 
-  .heading h3{
+  .heading h3 {
     padding-left: 10vw;
   }
 
@@ -141,7 +158,7 @@
     right: 3vw;
   }
 
-  .btn-Sinup{
+  .btn-Sinup {
     font-size: 4vw;
     padding: 3vw;
     border-radius: 2vw;

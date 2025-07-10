@@ -34,11 +34,12 @@
 .login-left {
   width: 27vw;
   /* display: flex; */
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center; */
+  /* align-items: center; */
   padding: 1.5vw;
   box-sizing: border-box;
   position: relative;
+  margin-top: -4vw;
 }
 
 .cartoon-touch {
@@ -154,7 +155,7 @@
   width: 30vw;
   color: white;
   margin-left: 10vw;
-  height: 33vw;
+  height: fit-content;
   margin-top: 7vw;
   font-family: 'Segoe UI', sans-serif;
   box-shadow: 0 1vw 3vw rgba(0, 0, 0, 0.15)
@@ -308,7 +309,6 @@
   color: #e53935;
   font-size: 0.9vw;
   margin: 0.7vw 0;
-  text-align: center;
 }
 
 /* Large screens - hide scrollbars */
