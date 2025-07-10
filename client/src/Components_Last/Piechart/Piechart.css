@@ -281,6 +281,7 @@ h1 {
               display: flex;
               justify-content: center;
               align-items: center;
+              transform: translate(1vw, 6vw);
           }
 
           .pie-chart {
