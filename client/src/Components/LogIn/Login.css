@@ -34,12 +34,11 @@
 .login-leftside {
   width: 27vw;
   /* display: flex; */
-  /* justify-content: center; */
-  /* align-items: center; */
+  justify-content: center;
+  align-items: center;
   padding: 1.5vw;
   box-sizing: border-box;
   position: relative;
-  margin-top: -4vw;
 }
 
 .boy_image {
@@ -47,7 +46,7 @@
   /* max-width: 20vw; */
   /* animation: cartoonPop 2s ease-in-out infinite; */
   /* pointer-events: none;*/
-  margin-top: 4vw;
+  margin-top: -1.5vw;
   margin-left: 3vw;
   /* z-index: 2; */
    /* max-width: 100%; */
@@ -64,7 +63,7 @@
     position: absolute; */
      /* max-width: 100%; */
   height: auto;
-  margin-top: 29vw; /* overlap effect */
+  margin-top: 24.5vw; /* overlap effect */
   /* z-index: 10; */
   width: 33vw;
   margin-left: -7vw;
@@ -142,12 +141,7 @@
 } */
 
 .login-rightside {
-  /* width: 51vw;
-  padding: 3vw 2.3vw;
-  color: #3d3d3d;
-  box-sizing: border-box;
-  overflow: hidden;
-  max-height: 100%; */
+
     background-color: #10b153;
   border-radius: 3vw;
   padding: 1vw 4vw;
@@ -155,8 +149,8 @@
   width: 30vw;
   color: white;
   margin-left: 10vw;
-  height: fit-content;
-  margin-top: 7vw;
+  height: 33vw;
+  margin-top: 3vw;
   font-family: 'Segoe UI', sans-serif;
   box-shadow: 0 1vw 3vw rgba(0, 0, 0, 0.15)
 }
@@ -310,6 +304,7 @@
   color: #e53935;
   font-size: 0.9vw;
   margin: 0.7vw 0;
+  text-align: center;
 }
 
 /* Large screens - hide scrollbars */
@@ -464,6 +459,7 @@
   }
 
   .login-rightside p{
+    width: 20vw;
     color: white;
     font-size: 3vw;
   }
