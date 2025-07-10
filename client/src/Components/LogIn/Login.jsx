@@ -199,11 +199,11 @@ const LoginPage = () => {
   */
 
   return (
-    <div className="login-wrapper">
-      <div className="login-box">
-        <div className="login-left">
-          <img src={image2} alt="Cartoon" className="cartoon-touch" />
-          <img src={image3} className="image_3" alt="Illustration" />
+    <div className="login_container">
+      <div className="login_box">
+        <div className="login-leftside">
+          <img src={image2} alt="Cartoon" className="boy_image " />
+          <img src={image3} className="image_shape" alt="Illustration" />
           <h2>
             Unleash the <span className="star-text">Star</span> Within!
           </h2>
@@ -212,7 +212,7 @@ const LoginPage = () => {
           </p>
         </div>
 
-        <div className="login-right">
+        <div className="login-rightside">
           <div className="head">
             <img src={image4} className="logo" alt="Logo" />
             {/* <h2>{showChangePassword ? "Change Password" : "User Login"}</h2> */}
@@ -220,7 +220,7 @@ const LoginPage = () => {
           </div>
 
           <form onSubmit={showChangePassword ? handlePasswordUpdate : handleLogin}>
-            <div className="form-group">
+            <div className="form-login">
               <label>Email</label>
               <input
                 type="email"
@@ -230,7 +230,7 @@ const LoginPage = () => {
               />
             </div>
 
-            <div className="form-group">
+            <div className="form-login">
               <label>{showChangePassword ? "New Password" : "Password"}</label>
               <div className="password-wrapper">
                 <input
@@ -252,7 +252,7 @@ const LoginPage = () => {
             <div>
               <p>
                 Create an account?{" "}
-                <b className="sign" onClick={() => navigate("/sign-up")}>
+                <b className="login" onClick={() => navigate("/sign-up")}>
                   Sign Up
                 </b>
               </p>

@@ -87,10 +87,10 @@ const SignupPage = () => {
           <h2>
             Unleash the <span className="star-text">Star</span> Within!
           </h2>
-          <p>
+          <h3>
             Boost your child’s confidence and social skills to unlock lifelong
             success.
-          </p>
+          </h3>
         </div>
 
         <div className="signup-right">
