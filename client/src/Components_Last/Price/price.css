@@ -92,7 +92,7 @@ overflow: auto;
 
 .payment-illustration {
   margin: -11vw ;
-  height: 35vw;
+  height: 23vw;
   display: block;
 }
 
@@ -190,6 +190,9 @@ overflow: auto;
   color: #444;
   margin-bottom: 0.67vw;
   line-height: 1.4;
+}
+.logo1{
+    
 }
 
 @media (max-width: 992px) {
