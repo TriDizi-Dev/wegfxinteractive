@@ -172,7 +172,7 @@ overflow: auto;
 }
 
 .flexible-options-text {
-  font-size: 1.33vw;
+  font-size: 1.2vw;
   color: #666;
   margin-bottom: 1.25vw;
    margin-left: 25vw; 
@@ -186,13 +186,13 @@ overflow: auto;
 }
 
 .payment-options li {
-  font-size: 1.33vw;
+  font-size: 1vw;
   color: #444;
   margin-bottom: 0.67vw;
   line-height: 1.4;
 }
 .logo1{
-    
+
 }
 
 @media (max-width: 992px) {
@@ -259,6 +259,42 @@ overflow: auto;
 
   .section-heading {
     font-size: 5.67vw;
+  }
+.foundation-text{
+    font-size: 4.5vw;
+  }
+
+  .content-area {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .image-section {
+    width: 45vw;
+    height: auto;
+  }
+.avatar-icon {
+    width: 16.74vw;
+    height: 4.74vw;
+}
+  .payment-illustration {
+    margin: -11vw;
+    height: 23vw;
+  }
+
+  .pricing-plans {
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
+  }
+
+  .flexible-options-text {
+    font-size: 4vw;
+    margin-left: 0;
+  }
+
+  .payment-options li {
+    font-size: 3.5vw;
   }
 
   .payment-illustration {

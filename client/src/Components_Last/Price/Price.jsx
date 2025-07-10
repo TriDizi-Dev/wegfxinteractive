@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Price.css";
 import mobile from "../../assets/Pieimages/phone.png";
-import Think from "../../assets/Pieimages/Think1.png";
+import Think from "../../assets/Pieimages/Think1b.png";
 import { auth, database } from "../../Firebase/firebase";
 import { ref, get, set } from "firebase/database";
 import { useNavigate } from "react-router-dom";
