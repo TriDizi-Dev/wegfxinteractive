@@ -1,18 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import image2 from "../../assets/Login/image2.png";
-import image1 from "../../assets/Login/image1.jpg"
-import image4 from "../../assets/Login/image4.png"
-import image3 from "../../assets/Login/image3.png"
+import image3 from "../../assets/Login/image3.png";
+import image4 from "../../assets/Login/image4.png";
 import { useNavigate } from "react-router-dom";
 import {
   signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
   signInWithRedirect,
   getRedirectResult,
   fetchSignInMethodsForEmail,
   signOut,
+  updatePassword,
 } from "firebase/auth";
 import { ref, set, get, database, auth } from "../../Firebase/firebase";
 import { GrView } from "react-icons/gr";
@@ -28,15 +27,17 @@ const setStorageItem = (key, value) => {
 };
 
 const LoginPage = () => {
-  const [isSignup, setIsSignup] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [showChangePassword, setShowChangePassword] = useState(false);
   const [redirectHandled, setRedirectHandled] = useState(false);
   const navigate = useNavigate();
 
-  // ✅ Handle Google Redirect login (even if useEffect doesn't fire)
+  // ✅ Handle Google Redirect login (kept for future use)
+  /*
   if (!redirectHandled && sessionStorage.getItem("googleRedirect") === "true") {
     setRedirectHandled(true);
     sessionStorage.removeItem("googleRedirect");
@@ -73,10 +74,12 @@ const LoginPage = () => {
         setError("Google Sign-In Failed");
       });
   }
+  */
 
-  const handleUserLoginSignup = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
+    setMessage("");
 
     const trimmedEmail = email.trim();
     const trimmedPassword = password.trim();
@@ -87,28 +90,12 @@ const LoginPage = () => {
     }
 
     try {
-      let userCredential;
+      const userCredential = await signInWithEmailAndPassword(auth, trimmedEmail, trimmedPassword);
 
-      if (isSignup) {
-        const existingMethods = await fetchSignInMethodsForEmail(auth, trimmedEmail);
-        if (existingMethods.length > 0) {
-          setError("Email already exists. Please log in.");
-          return;
-        }
-
-        userCredential = await createUserWithEmailAndPassword(auth, trimmedEmail, trimmedPassword);
-        await set(ref(database, `users/${userCredential.user.uid}`), {
-          email: trimmedEmail,
-          role: "user",
-        });
-      } else {
-        userCredential = await signInWithEmailAndPassword(auth, trimmedEmail, trimmedPassword);
-
-        const snapshot = await get(ref(database, `users/${userCredential.user.uid}`));
-        if (snapshot.exists() && snapshot.val().role === "admin") {
-          setError("Admins must log in through the Admin tab.");
-          return;
-        }
+      const snapshot = await get(ref(database, `users/${userCredential.user.uid}`));
+      if (snapshot.exists() && snapshot.val().role === "admin") {
+        setError("Admins must log in through the Admin tab.");
+        return;
       }
 
       const token = await userCredential.user.getIdToken();
@@ -128,12 +115,40 @@ const LoginPage = () => {
     } catch (err) {
       console.error(err);
       if (err.code === "auth/invalid-email") setError("Invalid email format.");
-      else if (err.code === "auth/user-not-found") setError("User not found. Please sign up.");
+      else if (err.code === "auth/user-not-found") setError("User not found.");
       else if (err.code === "auth/wrong-password") setError("Incorrect password.");
-      else setError(isSignup ? "Signup failed." : "Login failed.");
+      else setError("Login failed.");
     }
   };
 
+  const handlePasswordUpdate = async (e) => {
+    e.preventDefault();
+    setError("");
+    setMessage("");
+
+    const trimmedEmail = email.trim();
+    const newPass = password.trim();
+
+    if (!trimmedEmail || !newPass) {
+      setError("Email and new password are required.");
+      return;
+    }
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, trimmedEmail, newPass);
+      await updatePassword(userCredential.user, newPass);
+      await signOut(auth);
+
+      setMessage("Password changed successfully. Please log in.");
+      setShowChangePassword(false);
+    } catch (err) {
+      console.error("Password change error:", err);
+      setError("Failed to change password.");
+    }
+  };
+
+  // ✅ Google Login handler (commented for future use)
+  /*
   const handleGoogleLogin = async () => {
     try {
       const provider = new GoogleAuthProvider();
@@ -180,29 +195,31 @@ const LoginPage = () => {
       setError("Google Sign-In Failed.");
     }
   };
+  */
 
   return (
-    <div className="login_container">
-      <div className="login_box">
-        <div className="login-leftside">
-          <img src={image2} alt="Cartoon" className="boy_image" />
-          <img src={image3} className="image_shape"/>
-        <h2>
-          Unleash the <span className="star">Star</span> Within!
-        </h2>
-        <p>
-          Boost your child’s confidence and social skills to unlock lifelong success.
-        </p>
+    <div className="login-wrapper">
+      <div className="login-box">
+        <div className="login-left">
+          <img src={image2} alt="Cartoon" className="cartoon-touch" />
+          <img src={image3} className="image_3" alt="Illustration" />
+          <h2>
+            Unleash the <span className="star-text">Star</span> Within!
+          </h2>
+          <p>
+            Boost your child’s confidence and social skills to unlock lifelong success.
+          </p>
         </div>
 
         <div className="login-rightside">
           <div className="head">
-          <img src={image4} className="logo"/>
-          <h2>{isSignup ? "User Signup" : "User Login"}</h2> 
+            <img src={image4} className="logo" alt="Logo" />
+            {/* <h2>{showChangePassword ? "Change Password" : "User Login"}</h2> */}
+            <h2>{"User Login"}</h2>
           </div>
 
-          <form onSubmit={handleUserLoginSignup}>
-            <div className="form-login">
+          <form onSubmit={showChangePassword ? handlePasswordUpdate : handleLogin}>
+            <div className="form-group">
               <label>Email</label>
               <input
                 type="email"
@@ -212,8 +229,8 @@ const LoginPage = () => {
               />
             </div>
 
-            <div className="form-login">
-              <label>Password</label>
+            <div className="form-group">
+              <label>{showChangePassword ? "New Password" : "Password"}</label>
               <div className="password-wrapper">
                 <input
                   type={showPassword ? "text" : "password"}
@@ -230,29 +247,34 @@ const LoginPage = () => {
                 </button>
               </div>
             </div>
+
             <div>
-              <p>Create an account ?<b className="login" onClick={() => navigate("/sign")}>Sign Up</b></p>
-              <p>Forget Password</p>
+              <p>
+                Create an account?{" "}
+                <b className="sign" onClick={() => navigate("/sign-up")}>
+                  Sign Up
+                </b>
+              </p>
+              <p>
+                {showChangePassword ? (
+                  <span className="sign" onClick={() => setShowChangePassword(false)}>
+                    Back to Login
+                  </span>
+                ) : (
+                  <span className="sign" onClick={() => setShowChangePassword(true)}>
+                    Change Password
+                  </span>
+                )}
+              </p>
             </div>
 
             {error && <p className="error-message">{error}</p>}
+            {message && <p className="success-message">{message}</p>}
 
             <button type="submit" className="btn-login">
-              {isSignup ? "Sign Up" : "Login"}
+              {showChangePassword ? "Change Password" : "Login"}
             </button>
           </form>
-
-          {/* <div className="signup-toggle">
-            <button type="button" onClick={() => setIsSignup(!isSignup)} className="toggle-button">
-              {isSignup ? "Switch to Login" : "Switch to Signup"}
-            </button>
-          </div>
-
-          <div className="or-divider">OR</div> */}
-
-          {/* <button className="btn-google" onClick={handleGoogleLogin}>
-            Continue with Google
-          </button> */}
         </div>
       </div>
     </div>
