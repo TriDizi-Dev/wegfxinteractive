@@ -13,10 +13,14 @@ const PaymentSuccess = () => {
     const now = Date.now();
     let expiry;
 
-    if (plan === "daily") expiry = now + 24 * 60 * 60 * 1000;
-    else if (plan === "weekly") expiry = now + 7 * 24 * 60 * 60 * 1000;
-    else {
-      alert("Invalid plan type");
+    if (plan === "starter") {
+      expiry = now + 7 * 24 * 60 * 60 * 1000; // 1 Week
+    } else if (plan === "pro") {
+      expiry = now + 30 * 24 * 60 * 60 * 1000; // 1 Month
+    } else if (plan === "elite") {
+      expiry = now + 90 * 24 * 60 * 60 * 1000; // 3 Months
+    } else {
+      alert("Invalid plan selected");
       return;
     }
 

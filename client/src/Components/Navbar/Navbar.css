@@ -1,0 +1,38 @@
+
+
+
+
+.quiz-user-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* position: absolute;
+  top: 2vw;
+  right: 3vw; */
+  gap: 1vw;
+}
+
+.quiz-user-info span {
+  font-size: 1.2vw;
+  color: purple;
+  font-weight: 600;
+}
+.user-avatar {
+  font-size: 2vw;
+  color: purple;
+}
+.Main_NavBar_Css{
+    width: 95%;
+    display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+.Main_Logo_Image{
+    width: 10vw;
+    height: 5vw;
+}
+.Main_Logo_Image img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
