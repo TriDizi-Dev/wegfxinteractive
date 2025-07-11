@@ -40,14 +40,12 @@ function Kids() {
     navigate("/plans"); // 👈 change this route if needed
   };
 
-  
   return (
     <>
-    
-    <div className="kids">
-       <Navbar/>
-      {/* <header className="header1"> */}
-         {/* <Navbar/> */}
+      <Navbar />
+      <div className="kids">
+        {/* <header className="header1"> */}
+        {/* <Navbar/> */}
         {/* <div className="company-logo">
           <p>A Purple'd Advertising Company</p>
         </div>
@@ -63,93 +61,96 @@ function Kids() {
             </svg>
           </div>
         </div> */}
-      {/* </header> */}
+        {/* </header> */}
 
-      <div className="main-container">
-        <img src={Think} alt="Think1" className="thinkimage" />
-        <h2 className="tagline">
-          Empowering <span className="highlight-blue">kids</span> to step out
-          boldly into the future!
-        </h2>
+        <div className="main-container">
+          <img src={Think} alt="Think1" className="thinkimage" />
+          <h2 className="tagline">
+            Empowering <span className="highlight-blue">kids</span> to step out
+            boldly into the future!
+          </h2>
 
-        <div className="thinker-sections">
-          <div
-            className="thinker-card"
-            onClick={() =>
-              handleAgeGroupSelect({
-                age: "5–8",
-                title: "Foundation Thinkers",
-              })
-            }
-          >
-            <img
-              src={girl}
-              alt="Foundation Thinker"
-              className="thinker-image1"
-            />
-            <div>
-            <h2 className="thinker-title foundation-color">
-              Foundation Thinkers
-            </h2>
-            <p className="thinker-age">Age 5–8 years</p>
-            <p className="thinker-description">
-              Build strong roots of confidence <br/>and curiosity
-            </p>
+          <div className="thinker-sections">
+            <div
+              className="thinker-card"
+              onClick={() =>
+                handleAgeGroupSelect({
+                  age: "5–8",
+                  title: "Foundation Thinkers",
+                })
+              }
+            >
+              <img
+                src={girl}
+                alt="Foundation Thinker"
+                className="thinker-image1"
+              />
+              <div>
+                <h2 className="thinker-title foundation-color">
+                  Foundation Thinkers
+                </h2>
+                <p className="thinker-age">Age 5–8 years</p>
+                <p className="thinker-description">
+                  Build strong roots of confidence <br />
+                  and curiosity
+                </p>
+              </div>
             </div>
-          </div>
 
-          <div
-            className="thinker-card"
-            onClick={() =>
-              handleAgeGroupSelect({
-                age: "9–12",
-                title: "Explorative Thinkers",
-              })
-            }
-          >
-            <img
-              src={boy1}
-              alt="Explorative Thinker"
-              className="thinker-image"
-            />
-            <div>
-            <h2 className="thinker-title explorative-color">
-              Explorative Thinkers
-            </h2>
-            <p className="thinker-age">Age 9–12 years</p>
-            <p className="thinker-description">
-              Discover talents, sharpen <br/>thinking, and express freely
-            </p>
+            <div
+              className="thinker-card"
+              onClick={() =>
+                handleAgeGroupSelect({
+                  age: "9–12",
+                  title: "Explorative Thinkers",
+                })
+              }
+            >
+              <img
+                src={boy1}
+                alt="Explorative Thinker"
+                className="thinker-image"
+              />
+              <div>
+                <h2 className="thinker-title explorative-color">
+                  Explorative Thinkers
+                </h2>
+                <p className="thinker-age">Age 9–12 years</p>
+                <p className="thinker-description">
+                  Discover talents, sharpen <br />
+                  thinking, and express freely
+                </p>
+              </div>
             </div>
-          </div>
 
-          <div
-            className="thinker-card"
-            onClick={() =>
-              handleAgeGroupSelect({
-                age: "13–16",
-                title: "Future - Ready Thinkers",
-              })
-            }
-          >
-            <img
-              src={boy2}
-              alt="Future-Ready Thinker"
-              className="thinker-image2"
-            />
-            <div>
-            <h2 className="thinker-title future-ready-color">
-              Future - Ready Thinkers
-            </h2>
-            <p className="thinker-age">Age 13–16 years</p>
-            <p className="thinker-description">
-              Prepare for real-world challenges <br/>with confidence & clarity
-            </p>
+            <div
+              className="thinker-card"
+              onClick={() =>
+                handleAgeGroupSelect({
+                  age: "13–16",
+                  title: "Future - Ready Thinkers",
+                })
+              }
+            >
+              <img
+                src={boy2}
+                alt="Future-Ready Thinker"
+                className="thinker-image2"
+              />
+              <div>
+                <h2 className="thinker-title future-ready-color">
+                  Future - Ready Thinkers
+                </h2>
+                <p className="thinker-age">Age 13–16 years</p>
+                <p className="thinker-description">
+                  Prepare for real-world challenges <br />
+                  with confidence & clarity
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
     </>
   );
 }

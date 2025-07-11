@@ -3,7 +3,8 @@
  .cost {
  width: 95vw;
   max-width: 100vw;
-  padding: 1.67vw; /* 20px */
+  padding: 1.67vw;
+  /* 20px */
   box-sizing: border-box;
 height: 34vw;
 /* border: 2px solid; */
@@ -73,9 +74,11 @@ height: 34vw;
   font-weight: bold;
   font-size: 2vw;
 }
-.foundation-text span{
-     font-size: 1.5vw;
+
+.foundation-text span {
+  font-size: 1.5vw;
 }
+
 .content-area {
   display: flex;
   justify-content: center;
@@ -90,7 +93,7 @@ height: 34vw;
 }
 
 .payment-illustration {
-  margin: -11vw ;
+  margin: -11vw;
   height: 23vw;
   display: block;
 }
@@ -174,7 +177,7 @@ height: 34vw;
   font-size: 1.2vw;
   color: #000;
   margin-bottom: 1.25vw;
-   margin-left: 25vw; 
+  margin-left: 25vw;
 }
 
 .payment-options {
@@ -196,21 +199,23 @@ height: 34vw;
 @media (max-width: 768px) {
 
 
-  .cost{
-    height: 180vw;
+  .cost {
+    height: 100vh;
   }
    
   .main-title {
     font-size: 8vw;
   }
-.main-content{
-  margin: 3vw 0;
-}
+
+  .main-content {
+    margin: 3vw 0;
+  }
+
   .section-heading {
     font-size: 4vw;
     margin-bottom: 2vw;
     margin-top: -5vw;
-    
+
   }
 
   .foundation-text {
@@ -237,17 +242,17 @@ height: 34vw;
 
   .plan-name,
   .price,
-  .price-value{
+  .price-value {
     font-size: 4vw;
     margin-top: 1vw;
   }
 
-  .plan-label{
+  .plan-label {
     font-size: 4vw;
     padding-top: 1vw;
   }
 
-  .duration{
+  .duration {
     font-size: 4vw;
   }
 
@@ -273,7 +278,7 @@ height: 34vw;
     font-size: 4vw;
   }
 
-  .image-section{
+  .image-section {
     display: none;
   }
 

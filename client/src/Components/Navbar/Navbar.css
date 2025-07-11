@@ -2,9 +2,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* position: absolute;
-  top: 2vw;
-  right: 3vw; */
     gap: 1vw;
 }
 
@@ -25,6 +22,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin: 0 auto;
 }
 
 .Main_Logo_Image {
@@ -80,8 +78,8 @@
     }
 
     .logout-popup {
-        top: 9vw;
-        right:0vw;
+        top: 7vw;
+        right: -.5vw;
     }
 
     .logout-popup button {

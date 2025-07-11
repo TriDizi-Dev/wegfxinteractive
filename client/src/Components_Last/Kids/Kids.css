@@ -1,22 +1,10 @@
 
 
 .kids {
-  width: 99.5w;
-  /* max-width: 100vw;  */
   padding: 1.67vw;
-  box-sizing: border-box;
-  overflow: hidden;
-  height: 97vh;
-/* border: 2px solid; *
-overflow: auto;
-/* background-image: url("../../assets/Login/image1.jpg");
-  background-size: cover;
-  background-position: center;
-  height: 97.5vh;
-  width: 99vw;
-  display: flex;
-  justify-content: center;
-  align-items: center; */
+   box-sizing: border-box; 
+  /* overflow: hidden; */
+  /* height: 97vh; */
 }
 
 /* Header Styling */
@@ -122,7 +110,7 @@ overflow: auto;
 } 
 
 .thinker-image {
-  width: 22.83vw; 
+  width: 18.83vw; 
   height: auto; 
   border-radius: 0.83vw; /* 10px */
   /* margin-bottom: 1.67vw;  */
@@ -130,12 +118,12 @@ overflow: auto;
 }
 
 .thinker-image2{
-  width: 22.83vw;
+  width: 18.83vw;
   border-radius: 0.83vw;
   margin-top: -4vw;
 }
 .thinker-image1{
-  width: 22.83vw;
+  width: 18.83vw;
   border-radius: 0.83vw;
   margin-top: -2.5vw;
 }

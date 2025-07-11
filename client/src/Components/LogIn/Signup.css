@@ -20,8 +20,8 @@
 }
 
 .login-wrapper{
-  height: 97.5vh;
-  width: 99vw;
+  /* height: 97.5vh;
+  width: 99vw; */
   display: flex;
   justify-content: center;
   align-items: center;
