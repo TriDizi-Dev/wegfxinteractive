@@ -1,14 +1,7 @@
 
 .login_container {
-  /* min-height: 100vh;
-  max-width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1.5vw;
-  background-color: #f5f0fa;
-  box-sizing: border-box;
-  overflow: hidden; */
+
+
     background-image: url("../../assets/Login/image1.jpg");
   background-size: cover;
   background-position: center;
@@ -144,7 +137,7 @@
 
     background-color: #10b153;
   border-radius: 3vw;
-  padding: 1vw 4vw;
+  padding: 1vw;
   /* max-width: 50vw; */
   width: 30vw;
   color: white;
@@ -164,21 +157,33 @@
 }
 .logo{
   width: 10vw;
+  height: 6vw;
 }
 .head{
   display: flex;
 }
 .login-rightside h2 {
-  text-align: center;
+  /* text-align: center;
   margin-bottom: 2.3vw;
   font-size: 2.2vw;
   font-weight: 700;
-  color: white;
+  color: white;*/
   margin-left: 8vw;
+  color: #ffffff;
+  font-size: 2.2vw; /* or 30px */
+  font-weight: bold;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.login-rightside h3{
+  font-size: 1.2vw;     /* Or use 16px for fixed layout */
+  color: #ffffff;
+  font-weight: 300;
+  cursor: pointer;
 }
 
 .form-login {
-  margin-bottom: 1.5vw;
+  margin-bottom: 0.5vw;
   position: relative;
 }
 
@@ -484,9 +489,17 @@
   }
 
   .form-login input {
-    font-size: 4vw;
+    /* font-size: 4vw;
     padding: 3.5vw 4vw;
-    border-radius: 2vw;
+    border-radius: 2vw; */
+    width: 90%;
+  max-width: 600px;
+  height: 3.5vw; /* Or a fixed height like 48px */
+  border: 1px solid #000; /* Thin black border */
+  border-radius: 0.75vw; /* Smooth rounded corners */
+  padding: 0.8vw;
+  font-size: 1.2vw;
+  box-sizing: border-box;
   }
 
   .toggle-password {
