@@ -418,6 +418,7 @@ h1 {
                   font-size: 8.5vw;
                   display: block;
                  width: 63vw;
+                 margin: 11vw 0vw;
              }
               .highlight-name{
                     font-size: 8.5vw;
@@ -433,7 +434,9 @@ h1 {
               .ready-message,
               .learning-message {
                   font-size: 4vw;
-              }
+                  transform: translate(0vw, -4vw);
+    }
+              
 
               .foundation-title {
                   font-size: 5.6vw;
@@ -447,6 +450,7 @@ h1 {
                padding: 1.83vw 1.5;
                font-size:  3vw;
                max-width: 30vw;/* Adjust width for very small screens */
+               margin: 4vw 0vw;
               }
               .avatar-circle{
                   width: 4vw;
@@ -456,6 +460,7 @@ h1 {
               .pie-chart-container {
                   width: 50.44vw;
         height: 50.44vw;;
+        transform: translate(0vw, 30vw);
               }
 
               .pie-label {
@@ -471,5 +476,14 @@ h1 {
               .star-icon1{
                 font-size: 8vw;
                 /* transform: translate(0, -2vw); */
+              }
+              .app-main-content{
+                flex-direction: column-reverse;
+              }
+              .think-logo-image{
+                transform: translate(0,-39vw);
+              }
+              .foundation-title {
+                transform: translate(0,-2vw);
               }
           }

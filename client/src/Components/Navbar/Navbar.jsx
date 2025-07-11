@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { CgProfile } from 'react-icons/cg';
-import { auth, database } from '../../Firebase/firebase';
-import { get, ref } from 'firebase/database'; // ✅ FIXED import
+import React, { useEffect, useState } from "react";
+import { CgProfile } from "react-icons/cg";
+import { auth, database } from "../../Firebase/firebase";
+import { get, ref } from "firebase/database"; // ✅ FIXED import
 import Logo from "../../assets/image.png";
-import "./Navbar.css"
+import "./Navbar.css";
+import { signOut } from "firebase/auth";
 
 export const Navbar = () => {
   const [Userdata, setUserdata] = useState({});
-  console.log(Userdata, 'UserdataUserdata');
+  const [showLogout, setShowLogout] = useState(false);
+
+  console.log(Userdata, "UserdataUserdata");
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -24,14 +27,30 @@ export const Navbar = () => {
     };
     fetchUser();
   }, []);
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      // Optional: redirect to login page or show message
+      window.location.href = "/"; // Or your login route
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
 
   return (
-    <div className='Main_NavBar_Css'>
-        <div className='Main_Logo_Image'><img src={Logo} alt='Name'/></div>
+    <div className="Main_NavBar_Css">
+      <div className="Main_Logo_Image">
+        <img src={Logo} alt="Name" />
+      </div>
       <div className="quiz-user-info">
         <span>{Userdata.name}</span>
-        <div className="user-avatar">
+        <div className="user-avatar" onClick={() => setShowLogout(!showLogout)}>
           <CgProfile />
+          {showLogout && (
+            <div className="logout-popup">
+              <button onClick={handleLogout}>Logout</button>
+            </div>
+          )}
         </div>
       </div>
     </div>
