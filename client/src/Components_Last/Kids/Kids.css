@@ -134,9 +134,14 @@ overflow: auto;
 }
 
 .thinker-image2{
-  width: 16.5vw;
+  width: 22.83vw;
   border-radius: 0.83vw;
-  margin-top: -3vw;
+  margin-top: -4vw;
+}
+.thinker-image1{
+  width: 22.83vw;
+  border-radius: 0.83vw;
+  margin-top: -2.5vw;
 }
 
 .thinker-title {
@@ -280,6 +285,12 @@ overflow: auto;
   }
 
   .thinker-image {
+    width: 30vw;
+    height: auto;
+    margin-bottom: 3vw;
+  }
+  
+  .thinker-image1{
     width: 30vw;
     height: auto;
     margin-bottom: 3vw;
