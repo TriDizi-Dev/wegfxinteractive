@@ -5,9 +5,6 @@
   max-width: 100vw;
   padding: 1.67vw; /* 20px */
   box-sizing: border-box;
-  background: url("../../assets/Pieimages/Baackground_last.png");
-  background-size: cover;
-  background-repeat: no-repeat;
 height: fit-content;
 /* border: 2px solid; */
 overflow: auto;

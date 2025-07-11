@@ -1,12 +1,8 @@
 /* File: QuizComponent.css */
 
 .quiz-wrapper {
-  height: 100vh;
+  /* height: 95vh; */
   width: 100%;
-  background-image: url("../../../assets/home/bg.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   padding-bottom: 20px;
   display: flex;
   flex-direction: column;
@@ -50,6 +46,7 @@
 .think-logo_Quiz {
   width: 8vw;
   height: 7vw;
+  margin-top: -.5vw;
 }
 .think-logo_Quiz img{
   width: 100%;
@@ -416,6 +413,7 @@
   .quiz-wrapper {
     padding: 15px;
     width: 94%;
+    height: 100vh;
   }
 
   .quiz-question-box {
@@ -448,9 +446,10 @@
 .think-logo_Quiz {
   width: 20vw;
   height: 15vw;
+  
 }
 .think-logo_Quiz img{
-  width: 100;
+  /* width: 100; */
   height: 15vw;
 }
 .quiz-header-center {
