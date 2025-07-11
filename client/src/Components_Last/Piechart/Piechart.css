@@ -416,6 +416,16 @@ h1 {
               }
               .welcome-message {
                   font-size: 8.5vw;
+                  display: block;
+                 width: 63vw;
+             }
+              .highlight-name{
+                    font-size: 8.5vw;
+                    width: 42vw !important;
+              }
+              .pie1{
+                width: 100%;
+        height: 179vw;  
               }
                 .age-range{
                   font-size: 6vw;
@@ -453,5 +463,13 @@ h1 {
               }
               .think-logo-image{
                 margin-top: -8vw;
+              }
+              .star-icon2{
+                font-size: 8vw;
+                /* transform: translate(0, -2vw); */
+              }
+              .star-icon1{
+                font-size: 8vw;
+                /* transform: translate(0, -2vw); */
               }
           }

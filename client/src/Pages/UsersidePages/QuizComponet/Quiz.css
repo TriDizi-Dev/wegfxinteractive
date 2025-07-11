@@ -1,7 +1,7 @@
 /* File: QuizComponent.css */
 
 .quiz-wrapper {
-  height: 100vh;
+  height: 94vh;
   width: 100%;
   background-image: url("../../../assets/home/bg.jpg");
   background-size: cover;
@@ -126,6 +126,7 @@
   background-color: #007be5;
   color: white;
   width:50%;
+  height: 24vw;
   /* max-width: 700px; */
   border-radius: 20px;
   padding: 30px;

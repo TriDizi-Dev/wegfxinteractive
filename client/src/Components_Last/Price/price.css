@@ -206,7 +206,9 @@ overflow: auto;
   .main-title {
     font-size: 8vw;
   }
-
+.main-content{
+  margin: 3vw 0;
+}
   .section-heading {
     font-size: 4vw;
     margin-bottom: 2vw;
