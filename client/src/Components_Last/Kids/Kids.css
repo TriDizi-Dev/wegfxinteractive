@@ -1,22 +1,10 @@
 
 
 .kids {
-  width: 99.5w;
-  /* max-width: 100vw;  */
   padding: 1.67vw;
   box-sizing: border-box;
-  overflow: hidden;
-  height: 97vh;
-/* border: 2px solid; *
-overflow: auto;
-/* background-image: url("../../assets/Login/image1.jpg");
-  background-size: cover;
-  background-position: center;
-  height: 97.5vh;
-  width: 99vw;
-  display: flex;
-  justify-content: center;
-  align-items: center; */
+  /* overflow: hidden; */
+  /* height: 97vh; */
 }
 
 /* Header Styling */

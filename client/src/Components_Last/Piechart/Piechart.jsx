@@ -105,14 +105,12 @@ function Pie() {
   };
 
   return (
+    <div>
+      <Navbar />
 
-    <div className="pie1">
-      <Navbar/>
-
-    <div className="pie">
-      
-      <div className="app-container">
-        {/* Header
+      <div className="pie">
+        <div className="app-container">
+          {/* Header
         <header className="app-header">
           <span className="logo-placeholder">
             A Purple'd Advertising Company
@@ -131,30 +129,30 @@ function Pie() {
           </div>
         </header> */}
 
-        {/* Main Content */}
-        <main className="app-main-content">
-          {/* Welcome Section */}
-          <div className="welcome-section">
-            <div className="think-logo">
-              {/* <h1 className="think-text">Think</h1> */}
-              <img src={Think} alt="Think" className="think-logo-image" />
-            </div>
+          {/* Main Content */}
+          <main className="app-main-content">
+            {/* Welcome Section */}
+            <div className="welcome-section">
+              <div className="think-logo">
+                {/* <h1 className="think-text">Think</h1> */}
+                <img src={Think} alt="Think" className="think-logo-image" />
+              </div>
 
-            <h2 className="welcome-message">
-              <span className="star-icon1">✰</span>
-              <span className="star-icon2">✰</span>
-              {/* <span className="star-icon">⭐️</span> */}
-              Welcome 
-            </h2>
-            <p className="highlight-name">{Userdata?.name}</p>
-            <p className="ready-message">Ready to conquer today?</p>
-            <p className="learning-message">Let's make learning awesome!</p>
+              <h2 className="welcome-message">
+                <span className="star-icon1">✰</span>
+                <span className="star-icon2">✰</span>
+                {/* <span className="star-icon">⭐️</span> */}
+                Welcome
+              </h2>
+              <p className="highlight-name">{Userdata?.name}</p>
+              <p className="ready-message">Ready to conquer today?</p>
+              <p className="learning-message">Let's make learning awesome!</p>
 
-            <div className="foundation-section">
-              <p className="foundation-title">{Userdata?.ageGroup?.title}</p>
-              <p className="age-range">Age {Userdata?.ageGroup?.age} years</p>
-              <div className="input-group">
-                {/* <select
+              <div className="foundation-section">
+                <p className="foundation-title">{Userdata?.ageGroup?.title}</p>
+                <p className="age-range">Age {Userdata?.ageGroup?.age} years</p>
+                <div className="input-group">
+                  {/* <select
                   className="age-group-dropdown"
                   value={ageGroup}
                   onChange={handleAgeGroupChange}
@@ -163,29 +161,29 @@ function Pie() {
                   <option value="Intermediate">Intermediate</option>
                   <option value="Advanced">Advanced</option>
                 </select> */}
-                <button className="start-button" onClick={handleStartClick}>
-                  Start
-                </button>
+                  <button className="start-button" onClick={handleStartClick}>
+                    Start
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Pie Chart Section */}
-          <div className="pie-chart-section">
-            <div className="pie-chart-container">
-              {/* Using conic-gradient for a more accurate pie chart representation */}
-              <div className="pie-chart">
-                <span className="pie-label english-label">English</span>
-                <span className="pie-label gk-label">GK</span>
-                <span className="pie-label maths-label">Maths</span>
-                <span className="pie-label social-label">Social</span>
-                <span className="pie-label science-label">Science</span>
+            {/* Pie Chart Section */}
+            <div className="pie-chart-section">
+              <div className="pie-chart-container">
+                {/* Using conic-gradient for a more accurate pie chart representation */}
+                <div className="pie-chart">
+                  <span className="pie-label english-label">English</span>
+                  <span className="pie-label gk-label">GK</span>
+                  <span className="pie-label maths-label">Maths</span>
+                  <span className="pie-label social-label">Social</span>
+                  <span className="pie-label science-label">Science</span>
+                </div>
               </div>
             </div>
-          </div>
-        </main>
+          </main>
+        </div>
       </div>
-    </div>
     </div>
   );
 }
