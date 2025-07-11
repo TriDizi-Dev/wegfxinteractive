@@ -85,7 +85,7 @@ function Kids() {
             <img
               src={girl}
               alt="Foundation Thinker"
-              className="thinker-image"
+              className="thinker-image1"
             />
             <div>
             <h2 className="thinker-title foundation-color">

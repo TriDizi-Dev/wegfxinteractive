@@ -110,7 +110,7 @@ function Price() {
         <span className="logo-placeholder">A Purple'd Advertising Company</span>
         <div className="user-profile">
           <span>{userdata.name}</span>
-          <div className="avatar-circle">
+          <div className="avatar">
             <svg
               viewBox="0 0 24 24"
               fill="currentColor"
