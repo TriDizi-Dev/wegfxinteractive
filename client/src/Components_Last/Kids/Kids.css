@@ -73,7 +73,7 @@ overflow: auto;
     margin-top: 1.5vw;
 }
 .thinkimage{
-   margin-top: -1vw;
+   margin-top: 0vw;
 }
 /* Main Content Styling */
 .main-container {
@@ -224,7 +224,7 @@ overflow: auto;
   }
 
   .thinkimage {
-    margin-top: -2vw;
+    margin-top: 2vw;
     width: 20vw;
     height: auto;
   }
