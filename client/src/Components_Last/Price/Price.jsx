@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Price.css";
+import "./price.css";
 import mobile from "../../assets/Pieimages/phone.png";
 import Think from "../../assets/Pieimages/Think1b.png";
 import { auth, database } from "../../Firebase/firebase";
