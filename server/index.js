@@ -200,10 +200,10 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Environment Variables
-// const MERCHANT_ID = "SU2507081620336428452705";
-// const SALT_KEY = "f8de9bcc-c6f5-4ae2-bcf9-ff84151eab67";
-const MERCHANT_ID = "M22YOQGB6C5LL";
-const SALT_KEY = "05ad3adc-857d-439a-aff4-2ee07d9028f9";
+const MERCHANT_ID = "SU2507081620336428452705";
+const SALT_KEY = "f8de9bcc-c6f5-4ae2-bcf9-ff84151eab67";
+// const MERCHANT_ID = "M22YOQGB6C5LL";
+// const SALT_KEY = "05ad3adc-857d-439a-aff4-2ee07d9028f9";
 const SALT_INDEX = "1"; // Can change to dynamic if needed
 const SUCCESS_URL = "https://think.wegfx.com/payment-success";
 const FAILURE_URL =  "https://think.wegfx.com/";

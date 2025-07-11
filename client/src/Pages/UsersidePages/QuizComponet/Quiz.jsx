@@ -10,6 +10,7 @@ import ribbon from "../../../assets/home/congratulation.png";
 import trophy from "../../../assets/home/trophy.png";
 import { auth, database } from "../../../Firebase/firebase";
 import { CgProfile } from "react-icons/cg";
+import { Navbar } from "../../../Components/Navbar/Navbar";
 
 const QuizComponent = () => {
   const { currentUser, loading: authLoading } = useAuth();
@@ -105,10 +106,12 @@ const QuizComponent = () => {
   if (!currentUser) return <Navigate to="/" />;
 
   return (
+
     <div
       className="quiz-wrapper"
       style={{ backgroundImage: `url(${backgroundImg})` }}
     >
+      <Navbar/>
       {/* HEADER */}
       <div className="quiz-header">
         {/* <img src={logo} alt="logo" className="quiz-logo" /> */}
@@ -119,12 +122,7 @@ const QuizComponent = () => {
             <p>Age {Userdata?.ageGroup?.age || 0} years</p>
           </div>
         </div>
-        <div className="quiz-user-info">
-          <span>{Userdata.name}</span>
-          <div className="user-avatar">
-            <CgProfile />
-          </div>
-        </div>
+       
       </div>
 
       {/* CATEGORY BUTTONS */}
@@ -188,6 +186,7 @@ const QuizComponent = () => {
               </button>
             ))}
           </div>
+          <div className="Quiz_Next_Button">
           <button
             className="quiz-next-btn"
             onClick={handleNext}
@@ -195,6 +194,7 @@ const QuizComponent = () => {
           >
             Next
           </button>
+         </div>
         </div>
       )}
     </div>

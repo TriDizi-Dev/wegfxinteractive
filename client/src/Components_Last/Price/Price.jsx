@@ -5,6 +5,7 @@ import Think from "../../assets/Pieimages/Think1b.png";
 import { auth, database } from "../../Firebase/firebase";
 import { ref, get, set } from "firebase/database";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function Price() {
   const [userdata, setUserdata] = useState({});
@@ -26,6 +27,44 @@ function Price() {
     };
     fetchUser();
   }, []);
+
+  // const handleProceed = async (planType) => {
+  //   if (!planType) return alert("Please select a plan.");
+
+  //   const uid = auth.currentUser?.uid;
+  //   if (!uid) return alert("User not authenticated");
+
+  //   // const amount = selectedPlan === "daily" ? 99 : 199;
+  // let amount;
+  // if (planType === "starter") {
+  //   amount = 99; // 1 Week
+  // } else if (planType === "pro") {
+  //   amount = 299; // 1 Month
+  // } else if (planType === "elite") {
+  //   amount = 799; // 3 Months
+  // }
+  //   try {
+  //     const res = await axios.post("http://localhost:5000/initiate-payment", {
+  //       userId: uid,
+  //       amount,
+  //       mobile: "9999999999",
+  //       plan: planType,
+  //     });
+
+  //     console.log("Full Response:", res);
+  //     console.log("Redirect URL:", res.data?.route);
+
+  //     if (res.data?.route) {
+  //       window.location.href = res.data.route;
+  //     } else {
+  //       alert("No redirect URL returned.");
+  //     }
+  //   } catch (err) {
+  //     console.error("Payment Error", err.response?.data || err.message);
+  //     alert("Failed to initiate payment.");
+  //   }
+  // };
+
 
   const handleProceed = async (planType) => {
     if (!planType) {
@@ -84,7 +123,8 @@ function Price() {
       <main className="main-content">
         <img src={Think} alt="Think1" className="logo1" />
         <h2 className="section-heading">
-          <span className="foundation-text">{userdata?.ageGroup?.title}</span> (Age {userdata?.ageGroup?.age})
+          <span className="foundation-text">{userdata?.ageGroup?.title}</span>{" "}
+          (Age {userdata?.ageGroup?.age})
         </h2>
 
         <div className="content-area">
