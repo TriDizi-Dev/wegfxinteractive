@@ -42,17 +42,10 @@
 }
 
 .boy_image {
-  width: 16vw;
-  /* max-width: 20vw; */
-  /* animation: cartoonPop 2s ease-in-out infinite; */
-  /* pointer-events: none;*/
-  margin-top: -1.5vw;
+  width: 19vw;
+  margin-top: -4vw;
   margin-left: 3vw;
-  /* z-index: 2; */
-   /* max-width: 100%; */
   height: auto;
-  /* z-index: 2; */
-  /* position: relative; */
   position: absolute;
 }
 
@@ -63,7 +56,7 @@
     position: absolute; */
      /* max-width: 100%; */
   height: auto;
-  margin-top: 24.5vw; /* overlap effect */
+  margin-top: 26.5vw; /* overlap effect */
   /* z-index: 10; */
   width: 33vw;
   margin-left: -7vw;
@@ -98,19 +91,9 @@
 }
 
 
-  /* background-color: #ffcd2b;
-  color: #1a1a1a;
-  border-radius: 2vw;
-  padding: 2vw;
-  margin-top: -3vw;
-  z-index: 1;
-  position: relative;
-  width: 90%;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-  font-family: 'Segoe UI', sans-serif;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2); */
+
+
+
 
 
 .text-bubble {
@@ -131,26 +114,21 @@
 
 
 
-/* @keyframes cartoonPop {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.03);
-  }
-} */
+
 
 .login-rightside {
 
     background-color: #10b153;
-  border-radius: 3vw;
+  border-radius: 2vw;
   padding: 1vw;
   /* max-width: 50vw; */
   width: 30vw;
   color: white;
+  padding-left: 2vw;
   margin-left: 10vw;
-  height: 33vw;
-  margin-top: 3vw;
+  padding-right: 2vw;
+  height: 28vw;
+  margin-top: 7vw;
   font-family: 'Segoe UI', sans-serif;
   box-shadow: 0 1vw 3vw rgba(0, 0, 0, 0.15)
 }
@@ -183,10 +161,18 @@
 }
 
 .login-rightside h3{
-  font-size: 1.2vw;     /* Or use 16px for fixed layout */
+  font-size: 1vw;     /* Or use 16px for fixed layout */
   color: #ffffff;
-  font-weight: 300;
+  font-weight: 400;
   cursor: pointer;
+  margin-top: -0.5vw;
+  padding-left: 1vw;
+}
+
+.login-rightside p{
+  font-size: 1vw;
+  font-weight: 400;
+  padding-left: 1vw;
 }
 
 .form-login {
@@ -200,6 +186,7 @@
   font-weight: 500;
   font-size: 1.15vw;
   color: white;
+  padding-left: 1vw;
 }
 
 .form-login input {
@@ -232,7 +219,7 @@
 }
 
 .btn-login {
-  width: 100%;
+  /* width: 100%;
   padding: 1.1vw;
   font-size: 1.2vw;
   font-weight: bold;
@@ -241,7 +228,17 @@
   background-color: #0072ce;
   color: white;
   cursor: pointer;
-  box-shadow: 0 0.5vw 1.5vw rgba(108, 99, 255, 0.2);
+  box-shadow: 0 0.5vw 1.5vw rgba(108, 99, 255, 0.2); */
+  background-color: #253b6e;
+  color: #ffffff;
+  padding: 0.8vw 2vw;
+  font-size: 1.3vw;
+  font-weight: 500;
+  width: 100%;
+  border-radius: 1vw;
+  border: 1px solid #253b6e;
+  cursor: pointer;
+  text-align: center;
 }
 
 .btn-login:hover {
@@ -476,7 +473,7 @@
   .login-rightside p{
 
     color: white;
-    font-size: 4vw;
+    font-size: 2vw;
   }
 
   .login{
