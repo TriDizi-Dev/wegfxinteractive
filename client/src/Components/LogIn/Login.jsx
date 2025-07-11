@@ -262,7 +262,7 @@ const LoginPage = () => {
                   Sign Up
                 </b>
               </p>
-              <p>
+              <h3>
                 {showChangePassword ? (
                   <span className="sign" onClick={() => setShowChangePassword(false)}>
                     Back to Login
@@ -272,7 +272,7 @@ const LoginPage = () => {
                     Change Password
                   </span>
                 )}
-              </p>
+              </h3>
             </div>
 
             {error && <p className="error-message">{error}</p>}
