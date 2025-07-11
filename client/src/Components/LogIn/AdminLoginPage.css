@@ -6,9 +6,9 @@
 }
 
 .admin-login-wrapper {
-  min-height: 100vh;
+  min-height: 97vh;
   width: 100%;
-  background: radial-gradient(circle at top left, #ede7f6, #d6d0f5, #e0dcff);
+  /* background: radial-gradient(circle at top left, #ede7f6, #d6d0f5, #e0dcff); */
   display: flex;
   justify-content: center;
   align-items: center;

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import image1 from "../../assets/Login/image1.jpg";
 import image2 from "../../assets/Login/image2.png";
 import image3 from "../../assets/Login/image3.png";
 import image4 from "../../assets/Login/image4.png";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
@@ -36,6 +36,10 @@ const LoginPage = () => {
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [redirectHandled, setRedirectHandled] = useState(false);
   const navigate = useNavigate();
+
+
+
+
 
   // ✅ Handle Google Redirect login (kept for future use)
   /*

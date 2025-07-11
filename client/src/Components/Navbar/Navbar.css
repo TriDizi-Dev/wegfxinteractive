@@ -80,13 +80,13 @@
     }
 
     .logout-popup {
-        top: 12vw;
-        right: 2vw;
+        top: 9vw;
+        right:0vw;
     }
 
     .logout-popup button {
 
-        font-size: 3.5vw;
+        font-size: 2.5vw;
     }
 
 }
