@@ -1,13 +1,13 @@
 
 
  .cost {
- width: 99.1vw;
+ width: 95vw;
   max-width: 100vw;
   padding: 1.67vw; /* 20px */
   box-sizing: border-box;
-height: fit-content;
+height: 34vw;
 /* border: 2px solid; */
-overflow: auto;
+/* overflow: auto; */
 }
 
 .header {
@@ -199,7 +199,7 @@ overflow: auto;
   .cost{
     height: 180vw;
   }
-
+   
   .main-title {
     font-size: 8vw;
   }
