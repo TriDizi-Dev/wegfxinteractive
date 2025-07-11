@@ -19,5 +19,5 @@ export const PlanBasedRoute = ({ children }) => {
   const { currentUser, plan, loading } = useAuth();
 //   if (loading) return <p>Loading...</p>;
   if (!currentUser) return <Navigate to="/" />;
-  return plan ? children : <Navigate to="/slectPlanpage" />;
+  return plan ? children : <Navigate to="/plans" />;
 };

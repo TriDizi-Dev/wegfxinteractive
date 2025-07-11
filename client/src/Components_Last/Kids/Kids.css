@@ -1,0 +1,290 @@
+
+
+.kids {
+  padding: 1.67vw;
+   box-sizing: border-box; 
+  /* overflow: hidden; */
+  /* height: 97vh; */
+}
+
+/* Header Styling */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.17vw; /* 50px */
+}
+
+.company-logo p {
+  font-size: 1.17vw; /* 14px */
+  color: #666;
+  margin: 0;
+  transform: translate(1vw, 1vw);
+}
+
+.header1{
+  display: flex;
+}
+
+.user-profile2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+ /* transform: translate(80vw, 0vw); */
+  gap: 0.83vw; /* 10px */
+
+}
+
+.user-profile2 span {
+  font-weight: bold;
+  color: #333;
+  margin-top: 2vw;
+  padding-left: 70vw;
+}
+
+/* .avatar {
+  width: 2.5vw; 
+  height: 2.5vw; 
+  background-color: #9932cc;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.5vw; 
+} */
+.avatar-circle{
+    margin-top: 1.5vw;
+}
+.thinkimage{
+   margin-top: 0vw;
+}
+/* Main Content Styling */
+.main-container {
+  text-align: center;
+}
+
+.main-title {
+  font-family: 'Georgia', serif;
+  font-size: 6.67vw; /* 80px */
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1.67vw; /* 20px */
+}
+
+.tagline {
+  font-size: 2.2vw; /* 30px */
+ color: #c95115;
+  margin-bottom: 5.67vw; /* 80px */
+  letter-spacing: 0vw;
+  letter-spacing: 0vw; /* 1px */
+  margin-top: -1vw;
+}
+
+.highlight-blue {
+  color: #007bff;
+  font-weight: bold;
+}
+
+/* Thinker Sections Styling */
+.thinker-sections {
+  display: flex;
+  justify-content: space-around;
+  gap: 2.5vw; /* 30px */
+  flex-wrap: wrap;
+  margin: -5vw 0vw;
+}
+
+.thinker-card {
+  /* background-color: #fff; */
+  /* border-radius: 1.25vw;  */
+  padding: 1.67vw; 
+  /* box-shadow: 0 0.83vw 1.67vw rgba(0, 0, 0, 0.1);  */
+  text-align: center;
+  flex: 1;
+  min-width: 25vw; 
+  max-width: 29.17vw; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+} 
+
+.thinker-image {
+  width: 18.83vw; 
+  height: auto; 
+  border-radius: 0.83vw; /* 10px */
+  /* margin-bottom: 1.67vw;  */
+  /* transform: translate(20vw ,0); */
+}
+
+.thinker-image2{
+  width: 18.83vw;
+  border-radius: 0.83vw;
+  margin-top: -4vw;
+}
+.thinker-image1{
+  width: 18.83vw;
+  border-radius: 0.83vw;
+  margin-top: -2.5vw;
+}
+
+.thinker-title {
+  font-size: 1.5vw; 
+  font-weight: bold;
+  margin-bottom: 0.83vw;
+}
+
+.foundation-color {
+  color: #dc3545;
+}
+
+.explorative-color {
+  color: #007bff;
+}
+
+.future-ready-color {
+  color: #002d72;
+}
+
+.thinker-age {
+  font-size: 1.5vw; /* 18px */
+  color: #000;
+  margin-bottom: 1.25vw; /* 15px */
+  font-weight: 600;
+}
+
+.thinker-description {
+  font-size: 1.33vw; /* 16px */
+  color: #444;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+
+@media (max-width: 768px) {
+  .kids {
+    padding: 5vw;
+    height: auto;
+    background-size: cover;
+    background-position: center;
+    overflow-x: hidden;
+  }
+
+  .header1{
+    flex-direction: row;
+    margin-top: -4vw;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3vw;
+    margin-bottom: 4vw;
+  }
+
+  .company-logo p {
+    font-size: 4vw;
+    transform: translate(0, 0);
+  }
+
+  .user-profile2 {
+    flex-direction: row;
+    gap: 2vw;
+    margin-top: -3vw;
+    margin-left: 6.5vw;
+  }
+
+  .user-profile2 span {
+    font-size: 4vw;
+    padding-left: 0;
+    margin-top: 2vw;
+  }
+
+  .avatar-circle {
+    width: 10vw;
+    height: 10vw;
+    font-size: 4.5vw;
+    margin-top: 2vw;
+  }
+
+  .thinkimage {
+    margin-top: 2vw;
+    width: 20vw;
+    height: auto;
+  }
+
+  .main-title {
+    font-size: 8vw;
+    margin-bottom: 3vw;
+  }
+
+  .tagline {
+    font-size: 4.5vw;
+    margin-bottom: 6vw;
+    margin-top: -2vw;
+  }
+
+  .thinker-sections {
+    flex-direction: column;
+    align-items: center;
+    margin: 4vw 0;
+  }
+
+  .thinker-card {
+    /* min-width: 80vw;
+    max-width: 90vw; */
+    padding: 1vw;
+    width: 80vw;
+    flex-direction: row;
+    height: 30vw;
+    margin-left: -60vw;
+    text-align: center;
+  }
+
+  .thinker-title {
+    font-size: 5vw;
+    margin-bottom: 2vw;
+  }
+
+  .thinker-title {
+    width: 70vw;
+  }
+
+  .thinker-age {
+    font-size: 4.2vw;
+    margin-bottom: 1vw;
+    margin-top: -0.5vw;
+  }
+
+  .avatar-icon{
+    width: 6vw;
+  }
+
+  .thinker-description {
+    font-size: 4vw;
+    width: 50vw;
+    padding-left: 9vw;
+    margin-top: -0.5vw;
+    text-align: center;
+  }
+
+  .thinker-image {
+    width: 30vw;
+    height: auto;
+    margin-bottom: 3vw;
+  }
+  
+  .thinker-image1{
+    width: 30vw;
+    height: auto;
+    margin-bottom: 3vw;
+  }
+
+  .thinker-image2{
+    width: 30vw;
+        height: auto;
+        margin-bottom: 3vw;
+  }
+
+}

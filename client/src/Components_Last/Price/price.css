@@ -1,0 +1,307 @@
+
+
+ .cost {
+ width: 95vw;
+  max-width: 100vw;
+  padding: 1.67vw;
+  /* 20px */
+  box-sizing: border-box;
+height: 34vw;
+/* border: 2px solid; */
+/* overflow: auto; */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 4.17vw;
+}
+
+.company-logo p {
+  font-size: 1.17vw;
+  color: #666;
+  margin: 0;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.83vw;
+}
+
+.user-profile span {
+  font-weight: bold;
+  color: #333;
+}
+
+.avatar {
+  width: 2.5vw;
+  height: 2.5vw;
+  background-color: #9932cc;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.5vw;
+}
+
+.main-content {
+  text-align: center;
+  transform: translate(0vw, -3vw);
+  height: 79vh;
+}
+
+.main-title {
+  font-family: 'Georgia', serif;
+  font-size: 6.67vw;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1.67vw;
+}
+.logo1{
+height: 8vw;
+width: 10vw;
+margin-right: 15vw;
+}
+
+
+.section-heading {
+  font-size: 1.5vw;
+  color: #000;
+  margin-bottom: 3.33vw;
+  padding-left: 14vw;
+  margin-top: -1vw;
+}
+
+.foundation-text {
+  color: #dc3545;
+  font-weight: bold;
+  font-size: 2vw;
+}
+
+.foundation-text span {
+  font-size: 1.5vw;
+}
+
+.content-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4.17vw;
+  flex-wrap: wrap;
+  margin-top: -1.5vw;
+}
+
+.image-section {
+  flex-shrink: 0;
+}
+
+.payment-illustration {
+  margin: -11vw;
+  height: 24vw;
+  display: block;
+}
+
+.pricing-section {
+  text-align: left;
+}
+
+.pricing-plans {
+  display: flex;
+  gap: 1.67vw;
+  margin-bottom: 2.5vw;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-left: 9vw;
+}
+
+.price-card {
+  width: 12vw;
+  height: 10vw;
+  border-radius: 1.25vw;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.25vw;
+  box-sizing: border-box;
+  box-shadow: 0 0.42vw 1.25vw rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.price-card:hover {
+  transform: translateY(-0.42vw);
+}
+
+.plan-label {
+  font-size: 1.17vw;
+  margin-bottom: 0.42vw;
+  text-transform: uppercase;
+  font-weight: bold;
+  opacity: 0.8;
+}
+
+.plan-name {
+  font-size: 1vw;
+  margin-top: 0;
+  margin-bottom: -.5vw;
+  font-weight: bold;
+}
+
+.price {
+  font-size: 1.33vw;
+  margin-bottom: 0.42vw;
+}
+
+.price-value {
+  font-size: 1.5vw;
+  font-weight: bold;
+}
+
+.duration {
+  font-size: 1.33vw;
+  margin-top: 0.42vw;
+}
+
+.trial-pack {
+  background-color: red;
+}
+
+.recommended {
+  background-color: #007bff;
+}
+
+.super-saver {
+  background-color: rgba(4, 4, 29, 0.89);
+}
+
+.flexible-options-text {
+  font-size: 1.2vw;
+  color: #000;
+  margin-bottom: 1.25vw;
+  margin-left: 25vw;
+}
+
+.payment-options {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  margin: 0vw 11vw;
+}
+
+.payment-options li {
+  font-size: 1vw;
+  color: #000;
+  margin-bottom: 0.67vw;
+  line-height: 1.4;
+}
+
+
+
+@media (max-width: 768px) {
+
+
+  .cost {
+    height: 100vh;
+  }
+   
+  .main-title {
+    font-size: 8vw;
+  }
+
+  .main-content {
+    margin: 3vw 0;
+  }
+
+  .section-heading {
+    font-size: 4vw;
+    margin-bottom: 2vw;
+    margin-top: -5vw;
+
+  }
+
+  .foundation-text {
+    font-size: 4.5vw;
+  }
+
+  .foundation-text span {
+    font-size: 3.5vw;
+  }
+
+  .pricing-plans {
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
+  }
+
+  .price-card {
+    width: 90vw;
+    height: 25vw;
+    padding: 1vw;
+    font-size: 4vw;
+    border-radius: 4vw;
+  }
+
+  .plan-name,
+  .price,
+  .price-value {
+    font-size: 4vw;
+    margin-top: 1vw;
+  }
+
+  .plan-label {
+    font-size: 4vw;
+    padding-top: 1vw;
+  }
+
+  .duration {
+    font-size: 4vw;
+  }
+
+  .flexible-options-text {
+    font-size: 6vw;
+    text-align: center;
+    margin-left: 0;
+    margin-bottom: 4vw;
+  }
+
+  .payment-options li {
+    font-size: 5vw;
+    margin-bottom: 2vw;
+  }
+
+  .avatar {
+    width: 6vw;
+    height: 6vw;
+    font-size: 4vw;
+  }
+
+  .user-profile span {
+    font-size: 4vw;
+  }
+
+  .image-section {
+    display: none;
+  }
+
+  .company-logo p {
+    font-size: 3.5vw;
+  }
+
+  .payment-illustration {
+    height: auto;
+    width: 80vw;
+    margin: 0 auto;
+  }
+
+  .content-area {
+    flex-direction: column;
+    gap: 6vw;
+    margin-top: 4vw;
+  }
+}
