@@ -144,8 +144,9 @@ function Pie() {
               <span className="star-icon1">✰</span>
               <span className="star-icon2">✰</span>
               {/* <span className="star-icon">⭐️</span> */}
-              Welcome <span className="highlight-name">{Userdata?.name}</span>
+              Welcome 
             </h2>
+            <p className="highlight-name">{Userdata?.name}</p>
             <p className="ready-message">Ready to conquer today?</p>
             <p className="learning-message">Let's make learning awesome!</p>
 

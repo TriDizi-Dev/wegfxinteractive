@@ -9,9 +9,9 @@
   background-color: #f5f0fa;
   box-sizing: border-box;
   overflow: hidden; */
-    background-image: url("../../assets/Login/image1.jpg");
+    /* background-image: url("../../assets/Login/image1.jpg");
   background-size: cover;
-  background-position: center;
+  background-position: center; */
   height: 97.5vh;
   width: 99vw;
   display: flex;

@@ -1,388 +1,447 @@
-/* .container {
-  width: 100%;
-  height: 100vh;
-  background: linear-gradient(to bottom, #e0f7fa, #ffffff);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+.pie1 {
+    width: 99vw;
+    height: 97vh;
 }
 
-.content {
-  text-align: center;
+.pie-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
-h1 {
-  font-size: 36px;
-  font-weight: bold;
-  margin-bottom: 16px;
+.think-logo-image {
+    margin-left: 33vw;
 }
 
-.welcome-text {
-  color: #ff0000;
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 8px;
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.69vw 1.39vw;
+    width: 100%;
+    box-sizing: border-box;
+    color: #333;
+    margin-bottom: 1.39vw;
 }
 
-.sub-text {
-  color: #000000;
-  font-size: 16px;
-  margin-bottom: 16px;
+.logo-placeholder {
+    font-size: 0.8em;
+    color: #666;
+    opacity: 0.7;
 }
 
-.foundation {
-  margin-bottom: 16px;
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.69vw;
+    font-weight: bold;
+    transform: translate(0vw, 0vw);
 }
 
-.age {
-  margin-bottom: 16px;
+.avatar-circle {
+    width: 2.43vw;
+    height: 2.43vw;
+    border-radius: 50%;
+    background-color: blueviolet;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
 }
 
-.dropdown {
-  padding: 8px;
-  border: 1px solid #e5e7eb;
-  border-radius: 4px;
-  margin-bottom: 16px;
+.avatar-icon {
+    width: 1.74vw;
+    height: 1.74vw;
+    color: rgb(227, 213, 240);
+}
+
+.app-main-content {
+    display: flex;
+    flex-direction: column;
+    /* Default to column for mobile */
+    justify-content: space-around;
+    align-items: center;
+    padding: 1.39vw;
+    gap: 2.78vw;
+}
+
+.welcome-section {
+    flex: 1;
+    min-width: 20.83vw;
+    text-align: center;
+    /* Center for mobile */
+    padding: 0 1.39vw;
+}
+
+.think-logo {
+    margin-bottom: 1.39vw;
+    text-align: center;
+}
+
+.think-text {
+    font-family: 'Georgia', serif;
+    font-size: 4.5em;
+    /* Larger size */
+    color: #333;
+    margin: 0;
+    font-style: italic;
+    font-weight: bold;
+    transform: translate(10vw, -6vw);
+}
+
+.welcome-message {
+    font-size: 3vw;
+    /* Larger size */
+    color: #01011a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Center for mobile */
+    margin-bottom: 0.69vw;
+    flex-wrap: wrap;
+    /* Allow wrapping for long names on small screens */
+}
+
+.star-icon1 {
+    color: rgb(228, 78, 19);
+    margin-right: 0.35vw;
+    font-size: 1.5vw;
+    transform: translate(4vw, -3vw);
+}
+
+.star-icon2 {
+    color: rgb(11, 180, 11);
+    margin-left: 0.35vw;
+    font-size: 2vw;
+    transform: translate(4vw, -3vw);
+}
+
+.highlight-name {
+    /* color: #e74c3c; Red color for "Raj Kumar" */
+    color: red;
+    font-weight: bold;
+    /* margin-left: 0.35vw; */
+    font-size: 2.8vw;
+    margin: 0vw 4vw;
+
+}
+
+.ready-message,
+.learning-message {
+    font-size: 2vw;
+    /* Larger size */
+    color: #0c0b0b;
+    margin: 0vw 4vw;
+}
+
+.foundation-section {
+    margin-top: 2.78vw;
+}
+
+.foundation-title {
+    font-size: 2.5vw;
+    /* Larger size */
+    /* font-weight: bold; */
+    color: #d80707;
+    margin: 0vw 4vw;
+}
+
+.age-range {
+    font-size: 2vw;
+    color: black;
+    /* margin-bottom: 20px; */
+    margin: 0vw 4vw;
+    font-weight: 800;
+
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    /* Stack for mobile */
+    align-items: center;
+    gap: 1.39vw;
+    margin: 1vw 4vw;
+}
+
+.age-group-dropdown {
+    padding: 0.5666vw 1.39vw;
+    border: 0.069vw solid #ccc;
+    background-color: rgb(221, 207, 207);
+    border-radius: 8px;
+    font-size: 1.5vw;
+    /* background-color: white; */
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    /* Full width for mobile */
+    max-width: 17.36vw;
+    /* Limit width */
+    /* transform: translate(4vw, 1vw); */
 }
 
 .start-button {
-  background-color: #22c55e;
-  color: #ffffff;
-  padding: 8px 16px;
-  border-radius: 4px;
-  border: none;
-  cursor: pointer;
+    padding: 0.5vw 2.78vw;
+    background-color: #28a745;
+    /* Green button */
+    color: white;
+    border: none;
+    border-radius: 0.69vw;
+    font-size: 1.5vw;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    /* Full width for mobile */
+    max-width: 17.36vw;
+    /* Limit width */
+    /* transform: translate(-8vw, 6vw); */
+}
+
+.start-button:hover {
+    background-color: #218838;
+    transform: translateY(-0.14vw);
+    /* Slight lift on hover */
+}
+
+.pie-chart-section {
+    flex: 1;
+    min-width: 20.83vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 1.39vw;
+}
+
+.pie-chart-container {
+    width: 24.83vw;
+    /* Size of the entire pie chart */
+    height: 24.83vw;
+    border-radius: 50%;
+    background-color: transparent;
+    position: relative;
+    box-shadow: 0 0.35vw 2vw rgba(0, 0, 0, 0.15);
+    /* More prominent shadow */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translate(1vw, 6vw);
 }
 
 .pie-chart {
-  width: 300px;
-  height: 300px;
-  position: absolute;
-  right: 50px;
-  top: 50px;
-} */
-.pie1{
-     width: 99vw;
-              /* border: 1px solid; */
-              height: 97vh;
-                            background-image: url('../../assets/Pieimages/Picture1.jpg');
-                             background-attachment: fixed;
-              background-size: cover; /* Cover the entire container */
-              background-position: center;
-               width: 99vw;
-                height: 97vh;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: relative;
+    /* Using conic-gradient for accurate pie chart slices */
+    background: conic-gradient(#6a1b9a 0% 45%,
+            /* English */
+            #e74c3c 45% 65%,
+            /* lab(53.23% 80.11 67.22) */
+            #3498db 65% 80%,
+            /* Maths */
+            #5dade2 80% 90%,
+            /* Social */
+            #2ecc71 90% 100%
+            /* Science */
+        );
 }
 
-          .pie-container {
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              /* width: 99vw; */
-              /* border: 1px solid; */
-              /* height: 97vh; */
-                            background-image: url('../../assets/Pieimages/Picture1.jpg'); /* Background image */
-              /* border-radius: 15px;
-              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-              padding: 30px;
-              box-sizing: border-box; */
-              /* border: 5px solid #cf2323; */
-              background-attachment: fixed;
-              background-size: cover; /* Cover the entire container */
-              background-position: center; /* Center the background image */
-              /* padding: 1.39vw; */
-              /* box-sizing: border-box; */
-              /* overflow-x: hidden; */
-          }
+.pie-label {
+    position: absolute;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2vw;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    /* Add text shadow for readability */
+}
 
-          .think-logo-image{
-            margin-left:  33vw;
-          }
+/* Positioning labels for each slice */
+.english-label {
+    top: 50%;
+    left: 75%;
+    transform: translate(-50%, -50%);
+}
 
-          .app-header {
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              padding: 0.69vw 1.39vw;
-              width: 100%;
-              box-sizing: border-box;
-              color: #333;
-              margin-bottom: 1.39vw;
-          }
+.gk-label {
+    top: 80%;
+    left: 40%;
+    transform: translate(-50%, -50%);
+}
 
-          .logo-placeholder {
-              font-size: 0.8em;
-              color: #666;
-              opacity: 0.7;
-          }
+.maths-label {
+    top: 65%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+}
 
-          .user-profile {
-              display: flex;
-              align-items: center;
-              gap: 0.69vw;
-              font-weight: bold;
-              transform: translate(0vw, 0vw);
-          }
+.social-label {
+    top: 35%;
+    left: 25%;
+    transform: translate(-50%, -50%);
+}
 
-          .avatar-circle {
-              width: 2.43vw;
-              height: 2.43vw;
-              border-radius: 50%;
-              background-color: blueviolet;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              border: 1px solid #ccc;
-          }
+.science-label {
+    top: 20%;
+    left: 42%;
+    transform: translate(-50%, -50%);
+}
 
-          .avatar-icon {
-              width: 1.74vw;
-              height: 1.74vw;
-              color:rgb(227, 213, 240);
-          }
+.user-profile span {
+    color: #6a1b9a !important;
+}
 
-          .app-main-content {
-              display: flex;
-              flex-direction: column; /* Default to column for mobile */
-              justify-content: space-around;
-              align-items: center;
-              padding: 1.39vw;
-              gap: 2.78vw;
-          }
+/* Media Queries for Responsiveness */
+@media (min-width: 768px) {
+    .app-main-content {
+        flex-direction: row;
+        /* Row for larger screens */
+        align-items: flex-start;
+        padding: 1.39vw 0;
+    }
 
-          .welcome-section {
-              flex: 1;
-              min-width: 20.83vw;
-              text-align: center; /* Center for mobile */
-              padding: 0 1.39vw;
-          }
+    .welcome-section {
+        text-align: left;
+        padding-left: 3vw;
+    }
 
-          .think-logo {
-              margin-bottom: 1.39vw;
-              text-align: center;
-          }
+    .think-logo {
+        text-align: left;
+    }
 
-          .think-text {
-              font-family: 'Georgia', serif;
-              font-size: 4.5em; /* Larger size */
-              color: #333;
-              margin: 0;
-              font-style: italic;
-              font-weight: bold;
-              transform: translate(10vw, -6vw);
-          }
+    .welcome-message {
+        justify-content: flex-start;
+    }
 
-          .welcome-message {
-              font-size: 3vw; /* Larger size */
-              color: #01011a;
-              display: flex;
-              align-items: center;
-              justify-content: center; /* Center for mobile */
-              margin-bottom: 0.69vw;
-              flex-wrap: wrap; /* Allow wrapping for long names on small screens */
-          }
+    .input-group {
+        flex-direction: row;
+        /* Row for larger screens */
+        justify-content: flex-start;
+    }
 
-          .star-icon1 {
-              color: rgb(228, 78, 19);
-              margin-right: 0.35vw;
-              font-size: 1.5vw;
-              transform: translate(4vw, -3vw);
-          }
-          .star-icon2 {
-              color:rgb(11, 180, 11);
-              margin-left: 0.35vw;
-              font-size: 2vw;
-              transform: translate(4vw, -3vw);
-          }
+    .age-group-dropdown {
+        width: auto;
+    }
 
-          .highlight-name {
-              /* color: #e74c3c; Red color for "Raj Kumar" */
-              color: red;
-              font-weight: bold;
-              margin-left: 0.35vw;
-              width: 28vw; 
-          }
+    .start-button {
+        width: auto;
+    }
 
-          .ready-message,
-          .learning-message {
-              font-size: 2vw; /* Larger size */
-              color: #0c0b0b;
-             margin: 0vw 4.56vw;
-          }
+    .pie-chart-section {
+        padding-right: 3vw;
+    }
 
-          .foundation-section {
-              margin-top: 2.78vw;
-          }
+    .think-text {
+        transform: translate(0, 0);
+    }
+}
 
-          .foundation-title {
-              font-size: 2.5vw; /* Larger size */
-              /* font-weight: bold; */
-              color: #d80707;
-              margin: 0vw 4vw;
-          }
+@media (max-width: 480px) {
+    .app-header {
+        flex-direction: column;
 
-          .age-range {
-              font-size: 2vw;
-              color: black;
-              /* margin-bottom: 20px; */
-              margin: 0vw 4vw;
-              font-weight: 800;
+        gap: 2vw;
+        font-size: 7vw;
+    }
 
-          }
+    .think-logo {
+        transform: translate(-19vw, 5vw);
+    }
 
-          .input-group {
-              display: flex;
-              flex-direction: column; /* Stack for mobile */
-              align-items: center;
-              gap: 1.39vw;
-              margin: 1vw 4vw;
-          }
+    .think-text {
+        font-size: 10vw;
+        transform: translate(0vw, 3vw);
+    }
 
-          .age-group-dropdown {
-              padding: 0.5666vw 1.39vw;
-              border: 0.069vw solid #ccc;
-              background-color: rgb(221, 207, 207);
-              border-radius: 8px;
-              font-size: 1.5vw;
-              /* background-color: white; */
-              cursor: pointer;
-              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-              width: 100%; /* Full width for mobile */
-              max-width: 17.36vw; /* Limit width */
-              /* transform: translate(4vw, 1vw); */
-          }
+    .welcome-section {
+        margin: 18vw 0;
+    }
 
-          .start-button {
-              padding: 0.5vw 2.78vw;
-              background-color: #28a745; /* Green button */
-              color: white;
-              border: none;
-              border-radius: 0.69vw;
-              font-size: 1.5vw;
-              cursor: pointer;
-              transition: background-color 0.3s ease, transform 0.2s ease;
-              font-weight: bold;
-              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-              width: 100%; /* Full width for mobile */
-              max-width: 17.36vw; /* Limit width */
-             /* transform: translate(-8vw, 6vw); */
-          }
+    .welcome-message {
+        font-size: 8.5vw;
+        display: block;
+        width: 63vw;
+        margin: 11vw 0vw;
+    }
 
-          .start-button:hover {
-              background-color: #218838;
-              transform: translateY(-0.14vw); /* Slight lift on hover */
-          }
+    .highlight-name {
+        font-size: 8.5vw;
+        width: 42vw !important;
+        transform: translate(5vw, -8vw);
+    }
 
-          .pie-chart-section {
-              flex: 1;
-              min-width: 20.83vw;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              position: relative;
-              padding: 1.39vw;
-          }
+    .pie1 {
+        width: 100%;
+        height: 179vw;
+    }
 
-          .pie-chart-container {
-              width: 24.83vw; /* Size of the entire pie chart */
-              height: 24.83vw;
-              border-radius: 50%;
-              background-color: transparent;
-              position: relative;
-              box-shadow: 0 0.35vw 2vw rgba(0, 0, 0, 0.15); /* More prominent shadow */
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              transform: translate(1vw, 6vw);
-          }
+    .age-range {
+        font-size: 6vw;
+    }
 
-          .pie-chart {
-              width: 100%;
-              height: 100%;
-              border-radius: 50%;
-              position: relative;
-              /* Using conic-gradient for accurate pie chart slices */
-              background: conic-gradient(
-                  #6a1b9a 0% 45%, /* English */
-                  #e74c3c 45% 65%, 
-                  /* lab(53.23% 80.11 67.22) */
-                  #3498db 65% 80%, /* Maths */
-                  #5dade2 80% 90%, /* Social */
-                  #2ecc71 90% 100% /* Science */
-              );
-          }
+    .ready-message,
+    .learning-message {
+        font-size: 4vw;
+        transform: translate(0vw, -4vw);
+    }
 
-          .pie-label {
-              position: absolute;
-              color: white;
-              font-weight: bold;
-              font-size: 1.2vw;
-              text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Add text shadow for readability */
-          }
 
-          /* Positioning labels for each slice */
-          .english-label {
-              top: 50%;
-              left: 75%;
-              transform: translate(-50%, -50%);
-          }
+    .foundation-title {
+        font-size: 5.6vw;
+    }
 
-          .gk-label {
-              top: 80%;
-              left: 40%;
-              transform: translate(-50%, -50%);
-          }
+    .age-group-dropdown,
+    .start-button {
 
-          .maths-label {
-              top: 65%;
-              left: 20%;
-              transform: translate(-50%, -50%);
-          }
+        width: 82%;
+        height: 9vw;
+        padding: 1.83vw 1.5;
+        font-size: 3vw;
+        max-width: 30vw;
+        /* Adjust width for very small screens */
+        margin: 4vw 0vw;
+    }
 
-          .social-label {
-              top: 35%;
-              left: 25%;
-              transform: translate(-50%, -50%);
-          }
+    .avatar-circle {
+        width: 4vw;
+        height: 4vw;
+    }
 
-          .science-label {
-              top: 20%;
-              left: 42%;
-              transform: translate(-50%, -50%);
-          }
-         .user-profile span{
-          color: #6a1b9a !important;
-         }
+    .pie-chart-container {
+        width: 50.44vw;
+        height: 50.44vw;
+        ;
+        transform: translate(0vw, 28vw);
+    }
 
-          /* Media Queries for Responsiveness */
-          @media (min-width: 768px) {
-              .app-main-content {
-                  flex-direction: row; /* Row for larger screens */
-                  align-items: flex-start;
-                  padding: 1.39vw 0;
-              }
+    .pie-label {
+        font-size: 0.9em;
+    }
 
-              .welcome-section {
-                  text-align: left;
-                  padding-left: 3vw;
-              }
+    .think-logo-image {
+        margin-top: -8vw;
+    }
 
-              .think-logo {
-                  text-align: left;
-              }
+    .star-icon2 {
+        font-size: 8vw;
+        /* transform: translate(0, -2vw); */
+    }
 
-              .welcome-message {
-                  justify-content: flex-start;
-              }
+    .star-icon1 {
+        font-size: 8vw;
+        /* transform: translate(0, -2vw); */
+    }
 
-              .input-group {
-                  flex-direction: row; /* Row for larger screens */
-                  justify-content: flex-start;
-              }
+    .app-main-content {
+        flex-direction: column-reverse;
+    }
 
-              .age-group-dropdown {
-                  width: auto;
-              }
+    .think-logo-image {
+        transform: translate(0, -39vw);
+    }
 
               .start-button {
                   width: auto;

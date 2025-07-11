@@ -20,9 +20,6 @@
 }
 
 .login-wrapper{
-   background-image: url("../../assets/Login/image1.jpg");
-  background-size: cover;
-  background-position: center;
   height: 97.5vh;
   width: 99vw;
   display: flex;
