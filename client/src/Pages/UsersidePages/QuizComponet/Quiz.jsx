@@ -109,21 +109,23 @@ const QuizComponent = () => {
 
     <div
       className="quiz-wrapper"
-      style={{ backgroundImage: `url(${backgroundImg})` }}
+      // style={{ backgroundImage: `url(${backgroundImg})` }}
     >
       <Navbar/>
       {/* HEADER */}
-      <div className="quiz-header">
+      {/* <div className="quiz-header"> */}
         {/* <img src={logo} alt="logo" className="quiz-logo" /> */}
         <div className="quiz-header-center">
-          <img src={think} alt="Think" className="think-logo" />
+          <div className="think-logo_Quiz">
+          <img src={think} alt="Think"  />
+          </div>
           <div className="quiz-header-text">
             <h2>{Userdata?.ageGroup?.title}</h2>
             <p>Age {Userdata?.ageGroup?.age || 0} years</p>
           </div>
         </div>
        
-      </div>
+      {/* </div> */}
 
       {/* CATEGORY BUTTONS */}
       <div className="quiz-categories">

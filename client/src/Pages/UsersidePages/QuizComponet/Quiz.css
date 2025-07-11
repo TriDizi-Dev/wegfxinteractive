@@ -1,8 +1,9 @@
 /* File: QuizComponent.css */
 
 .quiz-wrapper {
-  height: fit-content;
-  background-image: url("../../assets/bg.png");
+  height: 100vh;
+  width: 100%;
+  background-image: url("../../../assets/home/bg.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -10,10 +11,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: 'Segoe UI', sans-serif;
+  /* font-family: 'Segoe UI', sans-serif; */
   /* overflow: hidden; */
   /* prevent scrolling */
 }
+
 
 .quiz-header-bar {
   display: flex;
@@ -45,9 +47,13 @@
 
 
 
-.think-logo {
+.think-logo_Quiz {
   width: 8vw;
   height: 7vw;
+}
+.think-logo_Quiz img{
+  width: 100%;
+  height: 100%;
 }
 
 .quiz-categories {
@@ -118,11 +124,11 @@
 .quiz-question-box {
   background-color: #007be5;
   color: white;
-  width: 100%;
-  max-width: 700px;
+  width:50%;
+  /* max-width: 700px; */
   border-radius: 20px;
   padding: 30px;
-  text-align: left;
+  /* text-align: left; */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
   animation: fadeInUp 0.6s ease;
 }
@@ -314,18 +320,18 @@
   .quiz-congrats {
     padding: 20px;
     border-radius: 18px;
+    max-width: 80vw;
   }
 
-  .quiz-congrats {
-    width: 140px;
-  }
+ 
 
   .quiz-congrats .trophy-image {
-    width: 100px;
+    width: 30vw;
   }
 
   .quiz-congrats h2 {
     font-size: 20px;
+    width: 40vw;
   }
 
   .quiz-congrats .user-name,
@@ -335,6 +341,7 @@
 
   .quiz-congrats .restart-btn {
     width: 100%;
+    font-size: 4vw;
   }
 }
 
@@ -404,11 +411,13 @@
 
   .quiz-wrapper {
     padding: 15px;
+    width: 94%;
   }
 
   .quiz-question-box {
     padding: 20px;
     border-radius: 16px;
+    width: 80vw;
   }
 
   .quiz-tab {
@@ -424,4 +433,33 @@
   .quiz-next-btn {
     width: 100%;
   }
+  .quiz-header-text h2 {
+  font-size: 3.5vw;
+}
+
+.quiz-header-text p {
+  font-size: 3vw;
+}
+
+.think-logo_Quiz {
+  width: 20vw;
+  height: 15vw;
+}
+.think-logo_Quiz img{
+  width: 100;
+  height: 15vw;
+}
+.quiz-header-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.quiz-categories {
+padding: 2vw 1vw;
+  width: 90vw;
+  margin-top: 5vw;
+}
+.congrats-banner {
+  width: 60vw;
+}
 }
