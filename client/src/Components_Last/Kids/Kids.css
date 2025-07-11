@@ -103,21 +103,20 @@ overflow: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  cursor: pointer;
 } 
 
 .thinker-image {
-  /* width: 20.83vw; 
-  height: auto; */
+  width: 22.83vw; 
+  height: auto; 
   border-radius: 0.83vw; /* 10px */
   /* margin-bottom: 1.67vw;  */
   /* transform: translate(20vw ,0); */
 }
 
 .thinker-title {
-  font-size: 1.5vw; /* 24px */
+  font-size: 1.5vw; 
   font-weight: bold;
-  margin-bottom: 0.83vw; /* 10px */
+  margin-bottom: 0.83vw;
 }
 
 .foundation-color {

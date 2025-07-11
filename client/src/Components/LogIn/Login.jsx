@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import image1 from "../../assets/Login/image1.jpg";
+// import image1 from "../../assets/Login/image1.jpg";
 import image2 from "../../assets/Login/image2.png";
 import image3 from "../../assets/Login/image3.png";
 import image4 from "../../assets/Login/image4.png";
@@ -201,6 +201,7 @@ const LoginPage = () => {
 
   return (
     <div className="login_container">
+      {/* <img src={image1} alt="Background" className="login_background" /> */}
       <div className="login_box">
         <div className="login-leftside">
           <img src={image2} alt="Cartoon" className="boy_image " />
