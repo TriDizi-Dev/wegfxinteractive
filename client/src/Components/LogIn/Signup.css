@@ -39,7 +39,7 @@
 }
 
 .heading h3 {
-  padding-left: 4vw;
+  padding-left: 9vw;
 }
 .login-box{
 display: flex;
@@ -177,10 +177,7 @@ gap: 10vw;
     width: 90vw;
   }
 
-  .signup-left h2,
-  p {
-    /* display: none; */
-  }
+  
   .signup-right p{
     color: #fff;
   }
@@ -191,6 +188,10 @@ gap: 10vw;
 
   .form-group {
     margin-bottom: 4vw;
+  }
+
+  .signup-left h3{
+    display: none;
   }
 
   .form-group label {
@@ -218,6 +219,10 @@ gap: 10vw;
     border-radius: 2vw;
     width: 80vw;
     height: 10vw;
+  }
+
+  .signup{
+    padding-left: 21vw;
   }
 
   .logeimage {
