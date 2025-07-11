@@ -4,7 +4,7 @@ import image2 from "../../assets/Login/image2.png";
 import image3 from "../../assets/Login/image3.png";
 import image4 from "../../assets/Login/image4.png";
 import image6 from "../../assets/Login/Picture12.png"
-import image5 from "../../assets/Login/picture10.png"
+import image5 from "../../assets/Login/Picture10.png"
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   signInWithEmailAndPassword,
