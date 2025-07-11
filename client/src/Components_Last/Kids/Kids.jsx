@@ -7,6 +7,7 @@ import Think from "../../assets/Pieimages/Think1b.png";
 import { useNavigate } from "react-router-dom";
 import { auth, database } from "../../Firebase/firebase";
 import { ref, get, update } from "firebase/database";
+import { Navbar } from "../../Components/Navbar/Navbar";
 
 function Kids() {
   const [userName, setUserName] = useState("");
@@ -41,9 +42,13 @@ function Kids() {
 
   
   return (
+    <>
+    
     <div className="kids">
-      <header className="header1">
-        <div className="company-logo">
+       <Navbar/>
+      {/* <header className="header1"> */}
+         {/* <Navbar/> */}
+        {/* <div className="company-logo">
           <p>A Purple'd Advertising Company</p>
         </div>
         <div className="user-profile2">
@@ -57,8 +62,8 @@ function Kids() {
               <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
             </svg>
           </div>
-        </div>
-      </header>
+        </div> */}
+      {/* </header> */}
 
       <div className="main-container">
         <img src={Think} alt="Think1" className="thinkimage" />
@@ -145,6 +150,7 @@ function Kids() {
         </div>
       </div>
     </div>
+    </>
   );
 }
 export default Kids;
