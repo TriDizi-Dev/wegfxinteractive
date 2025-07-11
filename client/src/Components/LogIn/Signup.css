@@ -14,8 +14,9 @@
   width: 8vw;
   margin-top: -2vw;
 }
-.sign{
+.signup{
   cursor: pointer;
+  padding-left: 12vw;
 }
 
 .login-wrapper{

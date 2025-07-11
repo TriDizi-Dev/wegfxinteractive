@@ -39,6 +39,7 @@ function Kids() {
     navigate("/plans"); // 👈 change this route if needed
   };
 
+  
   return (
     <div className="kids">
       <header className="header1">
@@ -59,8 +60,8 @@ function Kids() {
         </div>
       </header>
 
-      <div className="main-content">
-        <img src={Think} alt="Think1" />
+      <div className="main-container">
+        <img src={Think} alt="Think1" className="thinkimage" />
         <h2 className="tagline">
           Empowering <span className="highlight-blue">kids</span> to step out
           boldly into the future!
@@ -81,13 +82,15 @@ function Kids() {
               alt="Foundation Thinker"
               className="thinker-image"
             />
-            <h3 className="thinker-title foundation-color">
+            <div>
+            <h2 className="thinker-title foundation-color">
               Foundation Thinkers
-            </h3>
+            </h2>
             <p className="thinker-age">Age 5–8 years</p>
             <p className="thinker-description">
-              Build strong roots of confidence and curiosity
+              Build strong roots of confidence <br/>and curiosity
             </p>
+            </div>
           </div>
 
           <div
@@ -104,13 +107,15 @@ function Kids() {
               alt="Explorative Thinker"
               className="thinker-image"
             />
-            <h3 className="thinker-title explorative-color">
+            <div>
+            <h2 className="thinker-title explorative-color">
               Explorative Thinkers
-            </h3>
+            </h2>
             <p className="thinker-age">Age 9–12 years</p>
             <p className="thinker-description">
-              Discover talents, sharpen thinking, and express freely
+              Discover talents, sharpen <br/>thinking, and express freely
             </p>
+            </div>
           </div>
 
           <div
@@ -125,15 +130,17 @@ function Kids() {
             <img
               src={boy2}
               alt="Future-Ready Thinker"
-              className="thinker-image"
+              className="thinker-image2"
             />
-            <h3 className="thinker-title future-ready-color">
+            <div>
+            <h2 className="thinker-title future-ready-color">
               Future - Ready Thinkers
-            </h3>
+            </h2>
             <p className="thinker-age">Age 13–16 years</p>
             <p className="thinker-description">
-              Prepare for real-world challenges with confidence & clarity
+              Prepare for real-world challenges <br/>with confidence & clarity
             </p>
+            </div>
           </div>
         </div>
       </div>
