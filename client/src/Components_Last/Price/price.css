@@ -61,12 +61,19 @@ height: 34vw;
   color: #333;
   margin-bottom: 1.67vw;
 }
+.logo1{
+height: 8vw;
+width: 10vw;
+margin-right: 15vw;
+}
+
 
 .section-heading {
   font-size: 1.5vw;
   color: #000;
   margin-bottom: 3.33vw;
-  padding-left: 10vw;
+  padding-left: 14vw;
+  margin-top: -1vw;
 }
 
 .foundation-text {
@@ -94,7 +101,7 @@ height: 34vw;
 
 .payment-illustration {
   margin: -11vw;
-  height: 23vw;
+  height: 24vw;
   display: block;
 }
 
@@ -113,7 +120,7 @@ height: 34vw;
 
 .price-card {
   width: 12vw;
-  height: 12vw;
+  height: 10vw;
   border-radius: 1.25vw;
   color: white;
   display: flex;
@@ -142,7 +149,7 @@ height: 34vw;
 .plan-name {
   font-size: 1vw;
   margin-top: 0;
-  margin-bottom: 0.83vw;
+  margin-bottom: -.5vw;
   font-weight: bold;
 }
 

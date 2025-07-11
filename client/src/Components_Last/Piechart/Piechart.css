@@ -210,13 +210,13 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    padding: 1.39vw;
+    padding: 0vw;
 }
 
 .pie-chart-container {
-    width: 24.83vw;
+    width: 28vw;
     /* Size of the entire pie chart */
-    height: 24.83vw;
+    height: 30vw;
     border-radius: 50%;
     background-color: transparent;
     position: relative;
@@ -302,7 +302,7 @@
 
     .welcome-section {
         text-align: left;
-        padding-left: 3vw;
+        padding-left: 10vw;
     }
 
     .think-logo {
