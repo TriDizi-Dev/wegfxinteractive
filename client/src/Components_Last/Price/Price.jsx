@@ -154,6 +154,7 @@ function Price() {
                   </p>
                   <p className="duration">1 Week</p>
                 </div>
+                
 
                 <div
                   className={`price-card recommended ${
@@ -161,7 +162,9 @@ function Price() {
                   }`}
                   onClick={() => handleProceed("pro")}
                 >
-                  <p className="plan-label">Recommended</p>
+                  <div><p className="plan-label">Recommended</p></div>
+                  
+                  {/* <p className="plan-label">Recommended</p> */}
                   <h3 className="plan-name">Pro Plan</h3>
                   <p className="price">
                     ₹<span className="price-value">299</span>
