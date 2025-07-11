@@ -1,73 +1,4 @@
-/* .container {
-  width: 100%;
-  height: 100vh;
-  background: linear-gradient(to bottom, #e0f7fa, #ffffff);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.content {
-  text-align: center;
-}
-
-h1 {
-  font-size: 36px;
-  font-weight: bold;
-  margin-bottom: 16px;
-}
-
-.welcome-text {
-  color: #ff0000;
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 8px;
-}
-
-.sub-text {
-  color: #000000;
-  font-size: 16px;
-  margin-bottom: 16px;
-}
-
-.foundation {
-  margin-bottom: 16px;
-}
-
-.age {
-  margin-bottom: 16px;
-}
-
-.dropdown {
-  padding: 8px;
-  border: 1px solid #e5e7eb;
-  border-radius: 4px;
-  margin-bottom: 16px;
-}
-
-.start-button {
-  background-color: #22c55e;
-  color: #ffffff;
-  padding: 8px 16px;
-  border-radius: 4px;
-  border: none;
-  cursor: pointer;
-}
-
-.pie-chart {
-  width: 300px;
-  height: 300px;
-  position: absolute;
-  right: 50px;
-  top: 50px;
-} */
 .pie1 {
-    width: 99vw;
-    /* border: 1px solid; */
-    height: 97vh;
-    /* Cover the entire container */
-    background-position: center;
     width: 99vw;
     height: 97vh;
 }
@@ -76,24 +7,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    /* width: 99vw; */
-    /* border: 1px solid; */
-    /* height: 97vh; */
-    background-image: url('../../assets/Pieimages/Picture1.jpg');
-    /* Background image */
-    /* border-radius: 15px;
-              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-              padding: 30px;
-              box-sizing: border-box; */
-    /* border: 5px solid #cf2323; */
-    background-attachment: fixed;
-    background-size: cover;
-    /* Cover the entire container */
-    background-position: center;
-    /* Center the background image */
-    /* padding: 1.39vw; */
-    /* box-sizing: border-box; */
-    /* overflow-x: hidden; */
+
 }
 
 .think-logo-image {
@@ -207,8 +121,10 @@ h1 {
     /* color: #e74c3c; Red color for "Raj Kumar" */
     color: red;
     font-weight: bold;
-    margin-left: 0.35vw;
-    width: 28vw;
+    /* margin-left: 0.35vw; */
+    font-size: 2.8vw;
+    margin: 0vw 4vw;
+
 }
 
 .ready-message,
@@ -216,7 +132,7 @@ h1 {
     font-size: 2vw;
     /* Larger size */
     color: #0c0b0b;
-    margin: 0vw 4.56vw;
+    margin: 0vw 4vw;
 }
 
 .foundation-section {
@@ -446,6 +362,19 @@ h1 {
 
     .welcome-message {
         font-size: 8.5vw;
+        display: block;
+        width: 63vw;
+        margin: 11vw 0vw;
+    }
+
+    .highlight-name {
+        font-size: 8.5vw;
+        width: 42vw !important;
+    }
+
+    .pie1 {
+        width: 100%;
+        height: 179vw;
     }
 
     .age-range {
@@ -455,7 +384,9 @@ h1 {
     .ready-message,
     .learning-message {
         font-size: 4vw;
+        transform: translate(0vw, -4vw);
     }
+
 
     .foundation-title {
         font-size: 5.6vw;
@@ -470,6 +401,7 @@ h1 {
         font-size: 3vw;
         max-width: 30vw;
         /* Adjust width for very small screens */
+        margin: 4vw 0vw;
     }
 
     .avatar-circle {
@@ -481,6 +413,7 @@ h1 {
         width: 50.44vw;
         height: 50.44vw;
         ;
+        transform: translate(0vw, 28vw);
     }
 
     .pie-label {
@@ -489,5 +422,27 @@ h1 {
 
     .think-logo-image {
         margin-top: -8vw;
+    }
+
+    .star-icon2 {
+        font-size: 8vw;
+        /* transform: translate(0, -2vw); */
+    }
+
+    .star-icon1 {
+        font-size: 8vw;
+        /* transform: translate(0, -2vw); */
+    }
+
+    .app-main-content {
+        flex-direction: column-reverse;
+    }
+
+    .think-logo-image {
+        transform: translate(0, -39vw);
+    }
+
+    .foundation-title {
+        transform: translate(0, -2vw);
     }
 }
