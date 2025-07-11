@@ -2,7 +2,7 @@
 
 .kids {
   padding: 1.67vw;
-  box-sizing: border-box;
+   box-sizing: border-box; 
   /* overflow: hidden; */
   /* height: 97vh; */
 }
@@ -111,7 +111,7 @@
 } 
 
 .thinker-image {
-  width: 22.83vw; 
+  width: 18.83vw; 
   height: auto; 
   border-radius: 0.83vw; /* 10px */
   /* margin-bottom: 1.67vw;  */
@@ -119,12 +119,12 @@
 }
 
 .thinker-image2{
-  width: 22.83vw;
+  width: 18.83vw;
   border-radius: 0.83vw;
   margin-top: -4vw;
 }
 .thinker-image1{
-  width: 22.83vw;
+  width: 18.83vw;
   border-radius: 0.83vw;
   margin-top: -2.5vw;
 }

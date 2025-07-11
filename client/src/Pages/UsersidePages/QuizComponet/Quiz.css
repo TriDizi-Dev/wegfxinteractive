@@ -39,10 +39,6 @@
   animation: fadeIn 1s ease;
 }
 
-
-
-
-
 .think-logo_Quiz {
   width: 8vw;
   height: 7vw;
@@ -421,6 +417,7 @@
     padding: 20px;
     border-radius: 16px;
     width: 80vw;
+    height: auto;
   }
 
   .quiz-tab {

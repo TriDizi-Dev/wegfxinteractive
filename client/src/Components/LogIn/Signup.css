@@ -1,7 +1,9 @@
 .form-group label {
   color: white;
   /* margin-top: vw; */
+  
 }
+
 
 .cartoon-touch{
    width: 18vw;
@@ -20,8 +22,8 @@
 }
 
 .login-wrapper{
-  height: 97.5vh;
-  width: 99vw;
+  /* height: 97.5vh;
+  width: 99vw; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -69,7 +71,7 @@ gap: 10vw;
   box-shadow: 0 1vw 3vw rgba(0, 0, 0, 0.15)
 }
 .form-group {
-  margin-bottom: 1.5vw;
+  margin-bottom: 0.5vw;
   position: relative;
 }
 .form-group input {

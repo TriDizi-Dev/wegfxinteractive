@@ -210,13 +210,13 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    padding: 1.39vw;
+    padding: 0vw;
 }
 
 .pie-chart-container {
-    width: 24.83vw;
+    width: 28vw;
     /* Size of the entire pie chart */
-    height: 24.83vw;
+    height: 30vw;
     border-radius: 50%;
     background-color: transparent;
     position: relative;
@@ -302,7 +302,7 @@
 
     .welcome-section {
         text-align: left;
-        padding-left: 3vw;
+        padding-left: 10vw;
     }
 
     .think-logo {
@@ -367,6 +367,7 @@
     .highlight-name {
         font-size: 8.5vw;
         width: 42vw !important;
+        transform: translate(5vw, -8vw);
     }
 
 
@@ -436,7 +437,106 @@
         transform: translate(0, -39vw);
     }
 
-    .foundation-title {
-        transform: translate(0, -2vw);
+              .start-button {
+                  width: auto;
+              }
+
+              .pie-chart-section {
+                  padding-right: 3vw;
+              }
+              .think-text {
+              transform: translate(0, 0);
+               }
+              }
+
+          @media (max-width: 480px) {
+              .app-header {
+                  flex-direction: column;
+                  
+                  gap: 2vw;
+                  font-size: 7vw;
+              }
+              .think-logo{
+                transform: translate(-19vw, 5vw);
+              }
+
+              .think-text {
+                  font-size: 10vw;
+                  transform: translate(0vw, 3vw);
+              }
+              .welcome-section{
+                margin: 18vw 0;
+              }
+              .welcome-message {
+                  font-size: 8.5vw;
+                  display: block;
+                 width: 63vw;
+                 margin: 11vw 0vw;
+             }
+              .highlight-name{
+                    font-size: 8.5vw;
+                    width: 42vw !important;
+              }
+              .pie1{
+                width: 100%;
+        height: 179vw;  
+              }
+                .age-range{
+                  font-size: 6vw;
+                }
+              .ready-message,
+              .learning-message {
+                  font-size: 4vw;
+                  transform: translate(0vw, -4vw);
     }
-}
+              
+
+              .foundation-title {
+                  font-size: 5.6vw;
+              }
+
+              .age-group-dropdown,
+              .start-button {
+                  
+                  width: 82%;
+                height: 9vw;
+               padding: 1.83vw 1.5;
+               font-size:  3vw;
+               max-width: 30vw;/* Adjust width for very small screens */
+               margin: 4vw 0vw;
+              }
+              .avatar-circle{
+                  width: 4vw;
+                  height: 4vw;
+              }
+
+              .pie-chart-container {
+                  width: 50.44vw;
+        height: 50.44vw;;
+        transform: translate(0vw, 30vw);
+              }
+
+              .pie-label {
+                  font-size: 0.9em;
+              }
+              .think-logo-image{
+                margin-top: -8vw;
+              }
+              .star-icon2{
+                font-size: 8vw;
+                /* transform: translate(0, -2vw); */
+              }
+              .star-icon1{
+                font-size: 8vw;
+                /* transform: translate(0, -2vw); */
+              }
+              .app-main-content{
+                flex-direction: column-reverse;
+              }
+              .think-logo-image{
+                transform: translate(0,-39vw);
+              }
+              .foundation-title {
+                transform: translate(0,-2vw);
+              }
+          }

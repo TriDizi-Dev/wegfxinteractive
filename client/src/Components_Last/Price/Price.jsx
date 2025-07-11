@@ -150,7 +150,7 @@ function Price() {
                   <p className="plan-label">Trial Pack</p>
                   <h3 className="plan-name">Starter Plan</h3>
                   <p className="price">
-                    ₹<span className="price-value">99</span>
+                    ₹ 99
                   </p>
                   <p className="duration">1 Week</p>
                 </div>
