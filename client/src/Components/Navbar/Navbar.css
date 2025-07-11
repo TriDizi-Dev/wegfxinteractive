@@ -36,3 +36,19 @@
     height: 100%;
     object-fit: contain;
 }
+@media screen and (max-width: 768px) {
+  .Main_Logo_Image{
+    width: 22vw;
+        height: 8vw;
+  }
+  .quiz-user-info span{
+    font-size: 5vw;
+  }
+  .user-avatar{
+   font-size: 5vw;
+
+  }
+  .pie-chart-section {
+   margin: -14vw 0vw;
+}
+}

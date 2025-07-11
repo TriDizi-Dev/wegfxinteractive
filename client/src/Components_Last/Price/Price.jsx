@@ -6,6 +6,7 @@ import { auth, database } from "../../Firebase/firebase";
 import { ref, get, set } from "firebase/database";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { Navbar } from "../../Components/Navbar/Navbar";
 
 function Price() {
   const [userdata, setUserdata] = useState({});
@@ -104,7 +105,8 @@ function Price() {
 
   return (
     <div className="cost">
-      <header className="app-header">
+      <Navbar />
+      {/* <header className="app-header">
         <span className="logo-placeholder">A Purple'd Advertising Company</span>
         <div className="user-profile">
           <span>{userdata.name}</span>
@@ -118,7 +120,7 @@ function Price() {
             </svg>
           </div>
         </div>
-      </header>
+      </header> */}
 
       <main className="main-content">
         <img src={Think} alt="Think1" className="logo1" />

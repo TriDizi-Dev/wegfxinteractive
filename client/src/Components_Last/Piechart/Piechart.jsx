@@ -74,6 +74,7 @@ import Think from "../../assets/Pieimages/Think1b.png"; // Import your logo imag
 import { auth, database } from "../../Firebase/firebase";
 import { ref, get, set } from "firebase/database";
 import { useNavigate } from "react-router-dom";
+import { Navbar } from "../../Components/Navbar/Navbar";
 function Pie() {
   const [ageGroup, setAgeGroup] = useState("Beginner");
   const [Userdata, setUserdata] = useState({});
@@ -104,9 +105,14 @@ function Pie() {
   };
 
   return (
-    <div className="app-wrapper">
+
+    <div className="pie1">
+      <Navbar/>
+
+    <div className="pie">
+      
       <div className="app-container">
-        {/* Header */}
+        {/* Header
         <header className="app-header">
           <span className="logo-placeholder">
             A Purple'd Advertising Company
@@ -123,7 +129,7 @@ function Pie() {
               </svg>
             </div>
           </div>
-        </header>
+        </header> */}
 
         {/* Main Content */}
         <main className="app-main-content">
@@ -178,6 +184,7 @@ function Pie() {
           </div>
         </main>
       </div>
+    </div>
     </div>
   );
 }
