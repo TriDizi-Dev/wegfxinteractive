@@ -66,7 +66,6 @@
     flex: 1;
     min-width: 20.83vw;
     text-align: center;
-    /* Center for mobile */
     padding: 0 1.39vw;
 }
 
@@ -76,9 +75,7 @@
 }
 
 .think-text {
-    /* font-family: 'Georgia', serif; */
     font-size: 4.5em;
-    /* Larger size */
     color: #333;
     margin: 0;
     font-style: italic;
@@ -87,18 +84,13 @@
 }
 
 .welcome-message {
-    /* font-size: 3vw; */
-
-    /* color: #01011a; */
+    
     display: flex;
     align-items: center;
     justify-content: center;
-
     margin-bottom: 0.69vw;
     flex-wrap: wrap;
-    /* font-family: 'Times New Roman', serif; */
     font-size: 3vw;
-    /* ~24px */
     font-weight: bold;
     color: #002855;
 
@@ -488,11 +480,11 @@
         margin: 13vw -4vw;
     }
 
-    .highlight-name {
+    /* .highlight-name {
         font-size: 8.5vw;
         width: 42vw !important;
         margin: 0vw 6vw;
-    }
+    } */
 
     .pie1 {
         width: 100%;
@@ -536,7 +528,6 @@
     .pie-chart-container {
         width: 50.44vw;
         height: 50.44vw;
-        ;
         transform: translate(0vw, 30vw);
     }
 
