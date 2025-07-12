@@ -410,7 +410,7 @@
   .quiz-wrapper {
     padding: 15px;
     width: 94%;
-    height: 100vh;
+    /* height: 100vh; */
   }
 
   .quiz-question-box {
