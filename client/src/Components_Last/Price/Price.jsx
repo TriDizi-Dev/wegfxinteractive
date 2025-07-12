@@ -29,42 +29,9 @@ function Price() {
     fetchUser();
   }, []);
 
-  // const handleProceed = async (planType) => {
-  //   if (!planType) return alert("Please select a plan.");
 
-  //   const uid = auth.currentUser?.uid;
-  //   if (!uid) return alert("User not authenticated");
 
-  //   // const amount = selectedPlan === "daily" ? 99 : 199;
-  // let amount;
-  // if (planType === "starter") {
-  //   amount = 99; // 1 Week
-  // } else if (planType === "pro") {
-  //   amount = 299; // 1 Month
-  // } else if (planType === "elite") {
-  //   amount = 799; // 3 Months
-  // }
-  //   try {
-  //     const res = await axios.post("http://localhost:5000/initiate-payment", {
-  //       userId: uid,
-  //       amount,
-  //       mobile: "9999999999",
-  //       plan: planType,
-  //     });
 
-  //     console.log("Full Response:", res);
-  //     console.log("Redirect URL:", res.data?.route);
-
-  //     if (res.data?.route) {
-  //       window.location.href = res.data.route;
-  //     } else {
-  //       alert("No redirect URL returned.");
-  //     }
-  //   } catch (err) {
-  //     console.error("Payment Error", err.response?.data || err.message);
-  //     alert("Failed to initiate payment.");
-  //   }
-  // };
 
   const handleProceed = async (planType) => {
     if (!planType) {
@@ -107,21 +74,7 @@ function Price() {
       {" "}
       <Navbar />
       <div className="cost">
-        {/* <header className="app-header">
-        <span className="logo-placeholder">A Purple'd Advertising Company</span>
-        <div className="user-profile">
-          <span>{userdata.name}</span>
-          <div className="avatar">
-            <svg
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="avatar-icon"
-            >
-              <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-            </svg>
-          </div>
-        </div>
-      </header> */}
+
 
         <main className="main-content">
           <img src={Think} alt="Think1" className="logo1" />
@@ -142,9 +95,8 @@ function Price() {
             <div className="pricing-section">
               <div className="pricing-plans">
                 <div
-                  className={`price-card trial-pack ${
-                    selectedPlan === "starter" ? "selected" : ""
-                  }`}
+                  className={`price-card trial-pack ${selectedPlan === "starter" ? "selected" : ""
+                    }`}
                   onClick={() => handleProceed("starter")}
                 >
                   <p className="plan-label">Trial Pack</p>
@@ -154,16 +106,15 @@ function Price() {
                   </p>
                   <p className="duration">1 Week</p>
                 </div>
-                
+
 
                 <div
-                  className={`price-card recommended ${
-                    selectedPlan === "pro" ? "selected" : ""
-                  }`}
+                  className={`price-card recommended ${selectedPlan === "pro" ? "selected" : ""
+                    }`}
                   onClick={() => handleProceed("pro")}
                 >
                   <div><p className="plan-label">Recommended</p></div>
-                  
+
                   {/* <p className="plan-label">Recommended</p> */}
                   <h3 className="plan-name">Pro Plan</h3>
                   <p className="price">
@@ -173,9 +124,8 @@ function Price() {
                 </div>
 
                 <div
-                  className={`price-card super-saver ${
-                    selectedPlan === "elite" ? "selected" : ""
-                  }`}
+                  className={`price-card super-saver ${selectedPlan === "elite" ? "selected" : ""
+                    }`}
                   onClick={() => handleProceed("elite")}
                 >
                   <p className="plan-label">Super Saver</p>

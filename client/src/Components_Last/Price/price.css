@@ -80,10 +80,14 @@ margin-right: 15vw;
   color: #dc3545;
   font-weight: bold;
   font-size: 2vw;
+  font-family: 'Times New Roman', Times, serif; /* Or use Georgia */
 }
 
 .foundation-text span {
   font-size: 1.5vw;
+  font-family: 'Times New Roman', Times, serif;
+    font-weight: normal;
+    color: black;
 }
 
 .content-area {
@@ -119,9 +123,9 @@ margin-right: 15vw;
 }
 
 .price-card {
-  width: 12vw;
+  width: 11vw;
   height: 10vw;
-  border-radius: 1.25vw;
+  border-radius: 2.25vw;
   color: white;
   display: flex;
   flex-direction: column;
@@ -169,16 +173,34 @@ margin-right: 15vw;
 }
 
 .trial-pack {
-  background-color: red;
+ 
+  background-color: #c80000;
+  color: white;
+  border-radius: 1.5vw;
+  text-align: center;
+  /* padding: 0.83vw; */
+  Font-weight: bold
+
+
 }
 
 .recommended {
-  background-color: #007bff;
+  background-color: #0073cf;
+  color: white;
+  border-radius: 1.5vw;
+  text-align: center;
+  /* padding: 0.83vw; */
+  Font-weight: bold;
 }
-
 .super-saver {
-  background-color: rgba(4, 4, 29, 0.89);
+ background-color: #002855;
+  color: white;
+  border-radius: 1.5vw;
+  text-align: center;
+  /* padding: 0.83vw; */
+  Font-weight: bold;
 }
+ 
 
 .flexible-options-text {
   font-size: 1.2vw;
@@ -304,4 +326,9 @@ margin-right: 15vw;
     gap: 6vw;
     margin-top: 4vw;
   }
+  .logo1{
+height: 14vw;
+width: 14vw;
+transform: translate(5vw, -4vw);
+}
 }
