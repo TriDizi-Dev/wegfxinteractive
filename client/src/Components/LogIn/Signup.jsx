@@ -4,6 +4,7 @@ import image3 from "../../assets/Login/image3.png";
 import image4 from "../../assets/Login/image4.png";
 import image5 from "../../assets/Login/Picture10.png";
 import { useNavigate } from "react-router-dom";
+// import pic1 from "../../assets/Login/Picture12.png"
 import {
   createUserWithEmailAndPassword,
   fetchSignInMethodsForEmail,
@@ -87,6 +88,7 @@ const SignupPage = () => {
           <img src={image3} className="image_3" alt="Decoration" />
           <h2>
             Unleash the <img src={image5} className="image5"/>
+            {/* <img src={pic1} className="pic1"/> */}
             <span className="star-text">Star</span> Within!
           </h2>
           <h3>
@@ -149,6 +151,7 @@ const SignupPage = () => {
                 name="confirmPassword"
                 value={confirm}
                 onChange={(e) => setConfirm(e.target.value)}
+                
                 required
               />
             </div>

@@ -330,6 +330,10 @@
   margin: 0.7vw 0;
   text-align: center;
 }
+.pic{
+  width: 2vw;
+    transform: translate(0vw, -1vw);
+}
 
 
 
@@ -337,7 +341,7 @@
   .login_container {
     flex-direction: column;
     padding: 4vw;
-    height: 160vw;
+    height: 100vh;
   }
 
   .login_box {
