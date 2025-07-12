@@ -72,15 +72,18 @@
   margin-bottom: 1vw;
   margin-top: -10vw;
   position:relative;
+  font-family: 'Poppins', sans-serif;
 }
 
 .login-leftside p{
   position: relative;
+  font-family: 'Poppins', sans-serif;
 }
 
 .star {
   color: #c62828; /* red */
   position: relative;
+  font-family: 'Poppins', sans-serif;
 }
 
 .text-bubble p {
@@ -151,7 +154,7 @@
   color: white;
 }
 .logo{
-  width: 9.5vw;
+  width: 9vw;
   height: 5vw;
   margin-left: -0.5vw;
 }
@@ -182,12 +185,14 @@
   margin-top: -0.2vw;
   padding-left: 0.2vw;
   padding-bottom: 1vw;
+  font-family: 'Poppins', sans-serif
 }
 
 .login-rightside p{
   font-size: 1vw;
   font-weight: 400;
   padding-left: 0.2vw;
+  font-family: 'Poppins', sans-serif
 }
 
 .form-login {
@@ -199,9 +204,10 @@
   display: block;
   margin-bottom: 0.6vw;
   font-weight: 400;
-  font-size: 1.2vw;
+  font-size: 1vw;
   color: white;
   padding-left: 0.2vw;
+  font-family: 'Poppins', sans-serif
 }
 
 .form-login input {
