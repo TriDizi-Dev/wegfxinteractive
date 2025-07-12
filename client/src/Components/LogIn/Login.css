@@ -78,6 +78,7 @@
 .login-leftside p{
   position: relative;
   font-family: 'Poppins', sans-serif;
+  text-align: center;
 }
 
 .star {
