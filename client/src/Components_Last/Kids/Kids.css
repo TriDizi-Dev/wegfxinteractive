@@ -57,7 +57,7 @@
     margin-top: 1.5vw;
 }
 .thinkimage{
-   margin-top: 0vw;
+   margin-top: -1vw;
 }
 /* Main Content Styling */
 .main-container {
@@ -110,20 +110,21 @@
 } 
 
 .thinker-image {
-  width: 22.83vw; 
+  width: 15.83vw; 
   height: auto; 
+  margin-top: -4.5vw;
   border-radius: 0.83vw; /* 10px */
   /* margin-bottom: 1.67vw;  */
   /* transform: translate(20vw ,0); */
 }
 
 .thinker-image2{
-  width: 22.83vw;
+  width: 15.83vw;
   border-radius: 0.83vw;
   margin-top: -4vw;
 }
 .thinker-image1{
-  width: 22.83vw;
+  width: 15.83vw;
   border-radius: 0.83vw;
   margin-top: -2.5vw;
 }
