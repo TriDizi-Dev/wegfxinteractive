@@ -4,6 +4,11 @@
     align-items: center;
 
 }
+.recharts-sector {
+  outline: none;
+  stroke: none;
+  user-select: none;
+}
 
 .think-logo-image {
     margin-top: -3vw;
@@ -366,11 +371,13 @@
 
     .highlight-name {
         font-size: 8.5vw;
-        width: 42vw !important;
+        /* width: 42vw !important; */
         transform: translate(5vw, 0vw);
         display: block;
     }
-
+.foundation-section {
+    margin-top: 0vw;
+}
 
 
     .age-range {
@@ -481,7 +488,7 @@
 
     .highlight-name {
         font-size: 8.5vw;
-        width: 42vw !important;
+        /* width: 42vw !important; */
         margin: 0vw 6vw;
     }
 
@@ -510,13 +517,12 @@
 
     .age-group-dropdown,
     .start-button {
-
         width: 82%;
-        height: 9vw;
+        height: 10vw;
         padding: 1.83vw 1.5;
-        font-size: 3vw;
+        font-size: 4vw;
         max-width: 30vw;
-        margin: 4vw 0vw;
+        margin: 1vw 0vw;
     }
 
     .avatar-circle {
