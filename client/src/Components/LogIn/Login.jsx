@@ -273,7 +273,7 @@ const LoginPage = () => {
                   </span>
                 ) : (
                   <span className="sign" onClick={() => setShowChangePassword(true)}>
-                    Change Password
+                    Forget Password
                   </span>
                 )}
               </h3>

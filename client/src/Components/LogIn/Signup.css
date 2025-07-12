@@ -39,6 +39,7 @@
 
 .heading h3 {
   padding-left: 9vw;
+  margin-top: 1vw;
 }
 .login-box{
 display: flex;
