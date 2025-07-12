@@ -5,6 +5,7 @@ import image3 from "../../assets/Login/image3.png";
 import image4 from "../../assets/Login/image4.png";
 import image6 from "../../assets/Login/Picture12.png"
 import image5 from "../../assets/Login/Picture10.png"
+// import pic from "../../assets/Login/Picture12.png"
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   signInWithEmailAndPassword,
@@ -215,6 +216,7 @@ const LoginPage = () => {
           <h2>
             {/* Unleash the <img src={image6} className="img6"/> */}
             Unlesh the
+             {/* <img  src={image5} className="img5"/> */}
             <img  src={image5} className="img5"/><span className="star-text">Star</span> Within!
           </h2>
           <p>
