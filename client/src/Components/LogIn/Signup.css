@@ -22,8 +22,8 @@
 }
 
 .login-wrapper{
-  /* height: 97.5vh;
-  width: 99vw; */
+  height: 97.5vh;
+  width: 99vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,7 +39,7 @@
 
 .heading h3 {
   padding-left: 9vw;
-  margin-top: 1vw;
+  font-family: 'Poppins', sans-serif;
 }
 .login-box{
 display: flex;
@@ -66,19 +66,14 @@ gap: 10vw;
   width: 29vw;
   color: white;
   /* margin-left: 10vw; */
-  height: fit-content;
-  margin-top: 2.5vw;
-  /* font-family: 'Segoe UI', sans-serif; */
+  height: 37vw;
+  margin-top: -0.2vw;
+  font-family: 'Segoe UI', sans-serif;
   box-shadow: 0 1vw 3vw rgba(0, 0, 0, 0.15)
 }
 .signup-right p{
-  padding-bottom: 0.5vw;
+  padding-bottom: 2vw;
   font-size: 0.9vw;
-}
-.error-message2{
-    text-align: center;
-  font-size: 18px;
-  color: #b33a3a;
 }
 .para{
   padding-top: 1vw;
