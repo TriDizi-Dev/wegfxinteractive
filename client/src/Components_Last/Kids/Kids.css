@@ -290,9 +290,8 @@
   }
 
   .thinker-card3 {
-    /* min-width: 80vw;
-    max-width: 90vw; */
     padding: 1vw;
+    
     width: 80vw;
     flex-direction: row;
     height: 30vw;
