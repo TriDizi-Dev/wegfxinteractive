@@ -55,7 +55,7 @@ function Kids() {
 
           <div className="thinker-sections">
             <div
-              className="thinker-card"
+              className="thinker-card1"
               onClick={() =>
                 handleAgeGroupSelect({
                   age: "5–8",
@@ -81,7 +81,7 @@ function Kids() {
             </div>
 
             <div
-              className="thinker-card"
+              className="thinker-card2"
               onClick={() =>
                 handleAgeGroupSelect({
                   age: "9–12",
@@ -107,7 +107,7 @@ function Kids() {
             </div>
 
             <div
-              className="thinker-card"
+              className="thinker-card3"
               onClick={() =>
                 handleAgeGroupSelect({
                   age: "13–16",
