@@ -60,7 +60,7 @@
 
 .thinkimage {
   margin-top: 0vw;
-  transform: translate(0vw,-4vw);
+  transform: translate(0vw,-2vw);
 }
 
 /* Main Content Styling */
@@ -82,9 +82,10 @@
   font-size: 2.2vw;
   /* 30px */
   color: #c95115;
-  margin-bottom: 5.67vw;
+  margin-bottom: 8.67vw;
   /* 80px */
   letter-spacing: 0vw;
+  font-weight: 400;
   letter-spacing: 0vw;
   /* 1px */
   margin-top: -1vw;
@@ -92,7 +93,7 @@
 
 .highlight-blue {
   color: #007bff;
-  font-weight: bold;
+  font-weight: 400;
 }
 
 /* Thinker Sections Styling */
@@ -102,7 +103,7 @@
   gap: 2.5vw;
   /* 30px */
   flex-wrap: wrap;
-  margin: -5vw 0vw;
+  margin: -6.5vw 0vw;
   
 }
 
@@ -133,7 +134,7 @@
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  margin: -4vw -5vw
+  margin: -4vw -2vw
 }
 .thinker-card3 {
   /* background-color: #fff; */
@@ -151,7 +152,7 @@
 }
 
 .thinker-image {
-  width: 18.83vw;
+  width: 15.83vw;
   height: auto;
   border-radius: 0.83vw;
  
@@ -161,20 +162,20 @@
 }
 
 .thinker-image2 {
-  width: 18.83vw;
+  width: 16.83vw;
   border-radius: 0.83vw;
   margin-top: -4vw;
 }
 
 .thinker-image1 {
-  width: 18.83vw;
+  width: 16.83vw;
   border-radius: 0.83vw;
   margin-top: -2.5vw;
 }
 
 .thinker-title {
   font-size: 1.5vw;
-  font-weight: bold;
+  font-weight: 900;
   margin-bottom: 0.83vw;
 }
 
@@ -194,15 +195,16 @@
   font-size: 1.5vw;
   /* 18px */
   color: #000;
-  margin-bottom: 1.25vw;
+  margin-bottom: -0.4vw;
   /* 15px */
   font-weight: 600;
+  margin-top: -0.5vw;
 }
 
 .thinker-description {
   font-size: 1.33vw;
   /* 16px */
-  color: #444;
+  color: #000;
   line-height: 1.5;
   font-style: italic;
 }
@@ -267,7 +269,7 @@
 
   .tagline {
     font-size: 4.5vw;
-    margin-bottom: 6vw;
+    margin-bottom: 5vw;
     margin-top: -2vw;
   }
 
@@ -277,7 +279,28 @@
     margin: 4vw 0;
   }
 
-  .thinker-card {
+  .thinker-card1 {
+    /* min-width: 80vw;
+    max-width: 90vw; */
+    padding: 1vw;
+    width: 80vw;
+    flex-direction: row;
+    height: 30vw;
+    margin-left: -60vw;
+    text-align: center;
+  }
+
+  .thinker-card3 {
+    padding: 1vw;
+
+    width: 80vw;
+    flex-direction: row;
+    height: 30vw;
+    margin-left: -60vw;
+    text-align: center;
+  }
+
+  .thinker-card2 {
     /* min-width: 80vw;
     max-width: 90vw; */
     padding: 1vw;
