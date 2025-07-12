@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
-import Pie from "./Components_Last/Piechart/Piechart";
 import Kids from "./Components_Last/Kids/Kids";
 import Price from "./Components_Last/Price/Price";
 import LoginPage from "./Components/LogIn/Login";
@@ -23,6 +22,7 @@ import AdminLoginPage from "./Components/LogIn/AdminLogin";
 import { useEffect } from "react";
 import backgroundImage from "../src/assets/Pieimages/Baackground_last.png";
 import backgroundImageQuiz from "../src/assets/home/bg.jpg";
+import PieChart from "./Components_Last/Piechart/Piechart";
 
 function Layout() {
   const { loading } = useAuth();
@@ -120,7 +120,7 @@ function Layout() {
           }
         />
         <Route path="/payment-success" element={<PaymentSuccess />} />
-        <Route path="/pie" element={<Pie />} />
+        <Route path="/pie" element={<PieChart />} />
         <Route path="/select-age-group" element={<Kids />} />
         <Route path="/plans" element={<Price />} />
       </Routes>

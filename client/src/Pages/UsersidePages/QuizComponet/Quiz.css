@@ -418,6 +418,7 @@
     border-radius: 16px;
     width: 80vw;
     height: auto;
+    /* margin: 9vw 0; */
   }
 
   .quiz-tab {
@@ -434,11 +435,14 @@
     width: 100%;
   }
   .quiz-header-text h2 {
-  font-size: 3.5vw;
+  font-size: 4.5vw;
+        /* margin: 6vw 0vw; */
+        transform: translate(-2vw, 4vw);
 }
 
 .quiz-header-text p {
-  font-size: 3vw;
+  font-size: 4vw;
+  transform: translate(-2vw, 4vw);
 }
 
 .think-logo_Quiz {
@@ -449,6 +453,8 @@
 .think-logo_Quiz img{
   /* width: 100; */
   height: 15vw;
+        width: 24vw;
+        margin: -15vw -12vw
 }
 .quiz-header-center {
   display: flex;
@@ -458,7 +464,7 @@
 .quiz-categories {
 padding: 2vw 1vw;
   width: 90vw;
-  margin-top: 5vw;
+  margin-top: 12vw;
 }
 .congrats-banner {
   width: 60vw;
