@@ -342,7 +342,7 @@
     }
 
     .pie-chart-section {
-        padding-right: 3vw;
+        padding-right: 7vw;
     }
 
     .think-text {
@@ -481,9 +481,7 @@
         transform: translate(0vw, 3vw);
     }
 
-    .welcome-section {
-        margin: 18vw 0;
-    }
+    
 
     .welcome-message {
         font-size: 9.5vw;
