@@ -1,71 +1,4 @@
-// import React from "react";
-//  import  "./Piechart.css";
-// const Pie = () => {
-//     const data = {
-//         labels: ['English', 'GK', 'Math', 'Social', 'Science'],
-//         datasets: [{
-//           data: [20, 30, 10, 20, 20],
-//           backgroundColor: ['#ff0000', '#800080', '#0000ff', '#00ff00', '#ff00ff'],
-//           borderColor: ['#ffffff'],
-//           borderWidth: 1,
-//         }]
-//       };
 
-//       const options = {
-//         plugins: {
-//           legend: {
-//             position: 'right',
-//             labels: {
-//               font: {
-//                 size: 14,
-//                 weight: 'bold'
-//               }
-//             }
-//           }
-//         }
-//       };
-// return (
-//         <div className="container">
-//           <div className="content">
-//             <h1>Think</h1>
-//             <div className="welcome-text">★ Welcome Raj Kumar</div>
-//             <div className="sub-text">Let's make learning awesome!</div>
-//             <div className="foundation">Foundation Thinkers</div>
-//             <div className="age">Age 5-8 years</div>
-//             <select className="dropdown">
-//               <option>Beginner</option>
-//             </select>
-//             <button className="start-button">Start</button>
-//           </div>
-//           <div className="pie-chart">
-//             <Pie data={data} options={options} />
-//           </div>
-
-//         </div>
-
-// )
-// }
-// export default Pie;
-// const Pie = () => {
-//     return (
-//         <div className="pie-container">
-//             <div className="pie-content">
-//                 <h1>Think</h1>
-//                 <div className="welcome-text">★ Welcome Raj Kumar</div>
-//                 <div className="sub-text">Let's make learning awesome!</div>
-//                 <div className="foundation">Foundation Thinkers</div>
-//                 <div className="age">Age 5-8 years</div>
-//                 <select className="dropdown">
-//                     <option>Beginner</option>
-//                 </select>
-//                 <button className="start-button">Start</button>
-//             </div>
-//             <div className="pie-chart">
-//             </div>
-//         </div>
-//     );
-// }
-// export default Pie;
 import React, { useEffect, useState } from "react";
 // import "../../assets/Pieimages/Picture1.png";
 import "./Piechart.css"; // Make sure this path is correct for your CSS file
@@ -110,24 +43,7 @@ function Pie() {
 
       <div className="pie">
         <div className="app-container">
-          {/* Header
-        <header className="app-header">
-          <span className="logo-placeholder">
-            A Purple'd Advertising Company
-          </span>
-          <div className="user-profile">
-            <span>{Userdata?.name}</span>
-            <div className="avatar-circle">
-              <svg
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                className="avatar-icon"
-              >
-                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-              </svg>
-            </div>
-          </div>
-        </header> */}
+
 
           {/* Main Content */}
           <main className="app-main-content">
@@ -152,15 +68,7 @@ function Pie() {
                 <p className="foundation-title">{Userdata?.ageGroup?.title}</p>
                 <p className="age-range">Age {Userdata?.ageGroup?.age} years</p>
                 <div className="input-group">
-                  {/* <select
-                  className="age-group-dropdown"
-                  value={ageGroup}
-                  onChange={handleAgeGroupChange}
-                >
-                  <option value="Beginner">Beginner</option>
-                  <option value="Intermediate">Intermediate</option>
-                  <option value="Advanced">Advanced</option>
-                </select> */}
+
                   <button className="start-button" onClick={handleStartClick}>
                     Start
                   </button>

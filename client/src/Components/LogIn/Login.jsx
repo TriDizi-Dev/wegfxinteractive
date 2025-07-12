@@ -273,13 +273,13 @@ const LoginPage = () => {
                   </span>
                 ) : (
                   <span className="sign" onClick={() => setShowChangePassword(true)}>
-                    Change Password
+                    Forget Password
                   </span>
                 )}
               </h3>
             </div>
 
-            {error && <p className="error-message">{error}</p>}
+            {error && <p className="error-message1">{error}</p>}
             {message && <p className="success-message">{message}</p>}
 
             <button type="submit" className="btn-login">

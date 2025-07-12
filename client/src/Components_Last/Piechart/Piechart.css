@@ -1,5 +1,3 @@
-
-
 .pie-container {
     display: flex;
     justify-content: center;
@@ -8,6 +6,7 @@
 }
 
 .think-logo-image {
+    margin-top: -3vw;
     margin-left: 33vw;
 }
 
@@ -77,7 +76,7 @@
 }
 
 .think-text {
-    font-family: 'Georgia', serif;
+    /* font-family: 'Georgia', serif; */
     font-size: 4.5em;
     /* Larger size */
     color: #333;
@@ -88,16 +87,21 @@
 }
 
 .welcome-message {
-    font-size: 3vw;
-    /* Larger size */
-    color: #01011a;
+    /* font-size: 3vw; */
+
+    /* color: #01011a; */
     display: flex;
     align-items: center;
     justify-content: center;
-    /* Center for mobile */
+
     margin-bottom: 0.69vw;
     flex-wrap: wrap;
-    /* Allow wrapping for long names on small screens */
+    /* font-family: 'Times New Roman', serif; */
+    font-size: 3vw;
+    /* ~24px */
+    font-weight: bold;
+    color: #002855;
+
 }
 
 .star-icon1 {
@@ -116,20 +120,25 @@
 
 .highlight-name {
     /* color: #e74c3c; Red color for "Raj Kumar" */
-    color: red;
+    /* font-family: 'Times New Roman', serif; */
+    font-size: 3vw;
+    /* ~24px */
     font-weight: bold;
-    /* margin-left: 0.35vw; */
-    font-size: 2.8vw;
-    margin: 0vw 4vw;
-
+    color: #d40000;
+    /* margin: 2vw 4vw; */
+    transform: translate(4vw, -3vw)
 }
 
 .ready-message,
 .learning-message {
-    font-size: 2vw;
+    font-size: 1.5vw;
+    /* font-family: 'Times New Roman', serif; */
     /* Larger size */
     color: #0c0b0b;
-    margin: 0vw 4vw;
+    /* margin: 0vw 4vw; */
+    transform: translate(4vw, -4vw);
+    line-height: 0vw;
+
 }
 
 .foundation-section {
@@ -137,18 +146,21 @@
 }
 
 .foundation-title {
-    font-size: 2.5vw;
+    font-size: 2vw;
     /* Larger size */
     /* font-weight: bold; */
     color: #d80707;
-    margin: 0vw 4vw;
+    font-weight: bold;
+    /* margin: 0vw 4vw; */
+    transform: translate(4vw, -4vw);
 }
 
 .age-range {
-    font-size: 2vw;
+    font-size: 1.5vw;
     color: black;
     /* margin-bottom: 20px; */
-    margin: 0vw 4vw;
+    /* margin: 0vw 4vw; */
+    transform: translate(4vw, -4vw);
     font-weight: 800;
 
 }
@@ -187,19 +199,20 @@
     border-radius: 0.69vw;
     font-size: 1.5vw;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    /* transition: background-color 0.3s ease, transform 0.2s ease; */
     font-weight: bold;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 100%;
     /* Full width for mobile */
     max-width: 17.36vw;
+    transform: translate(0vw, -4vw);
     /* Limit width */
     /* transform: translate(-8vw, 6vw); */
 }
 
 .start-button:hover {
     background-color: #218838;
-    transform: translateY(-0.14vw);
+    /* transform: translateY(-0.14vw); */
     /* Slight lift on hover */
 }
 
@@ -210,7 +223,8 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    padding: 0vw;
+    /* /* padding-right:10vw ; */
+    transform: translate(-2vw, -5vw);
 }
 
 .pie-chart-container {
@@ -396,7 +410,7 @@
         font-size: 3vw;
         max-width: 30vw;
         /* Adjust width for very small screens */
-        margin: 4vw 0vw;
+        margin: -5vw 0vw
     }
 
     .avatar-circle {
@@ -437,106 +451,127 @@
         transform: translate(0, -39vw);
     }
 
-              .start-button {
-                  width: auto;
-              }
-
-              .pie-chart-section {
-                  padding-right: 3vw;
-              }
-              .think-text {
-              transform: translate(0, 0);
-               }
-              }
-
-          @media (max-width: 480px) {
-              .app-header {
-                  flex-direction: column;
-                  
-                  gap: 2vw;
-                  font-size: 7vw;
-              }
-              .think-logo{
-                transform: translate(-19vw, 5vw);
-              }
-
-              .think-text {
-                  font-size: 10vw;
-                  transform: translate(0vw, 3vw);
-              }
-              .welcome-section{
-                margin: 18vw 0;
-              }
-              .welcome-message {
-                  font-size: 8.5vw;
-                  display: block;
-                 width: 63vw;
-                 margin: 11vw 0vw;
-             }
-              .highlight-name{
-                    font-size: 8.5vw;
-                    width: 42vw !important;
-              }
-              .pie1{
-                width: 100%;
-        height: 179vw;  
-              }
-                .age-range{
-                  font-size: 6vw;
-                }
-              .ready-message,
-              .learning-message {
-                  font-size: 4vw;
-                  transform: translate(0vw, -4vw);
+    .start-button {
+        width: auto;
     }
-              
 
-              .foundation-title {
-                  font-size: 5.6vw;
-              }
+    .pie-chart-section {
+        transform: translate(0vw, 0vw);
+    }
 
-              .age-group-dropdown,
-              .start-button {
-                  
-                  width: 82%;
-                height: 9vw;
-               padding: 1.83vw 1.5;
-               font-size:  3vw;
-               max-width: 30vw;/* Adjust width for very small screens */
-               margin: 4vw 0vw;
-              }
-              .avatar-circle{
-                  width: 4vw;
-                  height: 4vw;
-              }
+    .think-text {
+        transform: translate(0, 0);
+    }
+}
 
-              .pie-chart-container {
-                  width: 50.44vw;
-        height: 50.44vw;;
+@media (max-width: 480px) {
+    .app-header {
+        flex-direction: column;
+
+        gap: 2vw;
+        font-size: 7vw;
+    }
+
+    .think-logo {
+        transform: translate(-19vw, 5vw);
+    }
+
+    .think-text {
+        font-size: 10vw;
+        transform: translate(0vw, 3vw);
+    }
+
+    .welcome-section {
+        margin: 18vw 0;
+    }
+
+    .welcome-message {
+        font-size: 9.5vw;
+        display: block;
+        width: 63vw;
+        margin: 13vw -4vw;
+    }
+
+    .highlight-name {
+        font-size: 8.5vw;
+        width: 42vw !important;
+        margin: 0vw 6vw;
+    }
+
+    .pie1 {
+        width: 100%;
+        height: 179vw;
+    }
+
+    .age-range {
+        font-size: 6vw;
+        transform: translate(1vw, -7vw);
+    }
+
+    .ready-message,
+    .learning-message {
+        font-size: 5vw;
+        transform: translate(5vw, -7vw);
+        text-align: justify;
+    }
+
+
+    .foundation-title {
+        font-size: 5.6vw;
+        transform: translate(3vw, -5vw);
+    }
+
+    .age-group-dropdown,
+    .start-button {
+
+        width: 82%;
+        height: 9vw;
+        padding: 1.83vw 1.5;
+        font-size: 3vw;
+        max-width: 30vw;
+        /* Adjust width for very small screens */
+        margin: 4vw 0vw;
+    }
+
+    .avatar-circle {
+        width: 4vw;
+        height: 4vw;
+    }
+
+    .pie-chart-container {
+        width: 50.44vw;
+        height: 50.44vw;
+        ;
         transform: translate(0vw, 30vw);
-              }
+    }
 
-              .pie-label {
-                  font-size: 0.9em;
-              }
-              .think-logo-image{
-                margin-top: -8vw;
-              }
-              .star-icon2{
-                font-size: 8vw;
-                /* transform: translate(0, -2vw); */
-              }
-              .star-icon1{
-                font-size: 8vw;
-                /* transform: translate(0, -2vw); */
-              }
-              .app-main-content{
-                flex-direction: column-reverse;
-              }
-              .think-logo-image{
-                transform: translate(0,-39vw);
-              }
-              .foundation-title {
+    .pie-label {
+        font-size: 0.9em;
+    }
+
+    .think-logo-image {
+        margin-top: -8vw;
+    }
+
+    .star-icon2 {
+        font-size: 8vw;
+        /* transform: translate(0, -2vw); */
+    }
+
+    .star-icon1 {
+        font-size: 8vw;
+        /* transform: translate(0, -2vw); */
+    }
+
+    .app-main-content {
+        flex-direction: column-reverse;
+    }
+
+    .think-logo-image {
+        transform: translate(0, -39vw);
+    }
+
+    /* .foundation-title {
                 transform: translate(0,-2vw);
-              }
-          }
+              } */
+}
