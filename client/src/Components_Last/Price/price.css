@@ -244,21 +244,22 @@ margin-right: 15vw;
     font-size: 4vw;
     margin-bottom: 2vw;
     margin-top: -5vw;
-
+    margin-left: -11vw; 
   }
 
   .foundation-text {
-    font-size: 4.5vw;
+    font-size: 5vw;
   }
 
   .foundation-text span {
-    font-size: 3.5vw;
+    font-size: 6vw;
   }
 
   .pricing-plans {
     flex-direction: column;
     align-items: center;
     margin-left: 0;
+    gap: 4vw;
   }
 
   .price-card {
@@ -324,11 +325,13 @@ margin-right: 15vw;
   .content-area {
     flex-direction: column;
     gap: 6vw;
-    margin-top: 4vw;
+    margin-top: 6vw;
   }
   .logo1{
-height: 14vw;
-width: 14vw;
+height: 17vw;
+width: 17vw;
 transform: translate(5vw, -4vw);
+margin-top: 3vw;
+margin-left: 10vw;
 }
 }

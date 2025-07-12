@@ -92,7 +92,7 @@ const SignupPage = () => {
             <span className="star-text">Star</span> Within!
           </h2>
           <h3>
-            Boost your child’s confidence and social skills to unlock lifelong
+            Boost your child’s confidence and social <br/>skills to unlock lifelong
             success.
           </h3>
         </div>

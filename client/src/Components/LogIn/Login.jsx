@@ -220,7 +220,7 @@ const LoginPage = () => {
             <img  src={image5} className="img5"/><span className="star-text">Star</span> Within!
           </h2>
           <p>
-            Boost your child’s confidence and social skills to unlock lifelong success.
+            Boost your child’s confidence and social <br/>skills to unlock lifelong success.
           </p>
         </div>
 
