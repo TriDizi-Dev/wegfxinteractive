@@ -309,7 +309,6 @@
 @media (min-width: 768px) {
     .app-main-content {
         flex-direction: row;
-        /* Row for larger screens */
         align-items: flex-start;
         padding: 1.39vw 0;
     }
@@ -329,7 +328,6 @@
 
     .input-group {
         flex-direction: row;
-        /* Row for larger screens */
         justify-content: flex-start;
     }
 
@@ -409,7 +407,6 @@
         padding: 1.83vw 1.5;
         font-size: 3vw;
         max-width: 30vw;
-        /* Adjust width for very small screens */
         margin: -5vw 0vw
     }
 
@@ -435,12 +432,11 @@
 
     .star-icon2 {
         font-size: 8vw;
-        /* transform: translate(0, -2vw); */
     }
 
     .star-icon1 {
         font-size: 8vw;
-        /* transform: translate(0, -2vw); */
+        
     }
 
     .app-main-content {
@@ -529,7 +525,6 @@
         padding: 1.83vw 1.5;
         font-size: 3vw;
         max-width: 30vw;
-        /* Adjust width for very small screens */
         margin: 4vw 0vw;
     }
 
@@ -547,6 +542,7 @@
 
     .pie-label {
         font-size: 0.9em;
+        margin: -2vw -2vw;
     }
 
     .think-logo-image {
@@ -555,12 +551,11 @@
 
     .star-icon2 {
         font-size: 8vw;
-        /* transform: translate(0, -2vw); */
+
     }
 
     .star-icon1 {
         font-size: 8vw;
-        /* transform: translate(0, -2vw); */
     }
 
     .app-main-content {
@@ -571,7 +566,5 @@
         transform: translate(0, -39vw);
     }
 
-    /* .foundation-title {
-                transform: translate(0,-2vw);
-              } */
+    
 }

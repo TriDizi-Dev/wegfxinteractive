@@ -69,7 +69,9 @@ const SignupPage = () => {
         password: trimmedPassword,
         role: "user",
       });
-
+     setTimeout(() => {
+      navigate("/")
+     }, 1000);
       alert("Signup Successful");
     } catch (err) {
       console.error(err);
@@ -151,7 +153,7 @@ const SignupPage = () => {
                 name="confirmPassword"
                 value={confirm}
                 onChange={(e) => setConfirm(e.target.value)}
-                
+
                 required
               />
             </div>
