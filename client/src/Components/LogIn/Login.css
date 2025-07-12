@@ -47,6 +47,7 @@
   margin-left: 3vw;
   height: auto;
   position: absolute;
+  
 }
 
 .image_shape{
@@ -126,7 +127,7 @@
   padding-left: 2vw;
   margin-left: 10vw;
   padding-right: 2vw;
-  height: 28vw;
+  height: fit-content;
   margin-top: 7vw;
   /* font-family: 'Segoe UI', sans-serif; */
   box-shadow: 0 1vw 3vw rgba(0, 0, 0, 0.15)
@@ -150,8 +151,8 @@
   color: white;
 }
 .logo{
-  width: 10vw;
-  height: 5.5vw;
+  width: 9.5vw;
+  height: 5vw;
   margin-left: -0.5vw;
 }
 .head{
@@ -177,12 +178,13 @@
   color: #ffffff;
   font-weight: 400;
   cursor: pointer;
-  margin-top: -0.5vw;
+  margin-top: -0.2vw;
   padding-left: 0.2vw;
+  padding-bottom: 1vw;
 }
 
 .login-rightside p{
-  font-size: 0.9vw;
+  font-size: 1vw;
   font-weight: 400;
   padding-left: 0.2vw;
 }
@@ -195,8 +197,8 @@
 .form-login label {
   display: block;
   margin-bottom: 0.6vw;
-  font-weight: 500;
-  font-size: 1vw;
+  font-weight: 400;
+  font-size: 1.2vw;
   color: white;
   padding-left: 0.2vw;
 }
@@ -206,7 +208,7 @@
   padding: 1vw 3.3vw 1vw 1vw;
   border: 0.08vw solid #ccc;
   border-radius: 0.8vw;
-  font-size: 1.2vw;
+  font-size: 1.5vw;
   background-color: #f9f9f9;
   color: #000;
   box-sizing: border-box;
@@ -241,14 +243,14 @@
   color: white;
   cursor: pointer;
   box-shadow: 0 0.5vw 1.5vw rgba(108, 99, 255, 0.2); */
-  background-color: #253b6e;
+  background-color: #0072ce;
   color: #ffffff;
   padding: 0.8vw 2vw;
   font-size: 1.3vw;
   font-weight: 500;
   width: 100%;
   border-radius: 1vw;
-  border: 1px solid #253b6e;
+  border: 1px solid #0072ce;
   cursor: pointer;
   text-align: center;
 }
@@ -321,7 +323,7 @@
   right: 0;
 }
 
-.error-message {
+.error-message1 {
   color: #e53935;
   font-size: 0.9vw;
   margin: 0.7vw 0;
@@ -329,126 +331,7 @@
 }
 
 
-/* @media (max-width: 768px) {
-  .login_container {
-    flex-direction: column;
-    height: auto;
-    padding: 5vw 3vw;
-  }
 
-  .login_box {
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
-  }
-
-  .login-leftside { */
-    /* width: 100%;
-    padding: 4vw;
-    margin-bottom: 5vw;
-    text-align: center; */
-    /* display: none;
-  } */
-
-  /* .boy_image { */
-    /* width: 40vw;
-    margin: 0 auto;
-    position: static; */
-    /* display: none;
-  } */
-
-  /* .image_shape{ */
-    /* width: 50vw;
-    margin: 5vw auto 0;
-    position: static; */
-    /* display: none;
-  } */
-
-  /* .login-leftside h2 { */
-    /* font-size: 5.5vw;
-    margin-top: 2vw; */
-    /* display: none;
-  } */
-
-  /* .text-bubble {
-    padding: 4vw;
-    font-size: 4vw;
-    border-radius: 3vw;
-    width: 100%;
-  }
-
-  .text-bubble p {
-    font-size: 4vw;
-    width: 100%;
-  }
-
-  .login-rightside { */
-    /* width: 40vw;
-    margin: 0;
-    padding: 6vw 5vw;
-    height: auto;
-    border-radius: 4vw; */
-        /* width: 70vw;
-        margin: 2vw 0;
-        height: 93vw;
-        margin-top: 30vw;
-        margin-bottom: 33vw;
-        margin-left: -8vw;
-  } */
-
-  /* .login-rightside p{
-
-    color: white;
-    font-size: 2vw;
-  }
-
-  .login{
-    width: 10vw;
-    height: 10vw;
-    padding-left: 20vw;
-  }
-
-  .login-rightside h2 {
-    font-size: 6vw;
-    margin-left: 13vw;
-    margin-bottom: 4vw;
-  }
-
-  .form-login label {
-    font-size: 4vw;
-  }
-
-  .form-login input { */
-    /* font-size: 4vw;
-    padding: 3.5vw 4vw;
-    border-radius: 2vw; */
-    /* width: 90%;
-  max-width: 600px;
-  height: 3.5vw; /* Or a fixed height like 48px */
-  /* border: 1px solid #000; 
-  border-radius: 0.75vw; 
-  padding: 0.8vw;
-  font-size: 1.2vw;
-  box-sizing: border-box;
-  } */ 
-
-  /* .toggle-password {
-    font-size: 4vw;
-    right: 3vw;
-  }
-
-  .btn-login {
-    font-size: 4.2vw;
-    padding: 2vw;
-    border-radius: 2vw;
-    height: 10vw;
-  }
-
-  .logo {
-    width: 25vw;
-  }
-}
- */
  @media (max-width: 768px) {
   .login_container {
     flex-direction: column;
@@ -498,6 +381,7 @@
     height: 90vw;
     margin-left: 0vw;
     border-radius: 5vw;
+    padding: 5vw;
   }
 
   .btn-login{
@@ -511,7 +395,7 @@
     height: 15vw;
   }
   .head h2{
-    padding-left: 5vw;
+    padding-left: 17vw;
     font-size: 6vw;
   }
   .form-login  label{

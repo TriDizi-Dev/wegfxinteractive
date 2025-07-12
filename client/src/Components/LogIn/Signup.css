@@ -1,13 +1,13 @@
 .form-group label {
   color: white;
-  /* margin-top: vw; */
+  font-size: 0.9vw;
   
 }
 
 
 .cartoon-touch{
-   width: 18vw;
-  margin-top: -0.5vw;
+   width: 19vw;
+  margin-top: -2vw;
   margin-left: 3vw;
   height: auto;
   position: absolute;
@@ -18,7 +18,7 @@
 }
 .signup{
   cursor: pointer;
-  padding-left: 12vw;
+  padding-left: 16vw;
 }
 
 .login-wrapper{
@@ -39,6 +39,7 @@
 
 .heading h3 {
   padding-left: 9vw;
+  margin-top: 1vw;
 }
 .login-box{
 display: flex;
@@ -46,7 +47,7 @@ gap: 10vw;
 }
 .image_3{
   height: auto;
-  margin-top: 28vw;
+  margin-top: 27.5vw;
   width: 34.5vw;
   margin-left: -6vw;
   position: relative;
@@ -58,21 +59,37 @@ gap: 10vw;
 
 .signup-right {
   background-color: #0072ce;
-  border-radius: 3vw;
+  border-radius: 2vw;
   padding: 2vw;
   /* padding-right: 2vw; */
   /* max-width: 50vw; */
   width: 29vw;
   color: white;
   /* margin-left: 10vw; */
-  height: 34vw;
+  height: fit-content;
   margin-top: 0.5vw;
   /* font-family: 'Segoe UI', sans-serif; */
   box-shadow: 0 1vw 3vw rgba(0, 0, 0, 0.15)
 }
+.signup-right p{
+  padding-bottom: 0.5vw;
+  font-size: 0.9vw;
+}
+.error-message2{
+    text-align: center;
+  font-size: 18px;
+  color: #b33a3a;
+}
+.para{
+  padding-top: 1vw;
+}
 .form-group {
   margin-bottom: 0.5vw;
   position: relative;
+}
+.image5{
+  width: 2vw;
+  transform: translate(0vw, -1vw)
 }
 .form-group input {
   width: 100%;
@@ -124,7 +141,9 @@ gap: 10vw;
   margin-left: -1vw;
   font-size: 1.5vw;
   font-weight: 400;
+  margin-top: 1vw;
 }
+
 
 .star-text {
   color: #c62828;
@@ -179,6 +198,7 @@ gap: 10vw;
   
   .signup-right p{
     color: #fff;
+    font-size: 4vw;
   }
   .text-bubble p {
     font-size: 4vw;
@@ -205,6 +225,10 @@ gap: 10vw;
 
   .heading h3 {
     padding-left: 10vw;
+  }
+
+  .para{
+    font-size: 2vw;
   }
 
   .toggle-password {
