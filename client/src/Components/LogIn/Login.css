@@ -107,7 +107,7 @@
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
-  font-family: 'Segoe UI', sans-serif;
+  /* font-family: 'Segoe UI', sans-serif; */
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
@@ -128,7 +128,7 @@
   padding-right: 2vw;
   height: 28vw;
   margin-top: 7vw;
-  font-family: 'Segoe UI', sans-serif;
+  /* font-family: 'Segoe UI', sans-serif; */
   box-shadow: 0 1vw 3vw rgba(0, 0, 0, 0.15)
 }
 .img5{
@@ -169,7 +169,7 @@
   font-size: 1.5vw; /* or 30px */
   margin-top: 2vw;
   font-weight: bold;
-  font-family: 'Segoe UI', sans-serif;
+  /* font-family: 'Segoe UI', sans-serif; */
 }
 
 .login-rightside h3{

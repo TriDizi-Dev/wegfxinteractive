@@ -55,7 +55,7 @@ height: 34vw;
 }
 
 .main-title {
-  font-family: 'Georgia', serif;
+  /* font-family: 'Georgia', serif; */
   font-size: 6.67vw;
   font-weight: bold;
   color: #333;
@@ -80,7 +80,7 @@ margin-right: 15vw;
   color: #dc3545;
   font-weight: bold;
   font-size: 2vw;
-  font-family: 'Times New Roman', Times, serif; /* Or use Georgia */
+  /* font-family: 'Times New Roman', Times, serif; Or use Georgia */
 }
 
 .foundation-text span {

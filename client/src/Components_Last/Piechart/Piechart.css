@@ -76,7 +76,7 @@
 }
 
 .think-text {
-    font-family: 'Georgia', serif;
+    /* font-family: 'Georgia', serif; */
     font-size: 4.5em;
     /* Larger size */
     color: #333;
@@ -96,7 +96,7 @@
 
     margin-bottom: 0.69vw;
     flex-wrap: wrap;
-    font-family: 'Times New Roman', serif;
+    /* font-family: 'Times New Roman', serif; */
     font-size: 3vw;
     /* ~24px */
     font-weight: bold;
@@ -120,7 +120,7 @@
 
 .highlight-name {
     /* color: #e74c3c; Red color for "Raj Kumar" */
-    font-family: 'Times New Roman', serif;
+    /* font-family: 'Times New Roman', serif; */
     font-size: 3vw;
     /* ~24px */
     font-weight: bold;
@@ -132,7 +132,7 @@
 .ready-message,
 .learning-message {
     font-size: 1.5vw;
-    font-family: 'Times New Roman', serif;
+    /* font-family: 'Times New Roman', serif; */
     /* Larger size */
     color: #0c0b0b;
     /* margin: 0vw 4vw; */
