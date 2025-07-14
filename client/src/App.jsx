@@ -32,7 +32,13 @@ function Layout() {
 
   useEffect(() => {
     // Define the paths where you want a specific background
-    const imagePaths = ["/", "/sign-up", "/report", "/select-age-group", "/plans"];
+    const imagePaths = [
+      "/",
+      "/sign-up",
+      "/report",
+      "/select-age-group",
+      "/plans",
+    ];
 
     if (imagePaths.includes(location.pathname)) {
       document.body.style.backgroundImage = `url(${backgroundImage})`;
@@ -45,8 +51,8 @@ function Layout() {
       document.body.style.backgroundRepeat = "no-repeat";
       document.body.style.backgroundPosition = "center";
     } else {
-      document.body.style.backgroundImage =  "";
-      document.body.style.background =  `radial-gradient(circle at top left, #ede7f6, #d6d0f5, #e0dcff)`;
+      document.body.style.backgroundImage = "";
+      document.body.style.background = `radial-gradient(circle at top left, #ede7f6, #d6d0f5, #e0dcff)`;
       document.body.style.backgroundColor = "#ffffff";
     }
   }, [location.pathname]);
@@ -106,7 +112,7 @@ function Layout() {
           element={
             // <PlanBasedRoute>
             <QuizComponent />
-            // </PlanBasedRoute>
+            //  </PlanBasedRoute>
           }
         />
 
@@ -127,7 +133,6 @@ function Layout() {
     </>
   );
 }
-
 
 function App() {
   return (
