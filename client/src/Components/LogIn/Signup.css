@@ -28,6 +28,7 @@
   width: 99vw;
   display: flex;
   justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 }
 .login-box{
@@ -179,7 +180,7 @@ gap: 10vw;
   .login-box {
     flex-direction: column;
     align-items: center;
-    width: 100vw;
+    /* width: 100vw; */
   }
 
   .signup-left h2{
@@ -246,7 +247,8 @@ gap: 10vw;
   }
 
   .heading h3 {
-    padding-left: 19vw;
+    padding-left: 20.5vw;
+    font-size: 4.5vw;
   }
 
   .para{
@@ -254,7 +256,7 @@ gap: 10vw;
   }
 
   .toggle-password {
-    font-size: 4vw;
+    font-size: 6vw;
     right: 3vw;
   }
 
@@ -281,7 +283,7 @@ gap: 10vw;
     margin-top: 10vw;
     width: 80vw;
     margin-bottom: 26vw;
-    margin-left: -8vw;
+    margin-left: -7vw;
 
   }
 }

@@ -161,7 +161,7 @@ const SignupPage = () => {
             <div className="para">
               <p>
                 Already have an account?{" "}
-                <b className="signup" onClick={() => navigate("/")}>
+                <b className="signup" >
                   Login
                 </b>
               </p>
@@ -169,7 +169,7 @@ const SignupPage = () => {
 
             {error && <p className="error-message2">{error}</p>}
 
-            <button type="submit" className="btn-Sinup">
+            <button type="submit" className="btn-Sinup" onClick={() => navigate("/")}>
               Sign Up
             </button>
           </form>
