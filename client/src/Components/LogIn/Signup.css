@@ -212,7 +212,9 @@ gap: 10vw;
     display: none;
   }
 
-
+  .stares{
+    display: none;
+  }
 
 
   .signup-right h2 {

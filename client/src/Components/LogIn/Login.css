@@ -450,5 +450,8 @@
   .login{
     padding-left: 26vw;
   }
+  .stars{
+    display: none;
+  }
 }
 
