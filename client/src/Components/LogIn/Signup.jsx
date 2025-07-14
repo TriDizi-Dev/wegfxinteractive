@@ -29,7 +29,7 @@ const SignupPage = () => {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState("");
-   const [success, setSuccess] = useState("");
+  const [success, setsuccess] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
@@ -74,13 +74,11 @@ const SignupPage = () => {
         password: trimmedPassword,
         role: "user",
       });
-      setSuccess(true);
-     setTimeout(() => {
-      navigate("/")
-     }, 1000);
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
       // alert("Signup Successful");
-      setSuccess("Signup successful! ");
-    
+      setsuccess("Signup successful !");
     } catch (err) {
       console.error(err);
       if (err.code === "auth/invalid-email") setError("Invalid email format.");
@@ -177,7 +175,7 @@ const SignupPage = () => {
             </div>
 
             {error && <p className="error-message2">{error}</p>}
-            {success && <p className="success-message">{success}</p>}
+            {success && <p className="error-message2 succesMsg_signup">{success}</p>}
 
             <button type="submit" className="btn-Sinup">
               Sign Up
@@ -190,3 +188,4 @@ const SignupPage = () => {
 };
 
 export default SignupPage;
+  

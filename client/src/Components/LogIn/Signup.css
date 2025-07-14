@@ -319,5 +319,6 @@ gap: 10vw;
 }
 .succesMsg_signup{
   font-size: 3vw;
+  /* margin-top: -1vw; */
 }
 }
