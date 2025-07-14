@@ -19,7 +19,6 @@ import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 // ];
 
 
-
 function PiePage() {
   const [ageGroup, setAgeGroup] = useState("Beginner");
   const [Userdata, setUserdata] = useState({});

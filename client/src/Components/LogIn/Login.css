@@ -15,8 +15,9 @@
   /* height: 97.5vh;
   width: 99vw; */
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
+  justify-content: space-evenly;
 }
 
 .login_box {
@@ -67,17 +68,20 @@
 
 .login-leftside h2 {
   font-size: 2.2vw;
+   font-family: 'Londrina Solid, sans-serif';
   font-weight: 400;
   color: #1e1e7a;
   margin-bottom: 1vw;
   margin-top: -10vw;
   position:relative;
-  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: 'l';
 }
 
 .login-leftside p{
   position: relative;
-  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: 'Calibri', sans-serif;
   text-align: center;
 }
 
@@ -153,6 +157,7 @@
 }
 .form-login label{
   color: white;
+ font-family: 'Calibri', sans-serif;
 }
 .logo{
   width: 9vw;
@@ -170,11 +175,12 @@
   font-weight: 700;
   color: white;*/
   margin-left: 12vw;
+ font-family: 'Calibri', sans-serif;
   color: #ffffff;
   font-size: 1.5vw; /* or 30px */
   margin-top: 2vw;
   font-weight: bold;
-  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Poppins', sans-serif; */
   /* font-family: 'Segoe UI', sans-serif; */
 }
 
@@ -193,7 +199,8 @@
   font-size: 1vw;
   font-weight: 400;
   padding-left: 0.2vw;
-  font-family: 'Poppins', sans-serif
+  /* font-family: 'Poppins', sans-serif */
+  font-family: 'Calibri', sans-serif;
 }
 
 .form-login {
@@ -208,8 +215,9 @@
   font-size: 1vw;
   color: white;
   padding-left: 0.2vw;
-  font-family: 'Poppins', sans-serif
-}
+  /* /* font-family: 'Poppins', sans-serif */
+  font-family: 'Calibri', sans-serif; 
+} 
 
 .form-login input {
   width: 100%;
@@ -251,6 +259,7 @@
   color: white;
   cursor: pointer;
   box-shadow: 0 0.5vw 1.5vw rgba(108, 99, 255, 0.2); */
+  font-family: 'Calibri', sans-serif;
   background-color: #0072ce;
   color: #ffffff;
   padding: 0.8vw 2vw;
@@ -348,13 +357,18 @@
   .login_container {
     flex-direction: column;
     padding: 4vw;
-    height: 100vh;
+    justify-content: space-evenly;
+    /* height: 100vh; */ 
+    /* flex-direction: column; */
+    /* height: auto; */
+    /* padding: 5vw 2vw;
+    width: 100vw; */
   }
 
   .login_box {
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    /* width: 100%; */
   }
 
   .login-leftside {
@@ -394,6 +408,8 @@
     margin-left: 0vw;
     border-radius: 5vw;
     padding: 5vw;
+    margin-top: 25vw;
+    margin-bottom: 36.5vw;
   }
 
   .btn-login{
@@ -408,21 +424,24 @@
   }
   .head h2{
     padding-left: 17vw;
-    font-size: 6vw;
+    font-size: 5vw;
+    padding-top: 5vw;
   }
   .form-login  label{
-    font-size: 5vw;
+    font-size: 4vw;
   }
   .form-login input{
     width: 80vw;
     height: 10vw;
-    font-size: 5vw;
+    font-size: 4.5vw;
+    border-radius: 2vw;
   }
   .login-rightside p{
     font-size: 4vw;
   }
   .login-rightside h3{
     font-size: 4vw;
+    margin-bottom: 10vw;
   }
   .login{
     padding-left: 26vw;

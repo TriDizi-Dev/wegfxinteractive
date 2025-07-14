@@ -70,6 +70,7 @@ margin-right: 15vw;
 
 .section-heading {
   font-size: 1.5vw;
+  font-family: 'Calibri', sans-serif;
   color: #000;
   margin-bottom: 3.33vw;
   padding-left: 14vw;
@@ -78,6 +79,8 @@ margin-right: 15vw;
 
 .foundation-text {
   color: #dc3545;
+  font-family: 'Londrina Solid, sans-serif';
+ 
   font-weight: bold;
   font-size: 2vw;
   /* font-family: 'Times New Roman', Times, serif; Or use Georgia */
@@ -151,7 +154,9 @@ margin-right: 15vw;
 }
 
 .plan-name {
-  font-size: 1vw;
+  font-size: 1.5vw;
+   font-family: 'Calibri', sans-serif;
+  
   margin-top: 0;
   margin-bottom: -.5vw;
   font-weight: bold;
@@ -218,6 +223,7 @@ margin-right: 15vw;
 
 .payment-options li {
   font-size: 1vw;
+ font-family: Arial, Helvetica, sans-serif;
   color: #000;
   margin-bottom: 0.67vw;
   line-height: 1.4;
