@@ -28,7 +28,7 @@ const SignupPage = () => {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState("");
-   const [success, setSuccess] = useState(false);
+   const [success, setSuccess] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
@@ -75,7 +75,7 @@ const SignupPage = () => {
       navigate("/")
      }, 1000);
       // alert("Signup Successful");
-      
+      setSuccess("Signup successful! ");
     
     } catch (err) {
       console.error(err);
@@ -172,7 +172,7 @@ const SignupPage = () => {
             </div>
 
             {error && <p className="error-message2">{error}</p>}
-            {success && <p className="success-message">Signup successful! Redirecting...</p>}
+            {success && <p className="success-message">{success}</p>}
 
             <button type="submit" className="btn-Sinup" onClick={() => navigate("/")}>
               Sign Up

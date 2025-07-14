@@ -150,7 +150,7 @@ gap: 10vw;
   font-family: 'Londrina Solid, sans-serif';
 }
 .success-message {
-  color: green;
+  color: rgb(128, 77, 0);
   font-weight: 600;
   margin-top: 10px;
   text-align: center;
