@@ -213,11 +213,13 @@ const LoginPage = () => {
         <div className="login-leftside">
           <img src={image2} alt="Cartoon" className="boy_image " />
           <img src={image3} className="image_shape" alt="Illustration" />
+          <div className="stars">
+            <img src={image6} className="image6"/>
+            <img  src={image5} className="image5"/>
+          </div>
           <h2>
             {/* Unleash the <img src={image6} className="img6"/> */}
-            Unlesh the
-             {/* <img  src={image5} className="img5"/> */}
-            <img  src={image5} className="img5"/><span className="star-text">Star</span> Within!
+            Unlesh the <span className="star-text">Star</span> Within!
           </h2>
           <p>
             Boost your child’s confidence and social <br/>skills to unlock lifelong success.
