@@ -226,8 +226,8 @@ const LoginPage = () => {
           <img src={image2} alt="Cartoon" className="boy_image " />
           <img src={image3} className="image_shape" alt="Illustration" />
           <div className="stars">
-            <img src={image6} className="image6" />
-            <img src={image5} className="image5" />
+            <img src={image6} className="img6" />
+            <img src={image5} className="img5" />
           </div>
           <h2>
             {/* Unleash the <img src={image6} className="img6"/> */}
