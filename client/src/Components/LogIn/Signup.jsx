@@ -74,18 +74,11 @@ const SignupPage = () => {
         password: trimmedPassword,
         role: "user",
       });
-<<<<<<< HEAD
-     setTimeout(() => {
-      navigate("/")
-     }, 1000);
-      alert("Signup Successful");
-=======
       setTimeout(() => {
         navigate("/");
       }, 3000);
       // alert("Signup Successful");
       setsuccess("Signup successful !");
->>>>>>> 33ef4738f94397f3251c8864e16b41a14233188d
     } catch (err) {
       console.error(err);
       if (err.code === "auth/invalid-email") setError("Invalid email format.");
@@ -101,17 +94,10 @@ const SignupPage = () => {
         <div className="signup-left">
           <img src={image2} alt="Cartoon" className="cartoon-touch" />
           <img src={image3} className="image_3" alt="Decoration" />
-<<<<<<< HEAD
            <div className="stares">
                       <img src={image6} className="image6"/>
                       <img  src={image5} className="image5"/>
                     </div>
-=======
-          <div className="stares">
-            <img src={image6} className="img6" />
-            <img src={image5} className="img5" />
-          </div>
->>>>>>> 33ef4738f94397f3251c8864e16b41a14233188d
           <h2>
             Unleash the <span className="star-text">Star</span> Within!
           </h2>
@@ -191,11 +177,7 @@ const SignupPage = () => {
             {error && <p className="error-message2">{error}</p>}
             {success && <p className="error-message2 succesMsg_signup">{success}</p>}
 
-<<<<<<< HEAD
-            <button type="submit" className="btn-Sinup" onClick={() => navigate("/")}>
-=======
             <button type="submit" className="btn-Sinup">
->>>>>>> 33ef4738f94397f3251c8864e16b41a14233188d
               Sign Up
             </button>
           </form>
