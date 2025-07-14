@@ -66,7 +66,7 @@ function Price() {
       endTime: expiry,
     });
 
-    navigate("/pie", { state: { planType } });
+    navigate("/report", { state: { planType } });
   };
 
   return (

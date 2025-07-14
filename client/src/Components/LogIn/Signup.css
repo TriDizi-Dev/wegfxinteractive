@@ -1,7 +1,8 @@
 .form-group label {
   color: white;
   font-size: 0.9vw;
-  font-family: 'Poppins', sans-serif
+  /* /* font-family: 'Poppins', sans-serif * */
+  font-family: 'Calibri', sans-serif;
 }
 
 
@@ -41,6 +42,8 @@
 
 .heading h3 {
   padding-left: 9vw;
+  font-family: 'Calibri', sans-serif;
+
 
 }
 .login-box{
@@ -76,7 +79,8 @@ gap: 10vw;
 .signup-right p{
   padding-bottom: 2vw;
   font-size: 0.9vw;
-  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: 'Calibri', sans-serif;
   font-weight: 500;
 }
 .pic1{
@@ -143,7 +147,8 @@ gap: 10vw;
   margin-top: -10vw;
   margin-left: -1vw;
   position:relative;
-  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: 'Londrina Solid, sans-serif';
 }
 
 .signup-left h3 {
@@ -152,7 +157,8 @@ gap: 10vw;
   font-size: 1.5vw;
   font-weight: 300;
   margin-top: 1vw;
-  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: 'Calibri', sans-serif;
   text-align: center;
 }
 
