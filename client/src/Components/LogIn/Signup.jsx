@@ -3,6 +3,7 @@ import image2 from "../../assets/Login/image2.png";
 import image3 from "../../assets/Login/image3.png";
 import image4 from "../../assets/Login/image4.png";
 import image5 from "../../assets/Login/Picture10.png";
+import image6 from "../../assets/Login/Picture12.png";
 import { useNavigate } from "react-router-dom";
 // import pic1 from "../../assets/Login/Picture12.png"
 import {
@@ -92,10 +93,12 @@ const SignupPage = () => {
         <div className="signup-left">
           <img src={image2} alt="Cartoon" className="cartoon-touch" />
           <img src={image3} className="image_3" alt="Decoration" />
+            <div className="stares">
+                      <img src={image6} className="image6"/>
+                      <img  src={image5} className="image5"/>
+                    </div>
           <h2>
-            Unleash the <img src={image5} className="image5"/>
-            {/* <img src={pic1} className="pic1"/> */}
-            <span className="star-text">Star</span> Within!
+            Unleash the <span className="star-text">Star</span> Within!
           </h2>
           <h3>
             Boost your child’s confidence and social <br/>skills to unlock lifelong
@@ -165,7 +168,7 @@ const SignupPage = () => {
             <div className="para">
               <p>
                 Already have an account?{" "}
-                <b className="signup" >
+                <b className="signup" onClick={() => navigate("/")}>
                   Login
                 </b>
               </p>
@@ -174,7 +177,7 @@ const SignupPage = () => {
             {error && <p className="error-message2">{error}</p>}
             {success && <p className="success-message">{success}</p>}
 
-            <button type="submit" className="btn-Sinup" onClick={() => navigate("/")}>
+            <button type="submit" className="btn-Sinup" >
               Sign Up
             </button>
           </form>
