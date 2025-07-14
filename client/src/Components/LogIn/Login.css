@@ -142,12 +142,12 @@
 }
 .img5{
   width: 2vw;
-  /* margin-top: -14vw!important;
-      transform: translate(0vw, -1vw) */
+  /* margin-top: -14vw!important;*/
+      transform: translate(0.3vw, -0.8vw)
 }
 .img6{
   width: 1.5vw;
-  transform: translate(0.5vw, -1vw);
+  transform: translate(1vw, -1.4vw);
 }
 
 .login{
@@ -353,7 +353,7 @@
 .stars{
   margin-top: -11vw;
   position: absolute;
-  margin-left: 8vw;
+  margin-left: 6.5vw;
 }
 
 

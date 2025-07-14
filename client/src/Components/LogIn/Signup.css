@@ -176,13 +176,13 @@ gap: 10vw;
   font-family: 'Poppins', sans-serif;
 }
 .stares{
-  margin-top: -11vw;
+  margin-top: -10vw;
   position: absolute;
-  margin-left: 8vw;
+  margin-left: 7vw;
 }
 .image6{
   width: 1.5vw;
-  transform: translate(0.5vw, -1vw);
+  transform: translate(0.5vw, -1.7vw);
 }
 .image5{
   width: 2vw;
