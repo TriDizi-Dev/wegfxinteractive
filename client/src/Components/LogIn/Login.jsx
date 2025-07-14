@@ -116,7 +116,7 @@ const LoginPage = () => {
       const now = Date.now();
 
       if (planSnap.exists() && now < planSnap.val().endTime) {
-        navigate("/quiz");
+        navigate("/report");
       } else {
         // navigate("/slectPlanpage");
         navigate("/select-age-group");

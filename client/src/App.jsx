@@ -32,7 +32,7 @@ function Layout() {
 
   useEffect(() => {
     // Define the paths where you want a specific background
-    const imagePaths = ["/", "/sign-up", "/pie", "/select-age-group", "/plans"];
+    const imagePaths = ["/", "/sign-up", "/report", "/select-age-group", "/plans"];
 
     if (imagePaths.includes(location.pathname)) {
       document.body.style.backgroundImage = `url(${backgroundImage})`;
@@ -120,7 +120,7 @@ function Layout() {
           }
         />
         <Route path="/payment-success" element={<PaymentSuccess />} />
-        <Route path="/pie" element={<PieChart />} />
+        <Route path="/report" element={<PieChart />} />
         <Route path="/select-age-group" element={<Kids />} />
         <Route path="/plans" element={<Price />} />
       </Routes>

@@ -24,7 +24,6 @@ const QuizComponent = () => {
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  console.log(currentUser, "currentUsercurrentUser");
   const [Userdata, setUserdata] = useState({});
 
   useEffect(() => {
@@ -99,35 +98,29 @@ const QuizComponent = () => {
   };
 
   const handleRestart = () => {
-    fetchQuestions("Maths");
+    // fetchQuestions("Maths");
+  fetchQuestions(category);
   };
 
   if (authLoading) return <div>Loading...</div>;
   if (!currentUser) return <Navigate to="/" />;
 
   return (
+    <div className="quiz-wrapper">
+      <Navbar />
 
-    <div
-      className="quiz-wrapper"
-      // style={{ backgroundImage: `url(${backgroundImg})` }}
-    >
-      <Navbar/>
-      {/* HEADER */}
-      {/* <div className="quiz-header"> */}
-        {/* <img src={logo} alt="logo" className="quiz-logo" /> */}
-        <div className="quiz-header-center">
-          <div className="think-logo_Quiz">
-          <img src={think} alt="Think"  />
-          </div>
-          <div className="quiz-header-text">
-            <h2>{Userdata?.ageGroup?.title}</h2>
-            <p>Age {Userdata?.ageGroup?.age || 0} years</p>
-          </div>
+      {/* Header */}
+      <div className="quiz-header-center">
+        <div className="think-logo_Quiz">
+          <img src={think} alt="Think" />
         </div>
-       
-      {/* </div> */}
+        <div className="quiz-header-text">
+          <h2>{Userdata?.ageGroup?.title}</h2>
+          <p>Age {Userdata?.ageGroup?.age || 0} years</p>
+        </div>
+      </div>
 
-      {/* CATEGORY BUTTONS */}
+      {/* Categories */}
       <div className="quiz-categories">
         {categories.map((cat, i) => (
           <button
@@ -142,7 +135,7 @@ const QuizComponent = () => {
         ))}
       </div>
 
-      {/* MAIN CONTENT */}
+      {/* Quiz Content */}
       {loading ? (
         <div className="quiz-loading">Loading...</div>
       ) : quizOver ? (
@@ -169,34 +162,65 @@ const QuizComponent = () => {
           <h3>
             Q{currentIndex + 1}: {questions[currentIndex]?.question}
           </h3>
+
+          {/* Options */}
           <div className="quiz-options">
-            {["option1", "option2", "option3", "option4"].map((opt, i) => (
-              <button
-                key={i}
-                className={`quiz-option-btn ${
-                  selectedOption === questions[currentIndex][opt]
-                    ? questions[currentIndex][opt] ===
-                      questions[currentIndex].answer
-                      ? "correct"
-                      : "wrong"
-                    : ""
-                }`}
-                onClick={() => handleAnswer(questions[currentIndex][opt])}
-                disabled={!!selectedOption}
-              >
-                {String.fromCharCode(65 + i)}. {questions[currentIndex][opt]}
-              </button>
-            ))}
+            {["option1", "option2", "option3", "option4"].map((opt, i) => {
+              const isCorrectOption =
+                questions[currentIndex][opt] === questions[currentIndex].answer;
+              const isSelected =
+                selectedOption === questions[currentIndex][opt];
+
+              const optionClass = selectedOption
+                ? isCorrectOption
+                  ? "correct"
+                  : isSelected
+                  ? "wrong"
+                  : ""
+                : "";
+
+              return (
+                <button
+                  key={i}
+                  className={`quiz-option-btn ${optionClass}`}
+                  onClick={() => handleAnswer(questions[currentIndex][opt])}
+                  disabled={!!selectedOption}
+                >
+                  <span className="option-label">
+                    {String.fromCharCode(65 + i)}.
+                  </span>
+                  <span className="option-text">
+                    {questions[currentIndex][opt]}
+                  </span>
+                </button>
+              );
+            })}
           </div>
+
+          {/* Feedback */}
+          {selectedOption && (
+            <div className="quiz-feedback-text">
+              {feedback === "correct" ? (
+                <p className="feedback-correct">✅ Correct Answer!</p>
+              ) : (
+                <p className="feedback-wrong">
+                  ❌ Wrong Answer. The correct answer is:{" "}
+                  <strong>{questions[currentIndex].answer}</strong>
+                </p>
+              )}
+            </div>
+          )}
+
+          {/* Next Button */}
           <div className="Quiz_Next_Button">
-          <button
-            className="quiz-next-btn"
-            onClick={handleNext}
-            disabled={!selectedOption}
-          >
-            Next
-          </button>
-         </div>
+            <button
+              className="quiz-next-btn"
+              onClick={handleNext}
+              disabled={!selectedOption}
+            >
+              Next
+            </button>
+          </div>
         </div>
       )}
     </div>
@@ -204,5 +228,3 @@ const QuizComponent = () => {
 };
 
 export default QuizComponent;
-
-//sai vamshi

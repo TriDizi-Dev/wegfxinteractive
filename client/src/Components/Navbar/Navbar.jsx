@@ -41,7 +41,14 @@ export const Navbar = () => {
     <div className="Main_NavBar_Css">
       <div className="Main_Logo_Image">
         <img src={Logo} alt="Name" />
+        <button
+          className="back-arrow-btn"
+          onClick={() => window.history.back()}
+        >
+          ← Back
+        </button>
       </div>
+
       <div className="quiz-user-info">
         <span>{Userdata.name}</span>
         <div className="user-avatar" onClick={() => setShowLogout(!showLogout)}>

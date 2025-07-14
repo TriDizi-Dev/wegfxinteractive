@@ -58,6 +58,23 @@
     background-color: purple;
 }
 
+.back-arrow-btn {
+    margin-top: 8px;
+    padding: 6px 12px;
+    font-size: 14px;
+    background-color: transparent;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.back-arrow-btn:hover {
+    background-color: #f0f0f0;
+}
+
+
 @media screen and (max-width: 768px) {
     .Main_Logo_Image {
         width: 22vw;
@@ -86,6 +103,18 @@
 
         font-size: 2.5vw;
         margin: 6vw 0;
+    }
+
+    .back-arrow-btn {
+        margin-top: -2px;
+        padding: 3px 6px;
+        font-size: 3vw;
+        background-color: transparent;
+        color: #333;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
     }
 
 }

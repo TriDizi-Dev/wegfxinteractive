@@ -1,7 +1,8 @@
 /* File: QuizComponent.css */
 
 .quiz-wrapper {
-  /* height: 95vh; */
+  height: fit-content;
+  min-height: 95vh;
   width: 100%;
   padding-bottom: 20px;
   display: flex;
@@ -119,7 +120,7 @@
   background-color: #007be5;
   color: white;
   width:50%;
-  height: 24vw;
+  height: fit-content;
   /* max-width: 700px; */
   border-radius: 20px;
   padding: 30px;
@@ -151,6 +152,13 @@
   color: #000;
   cursor: pointer;
   transition: all 0.25s ease;
+
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+  position: relative;
 }
 
 .quiz-option-btn:hover {
@@ -312,6 +320,31 @@
 .congrats-banner {
   width: 25vw;
 }
+.quiz-feedback-text {
+  font-size: 1.1vw;
+  text-align: center;
+}
+
+.feedback-correct {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.feedback-wrong {
+  color: ffffff;
+  font-weight: bold;
+}
+
+
+.option-label {
+  position: absolute;
+  left: 16px;
+  font-weight: bold;
+}
+
+.option-text {
+  margin: 0 auto;
+}
 
 /* Mobile Responsive */
 @media screen and (max-width: 768px) {
@@ -410,7 +443,8 @@
   .quiz-wrapper {
     padding: 15px;
     width: 94%;
-    height: 100vh;
+    height: fit-content;
+    min-height: 100vh;
   }
 
   .quiz-question-box {
@@ -468,5 +502,9 @@ padding: 2vw 1vw;
 }
 .congrats-banner {
   width: 60vw;
+}
+.quiz-feedback-text {
+  font-size: 4vw;
+  text-align: center;
 }
 }
