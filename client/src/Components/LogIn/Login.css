@@ -67,20 +67,27 @@
 
 .login-leftside h2 {
   font-size: 2.2vw;
+   font-family: 'Londrina Solid, sans-serif';
   font-weight: 400;
   color: #1e1e7a;
   margin-bottom: 1vw;
   margin-top: -10vw;
   position:relative;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: 'l';
 }
 
 .login-leftside p{
   position: relative;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: 'Calibri', sans-serif;
+  text-align: center;
 }
 
 .star {
   color: #c62828; /* red */
   position: relative;
+  font-family: 'Poppins', sans-serif;
 }
 
 .text-bubble p {
@@ -149,9 +156,10 @@
 }
 .form-login label{
   color: white;
+ font-family: 'Calibri', sans-serif;
 }
 .logo{
-  width: 9.5vw;
+  width: 9vw;
   height: 5vw;
   margin-left: -0.5vw;
 }
@@ -166,10 +174,12 @@
   font-weight: 700;
   color: white;*/
   margin-left: 12vw;
+ font-family: 'Calibri', sans-serif;
   color: #ffffff;
   font-size: 1.5vw; /* or 30px */
   margin-top: 2vw;
   font-weight: bold;
+  /* font-family: 'Poppins', sans-serif; */
   /* font-family: 'Segoe UI', sans-serif; */
 }
 
@@ -181,12 +191,15 @@
   margin-top: -0.2vw;
   padding-left: 0.2vw;
   padding-bottom: 1vw;
+  font-family: 'Poppins', sans-serif
 }
 
 .login-rightside p{
   font-size: 1vw;
   font-weight: 400;
   padding-left: 0.2vw;
+  /* font-family: 'Poppins', sans-serif */
+  font-family: 'Calibri', sans-serif;
 }
 
 .form-login {
@@ -198,10 +211,12 @@
   display: block;
   margin-bottom: 0.6vw;
   font-weight: 400;
-  font-size: 1.2vw;
+  font-size: 1vw;
   color: white;
   padding-left: 0.2vw;
-}
+  /* /* font-family: 'Poppins', sans-serif */
+  font-family: 'Calibri', sans-serif; 
+} 
 
 .form-login input {
   width: 100%;
@@ -243,6 +258,7 @@
   color: white;
   cursor: pointer;
   box-shadow: 0 0.5vw 1.5vw rgba(108, 99, 255, 0.2); */
+  font-family: 'Calibri', sans-serif;
   background-color: #0072ce;
   color: #ffffff;
   padding: 0.8vw 2vw;

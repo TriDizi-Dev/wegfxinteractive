@@ -42,8 +42,9 @@ function Kids() {
 
   return (
     <>
-      <Navbar />
-      <div className="kids">
+          <Navbar />
+
+      {/* <div className="kids"> */}
         
 
         <div className="main-container">
@@ -133,7 +134,7 @@ function Kids() {
             </div>
           </div>
         </div>
-      </div>
+      {/* </div> */}
     </>
   );
 }

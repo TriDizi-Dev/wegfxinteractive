@@ -1,7 +1,8 @@
 .form-group label {
   color: white;
   font-size: 0.9vw;
-  
+  /* /* font-family: 'Poppins', sans-serif * */
+  font-family: 'Calibri', sans-serif;
 }
 
 
@@ -18,12 +19,13 @@
 }
 .signup{
   cursor: pointer;
-  padding-left: 16vw;
+  padding-left: 15.5vw;
+  font-weight: 700;
 }
 
 .login-wrapper{
-  /* height: 97.5vh;
-  width: 99vw; */
+  height: 97.5vh;
+  width: 99vw;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,7 +41,9 @@
 
 .heading h3 {
   padding-left: 9vw;
-  margin-top: 1vw;
+  font-family: 'Calibri', sans-serif;
+
+
 }
 .login-box{
 display: flex;
@@ -66,14 +70,17 @@ gap: 10vw;
   width: 29vw;
   color: white;
   /* margin-left: 10vw; */
-  height: fit-content;
-  margin-top: 2.5vw;
-  /* font-family: 'Segoe UI', sans-serif; */
+  height: 37vw;
+  margin-top: -0.2vw;
+  font-family: 'Segoe UI', sans-serif;
   box-shadow: 0 1vw 3vw rgba(0, 0, 0, 0.15)
 }
 .signup-right p{
-  padding-bottom: 0.5vw;
+  padding-bottom: 2vw;
   font-size: 0.9vw;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: 'Calibri', sans-serif;
+  font-weight: 500;
 }
 .pic1{
   width: 2vw;
@@ -138,14 +145,19 @@ gap: 10vw;
   margin-top: -10vw;
   margin-left: -1vw;
   position:relative;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: 'Londrina Solid, sans-serif';
 }
 
 .signup-left h3 {
   position: relative;
   margin-left: -1vw;
   font-size: 1.5vw;
-  font-weight: 400;
+  font-weight: 300;
   margin-top: 1vw;
+  /* font-family: 'Poppins', sans-serif; */
+  font-family: 'Calibri', sans-serif;
+  text-align: center;
 }
 
 
@@ -153,6 +165,7 @@ gap: 10vw;
   color: #c62828;
   /* red */
   position: relative;
+  font-family: 'Poppins', sans-serif;
 }
 
 @media (max-width: 768px) {
@@ -169,8 +182,13 @@ gap: 10vw;
     width: 100vw;
   }
 
+  .signup-left h2{
+    display: none;
+  }
 
-  .singup-left h2,
+
+
+
   .signup-right h2 {
     font-size: 6vw;
     text-align: center;
@@ -228,7 +246,7 @@ gap: 10vw;
   }
 
   .heading h3 {
-    padding-left: 10vw;
+    padding-left: 19vw;
   }
 
   .para{

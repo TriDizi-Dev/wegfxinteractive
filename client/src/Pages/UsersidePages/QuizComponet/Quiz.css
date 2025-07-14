@@ -65,6 +65,8 @@
 
 .quiz-tab {
   padding: 10px 18px;
+  font-family: 'Calibri', sans-serif;
+
   border: none;
   border-radius: 8px;
   font-weight: bold;
@@ -119,7 +121,7 @@
   background-color: #007be5;
   color: white;
   width:50%;
-  height: 24vw;
+  /* height: 24vw; */
   /* max-width: 700px; */
   border-radius: 20px;
   padding: 30px;
@@ -130,6 +132,7 @@
 }
 
 .quiz-question-box h3 {
+  font-family: 'Roboto', sans-serif;
   margin-bottom: 20px;
   font-size: 20px;
   font-weight: 600;
@@ -291,11 +294,13 @@
 
 .quiz-header-text h2 {
   color: red;
+  font-family: 'Londrina Solid, sans-serif';
   font-size: 1.5vw;
 }
 
 .quiz-header-text p {
   color: #000000;
+  font-family: 'Londrina Solid, sans-serif';
   font-size: 1.4vw;
   font-weight: 700;
   margin-top: -1vw;

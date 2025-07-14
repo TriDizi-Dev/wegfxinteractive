@@ -1,10 +1,15 @@
 .kids {
-  padding: 1.67vw;
+  padding: 1.67vw;  
   box-sizing: border-box;
   /* overflow: hidden; */
   /* height: 97vh; */
 }
-
+.main-container {
+  text-align: center;
+  padding-bottom: 1.67vw;  
+  height: 90vh;
+  box-sizing: border-box;
+}
 /* Header Styling */
 .header {
   display: flex;
@@ -64,9 +69,7 @@
 }
 
 /* Main Content Styling */
-.main-container {
-  text-align: center;
-}
+
 
 .main-title {
   /* font-family: 'Georgia', serif; */
@@ -80,11 +83,13 @@
 
 .tagline {
   font-size: 2.2vw;
+  font-family: 'Londrina Solid, sans-serif';
   /* 30px */
   color: #c95115;
   margin-bottom: 8.67vw;
   /* 80px */
   letter-spacing: 0vw;
+  font-weight: 400;
   letter-spacing: 0vw;
   /* 1px */
   margin-top: -1vw;
@@ -92,7 +97,8 @@
 
 .highlight-blue {
   color: #007bff;
-  font-weight: bold;
+   font-family: 'Londrina Solid, sans-serif';
+  font-weight: 400;
 }
 
 /* Thinker Sections Styling */
@@ -102,7 +108,7 @@
   gap: 2.5vw;
   /* 30px */
   flex-wrap: wrap;
-  margin: -7vw 0vw;
+  margin: -6.5vw 0vw;
   
 }
 
@@ -133,7 +139,7 @@
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  margin: -4vw -5vw
+  margin: -4vw -2vw
 }
 .thinker-card3 {
   /* background-color: #fff; */
@@ -152,7 +158,7 @@
 
 .thinker-image {
   width: 15.83vw;
-  height: auto;
+  /* height: auto; */
   border-radius: 0.83vw;
  
   /* 10px */
@@ -174,24 +180,28 @@
 
 .thinker-title {
   font-size: 1.5vw;
-  font-weight: bold;
+  font-weight: 900;
   margin-bottom: 0.83vw;
 }
 
 .foundation-color {
   color: #dc3545;
+   font-family: 'Londrina Solid, sans-serif';
 }
 
 .explorative-color {
   color: #007bff;
+   font-family: 'Londrina Solid, sans-serif';
 }
 
 .future-ready-color {
   color: #002d72;
+   font-family: 'Londrina Solid, sans-serif';
 }
 
 .thinker-age {
   font-size: 1.5vw;
+   font-family: 'Londrina Solid, sans-serif';
   /* 18px */
   color: #000;
   margin-bottom: -0.4vw;
@@ -202,20 +212,19 @@
 
 .thinker-description {
   font-size: 1.33vw;
+   font-family: 'Calibri', sans-serif;
+    font-family: 'Source Sans Pro', 'Calibri', sans-serif;
   /* 16px */
-  color: #444;
-  line-height: 1.5;
+  color: #000;
   font-style: italic;
 }
 
 
 @media (max-width: 768px) {
-  .kids {
+  .main-container {
     padding: 5vw;
-    /* height: auto; */
-    background-size: cover;
-    background-position: center;
-    overflow-x: hidden;
+     height: 93vh;
+    /* overflow-x: hidden; */
   }
 
   .header1 {
@@ -291,12 +300,12 @@
 
   .thinker-card3 {
     padding: 1vw;
-    
     width: 80vw;
     flex-direction: row;
     height: 30vw;
     margin-left: -60vw;
     text-align: center;
+    margin-top: 4vw;
   }
 
   .thinker-card2 {
@@ -308,6 +317,7 @@
     height: 30vw;
     margin-left: -60vw;
     text-align: center;
+    margin-top:0vw;
   }
 
   .thinker-title {
