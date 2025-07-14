@@ -73,6 +73,7 @@ const SignupPage = () => {
       navigate("/")
      }, 1000);
       alert("Signup Successful");
+    
     } catch (err) {
       console.error(err);
       if (err.code === "auth/invalid-email") setError("Invalid email format.");

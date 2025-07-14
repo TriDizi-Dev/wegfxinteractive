@@ -429,6 +429,8 @@
   .quiz-tab {
     font-size: 14px;
     padding: 8px 14px;
+    height: auto;
+    width: 25%;
   }
 
   .quiz-option-btn {
