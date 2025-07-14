@@ -53,7 +53,10 @@ const SignupPage = () => {
     }
 
     try {
-      const existingMethods = await fetchSignInMethodsForEmail(auth, trimmedEmail);
+      const existingMethods = await fetchSignInMethodsForEmail(
+        auth,
+        trimmedEmail
+      );
       if (existingMethods.length > 0) {
         setError("Email already exists. Please log in.");
         return;
@@ -101,8 +104,8 @@ const SignupPage = () => {
             Unleash the <span className="star-text">Star</span> Within!
           </h2>
           <h3>
-            Boost your child’s confidence and social <br/>skills to unlock lifelong
-            success.
+            Boost your child’s confidence and social <br />
+            skills to unlock lifelong success.
           </h3>
         </div>
 
@@ -160,7 +163,6 @@ const SignupPage = () => {
                 name="confirmPassword"
                 value={confirm}
                 onChange={(e) => setConfirm(e.target.value)}
-
                 required
               />
             </div>
@@ -177,7 +179,7 @@ const SignupPage = () => {
             {error && <p className="error-message2">{error}</p>}
             {success && <p className="success-message">{success}</p>}
 
-            <button type="submit" className="btn-Sinup" >
+            <button type="submit" className="btn-Sinup">
               Sign Up
             </button>
           </form>
