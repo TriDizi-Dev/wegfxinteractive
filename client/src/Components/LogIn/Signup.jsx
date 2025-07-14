@@ -3,7 +3,7 @@ import image2 from "../../assets/Login/image2.png";
 import image3 from "../../assets/Login/image3.png";
 import image4 from "../../assets/Login/image4.png";
 import image5 from "../../assets/Login/Picture10.png";
-import image6 from "../../assets/Login/Picture12.png";
+import image6 from "../../assets/Login/Picture12.png"
 import { useNavigate } from "react-router-dom";
 // import pic1 from "../../assets/Login/Picture12.png"
 import {
@@ -73,8 +73,7 @@ const SignupPage = () => {
      setTimeout(() => {
       navigate("/")
      }, 1000);
-      // alert("Signup Successful");
-      setError("Signup successful");
+      alert("Signup Successful");
     } catch (err) {
       console.error(err);
       if (err.code === "auth/invalid-email") setError("Invalid email format.");
@@ -90,9 +89,9 @@ const SignupPage = () => {
         <div className="signup-left">
           <img src={image2} alt="Cartoon" className="cartoon-touch" />
           <img src={image3} className="image_3" alt="Decoration" />
-            <div className="stares">
-                      <img src={image6} className="img6"/>
-                      <img  src={image5} className="img5"/>
+           <div className="stares">
+                      <img src={image6} className="image6"/>
+                      <img  src={image5} className="image5"/>
                     </div>
           <h2>
             Unleash the <span className="star-text">Star</span> Within!
@@ -165,7 +164,7 @@ const SignupPage = () => {
             <div className="para">
               <p>
                 Already have an account?{" "}
-                <b className="signup" onClick={() => navigate("/")}>
+                <b className="signup" >
                   Login
                 </b>
               </p>
@@ -173,7 +172,7 @@ const SignupPage = () => {
 
             {error && <p className="error-message2">{error}</p>}
 
-            <button type="submit" className="btn-Sinup" >
+            <button type="submit" className="btn-Sinup" onClick={() => navigate("/")}>
               Sign Up
             </button>
           </form>
