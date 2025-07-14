@@ -97,7 +97,7 @@
     margin-bottom: 0.69vw;
     flex-wrap: wrap;
     font-size: 3vw;
-    font-weight: bold;
+    font-weight: 100;
     color: #002855;
 
 }
@@ -120,6 +120,7 @@
     /* color: #e74c3c; Red color for "Raj Kumar" */
     /* font-family: 'Times New Roman', serif; */
     font-size: 3vw;
+    font-family: 'Londrina Solid, sans-serif';
     /* ~24px */
     font-weight: bold;
     color: #d40000;
