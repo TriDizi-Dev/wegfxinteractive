@@ -212,7 +212,7 @@
 @media (max-width: 768px) {
   .kids {
     padding: 5vw;
-     height: auto;
+     margin-bottom: 9vw;
     background-size: cover;
     background-position: center;
     overflow-x: hidden;

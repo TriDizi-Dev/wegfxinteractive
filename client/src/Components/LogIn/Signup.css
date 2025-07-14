@@ -27,6 +27,7 @@
   width: 99vw;
   display: flex;
   justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 }
 .login-box{
