@@ -91,7 +91,7 @@
     margin-bottom: 0.69vw;
     flex-wrap: wrap;
     font-size: 3vw;
-    font-weight: bold;
+    font-weight: 100;
     color: #002855;
 
 }
@@ -99,6 +99,7 @@
 .star-icon1 {
     color: rgb(228, 78, 19);
     margin-right: 0.35vw;
+    font-weight: 900;
     font-size: 1.5vw;
     transform: translate(4vw, -3vw);
 }
@@ -106,6 +107,7 @@
 .star-icon2 {
     color: rgb(11, 180, 11);
     margin-left: 0.35vw;
+    font-weight: 900;
     font-size: 2vw;
     transform: translate(4vw, -3vw);
 }
@@ -114,8 +116,9 @@
     /* color: #e74c3c; Red color for "Raj Kumar" */
     /* font-family: 'Times New Roman', serif; */
     font-size: 3vw;
+    font-family: 'Londrina Solid, sans-serif';
     /* ~24px */
-    font-weight: bold;
+    /* font-weight: bold; */
     color: #d40000;
     /* margin: 2vw 4vw; */
     /* transform: translate(4vw, -3vw) */

@@ -156,6 +156,12 @@ gap: 10vw;
   /* font-family: 'Poppins', sans-serif; */
   font-family: 'Londrina Solid, sans-serif';
 }
+.success-message {
+  color: rgb(128, 77, 0);
+  font-weight: 600;
+  margin-top: 10px;
+  text-align: center;
+}
 
 .signup-left h3 {
   position: relative;
