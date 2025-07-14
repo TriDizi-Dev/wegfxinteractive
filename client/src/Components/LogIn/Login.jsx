@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import image2 from "../../assets/Login/image2.png";
 import image3 from "../../assets/Login/image3.png";
 import image4 from "../../assets/Login/image4.png";
-import image6 from "../../assets/Login/Picture12.png"
-import image5 from "../../assets/Login/Picture10.png"
+import image6 from "../../assets/Login/Picture12.png";
+import image5 from "../../assets/Login/Picture10.png";
 // import pic from "../../assets/Login/Picture12.png"
 import { useLocation, useNavigate } from "react-router-dom";
 import {
@@ -38,11 +38,8 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [redirectHandled, setRedirectHandled] = useState(false);
+  const [successmsg, setsuccessmsg] = useState("");
   const navigate = useNavigate();
-
-
-
-
 
   // ✅ Handle Google Redirect login (kept for future use)
   /*
@@ -98,9 +95,15 @@ const LoginPage = () => {
     }
 
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, trimmedEmail, trimmedPassword);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        trimmedEmail,
+        trimmedPassword
+      );
 
-      const snapshot = await get(ref(database, `users/${userCredential.user.uid}`));
+      const snapshot = await get(
+        ref(database, `users/${userCredential.user.uid}`)
+      );
       if (snapshot.exists() && snapshot.val().role === "admin") {
         setError("Admins must log in through the Admin tab.");
         return;
@@ -114,18 +117,23 @@ const LoginPage = () => {
       const planRef = ref(database, `users/${uid}/plan`);
       const planSnap = await get(planRef);
       const now = Date.now();
+      setsuccessmsg("Login Successful!");
 
       if (planSnap.exists() && now < planSnap.val().endTime) {
-        navigate("/report");
+        setTimeout(() => {
+          navigate("/select-age-group");
+        }, 2000);
       } else {
-        // navigate("/slectPlanpage");
-        navigate("/select-age-group");
+        setTimeout(() => {
+          navigate("/select-age-group");
+        }, 2000);
       }
     } catch (err) {
       console.error(err);
       if (err.code === "auth/invalid-email") setError("Invalid email format.");
       else if (err.code === "auth/user-not-found") setError("User not found.");
-      else if (err.code === "auth/wrong-password") setError("Incorrect password.");
+      else if (err.code === "auth/wrong-password")
+        setError("Incorrect password.");
       else setError("Login failed.");
     }
   };
@@ -144,7 +152,11 @@ const LoginPage = () => {
     }
 
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, trimmedEmail, newPass);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        trimmedEmail,
+        newPass
+      );
       await updatePassword(userCredential.user, newPass);
       await signOut(auth);
 
@@ -214,15 +226,16 @@ const LoginPage = () => {
           <img src={image2} alt="Cartoon" className="boy_image " />
           <img src={image3} className="image_shape" alt="Illustration" />
           <div className="stars">
-            <img src={image6} className="image6"/>
-            <img  src={image5} className="image5"/>
+            <img src={image6} className="image6" />
+            <img src={image5} className="image5" />
           </div>
           <h2>
             {/* Unleash the <img src={image6} className="img6"/> */}
             Unlesh the <span className="star-text">Star</span> Within!
           </h2>
           <p>
-            Boost your child’s confidence and social <br/>skills to unlock lifelong success.
+            Boost your child’s confidence and social <br />
+            skills to unlock lifelong success.
           </p>
         </div>
 
@@ -233,7 +246,9 @@ const LoginPage = () => {
             <h2>{"User Login"}</h2>
           </div>
 
-          <form onSubmit={showChangePassword ? handlePasswordUpdate : handleLogin}>
+          <form
+            onSubmit={showChangePassword ? handlePasswordUpdate : handleLogin}
+          >
             <div className="form-login">
               <label>Email</label>
               <input
@@ -272,11 +287,17 @@ const LoginPage = () => {
               </p>
               <h3>
                 {showChangePassword ? (
-                  <span className="sign" onClick={() => setShowChangePassword(false)}>
+                  <span
+                    className="sign"
+                    onClick={() => setShowChangePassword(false)}
+                  >
                     Back to Login
                   </span>
                 ) : (
-                  <span className="sign" onClick={() => setShowChangePassword(true)}>
+                  <span
+                    className="sign"
+                    onClick={() => setShowChangePassword(true)}
+                  >
                     Forget Password
                   </span>
                 )}
@@ -285,6 +306,7 @@ const LoginPage = () => {
 
             {error && <p className="error-message1">{error}</p>}
             {message && <p className="success-message">{message}</p>}
+            {successmsg && <p className="success-message">{successmsg}</p>}
 
             <button type="submit" className="btn-login">
               {showChangePassword ? "Change Password" : "Login"}

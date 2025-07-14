@@ -78,7 +78,7 @@ gap: 10vw;
 }
 .signup-right p{
   padding-bottom: 2vw;
-  font-size: 0.9vw;
+  font-size: 1vw;
   /* font-family: 'Poppins', sans-serif; */
   font-family: 'Calibri', sans-serif;
   font-weight: 500;
@@ -89,8 +89,14 @@ gap: 10vw;
 }
 .error-message2{
     text-align: center;
-  font-size: 0.9vw;
+  font-size: 1vw;
   color: #b33a3a;
+  margin-top: -1vw;
+}
+.succesMsg_signup{
+    text-align: center;
+  font-size: 1vw;
+  color: white;
   margin-top: -1vw;
 }
 .para{
@@ -299,4 +305,11 @@ gap: 10vw;
     margin-left: -7vw;
 
   }
+  .error-message2{
+  font-size: 3vw;
+
+}
+.succesMsg_signup{
+  font-size: 3vw;
+}
 }

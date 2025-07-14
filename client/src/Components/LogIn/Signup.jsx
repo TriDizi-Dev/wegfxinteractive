@@ -29,6 +29,7 @@ const SignupPage = () => {
   const [password, setPassword] = useState("");
   const [confirm, setConfirm] = useState("");
   const [error, setError] = useState("");
+  const [success, setsuccess] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
@@ -52,7 +53,10 @@ const SignupPage = () => {
     }
 
     try {
-      const existingMethods = await fetchSignInMethodsForEmail(auth, trimmedEmail);
+      const existingMethods = await fetchSignInMethodsForEmail(
+        auth,
+        trimmedEmail
+      );
       if (existingMethods.length > 0) {
         setError("Email already exists. Please log in.");
         return;
@@ -70,11 +74,11 @@ const SignupPage = () => {
         password: trimmedPassword,
         role: "user",
       });
-     setTimeout(() => {
-      navigate("/")
-     }, 1000);
+      setTimeout(() => {
+        navigate("/");
+      }, 3000);
       // alert("Signup Successful");
-      setError("Signup successful");
+      setsuccess("Signup successful !");
     } catch (err) {
       console.error(err);
       if (err.code === "auth/invalid-email") setError("Invalid email format.");
@@ -90,16 +94,16 @@ const SignupPage = () => {
         <div className="signup-left">
           <img src={image2} alt="Cartoon" className="cartoon-touch" />
           <img src={image3} className="image_3" alt="Decoration" />
-            <div className="stares">
-                      <img src={image6} className="img6"/>
-                      <img  src={image5} className="img5"/>
-                    </div>
+          <div className="stares">
+            <img src={image6} className="img6" />
+            <img src={image5} className="img5" />
+          </div>
           <h2>
             Unleash the <span className="star-text">Star</span> Within!
           </h2>
           <h3>
-            Boost your child’s confidence and social <br/>skills to unlock lifelong
-            success.
+            Boost your child’s confidence and social <br />
+            skills to unlock lifelong success.
           </h3>
         </div>
 
@@ -157,7 +161,6 @@ const SignupPage = () => {
                 name="confirmPassword"
                 value={confirm}
                 onChange={(e) => setConfirm(e.target.value)}
-
                 required
               />
             </div>
@@ -172,8 +175,9 @@ const SignupPage = () => {
             </div>
 
             {error && <p className="error-message2">{error}</p>}
+            {success && <p className="error-message2 succesMsg_signup">{success}</p>}
 
-            <button type="submit" className="btn-Sinup" >
+            <button type="submit" className="btn-Sinup">
               Sign Up
             </button>
           </form>
