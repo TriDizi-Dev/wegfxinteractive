@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
-// import image1 from "../../assets/Login/image1.jpg";
 import image2 from "../../assets/Login/image2.png";
 import image3 from "../../assets/Login/image3.png";
 import image4 from "../../assets/Login/image4.png";
 import image6 from "../../assets/Login/Picture12.png";
 import image5 from "../../assets/Login/Picture10.png";
-// import pic from "../../assets/Login/Picture12.png"
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   signInWithEmailAndPassword,
@@ -42,7 +40,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   // ✅ Handle Google Redirect login (kept for future use)
-  /*
+  
   if (!redirectHandled && sessionStorage.getItem("googleRedirect") === "true") {
     setRedirectHandled(true);
     sessionStorage.removeItem("googleRedirect");
@@ -79,7 +77,7 @@ const LoginPage = () => {
         setError("Google Sign-In Failed");
       });
   }
-  */
+  
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -169,7 +167,7 @@ const LoginPage = () => {
   };
 
   // ✅ Google Login handler (commented for future use)
-  /*
+  
   const handleGoogleLogin = async () => {
     try {
       const provider = new GoogleAuthProvider();
@@ -216,7 +214,7 @@ const LoginPage = () => {
       setError("Google Sign-In Failed.");
     }
   };
-  */
+  
 
   return (
     <div className="login_container">
@@ -230,7 +228,7 @@ const LoginPage = () => {
             <img src={image5} className="img5" />
           </div>
           <h2>
-            {/* Unleash the <img src={image6} className="img6"/> */}
+            
             Unlesh the <span className="star-text">Star</span> Within!
           </h2>
           <p>
@@ -242,7 +240,7 @@ const LoginPage = () => {
         <div className="login-rightside">
           <div className="head">
             <img src={image4} className="logo" alt="Logo" />
-            {/* <h2>{showChangePassword ? "Change Password" : "User Login"}</h2> */}
+           
             <h2>{"User Login"}</h2>
           </div>
 
@@ -307,6 +305,7 @@ const LoginPage = () => {
             {error && <p className="error-message1">{error}</p>}
             {message && <p className="success-message">{message}</p>}
             {successmsg && <p className="success-message">{successmsg}</p>}
+            <button type="submit" className="google" onClick={handleGoogleLogin}/>
 
             <button type="submit" className="btn-login">
               {showChangePassword ? "Change Password" : "Login"}

@@ -41,7 +41,11 @@ function Layout() {
     ];
 
     if (imagePaths.includes(location.pathname)) {
-      document.body.style.backgroundImage = `url(${backgroundImage})`;
+      // document.body.style.backgroundImage = `url(${backgroundImage})`;
+      // document.body.style.background='linear-gradient(to right, yellow 30%, blue 70%)';
+      document.body.style.background='linear-gradient(to right, yellow, blue)';
+
+
       document.body.style.backgroundSize = "cover";
       document.body.style.backgroundRepeat = "no-repeat";
       document.body.style.backgroundPosition = "center";
