@@ -361,8 +361,10 @@
   .login_container {
     flex-direction: column;
     padding: 4vw;
-    justify-content: space-evenly;
-    /* height: 100vh; */ 
+     /* background-attachment: scroll;  */
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
     /* flex-direction: column; */
     /* height: auto; */
     /* padding: 5vw 2vw;
