@@ -197,7 +197,8 @@ gap: 10vw;
 @media (max-width: 768px) {
   .login-wrapper {
     flex-direction: column;
-     height: auto;
+     /* height: 97vh; */
+     /* max-height: 100vh; */
     padding: 5vw 2vw;
     /* width: 100vw; */
   }

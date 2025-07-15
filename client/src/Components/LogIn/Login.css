@@ -15,6 +15,7 @@
   /* height: 97.5vh;
   width: 99vw; */
   display: flex;
+  /* height: 100vh; */
   /* justify-content: center; */
   align-items: center;
   justify-content: space-evenly;
@@ -97,12 +98,6 @@
   color: #333;
   width: 50vw;
 }
-
-
-
-
-
-
 
 .text-bubble {
   background-color: #ffcd2b;
@@ -364,11 +359,12 @@
      /* background-attachment: scroll;  */
     background-size: cover;
     background-repeat: no-repeat;
-    height: 100vh;
+    /* height: 100vh; */
     /* flex-direction: column; */
     /* height: auto; */
     /* padding: 5vw 2vw;
     width: 100vw; */
+    
   }
 
   .login_box {
