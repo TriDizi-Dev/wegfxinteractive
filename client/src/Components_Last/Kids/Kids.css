@@ -224,8 +224,9 @@
 @media (max-width: 768px) {
   .main-container {
     padding: 5vw;
-     height: 93vh;
-    /* overflow-x: hidden; */
+    height: 94vh;
+    overflow-x: hidden;
+     /* padding: 6vw 4vw; */
   }
 
   .header1 {
