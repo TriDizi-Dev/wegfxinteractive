@@ -168,7 +168,7 @@ const SignupPage = () => {
             <div className="para">
               <p>
                 Already have an account?{" "}
-                <b className="signup" >
+                <b className="signup" onClick={() => navigate("/")}>
                   Login
                 </b>
               </p>
