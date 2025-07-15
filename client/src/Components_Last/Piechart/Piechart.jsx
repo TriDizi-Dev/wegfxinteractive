@@ -59,7 +59,7 @@ useEffect(() => {
 
   fetchQuestions();
 }, []);
-const COLORS = ["#6a1b9a", "#e74c3c", "#3498db", "#5dade2", "#2ecc71"];
+const COLORS = ["#6a1b9a", "#e74c3c", "#3498db", "#5dade2", "#2ecc71", "#C00000"];
 
 const CustomLabel = ({
   cx,

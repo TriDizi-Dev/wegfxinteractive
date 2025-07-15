@@ -147,12 +147,9 @@
 
 .login{
   cursor: pointer;
-  padding-left: 17vw;
+  padding-left: 15vw;
 }
-.form-login label{
-  color: white;
- font-family: 'Calibri', sans-serif;
-}
+
 .logo{
   width: 9vw;
   height: 5vw;
@@ -179,9 +176,9 @@
 }
 
 .login-rightside h3{
-  font-size: 0.9vw;     /* Or use 16px for fixed layout */
+  font-size: 1.2vw;     /* Or use 16px for fixed layout */
   color: #ffffff;
-  font-weight: 400;
+  font-weight: 300;
   cursor: pointer;
   margin-top: -0.2vw;
   padding-left: 0.2vw;
@@ -190,8 +187,8 @@
 }
 
 .login-rightside p{
-  font-size: 1vw;
-  font-weight: 400;
+  font-size: 1.3vw;
+  font-weight: 500;
   padding-left: 0.2vw;
   /* font-family: 'Poppins', sans-serif */
   font-family: 'Calibri', sans-serif;
@@ -205,8 +202,8 @@
 .form-login label {
   display: block;
   margin-bottom: 0.6vw;
-  font-weight: 400;
-  font-size: 1vw;
+  font-weight: 500;
+  font-size: 1.4vw;
   color: white;
   padding-left: 0.2vw;
   /* /* font-family: 'Poppins', sans-serif */
@@ -222,6 +219,12 @@
   background-color: #f9f9f9;
   color: #000;
   box-sizing: border-box;
+}
+.img1{
+  width: 32vw;
+  height: 42vw;
+  margin-left: -4vw;
+  margin-top: -2vw;
 }
 
 .password-wrapper {
@@ -378,6 +381,9 @@
   }
 
   .boy_image {
+    display: none;
+  }
+  .img1{
     display: none;
   }
 

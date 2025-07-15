@@ -359,6 +359,10 @@
         margin: 11vw 0vw;
     }
 
+    .input-group{
+        margin-top: -5vw;
+    }
+
     .highlight-name {
         font-size: 8.5vw;
         width: 42vw !important;
@@ -437,9 +441,9 @@
     }
 
     .pie-chart-section {
-        height: 75vw;
-        width: 75vw;
-        margin-top: 10vw;
+        height: 100vw;
+        width: 100vw;
+        margin-top: -8vw;
         margin-right: 0;
     }
 
@@ -544,7 +548,7 @@
     }
 
     .app-main-content {
-        flex-direction: column-reverse;
+        flex-direction: column;
     }
 
     /* .think-logo-image {

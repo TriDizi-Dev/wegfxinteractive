@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import image2 from "../../assets/Login/image2.png";
 import image3 from "../../assets/Login/image3.png";
+import image1 from "../../assets/Login/image1.svg";
 import image4 from "../../assets/Login/image4.png";
 import image5 from "../../assets/Login/Picture10.png";
 import image6 from "../../assets/Login/Picture12.png"
@@ -92,7 +93,7 @@ const SignupPage = () => {
     <div className="login-wrapper">
       <div className="login-box">
         <div className="signup-left">
-          <img src={image2} alt="Cartoon" className="cartoon-touch" />
+          {/* <img src={image2} alt="Cartoon" className="cartoon-touch" />
           <img src={image3} className="image_3" alt="Decoration" />
            <div className="stares">
                       <img src={image6} className="image6"/>
@@ -104,7 +105,8 @@ const SignupPage = () => {
           <h3>
             Boost your child’s confidence and social <br />
             skills to unlock lifelong success.
-          </h3>
+          </h3> */}
+          <img src={image1} className="image1"/>
         </div>
 
         <div className="signup-right">
