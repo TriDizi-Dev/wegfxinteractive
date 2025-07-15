@@ -3,12 +3,14 @@ import { CgProfile } from "react-icons/cg";
 import { auth, database } from "../../Firebase/firebase";
 import { get, ref } from "firebase/database"; // ✅ FIXED import
 import Logo from "../../assets/image.png";
+import { useLocation } from "react-router-dom";
 import "./Navbar.css";
 import { signOut } from "firebase/auth";
 
 export const Navbar = () => {
   const [Userdata, setUserdata] = useState({});
   const [showLogout, setShowLogout] = useState(false);
+ 
 
   console.log(Userdata, "UserdataUserdata");
 
@@ -37,16 +39,29 @@ export const Navbar = () => {
     }
   };
 
+  const location = useLocation();
+
+  // Define the paths where back button should be hidden
+  const hideBackButtonPaths = ["/select-age-group"];
+
+  const shouldHideBackButton = hideBackButtonPaths.includes(location.pathname);
+  
+
   return (
     <div className="Main_NavBar_Css">
       <div className="Main_Logo_Image">
         <img src={Logo} alt="Name" />
+        <nav>
+      {!shouldHideBackButton && (
         <button
           className="back-arrow-btn"
           onClick={() => window.history.back()}
         >
           ← Back
         </button>
+      )}
+      {/* Other navbar content */}
+    </nav>
       </div>
 
       <div className="quiz-user-info">

@@ -362,8 +362,9 @@
     .highlight-name {
         font-size: 8.5vw;
         width: 42vw !important;
-        transform: translate(7vw, 0vw);
+        /* transform: translate(7vw, 0vw); */
         display: block;
+        margin: 0 auto;
     }
 
 
