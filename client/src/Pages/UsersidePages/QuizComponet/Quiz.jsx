@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ref, get } from "firebase/database";
+import { ref, get, set } from "firebase/database";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../../Components/AuthContext";
 import "./Quiz.css";
@@ -60,23 +60,74 @@ const QuizComponent = () => {
     });
   }, [currentUser]);
 
-  const fetchQuestions = async (cat) => {
-    setLoading(true);
-    const snap = await get(ref(database, "questions"));
-    const list = [];
-    snap.forEach((c) => {
-      const d = c.val();
-      if (d.question_type === cat) list.push({ ...d, id: c.key });
-    });
-    setCategory(cat);
-    setQuestions(list);
-    setCurrentIndex(0);
-    setSelectedOption("");
-    setFeedback("");
-    setScore(0);
-    setQuizOver(false);
-    setLoading(false);
-  };
+  // const fetchQuestions = async (cat) => {
+  //   setLoading(true);
+  //   const snap = await get(ref(database, "questions"));
+  //   const list = [];
+  //   snap.forEach((c) => {
+  //     const d = c.val();
+  //     if (d.question_type === cat) list.push({ ...d, id: c.key });
+  //   });
+  //   setCategory(cat);
+  //   setQuestions(list);
+  //   setCurrentIndex(0);
+  //   setSelectedOption("");
+  //   setFeedback("");
+  //   setScore(0);
+  //   setQuizOver(false);
+  //   setLoading(false);
+  // };
+
+
+const fetchQuestions = async (cat) => {
+  setLoading(true);
+
+  const uid = currentUser?.uid;
+  if (!uid) return;
+
+  const allSnap = await get(ref(database, "questions"));
+  const fullList = [];
+
+  // 1. Get all questions of the selected category
+  allSnap.forEach((snap) => {
+    const q = snap.val();
+    if (q.question_type === cat) {
+      fullList.push({ ...q, id: snap.key });
+    }
+  });
+
+  // 2. Fetch attempted question IDs from Firebase
+  const trackingRef = ref(database, `users/${uid}/quizTracking/${cat}`);
+  const trackingSnap = await get(trackingRef);
+  const attemptedIds = trackingSnap.exists() ? trackingSnap.val().attempted || [] : [];
+
+  // 3. Filter out attempted questions
+  let unattempted = fullList.filter((q) => !attemptedIds.includes(q.id));
+
+  // 4. If fewer than 30 unattempted, reset attempts and reshuffle
+  if (unattempted.length < 30) {
+    unattempted = [...fullList];
+    await set(trackingRef, { attempted: [] }); // Reset tracking
+  }
+
+  // 5. Shuffle and pick 30
+  const shuffled = [...unattempted].sort(() => 0.5 - Math.random());
+  const selected30 = shuffled.slice(0, 30);
+
+  // 6. Update Firebase with newly attempted question IDs
+  const newAttemptedIds = [...attemptedIds, ...selected30.map((q) => q.id)];
+  await set(trackingRef, { attempted: newAttemptedIds });
+
+  // 7. Set state
+  setCategory(cat);
+  setQuestions(selected30);
+  setCurrentIndex(0);
+  setSelectedOption("");
+  setFeedback("");
+  setScore(0);
+  setQuizOver(false);
+  setLoading(false);
+};
 
   const handleAnswer = (option) => {
     if (selectedOption) return;
@@ -87,20 +138,44 @@ const QuizComponent = () => {
     if (isCorrect) setScore((prev) => prev + 1);
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (currentIndex < questions.length - 1) {
       setCurrentIndex((prev) => prev + 1);
       setSelectedOption("");
       setFeedback("");
     } else {
       setQuizOver(true);
+      await updateQuizStats();
     }
   };
 
   const handleRestart = () => {
     // fetchQuestions("Maths");
-  fetchQuestions(category);
+    fetchQuestions(category);
   };
+
+const updateQuizStats = async () => {
+  if (!currentUser || !category) return;
+
+  const uid = currentUser.uid;
+  const statsRef = ref(database, `users/${uid}/quizStats/${category}`);
+
+  const newCorrect = score;
+  const newAttempted = questions.length;
+
+  try {
+    // ✅ Always overwrite with latest values
+    await set(statsRef, {
+      correct: newCorrect,
+      attempted: newAttempted,
+    });
+
+    console.log("✅ Stats updated with latest attempt.");
+  } catch (err) {
+    console.error("❌ Failed to update quiz stats:", err);
+  }
+};
+
 
   if (authLoading) return <div>Loading...</div>;
   if (!currentUser) return <Navigate to="/" />;

@@ -1,16 +1,18 @@
 .kids {
-  padding: 1.67vw;  
+  padding: 1.67vw;
   box-sizing: border-box;
   /* overflow: hidden; */
   /* height: 97vh; */
 }
+
 .main-container {
   text-align: center;
-  padding-bottom: 3.67vw;  
+  padding-bottom: 3.67vw;
   /* min-height: 100vh; */
   height: fit-content;
   box-sizing: border-box;
 }
+
 /* Header Styling */
 .header {
   display: flex;
@@ -46,7 +48,7 @@
   font-weight: bold;
   color: #333;
   margin-top: 2vw;
-  padding-left: 70vw;
+  /* padding-left: 70vw; */
 }
 
 /* .avatar {
@@ -66,7 +68,7 @@
 
 .thinkimage {
   margin-top: 0vw;
-  transform: translate(0vw,-2vw);
+  transform: translate(0vw, -2vw);
 }
 
 /* Main Content Styling */
@@ -98,7 +100,7 @@
 
 .highlight-blue {
   color: #007bff;
-   /* font-family: 'Londrina Solid, sans-serif'; */
+  /* font-family: 'Londrina Solid, sans-serif'; */
   font-weight: 400;
 }
 
@@ -110,7 +112,7 @@
   /* 30px */
   flex-wrap: wrap;
   margin: -6.5vw 0vw;
-  
+
 }
 
 .thinker-card1 {
@@ -127,6 +129,7 @@
   align-items: center;
   cursor: pointer;
 }
+
 .thinker-card2 {
   /* background-color: #fff; */
   /* border-radius: 1.25vw;  */
@@ -142,6 +145,7 @@
   cursor: pointer;
   margin: -4vw -2vw
 }
+
 .thinker-card3 {
   /* background-color: #fff; */
   /* border-radius: 1.25vw;  */
@@ -161,28 +165,34 @@
   /* width: 15.83vw; */
 
   border-radius: 0.83vw;
- 
+
   margin-top: 1.5vw;
-    width: 18.83vw;
+  width: 18.83vw;
   /* height: auto; */
   /* border-radius: 0.83vw; */
-  background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-  box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.15); /* Subtle box-shadow */
-  padding: 0.5vw; /* Optional: padding to create space between image and background */
+  background: rgba(255, 255, 255, 0.8);
+  /* Semi-transparent white background */
+  box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.15);
+  /* Subtle box-shadow */
+  padding: 0.5vw;
+  /* Optional: padding to create space between image and background */
   box-sizing: border-box;
-  
+
 }
 
 .thinker-image2 {
   width: 16.83vw;
   border-radius: 0.83vw;
   margin-top: -2.5vw;
-    width: 18.83vw;
+  width: 18.83vw;
   /* height: auto; */
   border-radius: 0.83vw;
-  background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-  box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.15); /* Subtle box-shadow */
-  padding: 0.5vw; /* Optional: padding to create space between image and background */
+  background: rgba(255, 255, 255, 0.8);
+  /* Semi-transparent white background */
+  box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.15);
+  /* Subtle box-shadow */
+  padding: 0.5vw;
+  /* Optional: padding to create space between image and background */
   box-sizing: border-box;
 }
 
@@ -193,9 +203,12 @@
   /* width: 16.83vw; */
   /* height: auto; */
   border-radius: 0.83vw;
-  background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-  box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.15); /* Subtle box-shadow */
-  padding: 0.5vw; /* Optional: padding to create space between image and background */
+  background: rgba(255, 255, 255, 0.8);
+  /* Semi-transparent white background */
+  box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.15);
+  /* Subtle box-shadow */
+  padding: 0.5vw;
+  /* Optional: padding to create space between image and background */
   box-sizing: border-box;
 }
 
@@ -207,22 +220,22 @@
 
 .foundation-color {
   color: #dc3545;
-   /* font-family: 'Londrina Solid, sans-serif'; */
+  /* font-family: 'Londrina Solid, sans-serif'; */
 }
 
 .explorative-color {
   color: #007bff;
-   /* font-family: 'Londrina Solid, sans-serif'; */
+  /* font-family: 'Londrina Solid, sans-serif'; */
 }
 
 .future-ready-color {
   color: #002d72;
-   /* font-family: 'Londrina Solid, sans-serif'; */
+  /* font-family: 'Londrina Solid, sans-serif'; */
 }
 
 .thinker-age {
   font-size: 1.5vw;
-   /* font-family: 'Londrina Solid, sans-serif'; */
+  /* font-family: 'Londrina Solid, sans-serif'; */
   /* 18px */
   color: #000;
   margin-bottom: -0.4vw;
@@ -233,8 +246,8 @@
 
 .thinker-description {
   font-size: 1.33vw;
-   /* font-family: 'Calibri', sans-serif; */
-    font-family: 'Source Sans Pro', 'Calibri', sans-serif;
+  /* font-family: 'Calibri', sans-serif; */
+  font-family: 'Source Sans Pro', 'Calibri', sans-serif;
   /* 16px */
   color: #000;
   font-style: italic;
@@ -246,12 +259,12 @@
 @media (max-width: 768px) {
   .main-container {
     /* padding: 5vw;
-    /* height: 94vh; */ 
+    /* height: 94vh; */
     overflow-x: hidden;
-     /* padding: 6vw 4vw; */
-         min-height: 100vh;
-  width: 100%;
-  padding: 20px;
+    /* padding: 6vw 4vw; */
+    min-height: 100vh;
+    width: 100%;
+    padding: 20px;
   }
 
   .header1 {
@@ -344,7 +357,7 @@
     height: 30vw;
     margin-left: -60vw;
     text-align: center;
-    margin-top:0vw;
+    margin-top: 0vw;
   }
 
   .thinker-title {
