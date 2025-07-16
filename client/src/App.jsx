@@ -20,7 +20,7 @@ import { useAuth } from "./Components/AuthContext";
 import PaymentSuccess from "./Pages/UsersidePages/PaymentSucces/paymentsucces";
 import AdminLoginPage from "./Components/LogIn/AdminLogin";
 import { useEffect } from "react";
-import backgroundImage from "../src/assets/Pieimages/Baackground_last.png";
+import backgroundImage from "../src/assets/Pieimages/Baackground_last.jpg";
 import backgroundImageQuiz from "../src/assets/home/bg.jpg";
 import PieChart from "./Components_Last/Piechart/Piechart";
 
@@ -41,9 +41,9 @@ function Layout() {
     ];
 
     if (imagePaths.includes(location.pathname)) {
-      // document.body.style.backgroundImage = `url(${backgroundImage})`;
+      document.body.style.backgroundImage = `url(${backgroundImage})`;
       // document.body.style.background='linear-gradient(to right, yellow 30%, blue 70%)';
-      document.body.style.background='linear-gradient(to right, yellow, blue)';
+      // document.body.style.background='linear-gradient(to right, yellow, blue)';
 
 
       document.body.style.backgroundSize = "cover";

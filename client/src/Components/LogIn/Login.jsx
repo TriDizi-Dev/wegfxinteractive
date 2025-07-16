@@ -307,8 +307,8 @@ const LoginPage = () => {
             {error && <p className="error-message1">{error}</p>}
             {message && <p className="success-message">{message}</p>}
             {successmsg && <p className="success-message">{successmsg}</p>}
-            <button type="submit" className="google" onClick={handleGoogleLogin}/>
-
+            <button type="submit" className="btn-google" onClick={handleGoogleLogin}>
+              Google</button>
             <button type="submit" className="btn-login">
               {showChangePassword ? "Change Password" : "Login"}
             </button>
