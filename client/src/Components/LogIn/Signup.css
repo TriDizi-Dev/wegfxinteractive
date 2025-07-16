@@ -1,8 +1,8 @@
 .form-group label {
   color: white;
-  font-size: 0.9vw;
-  /* /* font-family: 'Poppins', sans-serif * */
-  font-family: 'Calibri', sans-serif;
+  font-size: 1.3vw;
+   font-family: 'Poppins', sans-serif 
+  /* font-family: 'Calibri', sans-serif; */
 }
 
 
@@ -14,12 +14,12 @@
   position: absolute;
 }
 .logeimage {
-  width: 8vw;
-  margin-top: -2vw;
+  width: 6vw;
+  margin-top: -1vw;
 }
 .signup{
   cursor: pointer;
-  padding-left: 15.5vw;
+  padding-left: 11.5vw;
   font-weight: 700;
 }
 
@@ -41,8 +41,8 @@
 }
 
 .heading h3 {
-  padding-left: 9vw;
-  font-family: 'Calibri', sans-serif;
+  padding-left: 12.5vw;
+  /* font-family: 'Calibri', sans-serif; */
 
 
 }
@@ -71,16 +71,17 @@ gap: 10vw;
   width: 29vw;
   color: white;
   /* margin-left: 10vw; */
-  height: 37vw;
+  /* height: 37vw; */
+  height: fit-content;
   margin-top: -0.2vw;
-  font-family: 'Segoe UI', sans-serif;
+  /* font-family: 'Segoe UI', sans-serif; */
   box-shadow: 0 1vw 3vw rgba(0, 0, 0, 0.15)
 }
 .signup-right p{
   padding-bottom: 2vw;
-  font-size: 1vw;
-  /* font-family: 'Poppins', sans-serif; */
-  font-family: 'Calibri', sans-serif;
+  font-size: 1.3vw;
+  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Calibri', sans-serif; */
   font-weight: 500;
 }
 .pic1{
@@ -91,16 +92,22 @@ gap: 10vw;
     text-align: center;
   font-size: 1vw;
   color: #b33a3a;
-  margin-top: -1vw;
+  margin-top: -2vw;
 }
 .succesMsg_signup{
     text-align: center;
   font-size: 1vw;
   color: white;
-  margin-top: -1vw;
+  margin-top: -3vw;
 }
 .para{
   padding-top: 1vw;
+}
+.image1{
+  width: 30vw;
+  height: 42vw;
+  margin-left: -8vw;
+  margin-top: -2vw;
 }
 .form-group {
   margin-bottom: 0.5vw;
@@ -153,9 +160,9 @@ gap: 10vw;
   margin-top: -10vw;
   margin-left: -1vw;
   position:relative;
-  /* font-family: 'Poppins', sans-serif; */
-  font-family: 'Londrina Solid, sans-serif';
-}
+  font-family: 'Poppins', sans-serif; 
+  
+} 
 .success-message {
   color: #fff;
   font-weight: 600;
@@ -169,8 +176,8 @@ gap: 10vw;
   font-size: 1.5vw;
   font-weight: 300;
   margin-top: 1vw;
-  /* font-family: 'Poppins', sans-serif; */
-  font-family: 'Calibri', sans-serif;
+  font-family: 'Poppins', sans-serif;
+  /* font-family: 'Calibri', sans-serif; */
   text-align: center;
 }
 
@@ -229,6 +236,10 @@ gap: 10vw;
     margin-top: 5vw;
     margin-left: 0;
     position: relative; */
+    display: none;
+  }
+
+  .image1{
     display: none;
   }
 

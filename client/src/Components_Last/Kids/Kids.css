@@ -6,8 +6,8 @@
 }
 .main-container {
   text-align: center;
-  padding-bottom: 1.67vw;  
-  min-height: 87vh;
+  padding-bottom: 3.67vw;  
+  /* min-height: 100vh; */
   height: fit-content;
   box-sizing: border-box;
 }
@@ -84,7 +84,7 @@
 
 .tagline {
   font-size: 2.2vw;
-  font-family: 'Londrina Solid, sans-serif';
+  /* font-family: 'Londrina Solid, sans-serif'; */
   /* 30px */
   color: #c95115;
   margin-bottom: 8.67vw;
@@ -98,7 +98,7 @@
 
 .highlight-blue {
   color: #007bff;
-   font-family: 'Londrina Solid, sans-serif';
+   /* font-family: 'Londrina Solid, sans-serif'; */
   font-weight: 400;
 }
 
@@ -207,22 +207,22 @@
 
 .foundation-color {
   color: #dc3545;
-   font-family: 'Londrina Solid, sans-serif';
+   /* font-family: 'Londrina Solid, sans-serif'; */
 }
 
 .explorative-color {
   color: #007bff;
-   font-family: 'Londrina Solid, sans-serif';
+   /* font-family: 'Londrina Solid, sans-serif'; */
 }
 
 .future-ready-color {
   color: #002d72;
-   font-family: 'Londrina Solid, sans-serif';
+   /* font-family: 'Londrina Solid, sans-serif'; */
 }
 
 .thinker-age {
   font-size: 1.5vw;
-   font-family: 'Londrina Solid, sans-serif';
+   /* font-family: 'Londrina Solid, sans-serif'; */
   /* 18px */
   color: #000;
   margin-bottom: -0.4vw;
@@ -233,7 +233,7 @@
 
 .thinker-description {
   font-size: 1.33vw;
-   font-family: 'Calibri', sans-serif;
+   /* font-family: 'Calibri', sans-serif; */
     font-family: 'Source Sans Pro', 'Calibri', sans-serif;
   /* 16px */
   color: #000;
