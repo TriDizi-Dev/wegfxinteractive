@@ -86,20 +86,27 @@
   font-size: 2.2vw;
   /* font-family: 'Londrina Solid, sans-serif'; */
   /* 30px */
-  color: #c95115;
+  color: #1A2B49;
+  font-family: 'Poppins', sans-serif;
+font-weight: bold;
   margin-bottom: 8.67vw;
   /* 80px */
   letter-spacing: 0vw;
-  font-weight: 400;
+  /* font-weight: 400; */
   letter-spacing: 0vw;
   /* 1px */
-  margin-top: -1vw;
+  margin-left: 21vw;
+  background-color: #F5B800;
+  margin-right: 21vw;
+  /* margin-top: -1vw; */
+  border: 0.1vw solid #F5B800;
 }
 
 .highlight-blue {
-  color: #007bff;
+  color: #B10000;
    /* font-family: 'Londrina Solid, sans-serif'; */
-  font-weight: 400;
+   
+  font-weight: bold;
 }
 
 /* Thinker Sections Styling */
@@ -119,28 +126,37 @@
   padding: 1.67vw;
   /* box-shadow: 0 0.83vw 1.67vw rgba(0, 0, 0, 0.1);  */
   text-align: center;
+  margin-left: 7vw;
   flex: 1;
-  min-width: 25vw;
-  max-width: 29.17vw;
+  width: 25vw;
+  border-radius: 2.5vw;
+  /* max-width: 29.17vw; */
+   background: #fff; /* Semi-transparent white background */
+  box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.15); /* Subtle box-shadow */
   display: flex;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+  
 }
 .thinker-card2 {
   /* background-color: #fff; */
   /* border-radius: 1.25vw;  */
-  padding: 1.67vw;
+  /* padding: 1.67vw; */
   /* box-shadow: 0 0.83vw 1.67vw rgba(0, 0, 0, 0.1);  */
   text-align: center;
   flex: 1;
-  min-width: 25vw;
-  max-width: 29.17vw;
+  width: 25vw;
+  /* max-width: 29.17vw; */
   display: flex;
+   background: #fff; /* Semi-transparent white background */
+  box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.15); /* Subtle box-shadow */
   flex-direction: column;
+  border-radius: 2.5vw;
   align-items: center;
   cursor: pointer;
-  margin: -4vw -2vw
+  /* margin: -4vw -2vw; */
+  
 }
 .thinker-card3 {
   /* background-color: #fff; */
@@ -149,25 +165,32 @@
   /* box-shadow: 0 0.83vw 1.67vw rgba(0, 0, 0, 0.1);  */
   text-align: center;
   flex: 1;
-  min-width: 25vw;
-  max-width: 29.17vw;
+  margin-right: 6vw;
+  border-radius: 2.5vw;
+  width: 25vw;
+  /* max-width: 29.17vw; */
+   background: #fff; /* Semi-transparent white background */
+  box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.15); /* Subtle box-shadow */
   display: flex;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
 }
 
+/* .tittle{
+  border: 0.1vw solid #000;
+} */
+
 .thinker-image {
   /* width: 15.83vw; */
 
   border-radius: 0.83vw;
  
-  margin-top: 1.5vw;
+  margin-top: -3vw;
     width: 18.83vw;
   /* height: auto; */
   /* border-radius: 0.83vw; */
-  background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-  box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.15); /* Subtle box-shadow */
+  
   padding: 0.5vw; /* Optional: padding to create space between image and background */
   box-sizing: border-box;
   
@@ -176,12 +199,11 @@
 .thinker-image2 {
   width: 16.83vw;
   border-radius: 0.83vw;
-  margin-top: -2.5vw;
+  margin-top: -3.5vw;
     width: 18.83vw;
   /* height: auto; */
   border-radius: 0.83vw;
-  background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-  box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.15); /* Subtle box-shadow */
+  
   padding: 0.5vw; /* Optional: padding to create space between image and background */
   box-sizing: border-box;
 }
@@ -193,8 +215,7 @@
   /* width: 16.83vw; */
   /* height: auto; */
   border-radius: 0.83vw;
-  background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-  box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.15); /* Subtle box-shadow */
+  
   padding: 0.5vw; /* Optional: padding to create space between image and background */
   box-sizing: border-box;
 }
@@ -319,20 +340,20 @@
     max-width: 90vw; */
     padding: 1vw;
     width: 80vw;
-    flex-direction: row;
+    /* flex-direction: row; */
     height: 30vw;
-    margin-left: -60vw;
+    margin-left: -2vw;
     text-align: center;
   }
 
   .thinker-card3 {
     padding: 1vw;
     width: 80vw;
-    flex-direction: row;
+    /* flex-direction: row; */
     height: 30vw;
-    margin-left: -60vw;
+    margin-left: 3vw;
     text-align: center;
-    margin-top: 4vw;
+    margin-top: 1vw;
   }
 
   .thinker-card2 {
@@ -340,9 +361,9 @@
     max-width: 90vw; */
     padding: 1vw;
     width: 80vw;
-    flex-direction: row;
+    /* flex-direction: row; */
     height: 30vw;
-    margin-left: -60vw;
+    margin-left: -2vw;
     text-align: center;
     margin-top:0vw;
   }

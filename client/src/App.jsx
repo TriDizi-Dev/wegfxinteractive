@@ -22,7 +22,10 @@ import AdminLoginPage from "./Components/LogIn/AdminLogin";
 import { useEffect } from "react";
 import backgroundImage from "../src/assets/Pieimages/Baackground_last.jpg";
 import backgroundImageQuiz from "../src/assets/home/bg.jpg";
+import backfroundImageKids from "../src/assets/Pieimages/kidsimage.jpg";
 import PieChart from "./Components_Last/Piechart/Piechart";
+import backgroundimagplan from "./assets/Pieimages/Baackground_last1.png";
+
 
 function Layout() {
   const { loading } = useAuth();
@@ -35,9 +38,9 @@ function Layout() {
     const imagePaths = [
       "/",
       "/sign-up",
-      "/report",
-      "/select-age-group",
-      "/plans",
+      // "/report",
+      // "/select-age-group",
+      // "/plans",
     ];
 
     if (imagePaths.includes(location.pathname)) {
@@ -54,7 +57,17 @@ function Layout() {
       document.body.style.backgroundSize = "cover";
       document.body.style.backgroundRepeat = "no-repeat";
       document.body.style.backgroundPosition = "center";
-    } else {
+    } else if(location.pathname === "/select-age-group") {
+      document.body.style.backgroundImage = `url(${backfroundImageKids})`;
+      document.body.style.backgroundSize = "cover";
+      document.body.style.backgroundRepeat = "no-repeat";
+      document.body.style.backgroundPosition = "center";
+    } else if (location.pathname === "/report" || location.pathname === "/plans"){
+      document.body.style.backgroundImage=`url(${backgroundimagplan})`;
+            document.body.style.backgroundSize = "cover";
+      document.body.style.backgroundRepeat = "no-repeat";
+      document.body.style.backgroundPosition = "center";
+    }else {
       document.body.style.backgroundImage = "";
       document.body.style.background = `radial-gradient(circle at top left, #ede7f6, #d6d0f5, #e0dcff)`;
       document.body.style.backgroundColor = "#ffffff";

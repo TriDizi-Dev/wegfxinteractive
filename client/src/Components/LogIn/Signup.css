@@ -145,14 +145,14 @@ gap: 10vw;
 }
 
 .google{
-  background-color: #4285f4;
+  background-color: #10b153;
   color: #ffffff;
   padding: 0.5vw 2vw;
   font-size: 1.3vw;
   font-weight: 500;
   width: 100%;
   border-radius: 0.7vw;
-  border: 1px solid #4285f4;
+  border: 1px solid #10b153;
   cursor: pointer;
   height: 2.5vw;
   margin-bottom: 1vw;
@@ -224,6 +224,7 @@ gap: 10vw;
      /* height: 97vh; */
      /* max-height: 100vh; */
     padding: 5vw 2vw;
+    /* height: auto; */
     /* width: 100vw; */
   }
 
@@ -231,6 +232,7 @@ gap: 10vw;
     flex-direction: column;
     align-items: center;
     /* width: 100vw; */
+    width: 100vh;
   }
 
   .signup-left h2{
@@ -277,7 +279,7 @@ gap: 10vw;
   
   .signup-right p{
     color: #fff;
-    font-size: 4vw;
+    font-size: 3.2vw;
   }
   .text-bubble p {
     font-size: 4vw;
@@ -293,7 +295,7 @@ gap: 10vw;
   }
 
   .form-group label {
-    font-size: 3.5vw;
+    font-size: 3vw;
   }
 
   .form-group input {
@@ -317,11 +319,19 @@ gap: 10vw;
   }
 
   .btn-Sinup {
-    font-size: 4vw;
-    padding: 3vw;
+    font-size: 2.5vw;
+    /* padding: 3vw; */
     border-radius: 2vw;
     width: 80vw;
-    height: 10vw;
+    height: 7vw;
+  }
+
+  .google{
+    font-size: 2.5vw;
+    /* padding: 3vw; */
+    border-radius: 2vw;
+    width: 80vw;
+    height: 7vw;
   }
 
   .signup{
@@ -334,7 +344,8 @@ gap: 10vw;
 
   .signup-right {
     padding: 3vw;
-    height: 130vw;
+    /* height: 130vw; */
+    height: auto;
     border-radius: 4vw;
     margin-top: 10vw;
     width: 80vw;

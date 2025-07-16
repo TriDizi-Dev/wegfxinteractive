@@ -390,6 +390,7 @@
     flex-direction: column;
     align-items: center;
     /* width: 100%; */
+    height: 100vh;
   }
 
   .login-leftside {
@@ -428,7 +429,8 @@
 
   .login-rightside{
     width: 80vw;
-    height: 94vw;
+    /* height: 94vw; */
+    height: auto;
     margin-left: 0vw;
     border-radius: 5vw;
     padding: 5vw;
@@ -440,6 +442,14 @@
     width: 80vw;
     height: 10vw;
     font-size: 4vw;
+    border-radius: 2vw;
+  }
+
+  .btn-google{
+    width: 80vw;
+    height: 10vw;
+    font-size: 4vw;
+    border-radius: 2vw;
   }
 
   .logo{
