@@ -10,7 +10,6 @@ import { signOut } from "firebase/auth";
 export const Navbar = () => {
   const [Userdata, setUserdata] = useState({});
   const [showLogout, setShowLogout] = useState(false);
- 
 
   console.log(Userdata, "UserdataUserdata");
 
@@ -41,27 +40,25 @@ export const Navbar = () => {
 
   const location = useLocation();
 
-  // Define the paths where back button should be hidden
   const hideBackButtonPaths = ["/select-age-group"];
 
   const shouldHideBackButton = hideBackButtonPaths.includes(location.pathname);
-  
 
   return (
     <div className="Main_NavBar_Css">
       <div className="Main_Logo_Image">
         <img src={Logo} alt="Name" />
-        <nav>
-      {!shouldHideBackButton && (
-        <button
-          className="back-arrow-btn"
-          onClick={() => window.history.back()}
-        >
-          ← Back
-        </button>
-      )}
-      {/* Other navbar content */}
-    </nav>
+        <div>
+          {!shouldHideBackButton && (
+            <button
+              className="back-arrow-btn"
+              onClick={() => window.history.back()}
+            >
+              ← Back
+            </button>
+          )}
+          {/* Other navbar content */}
+        </div>
       </div>
 
       <div className="quiz-user-info">

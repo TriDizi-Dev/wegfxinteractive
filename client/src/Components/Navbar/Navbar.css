@@ -8,13 +8,13 @@
 .quiz-user-info span {
     font-size: 1.2vw;
     font-family: 'Calibri', sans-serif;
-    color: purple;
+    color: #000000;
     font-weight: 600;
 }
 
 .user-avatar {
     font-size: 2vw;
-    color: purple;
+    color: #303f4a;
     cursor: pointer;
 }
 
@@ -47,7 +47,7 @@
 }
 
 .logout-popup button {
-    background-color: rgba(128, 0, 128, 0.908);
+    background-color: #06416a;
     color: white;
     border: none;
     padding: 8px 12px;
@@ -56,7 +56,7 @@
 }
 
 .logout-popup button:hover {
-    background-color: purple;
+    background-color: 06416a;
 }
 
 .back-arrow-btn {

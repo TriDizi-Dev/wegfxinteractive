@@ -4,6 +4,7 @@
     align-items: center;
 
 }
+
 .think-logo-image {
     margin-top: -3vw;
     margin-left: 33vw;
@@ -53,7 +54,7 @@
 
 .app-main-content {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: r; */
     /* Default to column for mobile */
     justify-content: space-around;
     align-items: center;
@@ -84,7 +85,7 @@
 }
 
 .welcome-message {
-    
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -288,6 +289,16 @@
     color: #6a1b9a !important;
 }
 
+.custom-tooltip {
+    background: white;
+    padding: .3vw .8vw;
+    font-size: 1vw;
+    border-radius: 5px;
+    color: #333;
+    font-family: 'Londrina Solid, sans-serif';
+}
+
+
 /* Media Queries for Responsiveness */
 @media (min-width: 768px) {
     .app-main-content {
@@ -329,6 +340,8 @@
     .think-text {
         transform: translate(0, 0);
     }
+
+
 }
 
 @media (max-width: 480px) {
@@ -359,7 +372,7 @@
         margin: 11vw 0vw;
     }
 
-    .input-group{
+    .input-group {
         margin-top: -5vw;
     }
 
@@ -415,10 +428,10 @@
     }
 
     .think-logo-image {
-        margin-top: 20vw;
+        margin-top: 10vw;
         margin-left: 0;
         margin-bottom: -15vw;
-        transform: translate(0, 0vw);
+        /* transform: translate(0, 0vw); */
 
     }
 
@@ -428,7 +441,7 @@
 
     .star-icon1 {
         font-size: 8vw;
-        
+
     }
 
     .app-main-content {
@@ -451,9 +464,7 @@
     .think-text {
         transform: translate(0, 0);
     }
-}
 
-@media (max-width: 480px) {
     .app-header {
         flex-direction: column;
 
@@ -555,6 +566,9 @@
     /* .think-logo-image {
         transform: translate(0, -39vw);
     } */
+    .custom-tooltip {
+        font-size: 4vw;
+        padding: 1vw 2vw;
+    }
 
-    
 }

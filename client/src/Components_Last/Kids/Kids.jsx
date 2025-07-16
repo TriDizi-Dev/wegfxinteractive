@@ -47,15 +47,14 @@ function Kids() {
   return (
     <>
       <Navbar />
-
-      {/* <div className="kids"> */}
-
       <div className="main-container">
         <img src={Think} alt="Think1" className="thinkimage" />
-        <h2 className="tagline">
-          Empowering <span className="highlight-blue">kids</span> to step out
-          boldly into the future!
-        </h2>
+        <div className="tittle">
+          <h2 className="tagline">
+            Empowering <span className="highlight-blue">kids</span> to step out
+            boldly into the future!
+          </h2>
+        </div>
         <div className="thinker-sections">
           <div
             className="thinker-card1"
@@ -76,10 +75,10 @@ function Kids() {
                 Foundation Thinkers
               </h2>
               <p className="thinker-age">Age 5–8 years</p>
-              <p className="thinker-description">
+              {/* <p className="thinker-description">
                 Build strong roots of confidence <br />
                 and curiosity
-              </p>
+              </p> */}
             </div>
           </div>
 
@@ -102,10 +101,10 @@ function Kids() {
                 Explorative Thinkers
               </h2>
               <p className="thinker-age">Age 9–12 years</p>
-              <p className="thinker-description">
+              {/* <p className="thinker-description">
                 Discover talents, sharpen <br />
                 thinking, and express freely
-              </p>
+              </p> */}
             </div>
           </div>
 
@@ -128,15 +127,14 @@ function Kids() {
                 Future - Ready Thinkers
               </h2>
               <p className="thinker-age">Age 13–16 years</p>
-              <p className="thinker-description">
+              {/* <p className="thinker-description">
                 Prepare for real-world challenges <br />
                 with confidence & clarity
-              </p>
+              </p> */}
             </div>
           </div>
         </div>
       </div>
-      {/* </div> */}
     </>
   );
 }

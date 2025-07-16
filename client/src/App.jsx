@@ -22,7 +22,9 @@ import AdminLoginPage from "./Components/LogIn/AdminLogin";
 import { useEffect } from "react";
 import backgroundImage from "../src/assets/Pieimages/Baackground_last.jpg";
 import backgroundImageQuiz from "../src/assets/home/bg.jpg";
+import backfroundImageKids from "../src/assets/Pieimages/kidsimage.jpg";
 import PieChart from "./Components_Last/Piechart/Piechart";
+import backgroundimagplan from "./assets/Pieimages/Baackground_last1.png";
 
 function Layout() {
   const { loading } = useAuth();
@@ -32,25 +34,28 @@ function Layout() {
 
   useEffect(() => {
     // Define the paths where you want a specific background
-    const imagePaths = [
-      "/",
-      "/sign-up",
-      "/report",
-      "/select-age-group",
-      "/plans",
-    ];
+    const imagePaths = ["/", "/sign-up"];
 
     if (imagePaths.includes(location.pathname)) {
       document.body.style.backgroundImage = `url(${backgroundImage})`;
-      // document.body.style.background='linear-gradient(to right, yellow 30%, blue 70%)';
-      // document.body.style.background='linear-gradient(to right, yellow, blue)';
-
-
       document.body.style.backgroundSize = "cover";
       document.body.style.backgroundRepeat = "no-repeat";
       document.body.style.backgroundPosition = "center";
     } else if (location.pathname === "/quiz") {
       document.body.style.backgroundImage = `url(${backgroundImageQuiz})`;
+      document.body.style.backgroundSize = "cover";
+      document.body.style.backgroundRepeat = "no-repeat";
+      document.body.style.backgroundPosition = "center";
+    } else if (location.pathname === "/select-age-group") {
+      document.body.style.backgroundImage = `url(${backfroundImageKids})`;
+      document.body.style.backgroundSize = "cover";
+      document.body.style.backgroundRepeat = "no-repeat";
+      document.body.style.backgroundPosition = "center";
+    } else if (
+      location.pathname === "/report" ||
+      location.pathname === "/plans"
+    ) {
+      document.body.style.backgroundImage = `url(${backgroundimagplan})`;
       document.body.style.backgroundSize = "cover";
       document.body.style.backgroundRepeat = "no-repeat";
       document.body.style.backgroundPosition = "center";

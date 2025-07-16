@@ -54,7 +54,8 @@ const LoginPage = () => {
           const snapshot = await get(userRef);
 
           if (!snapshot.exists()) {
-            await set(userRef, { email, role: "user" });
+            const name = result.user.displayName || "";
+            await set(userRef, { name, email, role: "user" });
           }
 
           const token = await result.user.getIdToken();
@@ -180,7 +181,8 @@ const LoginPage = () => {
         const snapshot = await get(userRef);
 
         if (!snapshot.exists()) {
-          await set(userRef, { email, role: "user" });
+          const name = result.user.displayName || "";
+          await set(userRef, { name, email, role: "user" });
         }
 
         const token = await result.user.getIdToken();
@@ -206,105 +208,104 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="login_container">
-      <div className="login_box">
-        <div className="login-leftside">
-          <img src={image1} className="img1" />
-        </div>
+    // <div className="login_container">
+    <div className="login_box">
+      <div className="login-leftside">
+        <img src={image1} className="img1" />
+      </div>
 
-        <div className="login-rightside">
-          <div className="head">
-            <img src={image4} className="logo" alt="Logo" />
-            <h2>User Login</h2>
+      <div className="login-rightside">
+        <div className="head">
+          <img src={image4} className="logo" alt="Logo" />
+          <h2>User Login</h2>
+        </div>
+        <form
+          onSubmit={showChangePassword ? handleSendResetEmail : handleLogin}
+        >
+          <div className="form-login">
+            <label>Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
           </div>
 
-          <form
-            onSubmit={showChangePassword ? handleSendResetEmail : handleLogin}
-          >
+          {!showChangePassword && (
             <div className="form-login">
-              <label>Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-
-            {!showChangePassword && (
-              <div className="form-login">
-                <label>Password</label>
-                <div className="password-wrapper">
-                  <input
-                    type={showPassword ? "text" : "password"}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="toggle-password"
-                  >
-                    {showPassword ? <GrView /> : <BiHide />}
-                  </button>
-                </div>
+              <label>Password</label>
+              <div className="password-wrapper">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="toggle-password"
+                >
+                  {showPassword ? <GrView /> : <BiHide />}
+                </button>
               </div>
-            )}
-
-            {showChangePassword && (
-              <p className="info-message">
-                We'll send a password reset link to your email.
-              </p>
-            )}
-
-            <div>
-              <p>
-                Create an account?{" "}
-                <b className="login" onClick={() => navigate("/sign-up")}>
-                  Sign Up
-                </b>
-              </p>
-              <h3>
-                {showChangePassword ? (
-                  <span
-                    className="sign"
-                    onClick={() => {
-                      setShowChangePassword(false);
-                      setMessage("");
-                    }}
-                  >
-                    Back to Login
-                  </span>
-                ) : (
-                  <span
-                    className="sign"
-                    onClick={() => setShowChangePassword(true)}
-                  >
-                    Forget Password
-                  </span>
-                )}
-              </h3>
             </div>
+          )}
 
-            {error && <p className="error-message1">{error}</p>}
-            {message && <p className="success-message">{message}</p>}
-            {successmsg && <p className="success-message">{successmsg}</p>}
-            
-            <button type="submit" className="btn-login">
-              {showChangePassword ? "Send Reset Link" : "Login"}
-            </button>
-            <button
-              type="submit"
-              className="btn-google"
-              onClick={handleGoogleLogin}
-            >
-              Google
-            </button>
-          </form>
-        </div>
+          {showChangePassword && (
+            <p className="info-message">
+              We'll send a password reset link to your email.
+            </p>
+          )}
+
+          <div>
+            <p>
+              Create an account?{" "}
+              <b className="login" onClick={() => navigate("/sign-up")}>
+                Sign Up
+              </b>
+            </p>
+            <h3>
+              {showChangePassword ? (
+                <span
+                  className="sign"
+                  onClick={() => {
+                    setShowChangePassword(false);
+                    setMessage("");
+                  }}
+                >
+                  Back to Login
+                </span>
+              ) : (
+                <span
+                  className="sign"
+                  onClick={() => setShowChangePassword(true)}
+                >
+                  Forget Password
+                </span>
+              )}
+            </h3>
+          </div>
+
+          {error && <p className="error-message1">{error}</p>}
+          {message && <p className="success-message">{message}</p>}
+          {successmsg && <p className="success-message">{successmsg}</p>}
+
+          <button type="submit" className="btn-login">
+            {showChangePassword ? "Send Reset Link" : "Login"}
+          </button>
+          <button
+            type="button"
+            className="btn-google"
+            onClick={handleGoogleLogin}
+          >
+            Google
+          </button>
+        </form>
       </div>
     </div>
+    // </div>
   );
 };
 

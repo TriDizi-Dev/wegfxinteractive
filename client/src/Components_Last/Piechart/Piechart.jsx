@@ -19,75 +19,108 @@ import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 // ];
 
 
+
 function PiePage() {
   const [ageGroup, setAgeGroup] = useState("Beginner");
   const [Userdata, setUserdata] = useState({});
   const [outerRadius, setOuterRadius] = useState(180);
   const [questionData, setQuestionData] = useState([]);
+  console.log(Userdata, "UserdataUserdata");
 
-useEffect(() => {
-  const fetchQuestions = async () => {
-    try {
-      const questionsRef = ref(database, "questions");
-      const snapshot = await get(questionsRef);
+  const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    const subject = payload[0].name;
+    const stats = Userdata.quizStats?.[subject];
 
-      if (snapshot.exists()) {
-        const questions = snapshot.val();
-
-        const subjectCount = {};
-
-        // Count the number of questions per question_type
-        Object.values(questions).forEach((q) => {
-          const type = q.question_type;
-          if (type) {
-            subjectCount[type] = (subjectCount[type] || 0) + 1;
-          }
-        });
-
-        // Convert the count to the format needed by the Pie chart
-        const chartData = Object.entries(subjectCount).map(([name, value]) => ({
-          name,
-          value,
-        }));
-
-        setQuestionData(chartData);
-      }
-    } catch (error) {
-      console.error("Error fetching questions:", error);
+    if (stats) {
+      return (
+        <div className="custom-tooltip">
+          <p><strong>{subject}</strong></p>
+          <p>{stats.correct} / {stats.attempted} correct</p>
+        </div>
+      );
+    } else {
+      return (
+        <div className="custom-tooltip">
+          <p><strong>{subject}</strong></p>
+          <p>No attempts yet</p>
+        </div>
+      );
     }
-  };
+  }
 
-  fetchQuestions();
-}, []);
-const COLORS = ["#6a1b9a", "#e74c3c", "#3498db", "#5dade2", "#2ecc71", "#C00000"];
-
-const CustomLabel = ({
-  cx,
-  cy,
-  midAngle,
-  innerRadius,
-  outerRadius,
-  percent,
-  index,
-}) => {
-  const RADIAN = Math.PI / 180;
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-  return (
-    <text
-      x={x}
-      y={y}
-      fill="white"
-      textAnchor="middle"
-      dominantBaseline="central"
-      style={{ fontWeight: "bold", fontSize: "13px" }}
-    >
-      {questionData[index].name}
-    </text>
-  );
+  return null;
 };
+
+
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const questionsRef = ref(database, "questions");
+        const snapshot = await get(questionsRef);
+
+        if (snapshot.exists()) {
+          const questions = snapshot.val();
+
+          const subjectCount = {};
+          Object.values(questions).forEach((q) => {
+            const type = q.question_type;
+            if (type) {
+              subjectCount[type] = (subjectCount[type] || 0) + 1;
+            }
+          });
+          const chartData = Object.entries(subjectCount).map(
+            ([name, value]) => ({
+              name,
+              value,
+            })
+          );
+
+          setQuestionData(chartData);
+        }
+      } catch (error) {
+        console.error("Error fetching questions:", error);
+      }
+    };
+
+    fetchQuestions();
+  }, []);
+  const COLORS = [
+    "#6a1b9a",
+    "#e74c3c",
+    "#3498db",
+    "#5dade2",
+    "#2ecc71",
+    "#C00000",
+  ];
+
+  const CustomLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percent,
+    index,
+  }) => {
+    const RADIAN = Math.PI / 180;
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="white"
+        textAnchor="middle"
+        dominantBaseline="central"
+        style={{ fontWeight: "bold", fontSize: "13px" }}
+      >
+        {questionData[index].name}
+      </text>
+    );
+  };
 
   useEffect(() => {
     const updateRadius = () => {
@@ -195,7 +228,7 @@ const CustomLabel = ({
                       />
                     ))}
                   </Pie>
-                  <Tooltip />
+                  <Tooltip content={<CustomTooltip />} />
                 </PieChart>
               </ResponsiveContainer>
             </div>

@@ -4,14 +4,18 @@ import image3 from "../../assets/Login/image3.png";
 import image1 from "../../assets/Login/image1.svg";
 import image4 from "../../assets/Login/image4.png";
 import image5 from "../../assets/Login/Picture10.png";
-import image6 from "../../assets/Login/Picture12.png"
+import image6 from "../../assets/Login/Picture12.png";
 import { useNavigate } from "react-router-dom";
 // import pic1 from "../../assets/Login/Picture12.png"
 import {
   createUserWithEmailAndPassword,
   fetchSignInMethodsForEmail,
+  getRedirectResult,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithRedirect,
 } from "firebase/auth";
-import { ref, set, database, auth } from "../../Firebase/firebase";
+import { ref, set, database, auth, get } from "../../Firebase/firebase";
 import { GrView } from "react-icons/gr";
 import { BiHide } from "react-icons/bi";
 import "./Signup.css";
@@ -89,88 +93,92 @@ const SignupPage = () => {
     }
   };
   if (!redirectHandled && sessionStorage.getItem("googleRedirect") === "true") {
-      setRedirectHandled(true);
-      sessionStorage.removeItem("googleRedirect");
-  
-      getRedirectResult(auth)
-        .then(async (result) => {
-          if (!result?.user) return;
-          const uid = result.user.uid;
-          const email = result.user.email;
-  
-          const userRef = ref(database, `users/${uid}`);
-          const snapshot = await get(userRef);
-  
-          if (!snapshot.exists()) {
-            await set(userRef, { email, role: "user" });
-          }
-  
-          const token = await result.user.getIdToken();
-          setStorageItem("authToken", token);
-          setStorageItem("userType", "user");
-  
-          const planRef = ref(database, `users/${uid}/plan`);
-          const planSnap = await get(planRef);
-          const now = Date.now();
-  
-          if (planSnap.exists() && now < planSnap.val().endTime) {
-            navigate("/quiz");
-          } else {
-            navigate("/slectPlanpage");
-          }
-        })
-        .catch((err) => {
-          console.error("Google Sign-In Failed:", err);
-          setError("Google Sign-In Failed");
-        });
-    }
+    setRedirectHandled(true);
+    sessionStorage.removeItem("googleRedirect");
 
-    const handleGoogleLogin = async () => {
-        try {
-          const provider = new GoogleAuthProvider();
-          provider.setCustomParameters({ prompt: "select_account" });
-    
-          if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
-            sessionStorage.setItem("googleRedirect", "true");
-            await signInWithRedirect(auth, provider);
-          } else {
-            const result = await signInWithPopup(auth, provider);
-            const email = result.user.email;
-    
-            const methods = await fetchSignInMethodsForEmail(auth, email);
-            if (methods.includes("password")) {
-              setError("This email is already registered with Email/Password.");
-              await signOut(auth);
-              return;
-            }
-    
-            const uid = result.user.uid;
-            const userRef = ref(database, `users/${uid}`);
-            const snapshot = await get(userRef);
-    
-            if (!snapshot.exists()) {
-              await set(userRef, { email, role: "user" });
-            }
-    
-            const token = await result.user.getIdToken();
-            setStorageItem("authToken", token);
-            setStorageItem("userType", "user");
-    
-            const planRef = ref(database, `users/${uid}/plan`);
-            const planSnap = await get(planRef);
-            const now = Date.now();
-    
-            if (planSnap.exists() && now < planSnap.val().endTime) {
-              navigate("/quiz");
-            } else {
-              navigate("/slectPlanpage");
-            }
-          }
-        } catch (err) {
-          console.error("Google sign-in error:", err);
-          setError("Google Sign-In Failed.");
+    getRedirectResult(auth)
+      .then(async (result) => {
+        if (!result?.user) return;
+        const uid = result.user.uid;
+        const email = result.user.email;
+
+        const userRef = ref(database, `users/${uid}`);
+        const snapshot = await get(userRef);
+
+        if (!snapshot.exists()) {
+          const name = result.user.displayName || "";
+          await set(userRef, { name, email, role: "user" });
         }
-      };
+
+        const token = await result.user.getIdToken();
+        setStorageItem("authToken", token);
+        setStorageItem("userType", "user");
+
+        const planRef = ref(database, `users/${uid}/plan`);
+        const planSnap = await get(planRef);
+        const now = Date.now();
+
+        if (planSnap.exists() && now < planSnap.val().endTime) {
+          navigate("/quiz");
+        } else {
+          navigate("/slectPlanpage");
+        }
+      })
+      .catch((err) => {
+        console.error("Google Sign-In Failed:", err);
+        setError("Google Sign-In Failed");
+      });
+  }
+
+  const handleGoogleLogin = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: "select_account" });
+
+      if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+        sessionStorage.setItem("googleRedirect", "true");
+        await signInWithRedirect(auth, provider);
+      } else {
+        const result = await signInWithPopup(auth, provider);
+        const email = result.user.email;
+
+        const methods = await fetchSignInMethodsForEmail(auth, email);
+        if (methods.includes("password")) {
+          setError("This email is already registered with Email/Password.");
+          await signOut(auth);
+          return;
+        }
+
+        const uid = result.user.uid;
+        const userRef = ref(database, `users/${uid}`);
+        const snapshot = await get(userRef);
+
+        if (!snapshot.exists()) {
+          const name = result.user.displayName || "";
+          await set(userRef, { name, email, role: "user" });
+        }
+
+        const token = await result.user.getIdToken();
+        setStorageItem("authToken", token);
+        setStorageItem("userType", "user");
+        setTimeout(() => {
+          navigate("/select-age-group");
+        }, 1000);
+        // const planRef = ref(database, `users/${uid}/plan`);
+        // const planSnap = await get(planRef);
+        // const now = Date.now();
+
+        // if (planSnap.exists() && now < planSnap.val().endTime) {
+        //   navigate("/quiz");
+        // } else {
+        //   navigate("/slectPlanpage");
+        // }
+      }
+    } catch (err) {
+      console.error("Google sign-in error:", err);
+      setError("Google Sign-In Failed.");
+    }
+  };
 
   return (
     <div className="login-wrapper">
@@ -189,7 +197,7 @@ const SignupPage = () => {
             Boost your child’s confidence and social <br />
             skills to unlock lifelong success.
           </h3> */}
-          <img src={image1} className="image1"/>
+          <img src={image1} className="image1" />
         </div>
 
         <div className="signup-right">
@@ -258,15 +266,19 @@ const SignupPage = () => {
                 </b>
               </p>
             </div>
-
             {error && <p className="error-message2">{error}</p>}
-            {success && <p className="error-message2 succesMsg_signup">{success}</p>}
-
-            <button type="submit" className="google" onClick={handleGoogleLogin}>
-              Google</button>
-
+            {success && (
+              <p className="error-message2 succesMsg_signup">{success}</p>
+            )}
             <button type="submit" className="btn-Sinup">
               Sign Up
+            </button>
+            <button
+              type="button"
+              className="google"
+              onClick={handleGoogleLogin}
+            >
+              Google
             </button>
           </form>
         </div>
@@ -276,4 +288,3 @@ const SignupPage = () => {
 };
 
 export default SignupPage;
-  

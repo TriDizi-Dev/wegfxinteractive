@@ -1,39 +1,43 @@
 .form-group label {
   color: white;
   font-size: 1vw;
-   font-family: 'Poppins', sans-serif 
-  /* font-family: 'Calibri', sans-serif; */
+  font-family: 'Poppins', sans-serif
+    /* font-family: 'Calibri', sans-serif; */
 }
 
 
-.cartoon-touch{
-   width: 19vw;
+.cartoon-touch {
+  width: 19vw;
   margin-top: -2vw;
   margin-left: 3vw;
   height: auto;
   position: absolute;
 }
+
 .logeimage {
   width: 6vw;
   margin-top: -1vw;
 }
-.signup{
+
+.signup {
   cursor: pointer;
   padding-left: 11.5vw;
   font-weight: 700;
 }
 
-.login-wrapper{
+.login-wrapper {
   height: 97.5vh;
   width: 99vw;
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   justify-content: space-evenly;
   align-items: center;
 }
-.login-box{
+
+.login-box {
   display: flex;
   flex-direction: row;
+  
 }
 
 .heading {
@@ -46,19 +50,23 @@
 
 
 }
-.login-box{
-display: flex;
-gap: 10vw;
+
+.login-box {
+  display: flex;
+  gap: 10vw;
 }
-.image_3{
+
+.image_3 {
   height: auto;
   margin-top: 27.5vw;
   width: 34.5vw;
   margin-left: -6vw;
   position: relative;
 }
-.star-text{
-   color: #c62828; /* red */
+
+.star-text {
+  color: #c62828;
+  /* red */
   position: relative;
 }
 
@@ -77,46 +85,55 @@ gap: 10vw;
   /* font-family: 'Segoe UI', sans-serif; */
   box-shadow: 0 1vw 3vw rgba(0, 0, 0, 0.15)
 }
-.signup-right p{
+
+.signup-right p {
   padding-bottom: 1vw;
   font-size: 1.1vw;
   font-family: 'Poppins', sans-serif;
   /* font-family: 'Calibri', sans-serif; */
   font-weight: 500;
 }
-.pic1{
+
+.pic1 {
   width: 2vw;
   transform: translate(0vw, -1vw);
 }
-.error-message2{
-    text-align: center;
+
+.error-message2 {
+  text-align: center;
   font-size: 1vw;
   color: #b33a3a;
   margin-top: -2vw;
 }
-.succesMsg_signup{
-    text-align: center;
+
+.succesMsg_signup {
+  text-align: center;
   font-size: 1vw;
   color: white;
   margin-top: -3vw;
 }
-.para{
+
+.para {
   padding-top: 1vw;
 }
-.image1{
+
+.image1 {
   width: 30vw;
   height: 42vw;
   margin-left: -8vw;
   margin-top: -2vw;
 }
+
 .form-group {
   margin-bottom: 0.5vw;
   position: relative;
 }
-.image5{
+
+.image5 {
   width: 2vw;
   transform: translate(0vw, -1vw)
 }
+
 .form-group input {
   width: 100%;
   padding: 1vw 3.3vw 1vw 1vw;
@@ -129,34 +146,24 @@ gap: 10vw;
   box-sizing: border-box;
 }
 
-
+.google,
 .btn-Sinup {
-  width: 100%;
-  padding: 1vw;
-  font-size: 1.1vw;
-  font-weight: bold;
-  border: none;
-  border-radius: 0.7vw;
   background-color: #10b153;
-  color: white;
-  height: 2.5vw;
-  cursor: pointer;
-  box-shadow: 0 0.5vw 1.5vw rgba(108, 99, 255, 0.2);
-}
-
-.google{
-  background-color: #4285f4;
   color: #ffffff;
-  padding: 0.5vw 2vw;
+  padding: .8vw 0vw;
   font-size: 1.3vw;
   font-weight: 500;
   width: 100%;
   border-radius: 0.7vw;
-  border: 1px solid #4285f4;
+  border: none;
   cursor: pointer;
-  height: 2.5vw;
+  /* height: 2.5vw; */
   margin-bottom: 1vw;
   text-align: center;
+}
+
+.google {
+  /* margin-top: 1vw; */
 }
 
 .signup-left {
@@ -170,16 +177,17 @@ gap: 10vw;
 }
 
 .signup-left h2 {
-   font-size: 2.2vw;
+  font-size: 2.2vw;
   font-weight: 400;
   color: #1e1e7a;
   margin-bottom: 1vw;
   margin-top: -10vw;
   margin-left: -1vw;
-  position:relative;
-  font-family: 'Poppins', sans-serif; 
-  
-} 
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+
+}
+
 .success-message {
   color: #fff;
   font-weight: 600;
@@ -205,39 +213,46 @@ gap: 10vw;
   position: relative;
   font-family: 'Poppins', sans-serif;
 }
-.stares{
+
+.stares {
   margin-top: -10vw;
   position: absolute;
   margin-left: 7vw;
 }
-.image6{
+
+.image6 {
   width: 1.5vw;
   transform: translate(0.5vw, -1.7vw);
 }
-.image5{
+
+.image5 {
   width: 2vw;
 }
 
 @media (max-width: 768px) {
   .login-wrapper {
     flex-direction: column;
-     /* height: 97vh; */
-     /* max-height: 100vh; */
+    /* max-height: 100vh; */
     padding: 5vw 2vw;
+    /* height: auto; */
     /* width: 100vw; */
+    height: 92vh;
+    width: auto;
   }
 
   .login-box {
     flex-direction: column;
     align-items: center;
-    /* width: 100vw; */
+    justify-content: center;
+    width: 90vw;
+    height: 92vh;
   }
 
-  .signup-left h2{
+  .signup-left h2 {
     display: none;
   }
 
-  .stares{
+  .stares {
     display: none;
   }
 
@@ -256,7 +271,7 @@ gap: 10vw;
     display: none;
   }
 
-  .image1{
+  .image1 {
     display: none;
   }
 
@@ -274,11 +289,12 @@ gap: 10vw;
     width: 90vw;
   }
 
-  
-  .signup-right p{
+
+  .signup-right p {
     color: #fff;
     font-size: 4vw;
   }
+
   .text-bubble p {
     font-size: 4vw;
     width: 100%;
@@ -288,17 +304,17 @@ gap: 10vw;
     margin-bottom: 4vw;
   }
 
-  .signup-left h3{
+  .signup-left h3 {
     display: none;
   }
 
   .form-group label {
-    font-size: 3.5vw;
+    font-size: 4vw;
   }
 
   .form-group input {
-    font-size: 3.8vw;
-    padding: 3vw;
+    font-size: 4vw;
+    padding: 5vw 3vw;
     border-radius: 2vw;
   }
 
@@ -307,7 +323,7 @@ gap: 10vw;
     font-size: 4.5vw;
   }
 
-  .para{
+  .para {
     font-size: 2vw;
   }
 
@@ -318,13 +334,22 @@ gap: 10vw;
 
   .btn-Sinup {
     font-size: 4vw;
-    padding: 3vw;
+    padding: 3vw 0vw;
     border-radius: 2vw;
     width: 80vw;
-    height: 10vw;
+    height: fit-content;
   }
 
-  .signup{
+  .google {
+    font-size: 4vw;
+    padding: 3vw 0vw;
+    border-radius: 2vw;
+    width: 80vw;
+    height: fit-content;
+    margin-top: 1vw;
+  }
+
+  .signup {
     padding-left: 21vw;
   }
 
@@ -334,20 +359,23 @@ gap: 10vw;
 
   .signup-right {
     padding: 3vw;
-    height: 130vw;
+    /* height: 130vw; */
+    height: auto;
     border-radius: 4vw;
-    margin-top: 10vw;
+    /* margin-top: 10vw; */
     width: 80vw;
-    margin-bottom: 26vw;
-    margin-left: -7vw;
+    /* margin-bottom: 26vw; */
+    /* margin-left: -7vw; */
 
   }
-  .error-message2{
-  font-size: 3vw;
 
-}
-.succesMsg_signup{
-  font-size: 3vw;
-  /* margin-top: -1vw; */
-}
+  .error-message2 {
+    font-size: 3vw;
+
+  }
+
+  .succesMsg_signup {
+    font-size: 3vw;
+    /* margin-top: -1vw; */
+  }
 }
