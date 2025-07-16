@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from "react";
-import image2 from "../../assets/Login/image2.png";
-import image3 from "../../assets/Login/image3.png";
-import image4 from "../../assets/Login/image4.png";
 import image1 from "../../assets/Login/image1.svg";
-import image6 from "../../assets/Login/Picture12.png";
-import image5 from "../../assets/Login/Picture10.png";
-import { useLocation, useNavigate } from "react-router-dom";
+import image4 from "../../assets/Login/image4.png";
 import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
@@ -14,12 +9,13 @@ import {
   getRedirectResult,
   fetchSignInMethodsForEmail,
   signOut,
-  updatePassword,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { ref, set, get, database, auth } from "../../Firebase/firebase";
 import { GrView } from "react-icons/gr";
 import { BiHide } from "react-icons/bi";
 import "./Login.css";
+import { useNavigate } from "react-router-dom";
 
 const setStorageItem = (key, value) => {
   try {
@@ -40,45 +36,47 @@ const LoginPage = () => {
   const [successmsg, setsuccessmsg] = useState("");
   const navigate = useNavigate();
 
-  // ✅ Handle Google Redirect login (kept for future use)
-  
-  if (!redirectHandled && sessionStorage.getItem("googleRedirect") === "true") {
-    setRedirectHandled(true);
-    sessionStorage.removeItem("googleRedirect");
+  useEffect(() => {
+    if (
+      !redirectHandled &&
+      sessionStorage.getItem("googleRedirect") === "true"
+    ) {
+      setRedirectHandled(true);
+      sessionStorage.removeItem("googleRedirect");
 
-    getRedirectResult(auth)
-      .then(async (result) => {
-        if (!result?.user) return;
-        const uid = result.user.uid;
-        const email = result.user.email;
+      getRedirectResult(auth)
+        .then(async (result) => {
+          if (!result?.user) return;
+          const uid = result.user.uid;
+          const email = result.user.email;
 
-        const userRef = ref(database, `users/${uid}`);
-        const snapshot = await get(userRef);
+          const userRef = ref(database, `users/${uid}`);
+          const snapshot = await get(userRef);
 
-        if (!snapshot.exists()) {
-          await set(userRef, { email, role: "user" });
-        }
+          if (!snapshot.exists()) {
+            await set(userRef, { email, role: "user" });
+          }
 
-        const token = await result.user.getIdToken();
-        setStorageItem("authToken", token);
-        setStorageItem("userType", "user");
+          const token = await result.user.getIdToken();
+          setStorageItem("authToken", token);
+          setStorageItem("userType", "user");
 
-        const planRef = ref(database, `users/${uid}/plan`);
-        const planSnap = await get(planRef);
-        const now = Date.now();
+          const planRef = ref(database, `users/${uid}/plan`);
+          const planSnap = await get(planRef);
+          const now = Date.now();
 
-        if (planSnap.exists() && now < planSnap.val().endTime) {
-          navigate("/quiz");
-        } else {
-          navigate("/slectPlanpage");
-        }
-      })
-      .catch((err) => {
-        console.error("Google Sign-In Failed:", err);
-        setError("Google Sign-In Failed");
-      });
-  }
-  
+          if (planSnap.exists() && now < planSnap.val().endTime) {
+            navigate("/quiz");
+          } else {
+            navigate("/slectPlanpage");
+          }
+        })
+        .catch((err) => {
+          console.error("Google Sign-In Failed:", err);
+          setError("Google Sign-In Failed");
+        });
+    }
+  }, [redirectHandled, navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -118,15 +116,9 @@ const LoginPage = () => {
       const now = Date.now();
       setsuccessmsg("Login Successful!");
 
-      if (planSnap.exists() && now < planSnap.val().endTime) {
-        setTimeout(() => {
-          navigate("/select-age-group");
-        }, 2000);
-      } else {
-        setTimeout(() => {
-          navigate("/select-age-group");
-        }, 2000);
-      }
+      setTimeout(() => {
+        navigate("/select-age-group");
+      }, 2000);
     } catch (err) {
       console.error(err);
       if (err.code === "auth/invalid-email") setError("Invalid email format.");
@@ -137,38 +129,31 @@ const LoginPage = () => {
     }
   };
 
-  const handlePasswordUpdate = async (e) => {
+  const handleSendResetEmail = async (e) => {
     e.preventDefault();
     setError("");
     setMessage("");
 
     const trimmedEmail = email.trim();
-    const newPass = password.trim();
 
-    if (!trimmedEmail || !newPass) {
-      setError("Email and new password are required.");
+    if (!trimmedEmail) {
+      setError("Please enter your email.");
       return;
     }
 
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        trimmedEmail,
-        newPass
-      );
-      await updatePassword(userCredential.user, newPass);
-      await signOut(auth);
-
-      setMessage("Password changed successfully. Please log in.");
-      setShowChangePassword(false);
+      await sendPasswordResetEmail(auth, trimmedEmail);
+      setMessage("Password reset email sent! Please check your inbox.");
     } catch (err) {
-      console.error("Password change error:", err);
-      setError("Failed to change password.");
+      console.error("Password reset error:", err);
+      if (err.code === "auth/user-not-found") {
+        setError("No user found with this email.");
+      } else {
+        setError("Failed to send password reset email.");
+      }
     }
   };
 
-  // ✅ Google Login handler (commented for future use)
-  
   const handleGoogleLogin = async () => {
     try {
       const provider = new GoogleAuthProvider();
@@ -215,39 +200,22 @@ const LoginPage = () => {
       setError("Google Sign-In Failed.");
     }
   };
-  
 
   return (
     <div className="login_container">
-      {/* <img src={image1} alt="Background" className="login_background" /> */}
       <div className="login_box">
         <div className="login-leftside">
-          {/* <img src={image2} alt="Cartoon" className="boy_image " />
-          <img src={image3} className="image_shape" alt="Illustration" />
-          <div className="stars">
-            <img src={image6} className="img6" />
-            <img src={image5} className="img5" />
-          </div>
-          <h2> */}
-            {/* Unleash the <img src={image6} className="img6"/> */}
-            {/* Unlesh the <span className="star-text">Star</span> Within!
-          </h2>
-          <p>
-            Boost your child’s confidence and social <br />
-            skills to unlock lifelong success.
-          </p> */}
-          <img src={image1}  className="img1"/>
+          <img src={image1} className="img1" />
         </div>
 
         <div className="login-rightside">
           <div className="head">
             <img src={image4} className="logo" alt="Logo" />
-           
-            <h2>{"User Login"}</h2>
+            <h2>User Login</h2>
           </div>
 
           <form
-            onSubmit={showChangePassword ? handlePasswordUpdate : handleLogin}
+            onSubmit={showChangePassword ? handleSendResetEmail : handleLogin}
           >
             <div className="form-login">
               <label>Email</label>
@@ -259,24 +227,32 @@ const LoginPage = () => {
               />
             </div>
 
-            <div className="form-login">
-              <label>{showChangePassword ? "New Password" : "Password"}</label>
-              <div className="password-wrapper">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="toggle-password"
-                >
-                  {showPassword ? <GrView /> : <BiHide />}
-                </button>
+            {!showChangePassword && (
+              <div className="form-login">
+                <label>Password</label>
+                <div className="password-wrapper">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="toggle-password"
+                  >
+                    {showPassword ? <GrView /> : <BiHide />}
+                  </button>
+                </div>
               </div>
-            </div>
+            )}
+
+            {showChangePassword && (
+              <p className="info-message">
+                We'll send a password reset link to your email.
+              </p>
+            )}
 
             <div>
               <p>
@@ -289,7 +265,10 @@ const LoginPage = () => {
                 {showChangePassword ? (
                   <span
                     className="sign"
-                    onClick={() => setShowChangePassword(false)}
+                    onClick={() => {
+                      setShowChangePassword(false);
+                      setMessage("");
+                    }}
                   >
                     Back to Login
                   </span>
@@ -307,10 +286,17 @@ const LoginPage = () => {
             {error && <p className="error-message1">{error}</p>}
             {message && <p className="success-message">{message}</p>}
             {successmsg && <p className="success-message">{successmsg}</p>}
-            <button type="submit" className="google" onClick={handleGoogleLogin}/>
+
+            <button
+              type="button"
+              className="google"
+              onClick={handleGoogleLogin}
+            >
+              Google Login
+            </button>
 
             <button type="submit" className="btn-login">
-              {showChangePassword ? "Change Password" : "Login"}
+              {showChangePassword ? "Send Reset Link" : "Login"}
             </button>
           </form>
         </div>
