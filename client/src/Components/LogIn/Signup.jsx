@@ -32,6 +32,7 @@ const SignupPage = () => {
   const [error, setError] = useState("");
   const [success, setsuccess] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [redirectHandled, setRedirectHandled] = useState(false);
   const navigate = useNavigate();
 
   const handleUserSignup = async (e) => {
@@ -72,7 +73,6 @@ const SignupPage = () => {
       await set(ref(database, `users/${userCredential.user.uid}`), {
         name: trimmedName,
         email: trimmedEmail,
-        password: trimmedPassword,
         role: "user",
       });
       setTimeout(() => {
@@ -88,6 +88,89 @@ const SignupPage = () => {
       else setError("Signup failed.");
     }
   };
+  if (!redirectHandled && sessionStorage.getItem("googleRedirect") === "true") {
+      setRedirectHandled(true);
+      sessionStorage.removeItem("googleRedirect");
+  
+      getRedirectResult(auth)
+        .then(async (result) => {
+          if (!result?.user) return;
+          const uid = result.user.uid;
+          const email = result.user.email;
+  
+          const userRef = ref(database, `users/${uid}`);
+          const snapshot = await get(userRef);
+  
+          if (!snapshot.exists()) {
+            await set(userRef, { email, role: "user" });
+          }
+  
+          const token = await result.user.getIdToken();
+          setStorageItem("authToken", token);
+          setStorageItem("userType", "user");
+  
+          const planRef = ref(database, `users/${uid}/plan`);
+          const planSnap = await get(planRef);
+          const now = Date.now();
+  
+          if (planSnap.exists() && now < planSnap.val().endTime) {
+            navigate("/quiz");
+          } else {
+            navigate("/slectPlanpage");
+          }
+        })
+        .catch((err) => {
+          console.error("Google Sign-In Failed:", err);
+          setError("Google Sign-In Failed");
+        });
+    }
+
+    const handleGoogleLogin = async () => {
+        try {
+          const provider = new GoogleAuthProvider();
+          provider.setCustomParameters({ prompt: "select_account" });
+    
+          if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+            sessionStorage.setItem("googleRedirect", "true");
+            await signInWithRedirect(auth, provider);
+          } else {
+            const result = await signInWithPopup(auth, provider);
+            const email = result.user.email;
+    
+            const methods = await fetchSignInMethodsForEmail(auth, email);
+            if (methods.includes("password")) {
+              setError("This email is already registered with Email/Password.");
+              await signOut(auth);
+              return;
+            }
+    
+            const uid = result.user.uid;
+            const userRef = ref(database, `users/${uid}`);
+            const snapshot = await get(userRef);
+    
+            if (!snapshot.exists()) {
+              await set(userRef, { email, role: "user" });
+            }
+    
+            const token = await result.user.getIdToken();
+            setStorageItem("authToken", token);
+            setStorageItem("userType", "user");
+    
+            const planRef = ref(database, `users/${uid}/plan`);
+            const planSnap = await get(planRef);
+            const now = Date.now();
+    
+            if (planSnap.exists() && now < planSnap.val().endTime) {
+              navigate("/quiz");
+            } else {
+              navigate("/slectPlanpage");
+            }
+          }
+        } catch (err) {
+          console.error("Google sign-in error:", err);
+          setError("Google Sign-In Failed.");
+        }
+      };
 
   return (
     <div className="login-wrapper">
@@ -178,6 +261,9 @@ const SignupPage = () => {
 
             {error && <p className="error-message2">{error}</p>}
             {success && <p className="error-message2 succesMsg_signup">{success}</p>}
+
+            <button type="submit" className="google" onClick={handleGoogleLogin}>
+              Google</button>
 
             <button type="submit" className="btn-Sinup">
               Sign Up

@@ -60,16 +60,18 @@ const LoginPage = () => {
           const token = await result.user.getIdToken();
           setStorageItem("authToken", token);
           setStorageItem("userType", "user");
+          setTimeout(() => {
+            navigate("/select-age-group");
+          }, 1000);
+          // const planRef = ref(database, `users/${uid}/plan`);
+          // const planSnap = await get(planRef);
+          // const now = Date.now();
 
-          const planRef = ref(database, `users/${uid}/plan`);
-          const planSnap = await get(planRef);
-          const now = Date.now();
-
-          if (planSnap.exists() && now < planSnap.val().endTime) {
-            navigate("/quiz");
-          } else {
-            navigate("/slectPlanpage");
-          }
+          // if (planSnap.exists() && now < planSnap.val().endTime) {
+          //   navigate("/select-age-group");
+          // } else {
+          //   navigate("/select-age-group");
+          // }
         })
         .catch((err) => {
           console.error("Google Sign-In Failed:", err);
@@ -110,10 +112,10 @@ const LoginPage = () => {
       setStorageItem("authToken", token);
       setStorageItem("userType", "user");
 
-      const uid = userCredential.user.uid;
-      const planRef = ref(database, `users/${uid}/plan`);
-      const planSnap = await get(planRef);
-      const now = Date.now();
+      // const uid = userCredential.user.uid;
+      // const planRef = ref(database, `users/${uid}/plan`);
+      // const planSnap = await get(planRef);
+      // const now = Date.now();
       setsuccessmsg("Login Successful!");
 
       setTimeout(() => {
@@ -184,16 +186,18 @@ const LoginPage = () => {
         const token = await result.user.getIdToken();
         setStorageItem("authToken", token);
         setStorageItem("userType", "user");
+        setTimeout(() => {
+          navigate("/select-age-group");
+        }, 1000);
+        // const planRef = ref(database, `users/${uid}/plan`);
+        // const planSnap = await get(planRef);
+        // const now = Date.now();
 
-        const planRef = ref(database, `users/${uid}/plan`);
-        const planSnap = await get(planRef);
-        const now = Date.now();
-
-        if (planSnap.exists() && now < planSnap.val().endTime) {
-          navigate("/quiz");
-        } else {
-          navigate("/slectPlanpage");
-        }
+        // if (planSnap.exists() && now < planSnap.val().endTime) {
+        //   navigate("/quiz");
+        // } else {
+        //   navigate("/slectPlanpage");
+        // }
       }
     } catch (err) {
       console.error("Google sign-in error:", err);
@@ -286,15 +290,13 @@ const LoginPage = () => {
             {error && <p className="error-message1">{error}</p>}
             {message && <p className="success-message">{message}</p>}
             {successmsg && <p className="success-message">{successmsg}</p>}
-
             <button
-              type="button"
-              className="google"
+              type="submit"
+              className="btn-google"
               onClick={handleGoogleLogin}
             >
-              Google Login
+              Google
             </button>
-
             <button type="submit" className="btn-login">
               {showChangePassword ? "Send Reset Link" : "Login"}
             </button>
