@@ -179,8 +179,8 @@ function PiePage() {
               </div>
 
               <h2 className="welcome-message">
-                <span className="star-icon1">✰</span>
-                <span className="star-icon2">✰</span>
+                {/* <span className="star-icon1">✰</span>
+                <span className="star-icon2">✰</span> */}
                 {/* <span className="star-icon">⭐️</span> */}
                 Welcome&nbsp;<b className="highlight-name">{Userdata?.name}</b>
               </h2>

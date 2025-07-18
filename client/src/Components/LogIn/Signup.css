@@ -37,7 +37,9 @@
 .login-box {
   display: flex;
   flex-direction: row;
-  
+  gap: 11vw;
+  justify-content: center;
+margin-left: 6vw;
 }
 
 .heading {
@@ -51,10 +53,7 @@
 
 }
 
-.login-box {
-  display: flex;
-  gap: 10vw;
-}
+
 
 .image_3 {
   height: auto;
@@ -76,14 +75,14 @@
   padding: 2vw;
   /* padding-right: 2vw; */
   /* max-width: 50vw; */
-  width: 29vw;
+  width: 30vw;
   color: white;
   /* margin-left: 10vw; */
   /* height: 37vw; */
   height: fit-content;
   margin-top: -0.2vw;
   /* font-family: 'Segoe UI', sans-serif; */
-  box-shadow: 0 1vw 3vw rgba(0, 0, 0, 0.15)
+  box-shadow: 0 1vw 3vw rgba(0, 0, 0, 0.15);
 }
 
 .signup-right p {
@@ -110,7 +109,6 @@
   text-align: center;
   font-size: 1vw;
   color: white;
-  margin-top: -3vw;
 }
 
 .para {
@@ -118,7 +116,7 @@
 }
 
 .image1 {
-  width: 30vw;
+  width: 32vw;
   height: 42vw;
   margin-left: -8vw;
   margin-top: -2vw;
@@ -146,7 +144,7 @@
   box-sizing: border-box;
 }
 
-.google,
+
 .btn-Sinup {
   background-color: #10b153;
   color: #ffffff;
@@ -163,7 +161,9 @@
 }
 
 .google {
-  /* margin-top: 1vw; */
+  font-size: 2vw;
+  cursor: pointer;
+  margin-top: -1.5vw;
 }
 
 .signup-left {
@@ -246,6 +246,8 @@
     justify-content: center;
     width: 90vw;
     height: 92vh;
+    margin-left: 0vw;
+
   }
 
   .signup-left h2 {
@@ -341,12 +343,9 @@
   }
 
   .google {
-    font-size: 4vw;
-    padding: 3vw 0vw;
-    border-radius: 2vw;
-    width: 80vw;
-    height: fit-content;
-    margin-top: 1vw;
+    font-size: 8vw;
+    cursor: pointer;
+    margin-top: -1.5vw;
   }
 
   .signup {

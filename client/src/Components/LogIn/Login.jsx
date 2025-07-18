@@ -12,7 +12,7 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { ref, set, get, database, auth } from "../../Firebase/firebase";
-import { GrView } from "react-icons/gr";
+import { GrGoogle, GrView } from "react-icons/gr";
 import { BiHide } from "react-icons/bi";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
@@ -291,16 +291,11 @@ const LoginPage = () => {
           {error && <p className="error-message1">{error}</p>}
           {message && <p className="success-message">{message}</p>}
           {successmsg && <p className="success-message">{successmsg}</p>}
-
+          <div onClick={handleGoogleLogin}>
+            <GrGoogle className="btn-google" />
+          </div>
           <button type="submit" className="btn-login">
             {showChangePassword ? "Send Reset Link" : "Login"}
-          </button>
-          <button
-            type="button"
-            className="btn-google"
-            onClick={handleGoogleLogin}
-          >
-            Google
           </button>
         </form>
       </div>

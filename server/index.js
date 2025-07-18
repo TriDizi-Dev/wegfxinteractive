@@ -30,7 +30,7 @@
 //     const { userId, amount, mobile } = req.body;
 
 //     const payload = {
-//       merchantId: process.env.PHONEPE_MERCHANT_ID,
+//       merchantId: process.env.PHONEPE_CLIENT_ID,
 //       merchantTransactionId: `TXN_${Date.now()}`,
 //       merchantUserId: userId,
 //       amount: amount * 100,
@@ -97,8 +97,8 @@
 
 // const app = express();
 // const PORT = 5000;
-// const salt_key = "f8de9bcc-c6f5-4ae2-bcf9-ff84151eab67";
-// const merchant_id = "SU2507081620336428452705";
+// const CLIENT_SECRET = "f8de9bcc-c6f5-4ae2-bcf9-ff84151eab67";
+// const CLIENT_ID = "SU2507081620336428452705";
 
 // app.use(helmet());
 // app.use(cors());
@@ -126,7 +126,7 @@
 
 //   try {
 //     const payload = {
-//       merchantId: merchant_id,
+//       merchantId: CLIENT_ID,
 //       merchantTransactionId: `TXN_${Date.now()}`,
 //       merchantUserId: userId,
 //       amount: amount * 100, // Convert to paise
@@ -141,7 +141,7 @@
 //     const base64Payload = Buffer.from(JSON.stringify(payload)).toString(
 //       "base64"
 //     );
-//     const xVerify = generateXVerify(base64Payload, "/pg/checkout/v2/pay", salt_key, "1");
+//     const xVerify = generateXVerify(base64Payload, "/pg/checkout/v2/pay", CLIENT_SECRET, "1");
 //     console.log(xVerify, "xVerifyxVerify");
 
 //     const baseUrl = "https://api.phonepe.com/apis/pg/checkout/v2/pay";
@@ -200,13 +200,16 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Environment Variables
-const MERCHANT_ID = "SU2507081620336428452705";
-const SALT_KEY = "f8de9bcc-c6f5-4ae2-bcf9-ff84151eab67";
-// const MERCHANT_ID = "M22YOQGB6C5LL";
-// const SALT_KEY = "05ad3adc-857d-439a-aff4-2ee07d9028f9";
+// const CLIENT_ID = "SU2507081620336428452705";
+// const CLIENT_SECRET = "f8de9bcc-c6f5-4ae2-bcf9-ff84151eab67";
+const CLIENT_ID = "TEST-M237YCB7VEY54_25070";
+const CLIENT_SECRET = "YWFkZWFiYmItNDczZi00NTQyLWE0OWYtYWNhMzlkMzY4MTJm";
+CLIENT_VERSION = 1;
+// const CLIENT_ID = "M22YOQGB6C5LL";
+// const CLIENT_SECRET = "05ad3adc-857d-439a-aff4-2ee07d9028f9";
 const SALT_INDEX = "1"; // Can change to dynamic if needed
 const SUCCESS_URL = "https://think.wegfx.com/payment-success";
-const FAILURE_URL =  "https://think.wegfx.com/";
+const FAILURE_URL = "https://think.wegfx.com/";
 
 // Middleware
 app.use(cors());
@@ -220,6 +223,34 @@ function generateXVerify(base64Payload, path, saltKey, saltIndex) {
   return `${hash}###${saltIndex}`;
 }
 
+const getAccessToken = async () => {
+  try {
+    const params = new URLSearchParams();
+    params.append("client_id", CLIENT_ID);
+    params.append("client_version", CLIENT_VERSION);
+    params.append("client_secret", CLIENT_SECRET);
+    params.append("grant_type", "client_credentials");
+
+    const response = await axios.post(
+      "https://api-preprod.phonepe.com/apis/pg-sandbox/v1/oauth/token",
+      params,
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    );
+    console.log(response.data, "tokennnn");
+
+    return response.data.access_token;
+  } catch (error) {
+    console.error(
+      "Error fetching token:",
+      error.response?.data || error.message
+    );
+    throw new Error("Unable to fetch access token");
+  }
+};
 // Initiate Payment
 app.post("/initiate-payment", async (req, res) => {
   try {
@@ -235,41 +266,49 @@ app.post("/initiate-payment", async (req, res) => {
 
     const merchantTransactionId = `TXN_${Date.now()}`;
     const payload = {
-      merchantId: MERCHANT_ID,
-      merchantTransactionId,
+      merchantOrderId: merchantTransactionId,
       merchantUserId: userId,
       amount: amount * 100,
+      metaInfo: {
+        udf1: "info1",
+        udf2: "info2",
+        udf3: "info3",
+        udf4: "info4",
+        udf5: "info5",
+      },
       redirectUrl: `http://localhost:5000/payment-success`,
       redirectMode: "POST",
-      paymentInstrument: { type: "PAY_PAGE" },
+      paymentFlow: {
+        type: "PG_CHECKOUT",
+      },
     };
     console.log(payload, "payloadpayload");
 
-    const base64Payload = Buffer.from(JSON.stringify(payload)).toString(
-      "base64"
-    );
-    const xVerify = generateXVerify(
-      base64Payload,
-      "/pg/v1/pay",
-      SALT_KEY,
-      SALT_INDEX
-    );
+    // const base64Payload = Buffer.from(JSON.stringify(payload)).toString(
+    //   "base64"
+    // );
+    // const xVerify = generateXVerify(
+    //   base64Payload,
+    //   "/pg/v1/pay",
+    //   CLIENT_SECRET,
+    //   SALT_INDEX
+    // );
+    const token = await getAccessToken();
 
     const response = await axios.post(
-      "https://api.phonepe.com/apis/hermes/pg/v1/pay",
-      { request: base64Payload },
+      "https://api-preprod.phonepe.com/apis/pg-sandbox/checkout/v2/sdk/pay",
+      payload,
+      // "https://api.phonepe.com/apis/hermes/pg/v1/pay",
+      // { request: base64Payload },
       {
         headers: {
-          accept: "application/json",
           "Content-Type": "application/json",
-          "X-VERIFY": xVerify,
-          "X-MERCHANT-ID": MERCHANT_ID,
+          Authorization: `O-Bearer ${token}`,
         },
       }
     );
 
-    const redirectUrl =
-      response.data?.data?.instrumentResponse?.redirectInfo?.url;
+    const redirectUrl = response.data?.data?.redirectUrl;
     console.log("redirectUrl :", redirectUrl);
 
     if (!redirectUrl) {
@@ -285,89 +324,6 @@ app.post("/initiate-payment", async (req, res) => {
       error: "Payment initiation failed.",
       details: error.response?.data || error.message,
     });
-  }
-});
-
-// Payment Success (redirect mode)
-app.post("/payment-success", (req, res) => {
-  try {
-    const xVerifyHeader = req.headers["x-verify"];
-    const base64Response = req.body.response;
-
-    if (!xVerifyHeader || !base64Response) {
-      return res.redirect(FAILURE_URL);
-    }
-
-    const expectedChecksum = generateXVerify(
-      base64Response,
-      "/pg/v1/status",
-      SALT_KEY,
-      SALT_INDEX
-    );
-    if (xVerifyHeader !== expectedChecksum) {
-      return res.redirect(FAILURE_URL);
-    }
-
-    const decodedResponse = JSON.parse(
-      Buffer.from(base64Response, "base64").toString()
-    );
-
-    if (decodedResponse.success && decodedResponse.code === "PAYMENT_SUCCESS") {
-      console.log(
-        "✅ Payment Success:",
-        decodedResponse.data.merchantTransactionId
-      );
-      return res.redirect(SUCCESS_URL);
-    } else {
-      console.log("❌ Payment Failed:", decodedResponse.message);
-      return res.redirect(FAILURE_URL);
-    }
-  } catch (error) {
-    console.error("Redirect Callback Error:", error.message);
-    return res.redirect(FAILURE_URL);
-  }
-});
-
-// Server-to-server Callback (optional)
-app.post("/api/v1/payment-callback", (req, res) => {
-  try {
-    const xVerifyHeader = req.headers["x-verify"];
-    const base64Response = req.body.response;
-
-    if (!xVerifyHeader || !base64Response) {
-      return res.status(400).json({ error: "Missing X-VERIFY or response" });
-    }
-
-    const expectedChecksum = generateXVerify(
-      base64Response,
-      "/pg/v1/status",
-      SALT_KEY,
-      SALT_INDEX
-    );
-    if (xVerifyHeader !== expectedChecksum) {
-      return res.status(400).json({ error: "Invalid checksum" });
-    }
-
-    const decodedResponse = JSON.parse(
-      Buffer.from(base64Response, "base64").toString()
-    );
-
-    if (decodedResponse.success && decodedResponse.code === "PAYMENT_SUCCESS") {
-      console.log(
-        "✅ Server Callback Payment Success:",
-        decodedResponse.data.merchantTransactionId
-      );
-    } else {
-      console.log(
-        "❌ Server Callback Payment Failed:",
-        decodedResponse.message
-      );
-    }
-
-    res.status(200).json({ message: "Callback processed successfully" });
-  } catch (error) {
-    console.error("Callback Error:", error.message);
-    res.status(500).json({ error: "Callback processing failed" });
   }
 });
 
