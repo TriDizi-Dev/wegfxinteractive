@@ -1,14 +1,12 @@
-
-
- .cost {
- width: 95vw;
+.cost {
+  width: 95vw;
   max-width: 100vw;
   padding: 1.67vw;
   /* 20px */
   box-sizing: border-box;
-height: 34vw;
-/* border: 2px solid; */
-/* overflow: auto; */
+  height: 34vw;
+  /* border: 2px solid; */
+  /* overflow: auto; */
 }
 
 .header {
@@ -61,10 +59,11 @@ height: 34vw;
   color: #333;
   margin-bottom: 1.67vw;
 }
-.logo1{
-height: 8vw;
-width: 10vw;
-margin-right: 15vw;
+
+.logo1 {
+  height: 8vw;
+  width: 10vw;
+  margin-right: 15vw;
 }
 
 
@@ -79,8 +78,7 @@ margin-right: 15vw;
 
 .foundation-text {
   color: #dc3545;
-  font-family: 'Londrina Solid, sans-serif';
- 
+  font-family: 'Poppins', sans-serif;
   font-weight: bold;
   font-size: 2vw;
   /* font-family: 'Times New Roman', Times, serif; Or use Georgia */
@@ -89,8 +87,8 @@ margin-right: 15vw;
 .foundation-text span {
   font-size: 1.5vw;
   font-family: 'Times New Roman', Times, serif;
-    font-weight: normal;
-    color: black;
+  font-weight: normal;
+  color: black;
 }
 
 .content-area {
@@ -151,12 +149,14 @@ margin-right: 15vw;
   text-transform: uppercase;
   font-weight: bold;
   opacity: 0.8;
+  font-family: 'Poppins', sans-serif;
+
 }
 
 .plan-name {
   font-size: 1.5vw;
-   font-family: 'Calibri', sans-serif;
-  
+  font-family: 'Calibri', sans-serif;
+
   margin-top: 0;
   margin-bottom: -.5vw;
   font-weight: bold;
@@ -170,23 +170,24 @@ margin-right: 15vw;
 .price-value {
   font-size: 1.5vw;
   font-weight: bold;
+  font-family: 'Poppins', sans-serif;
 }
 
 .duration {
   font-size: 1.33vw;
   margin-top: 0.42vw;
+  font-family: 'Poppins', sans-serif;
+
 }
 
 .trial-pack {
- 
+
   background-color: #c80000;
   color: white;
   border-radius: 1.5vw;
   text-align: center;
   /* padding: 0.83vw; */
   Font-weight: bold
-
-
 }
 
 .recommended {
@@ -197,21 +198,24 @@ margin-right: 15vw;
   /* padding: 0.83vw; */
   Font-weight: bold;
 }
+
 .super-saver {
- background-color: #002855;
+  background-color: #002855;
   color: white;
   border-radius: 1.5vw;
   text-align: center;
   /* padding: 0.83vw; */
   Font-weight: bold;
 }
- 
+
 
 .flexible-options-text {
   font-size: 1.2vw;
   color: #000;
   margin-bottom: 1.25vw;
   margin-left: 25vw;
+  font-family: 'Poppins', sans-serif;
+
 }
 
 .payment-options {
@@ -219,11 +223,13 @@ margin-right: 15vw;
   padding: 0;
   margin: 0;
   margin: 0vw 11vw;
+  font-family: 'Poppins', sans-serif;
+
 }
 
 .payment-options li {
   font-size: 1vw;
- font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   color: #000;
   margin-bottom: 0.67vw;
   line-height: 1.4;
@@ -237,7 +243,7 @@ margin-right: 15vw;
   .cost {
     height: 100vh;
   }
-   
+
   .main-title {
     font-size: 8vw;
   }
@@ -250,7 +256,7 @@ margin-right: 15vw;
     font-size: 4vw;
     margin-bottom: 2vw;
     margin-top: -5vw;
-    margin-left: -11vw; 
+    margin-left: -11vw;
   }
 
   .foundation-text {
@@ -333,11 +339,12 @@ margin-right: 15vw;
     gap: 6vw;
     margin-top: 6vw;
   }
-  .logo1{
-height: 17vw;
-width: 17vw;
-transform: translate(5vw, -4vw);
-margin-top: 3vw;
-margin-left: 10vw;
-}
+
+  .logo1 {
+    height: 17vw;
+    width: 17vw;
+    transform: translate(5vw, -4vw);
+    margin-top: 3vw;
+    margin-left: 10vw;
+  }
 }

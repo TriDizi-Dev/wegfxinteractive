@@ -53,6 +53,8 @@
     padding: 8px 12px;
     border-radius: 4px;
     cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+
 }
 
 .logout-popup button:hover {

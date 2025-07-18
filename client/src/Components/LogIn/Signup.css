@@ -5,6 +5,7 @@
     /* font-family: 'Calibri', sans-serif; */
 }
 
+.LogIn_main {}
 
 .cartoon-touch {
   width: 19vw;
@@ -26,8 +27,8 @@
 }
 
 .login-wrapper {
-  height: 97.5vh;
-  width: 99vw;
+  /* height: 97.5vh;
+  width: 99vw; */
   display: flex;
   /* justify-content: center; */
   justify-content: space-evenly;
@@ -39,7 +40,7 @@
   flex-direction: row;
   gap: 11vw;
   justify-content: center;
-margin-left: 6vw;
+  margin-left: 6vw;
 }
 
 .heading {
@@ -119,7 +120,7 @@ margin-left: 6vw;
   width: 32vw;
   height: 42vw;
   margin-left: -8vw;
-  margin-top: -2vw;
+  margin-top: -3vw;
 }
 
 .form-group {

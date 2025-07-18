@@ -16,6 +16,7 @@ import { GrGoogle, GrView } from "react-icons/gr";
 import { BiHide } from "react-icons/bi";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
+import { Navbar } from "../Navbar/Navbar";
 
 const setStorageItem = (key, value) => {
   try {
@@ -208,99 +209,101 @@ const LoginPage = () => {
   };
 
   return (
-    // <div className="login_container">
-    <div className="login_box">
-      <div className="login-leftside">
-        <img src={image1} className="img1" />
-      </div>
+    <div>
+      <Navbar />
 
-      <div className="login-rightside">
-        <div className="head">
-          <img src={image4} className="logo" alt="Logo" />
-          <h2>User Login</h2>
+      <div className="login_box">
+        <div className="login-leftside">
+          <img src={image1} className="img1" />
         </div>
-        <form
-          onSubmit={showChangePassword ? handleSendResetEmail : handleLogin}
-        >
-          <div className="form-login">
-            <label>Email</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-          </div>
 
-          {!showChangePassword && (
+        <div className="login-rightside">
+          <div className="head">
+            <img src={image4} className="logo" alt="Logo" />
+            <h2>User Login</h2>
+          </div>
+          <form
+            onSubmit={showChangePassword ? handleSendResetEmail : handleLogin}
+          >
             <div className="form-login">
-              <label>Password</label>
-              <div className="password-wrapper">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="toggle-password"
-                >
-                  {showPassword ? <GrView /> : <BiHide />}
-                </button>
-              </div>
+              <label>Email</label>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
             </div>
-          )}
 
-          {showChangePassword && (
-            <p className="info-message">
-              We'll send a password reset link to your email.
-            </p>
-          )}
+            {!showChangePassword && (
+              <div className="form-login">
+                <label>Password</label>
+                <div className="password-wrapper">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="toggle-password"
+                  >
+                    {showPassword ? <GrView /> : <BiHide />}
+                  </button>
+                </div>
+              </div>
+            )}
 
-          <div>
-            <p>
-              Create an account?{" "}
-              <b className="login" onClick={() => navigate("/sign-up")}>
-                Sign Up
-              </b>
-            </p>
-            <h3>
-              {showChangePassword ? (
-                <span
-                  className="sign"
-                  onClick={() => {
-                    setShowChangePassword(false);
-                    setMessage("");
-                  }}
-                >
-                  Back to Login
-                </span>
-              ) : (
-                <span
-                  className="sign"
-                  onClick={() => setShowChangePassword(true)}
-                >
-                  Forget Password
-                </span>
-              )}
-            </h3>
-          </div>
+            {showChangePassword && (
+              <p className="info-message">
+                We'll send a password reset link to your email.
+              </p>
+            )}
 
-          {error && <p className="error-message1">{error}</p>}
-          {message && <p className="success-message">{message}</p>}
-          {successmsg && <p className="success-message">{successmsg}</p>}
-          <div onClick={handleGoogleLogin}>
-            <GrGoogle className="btn-google" />
-          </div>
-          <button type="submit" className="btn-login">
-            {showChangePassword ? "Send Reset Link" : "Login"}
-          </button>
-        </form>
+            <div>
+              <p>
+                Create an account?{" "}
+                <b className="login" onClick={() => navigate("/sign-up")}>
+                  Sign Up
+                </b>
+              </p>
+              <h3>
+                {showChangePassword ? (
+                  <span
+                    className="sign"
+                    onClick={() => {
+                      setShowChangePassword(false);
+                      setMessage("");
+                    }}
+                  >
+                    Back to Login
+                  </span>
+                ) : (
+                  <span
+                    className="sign"
+                    onClick={() => setShowChangePassword(true)}
+                  >
+                    Forget Password
+                  </span>
+                )}
+              </h3>
+            </div>
+
+            {error && <p className="error-message1">{error}</p>}
+            {message && <p className="success-message">{message}</p>}
+            {successmsg && <p className="success-message">{successmsg}</p>}
+            <div onClick={handleGoogleLogin}>
+              <GrGoogle className="btn-google" />
+            </div>
+            <button type="submit" className="btn-login">
+              {showChangePassword ? "Send Reset Link" : "Login"}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
-    // </div>
   );
 };
 

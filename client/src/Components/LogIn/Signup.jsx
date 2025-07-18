@@ -20,6 +20,7 @@ import { GrGoogle, GrView } from "react-icons/gr";
 import { BiHide } from "react-icons/bi";
 import "./Signup.css";
 import { FcGoogle } from "react-icons/fc";
+import { Navbar } from "../Navbar/Navbar";
 
 const setStorageItem = (key, value) => {
   try {
@@ -173,10 +174,13 @@ const SignupPage = () => {
   // };
 
   return (
-    <div className="login-wrapper">
-      <div className="login-box">
-        <div className="signup-left">
-          {/* <img src={image2} alt="Cartoon" className="cartoon-touch" />
+    <div className="LogIn_main">
+      <Navbar />
+
+      <div className="login-wrapper">
+        <div className="login-box">
+          <div className="signup-left">
+            {/* <img src={image2} alt="Cartoon" className="cartoon-touch" />
           <img src={image3} className="image_3" alt="Decoration" />
            <div className="stares">
                       <img src={image6} className="image6"/>
@@ -189,87 +193,88 @@ const SignupPage = () => {
             Boost your child’s confidence and social <br />
             skills to unlock lifelong success.
           </h3> */}
-          <img src={image1} className="image1" />
-        </div>
-
-        <div className="signup-right">
-          <div className="heading">
-            <img src={image4} className="logeimage" alt="Logo" />
-            <h3>Create an account</h3>
+            <img src={image1} className="image1" />
           </div>
 
-          <form onSubmit={handleUserSignup}>
-            <div className="form-group">
-              <label>Name</label>
-              <input
-                type="text"
-                name="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
+          <div className="signup-right">
+            <div className="heading">
+              <img src={image4} className="logeimage" alt="Logo" />
+              <h3>Create an account</h3>
             </div>
 
-            <div className="form-group">
-              <label>Email</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-
-            <div className="form-group">
-              <label>Password</label>
-              <div className="password-wrapper">
+            <form onSubmit={handleUserSignup}>
+              <div className="form-group">
+                <label>Name</label>
                 <input
-                  type={showPassword ? "text" : "password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  type="text"
+                  name="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   required
                 />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-                  className="toggle-password"
-                >
-                  {showPassword ? <GrView /> : <BiHide />}
-                </button>
               </div>
-            </div>
 
-            <div className="form-group">
-              <label>Confirm Password</label>
-              <input
-                type="password"
-                name="confirmPassword"
-                value={confirm}
-                onChange={(e) => setConfirm(e.target.value)}
-                required
-              />
-            </div>
+              <div className="form-group">
+                <label>Email</label>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
 
-            <div className="para">
-              <p>
-                Already have an account?{" "}
-                <b className="signup" onClick={() => navigate("/")}>
-                  Login
-                </b>
-              </p>
-            </div>
-            {error && <p className="error-message2">{error}</p>}
-            {success && (
-              <p className="error-message2 succesMsg_signup">{success}</p>
-            )}
+              <div className="form-group">
+                <label>Password</label>
+                <div className="password-wrapper">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="toggle-password"
+                  >
+                    {showPassword ? <GrView /> : <BiHide />}
+                  </button>
+                </div>
+              </div>
 
-            {/* <p onClick={handleGoogleLogin}>
+              <div className="form-group">
+                <label>Confirm Password</label>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  value={confirm}
+                  onChange={(e) => setConfirm(e.target.value)}
+                  required
+                />
+              </div>
+
+              <div className="para">
+                <p>
+                  Already have an account?{" "}
+                  <b className="signup" onClick={() => navigate("/")}>
+                    Login
+                  </b>
+                </p>
+              </div>
+              {error && <p className="error-message2">{error}</p>}
+              {success && (
+                <p className="error-message2 succesMsg_signup">{success}</p>
+              )}
+
+              {/* <p onClick={handleGoogleLogin}>
               <GrGoogle className="google" />
             </p> */}
-            <button type="submit" className="btn-Sinup">
-              Sign Up
-            </button>
-          </form>
+              <button type="submit" className="btn-Sinup">
+                Sign Up
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>

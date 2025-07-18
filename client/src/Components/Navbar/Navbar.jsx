@@ -40,9 +40,11 @@ export const Navbar = () => {
 
   const location = useLocation();
 
-  const hideBackButtonPaths = ["/select-age-group"];
+  const hideBackButtonPaths = ["/select-age-group", "/", "/sign-up"];
+  const hideLogo = ["/", "/sign-up"];
 
   const shouldHideBackButton = hideBackButtonPaths.includes(location.pathname);
+  const shouldHideLog = hideLogo.includes(location.pathname);
 
   return (
     <div className="Main_NavBar_Css">
@@ -60,18 +62,22 @@ export const Navbar = () => {
           {/* Other navbar content */}
         </div>
       </div>
-
-      <div className="quiz-user-info">
-        <span>{Userdata.name}</span>
-        <div className="user-avatar" onClick={() => setShowLogout(!showLogout)}>
-          <CgProfile />
-          {showLogout && (
-            <div className="logout-popup">
-              <button onClick={handleLogout}>Logout</button>
-            </div>
-          )}
+      {!shouldHideLog && (
+        <div className="quiz-user-info">
+          <span>{Userdata.name}</span>
+          <div
+            className="user-avatar"
+            onClick={() => setShowLogout(!showLogout)}
+          >
+            <CgProfile />
+            {showLogout && (
+              <div className="logout-popup">
+                <button onClick={handleLogout}>Logout</button>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

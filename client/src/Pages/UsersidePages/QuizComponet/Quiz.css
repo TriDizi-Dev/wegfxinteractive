@@ -45,7 +45,8 @@
   height: 7vw;
   margin-top: -.5vw;
 }
-.think-logo_Quiz img{
+
+.think-logo_Quiz img {
   width: 100%;
   height: 100%;
 }
@@ -121,7 +122,7 @@
 .quiz-question-box {
   background-color: #007be5;
   color: white;
-  width:50%;
+  width: 50%;
   height: fit-content;
   /* max-width: 700px; */
   border-radius: 20px;
@@ -157,7 +158,7 @@
   cursor: pointer;
   transition: all 0.25s ease;
 
-    display: flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -247,6 +248,8 @@
   margin-bottom: 10px;
   font-weight: 600;
   text-align: left;
+  font-family: 'Poppins', sans-serif;
+
 }
 
 .quiz-congrats .user-name {
@@ -254,6 +257,8 @@
   font-weight: bold;
   margin: 10px 0;
   text-align: left;
+  font-family: 'Poppins', sans-serif;
+
 }
 
 .quiz-congrats .score {
@@ -262,6 +267,8 @@
   font-weight: 600;
   margin-bottom: 20px;
   text-align: left;
+  font-family: 'Poppins', sans-serif;
+
 }
 
 .quiz-congrats .restart-btn {
@@ -303,13 +310,14 @@
 
 .quiz-header-text h2 {
   color: red;
-  font-family: 'Londrina Solid, sans-serif';
   font-size: 1.5vw;
+  font-family: 'Poppins', sans-serif;
+
 }
 
 .quiz-header-text p {
   color: #000000;
-  font-family: 'Londrina Solid, sans-serif';
+  font-family: 'Poppins', sans-serif;
   font-size: 1.4vw;
   font-weight: 700;
   margin-top: -1vw;
@@ -326,6 +334,7 @@
 .congrats-banner {
   width: 25vw;
 }
+
 .quiz-feedback-text {
   font-size: 1.1vw;
   text-align: center;
@@ -334,11 +343,13 @@
 .feedback-correct {
   color: #ffffff;
   font-weight: bold;
+  font-family: 'Poppins', sans-serif;
 }
 
 .feedback-wrong {
-  color: ffffff;
+  color: #ffffff;
   font-weight: bold;
+  font-family: 'Poppins', sans-serif;
 }
 
 
@@ -474,43 +485,49 @@
   .quiz-next-btn {
     width: 100%;
   }
+
   .quiz-header-text h2 {
-  font-size: 4.5vw;
-        /* margin: 6vw 0vw; */
-        transform: translate(-2vw, 4vw);
-}
+    font-size: 4.5vw;
+    /* margin: 6vw 0vw; */
+    transform: translate(-2vw, 4vw);
+  }
 
-.quiz-header-text p {
-  font-size: 4vw;
-  transform: translate(-2vw, 4vw);
-}
+  .quiz-header-text p {
+    font-size: 4vw;
+    transform: translate(-2vw, 4vw);
+  }
 
-.think-logo_Quiz {
-  width: 20vw;
-  height: 15vw;
-  
-}
-.think-logo_Quiz img{
-  /* width: 100; */
-  height: 15vw;
-        width: 24vw;
-        margin: -15vw -12vw
-}
-.quiz-header-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.quiz-categories {
-padding: 2vw 1vw;
-  width: 90vw;
-  margin-top: 12vw;
-}
-.congrats-banner {
-  width: 60vw;
-}
-.quiz-feedback-text {
-  font-size: 4vw;
-  text-align: center;
-}
+  .think-logo_Quiz {
+    width: 20vw;
+    height: 15vw;
+
+  }
+
+  .think-logo_Quiz img {
+    /* width: 100; */
+    height: 15vw;
+    width: 24vw;
+    margin: -15vw -12vw
+  }
+
+  .quiz-header-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .quiz-categories {
+    padding: 2vw 1vw;
+    width: 90vw;
+    margin-top: 12vw;
+  }
+
+  .congrats-banner {
+    width: 60vw;
+  }
+
+  .quiz-feedback-text {
+    font-size: 4vw;
+    text-align: center;
+  }
 }
