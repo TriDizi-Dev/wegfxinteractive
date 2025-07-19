@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import image2 from "../../assets/Login/image2.png";
 import image3 from "../../assets/Login/image3.png";
 import image1 from "../../assets/Login/image1.svg";
-import image4 from "../../assets/Login/image4.png";
+import ThinkLogo from "../../assets/AllWebpAssets/Asset3.webp";
+
 import image5 from "../../assets/Login/Picture10.png";
 import image6 from "../../assets/Login/Picture12.png";
 import { useNavigate } from "react-router-dom";
@@ -198,7 +199,7 @@ const SignupPage = () => {
 
           <div className="signup-right">
             <div className="heading">
-              <img src={image4} className="logeimage" alt="Logo" />
+              <img src={ThinkLogo} className="logeimage" alt="Logo" />
               <h3>Create an account</h3>
             </div>
 

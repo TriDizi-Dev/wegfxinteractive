@@ -5,7 +5,6 @@
     /* font-family: 'Calibri', sans-serif; */
 }
 
-.LogIn_main {}
 
 .cartoon-touch {
   width: 19vw;
@@ -16,7 +15,8 @@
 }
 
 .logeimage {
-  width: 6vw;
+  width: 8vw;
+  height: 4vw;
   margin-top: -1vw;
 }
 
@@ -71,7 +71,7 @@
 }
 
 .signup-right {
-  background-color: #0072ce;
+  background-color: rgb(1, 1, 43);
   border-radius: 2vw;
   padding: 2vw;
   /* padding-right: 2vw; */
@@ -355,6 +355,7 @@
 
   .logeimage {
     width: 20vw;
+    height: 10vw;
   }
 
   .signup-right {

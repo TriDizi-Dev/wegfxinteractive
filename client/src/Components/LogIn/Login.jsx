@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import image1 from "../../assets/Login/image1.svg";
-import image4 from "../../assets/Login/image4.png";
+import thinklogo from "../../assets/AllWebpAssets/Asset3.webp";
 import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
@@ -219,7 +219,7 @@ const LoginPage = () => {
 
         <div className="login-rightside">
           <div className="head">
-            <img src={image4} className="logo" alt="Logo" />
+            <img src={thinklogo} className="logo" alt="Logo" />
             <h2>User Login</h2>
           </div>
           <form

@@ -95,8 +95,7 @@
 
 
 .login-rightside {
-
-  background-color: #10b153;
+  background-color: rgb(1, 1, 43);
   border-radius: 2vw;
   padding: 1vw;
   /* max-width: 50vw; */
@@ -127,8 +126,8 @@
 }
 
 .logo {
-  width: 9vw;
-  height: 5vw;
+  width: 8vw;
+  height: 4.5vw;
   margin-left: -0.5vw;
 }
 

@@ -20,9 +20,11 @@ import { useAuth } from "./Components/AuthContext";
 import PaymentSuccess from "./Pages/UsersidePages/PaymentSucces/paymentsucces";
 import AdminLoginPage from "./Components/LogIn/AdminLogin";
 import { useEffect } from "react";
-import backgroundImage from "../src/assets/Pieimages/Baackground_last.jpg";
+// import backgroundImage from "../src/assets/Pieimages/Baackground_last.jpg";
+import backgroundImage from "../src/assets/AllWebpAssets/Asset13.webp";
 import backgroundImageQuiz from "../src/assets/home/bg.jpg";
-import backfroundImageKids from "../src/assets/Pieimages/kidsimage.jpg";
+// import backfroundImageKids from "../src/assets/Pieimages/kidsimage.jpg";
+import backfroundImageKids from "../src/assets/AllWebpAssets/Asset10.webp";
 import PieChart from "./Components_Last/Piechart/Piechart";
 import backgroundimagplan from "./assets/Pieimages/Baackground_last1.png";
 
