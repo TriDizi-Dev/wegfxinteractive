@@ -34,45 +34,40 @@ function Layout() {
 
   const location = useLocation();
   console.log(location.pathname, "location.pathname");
-  const isMobile = window.innerWidth <= 768; // true if mobile screen
 
   useEffect(() => {
-    // Define the paths where you want a specific background
+    const isMobile = window.innerWidth <= 768;
     const imagePaths = ["/", "/sign-up"];
+
+    // Reset body styles first
+    document.body.style.backgroundImage = "";
+    document.body.style.height = "";
 
     if (imagePaths.includes(location.pathname)) {
       document.body.style.backgroundImage = `url(${backgroundImage})`;
-      document.body.style.backgroundSize = "cover";
-      document.body.style.backgroundRepeat = "no-repeat";
-      document.body.style.backgroundPosition = "center";
     } else if (location.pathname === "/quiz") {
       document.body.style.backgroundImage = `url(${backgroundImageQuiz})`;
-      document.body.style.backgroundSize = "cover";
-      document.body.style.backgroundRepeat = "no-repeat";
-      document.body.style.backgroundPosition = "center";
     } else if (location.pathname === "/select-age-group") {
       document.body.style.backgroundImage = `url(${backfroundImageKids})`;
-      document.body.style.backgroundSize = "cover";
-      document.body.style.backgroundRepeat = "no-repeat";
-      document.body.style.backgroundPosition = "center";
     } else if (location.pathname === "/report") {
-      document.body.style.height = isMobile && "120vh"; // ✅ ensures full viewport height
+      document.body.style.height = isMobile ? "120vh" : "";
       document.body.style.backgroundImage = `url(${backgroundimagplan})`;
-      document.body.style.backgroundSize = "cover";
-      document.body.style.backgroundRepeat = "no-repeat";
-      document.body.style.backgroundPosition = "center";
     } else if (location.pathname === "/plans") {
-      document.body.style.height = isMobile && "130vh"; // ✅ ensures full viewport height
+      document.body.style.height = isMobile ? "130vh" : "";
       document.body.style.backgroundImage = `url(${backgroundimagplan})`;
-      document.body.style.backgroundSize = "cover";
-      document.body.style.backgroundRepeat = "no-repeat";
-      document.body.style.backgroundPosition = "center";
     } else {
-      document.body.style.backgroundImage = "";
       document.body.style.background = `radial-gradient(circle at top left, #ede7f6, #d6d0f5, #e0dcff)`;
       document.body.style.backgroundColor = "#ffffff";
     }
+
+    // Common background styles
+    if (document.body.style.backgroundImage) {
+      document.body.style.backgroundSize = "cover";
+      document.body.style.backgroundRepeat = "no-repeat";
+      document.body.style.backgroundPosition = "center";
+    }
   }, [location.pathname]);
+
   if (loading) return <div>🔄 Loading...</div>;
   return (
     <>

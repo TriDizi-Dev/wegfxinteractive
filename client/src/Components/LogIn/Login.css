@@ -126,12 +126,14 @@
 
 .logo {
   width: 8vw;
-  height: 4.5vw;
-  margin-left: -0.5vw;
+  height: 4vw;
 }
 
 .head {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1vw;
 }
 
 .login-rightside h2 {
@@ -140,12 +142,12 @@
   font-size: 2.2vw;
   font-weight: 700;
   color: white;*/
-  margin-left: 12vw;
+  /* margin-left: 12vw; */
   /* font-family: 'Calibri', sans-serif; */
   color: #ffffff;
-  font-size: 1.5vw;
+  font-size: 1.3vw;
   /* or 30px */
-  margin-top: 3vw;
+  /* margin-top: 3vw; */
   font-weight: bold;
   font-family: 'Poppins', sans-serif;
   /* font-family: 'Segoe UI', sans-serif; */
