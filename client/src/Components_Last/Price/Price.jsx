@@ -12,7 +12,9 @@ function Price() {
   const [userdata, setUserdata] = useState({});
   const [selectedPlan, setSelectedPlan] = useState(null);
   const navigate = useNavigate();
-  const [coupan, setcoupan] = useState("COUP50");
+  const [showCouponPopup, setShowCouponPopup] = useState(false);
+  const [coupan, setcoupan] = useState("");
+  const [couponStatus, setCouponStatus] = useState("");
 
   const BenifitsObj = {
     "Foundation Thinkers": [
@@ -130,7 +132,7 @@ function Price() {
   //   console.log("Final amount:", amount);
 
   //   try {
-  //     const res = await axios.post("http://localhost:5000/initiate-pay", {
+  //     const res = await axios.post("http://localhost:5000/initiate-pa", {
   //       userId: uid,
   //       amount,
   //       mobile: "9999999999",
@@ -238,6 +240,17 @@ function Price() {
                 Simple Prices, Flexible Options
               </p> */}
               <div className="Benifits_text_main_container">
+                <div className="Coupon_Container">
+                  <p
+                    className="Apply_Coupon_btn"
+                    onClick={() => setShowCouponPopup(true)}
+                  >
+                    Click Here to Apply Coupon
+                  </p>
+                  {couponStatus === "valid" && (
+                    <p className="success">Coupon applied!</p>
+                  )}
+                </div>
                 <p className="Benifits_text">
                   Benifits of {userdata?.ageGroup?.title}
                 </p>
@@ -252,6 +265,40 @@ function Price() {
           </div>
         </main>
       </div>
+
+      {showCouponPopup && (
+        <div className="coupon-popup-overlay">
+          <div className="coupon-popup">
+            <h3>Apply Coupon</h3>
+            <input
+              type="text"
+              value={coupan}
+              onChange={(e) => setcoupan(e.target.value)}
+              placeholder="Enter Coupon Code"
+            />
+            <button
+              onClick={() => {
+                if (coupan === "COUP50" || coupan === "COUP20") {
+                  setcoupan(coupan);
+                  setCouponStatus("valid");
+                  setShowCouponPopup(false);
+                } else {
+                  setCouponStatus("invalid");
+                }
+              }}
+            >
+              Apply
+            </button>
+            <button onClick={() => setShowCouponPopup(false)}>Close</button>
+            {couponStatus === "valid" && (
+              <p className="success">Coupon applied!</p>
+            )}
+            {couponStatus === "invalid" && (
+              <p className="error">Invalid coupon code</p>
+            )}
+          </div>
+        </div>
+      )}
     </>
   );
 }
