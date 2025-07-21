@@ -32,7 +32,7 @@ const PaymentSuccess = () => {
       startTime: now,
       endTime: expiry,
     }).then(() => {
-      navigate("/quiz");
+      navigate("/report", { state: { type } });
     });
   }, []);
 

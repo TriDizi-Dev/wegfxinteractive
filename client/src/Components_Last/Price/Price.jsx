@@ -132,12 +132,15 @@ function Price() {
     console.log("Final amount:", amount);
 
     try {
-      const res = await axios.post("http://localhost:5000/initiate-payment", {
-        userId: uid,
-        amount,
-        mobile: "9999999999",
-        plan: planType,
-      });
+      const res = await axios.post(
+        "https://wegfxinteractive.onrender.com/initiate-payment",
+        {
+          userId: uid,
+          amount,
+          mobile: "9999999999",
+          plan: planType,
+        }
+      );
 
       console.log("Full Response:", res);
       console.log("Redirect URL:", res.data?.route);
