@@ -22,7 +22,6 @@
 
 .signup {
   cursor: pointer;
-  padding-left: 11.5vw;
   font-weight: 700;
 }
 
@@ -48,10 +47,9 @@
 }
 
 .heading h3 {
-  padding-left: 12.5vw;
+  padding-left: 10vw;
   /* font-family: 'Calibri', sans-serif; */
-
-
+  font-family: 'Poppins', sans-serif
 }
 
 
@@ -87,7 +85,7 @@
 }
 
 .signup-right p {
-  padding-bottom: 1vw;
+  /* padding-bottom: 1vw; */
   font-size: 1.1vw;
   font-family: 'Poppins', sans-serif;
   /* font-family: 'Calibri', sans-serif; */
@@ -114,6 +112,9 @@
 
 .para {
   padding-top: 1vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .image1 {
@@ -148,23 +149,29 @@
 
 .btn-Sinup {
   background-color: #10b153;
+  border: 1px solid #10b153;
   color: #ffffff;
-  padding: .8vw 0vw;
+  padding: .5vw 2vw;
   font-size: 1.3vw;
   font-weight: 500;
-  width: 100%;
-  border-radius: 0.7vw;
-  border: none;
+  border-radius: 0.5vw;
   cursor: pointer;
-  /* height: 2.5vw; */
-  margin-bottom: 1vw;
-  text-align: center;
+  height: 2.5vw;
+  display: flex;
+  align-items: center;
+  /* margin-top: -1.5vw; */
 }
 
 .google {
-  font-size: 2vw;
   cursor: pointer;
-  margin-top: -1.5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.google img {
+  height: 50%;
+  width: 50%;
 }
 
 .signup-left {
@@ -337,21 +344,16 @@
 
   .btn-Sinup {
     font-size: 4vw;
-    padding: 3vw 0vw;
+    padding: 3vw 2vw;
     border-radius: 2vw;
-    width: 80vw;
     height: fit-content;
   }
 
   .google {
     font-size: 8vw;
     cursor: pointer;
-    margin-top: -1.5vw;
   }
 
-  .signup {
-    padding-left: 21vw;
-  }
 
   .logeimage {
     width: 20vw;

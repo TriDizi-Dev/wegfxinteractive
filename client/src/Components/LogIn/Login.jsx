@@ -17,6 +17,7 @@ import { BiHide } from "react-icons/bi";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import { Navbar } from "../Navbar/Navbar";
+import googleImg from "../../assets/AllWebpAssets/Asset8.webp";
 
 const setStorageItem = (key, value) => {
   try {
@@ -263,12 +264,17 @@ const LoginPage = () => {
             )}
 
             <div>
-              <p>
-                Create an account?{" "}
-                <b className="login" onClick={() => navigate("/sign-up")}>
-                  Sign Up
-                </b>
-              </p>
+              <div className="Login_submit_and_Create_account">
+                <p className="Create_account">
+                  Create an account?{" "}
+                  <b className="login" onClick={() => navigate("/sign-up")}>
+                    Sign Up
+                  </b>
+                </p>
+                <button type="submit" className="btn-login">
+                  {showChangePassword ? "Send Reset Link" : "Login"}
+                </button>
+              </div>
               <h3>
                 {showChangePassword ? (
                   <span
@@ -290,16 +296,15 @@ const LoginPage = () => {
                 )}
               </h3>
             </div>
-
-            {error && <p className="error-message1">{error}</p>}
-            {message && <p className="success-message">{message}</p>}
-            {successmsg && <p className="success-message">{successmsg}</p>}
-            <div onClick={handleGoogleLogin}>
-              <GrGoogle className="btn-google" />
+            <div className="ErrAndSucHandle">
+              {error && <p className="error-message1">{error}</p>}
+              {message && <p className="success-message">{message}</p>}
+              {successmsg && <p className="success-message">{successmsg}</p>}
             </div>
-            <button type="submit" className="btn-login">
-              {showChangePassword ? "Send Reset Link" : "Login"}
-            </button>
+            <div onClick={handleGoogleLogin} className="btn-google">
+              <img src={googleImg} alt="googleImg" />
+              {/* <GrGoogle className="btn-google" /> */}
+            </div>
           </form>
         </div>
       </div>

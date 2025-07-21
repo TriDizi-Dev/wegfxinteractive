@@ -22,6 +22,8 @@ import { BiHide } from "react-icons/bi";
 import "./Signup.css";
 import { FcGoogle } from "react-icons/fc";
 import { Navbar } from "../Navbar/Navbar";
+import googleImg from "../../assets/AllWebpAssets/Asset8.webp";
+
 
 const setStorageItem = (key, value) => {
   try {
@@ -133,46 +135,46 @@ const SignupPage = () => {
       });
   }
 
-  // const handleGoogleLogin = async () => {
-  //   try {
-  //     const provider = new GoogleAuthProvider();
-  //     provider.setCustomParameters({ prompt: "select_account" });
+  const handleGoogleLogin = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: "select_account" });
 
-  //     if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
-  //       sessionStorage.setItem("googleRedirect", "true");
-  //       await signInWithRedirect(auth, provider);
-  //     } else {
-  //       const result = await signInWithPopup(auth, provider);
-  //       const email = result.user.email;
+      if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+        sessionStorage.setItem("googleRedirect", "true");
+        await signInWithRedirect(auth, provider);
+      } else {
+        const result = await signInWithPopup(auth, provider);
+        const email = result.user.email;
 
-  //       const methods = await fetchSignInMethodsForEmail(auth, email);
-  //       if (methods.includes("password")) {
-  //         setError("This email is already registered with Email/Password.");
-  //         await signOut(auth);
-  //         return;
-  //       }
+        const methods = await fetchSignInMethodsForEmail(auth, email);
+        if (methods.includes("password")) {
+          setError("This email is already registered with Email/Password.");
+          await signOut(auth);
+          return;
+        }
 
-  //       const uid = result.user.uid;
-  //       const userRef = ref(database, `users/${uid}`);
-  //       const snapshot = await get(userRef);
+        const uid = result.user.uid;
+        const userRef = ref(database, `users/${uid}`);
+        const snapshot = await get(userRef);
 
-  //       if (!snapshot.exists()) {
-  //         const name = result.user.displayName || "";
-  //         await set(userRef, { name, email, role: "user" });
-  //       }
+        if (!snapshot.exists()) {
+          const name = result.user.displayName || "";
+          await set(userRef, { name, email, role: "user" });
+        }
 
-  //       const token = await result.user.getIdToken();
-  //       setStorageItem("authToken", token);
-  //       setStorageItem("userType", "user");
-  //       setTimeout(() => {
-  //         navigate("/select-age-group");
-  //       }, 1000);
-  //     }
-  //   } catch (err) {
-  //     console.error("Google sign-in error:", err);
-  //     setError("Google Sign-In Failed.");
-  //   }
-  // };
+        const token = await result.user.getIdToken();
+        setStorageItem("authToken", token);
+        setStorageItem("userType", "user");
+        setTimeout(() => {
+          navigate("/select-age-group");
+        }, 1000);
+      }
+    } catch (err) {
+      console.error("Google sign-in error:", err);
+      setError("Google Sign-In Failed.");
+    }
+  };
 
   return (
     <div className="LogIn_main">
@@ -262,18 +264,19 @@ const SignupPage = () => {
                     Login
                   </b>
                 </p>
+                <button type="submit" className="btn-Sinup">
+                  Sign Up
+                </button>
               </div>
               {error && <p className="error-message2">{error}</p>}
               {success && (
                 <p className="error-message2 succesMsg_signup">{success}</p>
               )}
 
-              {/* <p onClick={handleGoogleLogin}>
-              <GrGoogle className="google" />
-            </p> */}
-              <button type="submit" className="btn-Sinup">
-                Sign Up
-              </button>
+              <p onClick={handleGoogleLogin} className="google">
+                 <img src={googleImg} alt="googleImg" />
+                {/* <GrGoogle className="google" /> */}
+              </p>
             </form>
           </div>
         </div>

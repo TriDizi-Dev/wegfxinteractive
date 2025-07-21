@@ -65,8 +65,9 @@
 }
 
 .thinkimage {
-  margin-top: 0vw;
-  transform: translate(0vw, -2vw);
+  /* transform: translate(0vw, -2vw); */
+  height: 5vw;
+  width: fit-content;
 }
 
 /* Main Content Styling */
@@ -97,7 +98,6 @@
   background-color: #F5B800;
   border: 0.1vw solid #F5B800;
   padding: .5vw 6vw;
-  margin-top: -1vw;
 }
 
 .highlight-blue {
@@ -131,7 +131,7 @@
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  gap: 2vw;
+  gap: 1vw;
 }
 
 
@@ -275,7 +275,7 @@
 
   .thinkimage {
     margin-top: 2vw;
-    width: 20vw;
+    width: 30vw;
     height: auto;
   }
 

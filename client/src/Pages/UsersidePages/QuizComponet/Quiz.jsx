@@ -5,12 +5,16 @@ import { useAuth } from "../../../Components/AuthContext";
 import "./Quiz.css";
 import backgroundImg from "../../../assets/home/bg.jpg";
 import logo from "../../../assets/home/logo.gif";
-import think from "../../../assets/home/Think.png";
+import think from "../../../assets/AllWebpAssets/Asset3.webp";
 import ribbon from "../../../assets/home/congratulation.png";
 import trophy from "../../../assets/home/trophy.png";
 import { auth, database } from "../../../Firebase/firebase";
 import { CgProfile } from "react-icons/cg";
 import { Navbar } from "../../../Components/Navbar/Navbar";
+import Foundation from "../../../assets/AllWebpAssets/Asset5.webp";
+import Explosive from "../../../assets/AllWebpAssets/Asset6.webp";
+import FutureReaady from "../../../assets/AllWebpAssets/Asset7.webp";
+import congrates from "../../../assets/AllWebpAssets/Asset16.webp";
 
 const QuizComponent = () => {
   const { currentUser, loading: authLoading } = useAuth();
@@ -23,7 +27,6 @@ const QuizComponent = () => {
   const [quizOver, setQuizOver] = useState(false);
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(true);
-
   const [Userdata, setUserdata] = useState({});
 
   useEffect(() => {
@@ -78,56 +81,57 @@ const QuizComponent = () => {
   //   setLoading(false);
   // };
 
+  const fetchQuestions = async (cat) => {
+    setLoading(true);
 
-const fetchQuestions = async (cat) => {
-  setLoading(true);
+    const uid = currentUser?.uid;
+    if (!uid) return;
 
-  const uid = currentUser?.uid;
-  if (!uid) return;
+    const allSnap = await get(ref(database, "questions"));
+    const fullList = [];
 
-  const allSnap = await get(ref(database, "questions"));
-  const fullList = [];
+    // 1. Get all questions of the selected category
+    allSnap.forEach((snap) => {
+      const q = snap.val();
+      if (q.question_type === cat) {
+        fullList.push({ ...q, id: snap.key });
+      }
+    });
 
-  // 1. Get all questions of the selected category
-  allSnap.forEach((snap) => {
-    const q = snap.val();
-    if (q.question_type === cat) {
-      fullList.push({ ...q, id: snap.key });
+    // 2. Fetch attempted question IDs from Firebase
+    const trackingRef = ref(database, `users/${uid}/quizTracking/${cat}`);
+    const trackingSnap = await get(trackingRef);
+    const attemptedIds = trackingSnap.exists()
+      ? trackingSnap.val().attempted || []
+      : [];
+
+    // 3. Filter out attempted questions
+    let unattempted = fullList.filter((q) => !attemptedIds.includes(q.id));
+
+    // 4. If fewer than 30 unattempted, reset attempts and reshuffle
+    if (unattempted.length < 30) {
+      unattempted = [...fullList];
+      await set(trackingRef, { attempted: [] }); // Reset tracking
     }
-  });
 
-  // 2. Fetch attempted question IDs from Firebase
-  const trackingRef = ref(database, `users/${uid}/quizTracking/${cat}`);
-  const trackingSnap = await get(trackingRef);
-  const attemptedIds = trackingSnap.exists() ? trackingSnap.val().attempted || [] : [];
+    // 5. Shuffle and pick 30
+    const shuffled = [...unattempted].sort(() => 0.5 - Math.random());
+    const selected30 = shuffled.slice(0, 30);
 
-  // 3. Filter out attempted questions
-  let unattempted = fullList.filter((q) => !attemptedIds.includes(q.id));
+    // 6. Update Firebase with newly attempted question IDs
+    const newAttemptedIds = [...attemptedIds, ...selected30.map((q) => q.id)];
+    await set(trackingRef, { attempted: newAttemptedIds });
 
-  // 4. If fewer than 30 unattempted, reset attempts and reshuffle
-  if (unattempted.length < 30) {
-    unattempted = [...fullList];
-    await set(trackingRef, { attempted: [] }); // Reset tracking
-  }
-
-  // 5. Shuffle and pick 30
-  const shuffled = [...unattempted].sort(() => 0.5 - Math.random());
-  const selected30 = shuffled.slice(0, 30);
-
-  // 6. Update Firebase with newly attempted question IDs
-  const newAttemptedIds = [...attemptedIds, ...selected30.map((q) => q.id)];
-  await set(trackingRef, { attempted: newAttemptedIds });
-
-  // 7. Set state
-  setCategory(cat);
-  setQuestions(selected30);
-  setCurrentIndex(0);
-  setSelectedOption("");
-  setFeedback("");
-  setScore(0);
-  setQuizOver(false);
-  setLoading(false);
-};
+    // 7. Set state
+    setCategory(cat);
+    setQuestions(selected30);
+    setCurrentIndex(0);
+    setSelectedOption("");
+    setFeedback("");
+    setScore(0);
+    setQuizOver(false);
+    setLoading(false);
+  };
 
   const handleAnswer = (option) => {
     if (selectedOption) return;
@@ -154,28 +158,38 @@ const fetchQuestions = async (cat) => {
     fetchQuestions(category);
   };
 
-const updateQuizStats = async () => {
-  if (!currentUser || !category) return;
+  const updateQuizStats = async () => {
+    if (!currentUser || !category) return;
 
-  const uid = currentUser.uid;
-  const statsRef = ref(database, `users/${uid}/quizStats/${category}`);
+    const uid = currentUser.uid;
+    const statsRef = ref(database, `users/${uid}/quizStats/${category}`);
 
-  const newCorrect = score;
-  const newAttempted = questions.length;
+    const newCorrect = score;
+    const newAttempted = questions.length;
 
-  try {
-    // ✅ Always overwrite with latest values
-    await set(statsRef, {
-      correct: newCorrect,
-      attempted: newAttempted,
-    });
+    try {
+      // ✅ Always overwrite with latest values
+      await set(statsRef, {
+        correct: newCorrect,
+        attempted: newAttempted,
+      });
 
-    console.log("✅ Stats updated with latest attempt.");
-  } catch (err) {
-    console.error("❌ Failed to update quiz stats:", err);
+      console.log("✅ Stats updated with latest attempt.");
+    } catch (err) {
+      console.error("❌ Failed to update quiz stats:", err);
+    }
+  };
+
+  let MainImage;
+  if (Userdata?.ageGroup?.title === "Foundation Thinkers") {
+    MainImage = Foundation;
+  } else if (Userdata?.ageGroup?.title === "Explorative Thinkers") {
+    MainImage = Explosive;
+  } else if (Userdata?.ageGroup?.title === "Future - Ready Thinkers") {
+    MainImage = FutureReaady;
+  } else {
+    return null;
   }
-};
-
 
   if (authLoading) return <div>Loading...</div>;
   if (!currentUser) return <Navigate to="/" />;
@@ -186,13 +200,14 @@ const updateQuizStats = async () => {
 
       {/* Header */}
       <div className="quiz-header-center">
-        <div className="think-logo_Quiz">
+        <img src={MainImage} alt="Think" />
+        {/* <div className="think-logo_Quiz">
           <img src={think} alt="Think" />
         </div>
         <div className="quiz-header-text">
           <h2>{Userdata?.ageGroup?.title}</h2>
           <p>Age {Userdata?.ageGroup?.age || 0} years</p>
-        </div>
+        </div> */}
       </div>
 
       {/* Categories */}
@@ -215,7 +230,7 @@ const updateQuizStats = async () => {
         <div className="quiz-loading">Loading...</div>
       ) : quizOver ? (
         <div className="quiz-congrats">
-          <img src={ribbon} className="congrats-banner" alt="congrats" />
+          <img src={congrates} className="congrats-banner" alt="congrats" />
           <div className="Quiz_Complete_Buttom_Section">
             <div>
               <h2>You Completed the Objectives</h2>

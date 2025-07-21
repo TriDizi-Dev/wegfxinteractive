@@ -3,7 +3,7 @@ import "./Kids.css";
 import girl from "../../assets/Pieimages/girlb.png";
 import boy1 from "../../assets/Pieimages/boy1b.png";
 import boy2 from "../../assets/Pieimages/boy2b.png";
-import Think from "../../assets/Login/image4.png";
+import Think from "../../assets/AllWebpAssets/Asset3.webp";
 import { useNavigate } from "react-router-dom";
 import { auth, database } from "../../Firebase/firebase";
 import { ref, get, update } from "firebase/database";

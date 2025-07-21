@@ -3,9 +3,11 @@ import { CgProfile } from "react-icons/cg";
 import { auth, database } from "../../Firebase/firebase";
 import { get, ref } from "firebase/database"; // ✅ FIXED import
 import Logo from "../../assets/image.png";
+import LogoWhite from "../../assets/AllWebpAssets/image.png";
 import { useLocation } from "react-router-dom";
 import "./Navbar.css";
 import { signOut } from "firebase/auth";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 export const Navbar = () => {
   const [Userdata, setUserdata] = useState({});
@@ -49,7 +51,11 @@ export const Navbar = () => {
   return (
     <div className="Main_NavBar_Css">
       <div className="Main_Logo_Image">
-        <img src={Logo} alt="Name" />
+        {location.pathname === "/select-age-group" ? (
+          <img src={LogoWhite} alt="Name" />
+        ) : (
+          <img src={Logo} alt="Name" />
+        )}
         <div>
           {!shouldHideBackButton && (
             <button
@@ -64,12 +70,18 @@ export const Navbar = () => {
       </div>
       {!shouldHideLog && (
         <div className="quiz-user-info">
-          <span>{Userdata.name}</span>
+          <span
+            style={{
+              color: location.pathname === "/select-age-group" && "white",
+            }}
+          >
+            {Userdata.name}
+          </span>
           <div
-            className="user-avatar"
+            
             onClick={() => setShowLogout(!showLogout)}
           >
-            <CgProfile />
+            <AccountCircleIcon className="user-avatar"/>
             {showLogout && (
               <div className="logout-popup">
                 <button onClick={handleLogout}>Logout</button>

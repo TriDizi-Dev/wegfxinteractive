@@ -42,8 +42,8 @@
 
 .think-logo_Quiz {
   width: 8vw;
-  height: 7vw;
-  margin-top: -.5vw;
+  height: 5vw;
+  margin-right: 1vw;
 }
 
 .think-logo_Quiz img {
@@ -61,7 +61,6 @@
   background-color: #cac5c5ac;
   padding: 1vw;
   border-radius: 1vw;
-  transform: translate(0vw, -3vw);
   /* width: 45vw; */
 }
 
@@ -130,8 +129,7 @@
   /* text-align: left; */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
   animation: fadeInUp 0.6s ease;
-  margin: -1vw -1vw;
-  margin-top: -3vw;
+
 }
 
 .quiz-question-box h3 {
@@ -303,9 +301,13 @@
 
 
 .quiz-header-center {
-  display: flex;
-  /* margin: 2vw 14vw; */
-  transform: translate(0vw, -3vw);
+  width: 35vw;
+  height: 6vw;
+}
+
+.quiz-header-center img {
+  width: 100%;
+  height: 100%;
 }
 
 .quiz-header-text h2 {
@@ -328,7 +330,6 @@
   justify-content: center;
   align-items: center;
   gap: 4vw;
-  margin-top: 4vw;
 }
 
 .congrats-banner {
@@ -489,12 +490,12 @@
   .quiz-header-text h2 {
     font-size: 4.5vw;
     /* margin: 6vw 0vw; */
-    transform: translate(-2vw, 4vw);
+    transform: translate(0vw, 4vw);
   }
 
   .quiz-header-text p {
     font-size: 4vw;
-    transform: translate(-2vw, 4vw);
+    margin-top: 0vw;
   }
 
   .think-logo_Quiz {
@@ -505,21 +506,21 @@
 
   .think-logo_Quiz img {
     /* width: 100; */
-    height: 15vw;
-    width: 24vw;
-    margin: -15vw -12vw
+    height: 100%;
+    width: 100%;
+    margin-right: 3vw;
   }
 
   .quiz-header-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+   width: 80vw;
+  height: 15vw;
+  margin-top: 8vw;
   }
 
   .quiz-categories {
     padding: 2vw 1vw;
     width: 90vw;
-    margin-top: 12vw;
+    margin-top: 8vw;
   }
 
   .congrats-banner {

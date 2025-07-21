@@ -4,7 +4,7 @@
   padding: 1.67vw;
   /* 20px */
   box-sizing: border-box;
-  height: 34vw;
+  /* height: 34vw; */
   /* border: 2px solid; */
   /* overflow: auto; */
 }
@@ -61,26 +61,27 @@
 }
 
 .logo1 {
-  height: 8vw;
+  height: 4.7vw;
   width: 10vw;
-  margin-right: 15vw;
+  /* margin-right: 15vw; */
 }
 
 
 .section-heading {
-  font-size: 1.5vw;
-  font-family: 'Calibri', sans-serif;
+  font-size: 1.3vw;
+  font-family: 'Poppins', sans-serif;
   color: #000;
-  margin-bottom: 3.33vw;
-  padding-left: 14vw;
-  margin-top: -1vw;
+  text-align: left;
+  font-weight: 800;
+  /* margin-bottom: 3.33vw; */
+  /* padding-left: 14vw; */
 }
 
 .foundation-text {
   color: #dc3545;
   font-family: 'Poppins', sans-serif;
-  font-weight: bold;
-  font-size: 2vw;
+  font-weight: 800;
+  font-size: 1.5vw;
   /* font-family: 'Times New Roman', Times, serif; Or use Georgia */
 }
 
@@ -95,24 +96,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4.17vw;
   flex-wrap: wrap;
-  margin-top: -1.5vw;
+  gap: 4vw;
 }
 
 .image-section {
-  flex-shrink: 0;
+  /* flex-shrink: 0; */
 }
 
 .payment-illustration {
-  margin: -11vw;
-  height: 24vw;
+  height: 28vw;
   display: block;
+  margin-top: -3vw;
 }
 
-.pricing-section {
-  text-align: left;
-}
+
 
 .pricing-plans {
   display: flex;
@@ -120,7 +118,7 @@
   margin-bottom: 2.5vw;
   flex-wrap: wrap;
   justify-content: center;
-  margin-left: 9vw;
+  /* margin-left: 9vw; */
 }
 
 .price-card {
@@ -140,23 +138,22 @@
 }
 
 .price-card:hover {
-  transform: translateY(-0.42vw);
+  transform: translateY(-0.32vw);
 }
 
 .plan-label {
-  font-size: 1.17vw;
+  font-size: 1.1vw;
   margin-bottom: 0.42vw;
-  text-transform: uppercase;
-  font-weight: bold;
+  font-weight: 600;
   opacity: 0.8;
   font-family: 'Poppins', sans-serif;
+  color: #000000dd;
 
 }
 
 .plan-name {
   font-size: 1.5vw;
   font-family: 'Calibri', sans-serif;
-
   margin-top: 0;
   margin-bottom: -.5vw;
   font-weight: bold;
@@ -168,9 +165,20 @@
 }
 
 .price-value {
-  font-size: 1.5vw;
+  font-size: 3vw;
   font-weight: bold;
   font-family: 'Poppins', sans-serif;
+}
+
+.Wrong_Price {
+  font-size: 1.3vw;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: -1vw;
+}
+
+.Wrong_Price span {
+  text-decoration: line-through;
 }
 
 .duration {
@@ -219,29 +227,44 @@
 }
 
 .payment-options {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  margin: 0vw 11vw;
+  /* list-style: none; */
+  margin-left: -.5vw;
+  font-family: 'Poppins', sans-serif;
+
+}
+
+.Benifits_text {
+  text-align: left;
+  margin-left: 1vw;
+  font-size: 1.5vw;
+  font-weight: 700;
   font-family: 'Poppins', sans-serif;
 
 }
 
 .payment-options li {
   font-size: 1vw;
-  font-family: Arial, Helvetica, sans-serif;
   color: #000;
   margin-bottom: 0.67vw;
-  line-height: 1.4;
+  font-weight: 500;
+  text-align: left;
+  font-family: 'Poppins', sans-serif;
+
 }
 
+.Price_Card_and_title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
 
 @media (max-width: 768px) {
 
 
   .cost {
-    height: 100vh;
+    height: fit-content;
   }
 
   .main-title {
@@ -253,10 +276,11 @@
   }
 
   .section-heading {
-    font-size: 4vw;
+    font-size: 3.5vw;
     margin-bottom: 2vw;
-    margin-top: -5vw;
-    margin-left: -11vw;
+    margin-top: -2vw;
+    text-align: center;
+    /* margin-left: -11vw; */
   }
 
   .foundation-text {
@@ -271,31 +295,30 @@
     flex-direction: column;
     align-items: center;
     margin-left: 0;
-    gap: 4vw;
+    gap: 1vw;
   }
 
   .price-card {
     width: 90vw;
-    height: 25vw;
+    height: 30vw;
     padding: 1vw;
-    font-size: 4vw;
+    /* font-size: 4vw; */
     border-radius: 4vw;
   }
 
   .plan-name,
   .price,
   .price-value {
-    font-size: 4vw;
+    font-size: 8vw;
     margin-top: 1vw;
   }
 
   .plan-label {
-    font-size: 4vw;
-    padding-top: 1vw;
+    font-size: 5vw;
   }
 
   .duration {
-    font-size: 4vw;
+    font-size: 5vw;
   }
 
   .flexible-options-text {
@@ -341,10 +364,23 @@
   }
 
   .logo1 {
-    height: 17vw;
-    width: 17vw;
+    height: 15vw;
+    width: 30vw;
     transform: translate(5vw, -4vw);
-    margin-top: 3vw;
-    margin-left: 10vw;
+    margin-top: 5vw;
+    /* margin-left: 10vw; */
+  }
+
+  .Wrong_Price {
+    font-size: 5vw;
+    margin-bottom: 0vw;
+  }
+
+  .Benifits_text {
+    margin-left: 2vw;
+    font-size: 5vw;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+
   }
 }

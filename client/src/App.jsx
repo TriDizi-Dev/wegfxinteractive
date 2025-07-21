@@ -24,9 +24,10 @@ import { useEffect } from "react";
 import backgroundImage from "../src/assets/AllWebpAssets/Asset13.webp";
 import backgroundImageQuiz from "../src/assets/home/bg.jpg";
 // import backfroundImageKids from "../src/assets/Pieimages/kidsimage.jpg";
-import backfroundImageKids from "../src/assets/AllWebpAssets/Asset10.webp";
+// import backfroundImageKids from "../src/assets/AllWebpAssets/Asset10.webp";
 import PieChart from "./Components_Last/Piechart/Piechart";
 import backgroundimagplan from "./assets/Pieimages/Baackground_last1.png";
+import backfroundImageKids from "./assets/AllWebpAssets/Asset10.webp"
 
 function Layout() {
   const { loading } = useAuth();

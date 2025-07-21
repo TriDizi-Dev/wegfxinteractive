@@ -97,7 +97,7 @@
 .login-rightside {
   background-color: rgb(1, 1, 43);
   border-radius: 2vw;
-  padding: 1vw;
+  padding: 2vw;
   /* max-width: 50vw; */
   width: 30vw;
   color: white;
@@ -122,7 +122,6 @@
 
 .login {
   cursor: pointer;
-  padding-left: 15vw;
 }
 
 .logo {
@@ -164,14 +163,19 @@
   font-family: 'Poppins', sans-serif
 }
 
-.login-rightside p {
+.ErrAndSucHandle {
   font-size: 1.1vw;
   font-weight: 500;
   padding-left: 0.2vw;
   font-family: 'Poppins', sans-serif
     /* font-family: 'Calibri', sans-serif; */
 }
-
+.Create_account{
+   font-size: 1.1vw;
+  font-weight: 500;
+  padding-left: 0.2vw;
+  font-family: 'Poppins', sans-serif
+}
 .form-login {
   margin-bottom: 0.5vw;
   position: relative;
@@ -242,8 +246,8 @@
   padding: 0.5vw 2vw;
   font-size: 1.3vw;
   font-weight: 500;
-  width: 100%;
-  border-radius: 0.7vw;
+  /* width: 100%; */
+  border-radius: 0.5vw;
   border: 1px solid #0072ce;
   cursor: pointer;
   height: 2.5vw;
@@ -252,17 +256,15 @@
 }
 
 
-
-.btn-login:hover {
-  /* background: linear-gradient(135deg, #8b69f4, #6a4cf4); */
-  transform: translateY(-0.1vw);
+.btn-google {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
 }
 
-.btn-google {
-  font-size: 2vw;
-  cursor: pointer;
-  margin-top: -1.5vw;
-  margin-bottom: 1vw;
+.btn-google img {
+  width: 50%;
+  height: 50%;
 }
 
 
@@ -317,6 +319,7 @@
   text-align: center;
 }
 
+
 .pic {
   width: 2vw;
   transform: translate(0vw, -1vw);
@@ -326,6 +329,12 @@
   margin-top: -11vw;
   position: absolute;
   margin-left: 6.5vw;
+}
+
+.Login_submit_and_Create_account {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 
@@ -386,11 +395,10 @@
   }
 
   .btn-login {
-    width: 80vw;
     height: 10vw;
     font-size: 4vw;
     border-radius: 2vw;
-    margin-top: -3vw;
+    padding: 0 3vw;
   }
 
   .btn-google {
@@ -422,8 +430,14 @@
     border-radius: 2vw;
   }
 
-  .login-rightside p {
+  .ErrAndSucHandle {
     font-size: 4vw;
+    position: relative;
+    top: -5vw;
+  }
+  .Create_account{
+        font-size: 4vw;
+
   }
 
   .login-rightside h3 {
@@ -431,11 +445,12 @@
     margin-bottom: 10vw;
   }
 
-  .login {
+  /* .login {
     padding-left: 26vw;
-  }
+  } */
 
   .stars {
     display: none;
   }
+
 }

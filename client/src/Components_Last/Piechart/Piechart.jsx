@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 // import "../../assets/Pieimages/Picture1.png";
 import "./Piechart.css"; // Make sure this path is correct for your CSS file
 // import logo from '../../assets/Pieimages/Think.png';
-import Think from "../../assets/Pieimages/Think1b.png"; // Import your logo image
+import Think from "../../assets/AllWebpAssets/Asset3.webp"; // Import your logo image
 import { auth, database } from "../../Firebase/firebase";
 import { ref, get, set } from "firebase/database";
 import { useNavigate } from "react-router-dom";
 import { Navbar } from "../../Components/Navbar/Navbar";
+import Welcome from "../../assets/AllWebpAssets/Asset9.webp"; // Import your logo image
 
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
@@ -18,8 +19,6 @@ import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 //   { name: "Science", value: 10 },
 // ];
 
-
-
 function PiePage() {
   const [ageGroup, setAgeGroup] = useState("Beginner");
   const [Userdata, setUserdata] = useState({});
@@ -28,30 +27,35 @@ function PiePage() {
   console.log(Userdata, "UserdataUserdata");
 
   const CustomTooltip = ({ active, payload }) => {
-  if (active && payload && payload.length) {
-    const subject = payload[0].name;
-    const stats = Userdata.quizStats?.[subject];
+    if (active && payload && payload.length) {
+      const subject = payload[0].name;
+      const stats = Userdata.quizStats?.[subject];
 
-    if (stats) {
-      return (
-        <div className="custom-tooltip">
-          <p><strong>{subject}</strong></p>
-          <p>{stats.correct} / {stats.attempted} correct</p>
-        </div>
-      );
-    } else {
-      return (
-        <div className="custom-tooltip">
-          <p><strong>{subject}</strong></p>
-          <p>No attempts yet</p>
-        </div>
-      );
+      if (stats) {
+        return (
+          <div className="custom-tooltip">
+            <p>
+              <strong>{subject}</strong>
+            </p>
+            <p>
+              {stats.correct} / {stats.attempted} correct
+            </p>
+          </div>
+        );
+      } else {
+        return (
+          <div className="custom-tooltip">
+            <p>
+              <strong>{subject}</strong>
+            </p>
+            <p>No attempts yet</p>
+          </div>
+        );
+      }
     }
-  }
 
-  return null;
-};
-
+    return null;
+  };
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -168,22 +172,22 @@ function PiePage() {
       <Navbar />
 
       <div className="pie">
+        <div className="think-logo">
+          {/* <h1 className="think-text">Think</h1> */}
+          <img src={Think} alt="Think" className="think-logo-image" />
+        </div>
         <div className="app-container">
           {/* Main Content */}
           <main className="app-main-content">
             {/* Welcome Section */}
-            <div className="welcome-section">
-              <div className="think-logo">
-                {/* <h1 className="think-text">Think</h1> */}
-                <img src={Think} alt="Think" className="think-logo-image" />
-              </div>
 
-              <h2 className="welcome-message">
-                {/* <span className="star-icon1">✰</span>
-                <span className="star-icon2">✰</span> */}
-                {/* <span className="star-icon">⭐️</span> */}
-                Welcome&nbsp;<b className="highlight-name">{Userdata?.name}</b>
-              </h2>
+            <div className="welcome-section">
+              <img
+                src={Welcome}
+                alt="WelcomeImage"
+                className="Welcome_Image"
+              ></img>
+              <p className="welcome-message">{Userdata?.name}</p>
               {/* <p className="highlight-name"></p> */}
               <p className="ready-message">Ready to conquer today?</p>
               <p className="learning-message">Let's make learning awesome!</p>
