@@ -137,10 +137,38 @@ function Layout() {
             </PrivateRoute>
           }
         />
-        <Route path="/payment-success" element={<PaymentSuccess />} />
-        <Route path="/report" element={<PieChart />} />
-        <Route path="/select-age-group" element={<Kids />} />
-        <Route path="/plans" element={<Price />} />
+        <Route
+          path="/payment-success"
+          element={
+            <PrivateRoute>
+              <PaymentSuccess />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/report"
+          element={
+            <PrivateRoute>
+              <PieChart />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/select-age-group"
+          element={
+            <PrivateRoute>
+              <Kids />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/plans"
+          element={
+            <PrivateRoute>
+              <Price />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </>
   );
