@@ -56,102 +56,102 @@ function Price() {
     fetchUser();
   }, []);
 
-  const handleProceed = async (planType) => {
-    if (!planType) {
-      alert("Please select a plan to proceed.");
-      return;
-    }
-    setSelectedPlan(planType);
-    const uid = auth.currentUser?.uid;
-    if (!uid) {
-      alert("User not authenticated");
-      return;
-    }
-
-    const now = Date.now();
-    let expiry;
-
-    if (planType === "starter") {
-      expiry = now + 7 * 24 * 60 * 60 * 1000; // 1 Week
-    } else if (planType === "pro") {
-      expiry = now + 30 * 24 * 60 * 60 * 1000; // 1 Month
-    } else if (planType === "elite") {
-      expiry = now + 90 * 24 * 60 * 60 * 1000; // 3 Months
-    } else {
-      alert("Invalid plan selected");
-      return;
-    }
-
-    const userPlanRef = ref(database, `users/${uid}/plan`);
-    await set(userPlanRef, {
-      type: planType,
-      startTime: now,
-      endTime: expiry,
-    });
-
-    navigate("/report", { state: { planType } });
-  };
-
   // const handleProceed = async (planType) => {
-  //   if (!planType) return alert("Please select a plan.");
-
+  //   if (!planType) {
+  //     alert("Please select a plan to proceed.");
+  //     return;
+  //   }
+  //   setSelectedPlan(planType);
   //   const uid = auth.currentUser?.uid;
-  //   if (!uid) return alert("User not authenticated");
-
-  //   let amount;
-
-  //   switch (planType) {
-  //     case "starter":
-  //       amount = 199; // Set base amount for starter
-  //       break;
-  //     case "pro":
-  //       amount = 399; // Set base amount for pro
-  //       break;
-  //     case "elite":
-  //       amount = 999; // Set base amount for elite
-  //       break;
-  //     default:
-  //       alert("Invalid plan selected");
-  //       return;
+  //   if (!uid) {
+  //     alert("User not authenticated");
+  //     return;
   //   }
 
-  //   // Apply coupon
-  //   if (coupan) {
-  //     switch (coupan) {
-  //       case "COUP50":
-  //         amount = amount * 0.5; // or amount -= amount * 0.5;
-  //         break;
-  //       case "COUP20":
-  //         amount = amount * 0.8;
-  //         break;
-  //       default:
-  //         console.log("Invalid coupon code");
-  //     }
+  //   const now = Date.now();
+  //   let expiry;
+
+  //   if (planType === "starter") {
+  //     expiry = now + 7 * 24 * 60 * 60 * 1000; // 1 Week
+  //   } else if (planType === "pro") {
+  //     expiry = now + 30 * 24 * 60 * 60 * 1000; // 1 Month
+  //   } else if (planType === "elite") {
+  //     expiry = now + 90 * 24 * 60 * 60 * 1000; // 3 Months
+  //   } else {
+  //     alert("Invalid plan selected");
+  //     return;
   //   }
 
-  //   console.log("Final amount:", amount);
+  //   const userPlanRef = ref(database, `users/${uid}/plan`);
+  //   await set(userPlanRef, {
+  //     type: planType,
+  //     startTime: now,
+  //     endTime: expiry,
+  //   });
 
-  //   try {
-  //     const res = await axios.post("http://localhost:5000/initiate-pa", {
-  //       userId: uid,
-  //       amount,
-  //       mobile: "9999999999",
-  //       plan: selectedPlan,
-  //     });
-
-  //     console.log("Full Response:", res);
-  //     console.log("Redirect URL:", res.data?.route);
-
-  //     if (res.data?.route) {
-  //       window.location.href = res.data.route;
-  //     } else {
-  //       alert("No redirect URL returned.");
-  //     }
-  //   } catch (err) {
-  //     console.error("Payment Error", err.response?.data || err.message);
-  //     alert("Failed to initiate payment.");
-  //   }
+  //   navigate("/report", { state: { planType } });
   // };
+
+  const handleProceed = async (planType) => {
+    if (!planType) return alert("Please select a plan.");
+
+    const uid = auth.currentUser?.uid;
+    if (!uid) return alert("User not authenticated");
+
+    let amount;
+
+    switch (planType) {
+      case "starter":
+        amount = 1; // Set base amount for starter
+        break;
+      case "pro":
+        amount = 399; // Set base amount for pro
+        break;
+      case "elite":
+        amount = 999; // Set base amount for elite
+        break;
+      default:
+        alert("Invalid plan selected");
+        return;
+    }
+
+    // Apply coupon
+    if (coupan) {
+      switch (coupan) {
+        case "COUP50":
+          amount = amount * 0.5; // or amount -= amount * 0.5;
+          break;
+        case "COUP20":
+          amount = amount * 0.8;
+          break;
+        default:
+          console.log("Invalid coupon code");
+      }
+    }
+
+    console.log("Final amount:", amount);
+
+    try {
+      const res = await axios.post("http://localhost:5000/initiate-payment", {
+        userId: uid,
+        amount,
+        mobile: "9999999999",
+        plan: planType,
+      });
+
+      console.log("Full Response:", res);
+      console.log("Redirect URL:", res.data?.route);
+
+      if (res.data?.route) {
+        window.location.href = res.data.route;
+      } else {
+        alert("No redirect URL returned.");
+      }
+    } catch (err) {
+      console.error("Payment Error", err.response?.data || err.message);
+      alert("Failed to initiate payment.");
+    }
+  };
 
   return (
     <>
