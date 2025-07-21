@@ -27,7 +27,7 @@ import backgroundImageQuiz from "../src/assets/home/bg.jpg";
 // import backfroundImageKids from "../src/assets/AllWebpAssets/Asset10.webp";
 import PieChart from "./Components_Last/Piechart/Piechart";
 import backgroundimagplan from "./assets/Pieimages/Baackground_last1.png";
-import backfroundImageKids from "./assets/AllWebpAssets/Asset10.webp"
+import backfroundImageKids from "./assets/AllWebpAssets/Asset10.webp";
 
 function Layout() {
   const { loading } = useAuth();
@@ -54,10 +54,15 @@ function Layout() {
       document.body.style.backgroundSize = "cover";
       document.body.style.backgroundRepeat = "no-repeat";
       document.body.style.backgroundPosition = "center";
-    } else if (
-      location.pathname === "/report" ||
-      location.pathname === "/plans"
-    ) {
+    } else if (location.pathname === "/report") {
+      document.body.style.height = "120vh"; // ✅ ensures full viewport height
+
+      document.body.style.backgroundImage = `url(${backgroundimagplan})`;
+      document.body.style.backgroundSize = "cover";
+      document.body.style.backgroundRepeat = "no-repeat";
+      document.body.style.backgroundPosition = "center";
+    } else if (location.pathname === "/plans") {
+      document.body.style.height = "130vh"; // ✅ ensures full viewport height
       document.body.style.backgroundImage = `url(${backgroundimagplan})`;
       document.body.style.backgroundSize = "cover";
       document.body.style.backgroundRepeat = "no-repeat";

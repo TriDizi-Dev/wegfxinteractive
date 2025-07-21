@@ -130,7 +130,7 @@ function Price() {
   //   console.log("Final amount:", amount);
 
   //   try {
-  //     const res = await axios.post("http://localhost:5000/initiate-pa", {
+  //     const res = await axios.post("http://localhost:5000/initiate-pay", {
   //       userId: uid,
   //       amount,
   //       mobile: "9999999999",

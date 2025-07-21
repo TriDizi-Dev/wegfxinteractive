@@ -314,8 +314,6 @@
 
 .error-message1 {
   color: #e53935;
-  font-size: 0.9vw;
-  margin: 0.7vw 0;
   text-align: center;
 }
 
@@ -345,7 +343,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 99vh;
+    height: 90vh;
   }
 
   .login-leftside {

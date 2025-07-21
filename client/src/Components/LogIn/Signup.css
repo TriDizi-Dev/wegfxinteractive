@@ -241,10 +241,9 @@
   .login-wrapper {
     flex-direction: column;
     /* max-height: 100vh; */
-    padding: 5vw 2vw;
     /* height: auto; */
     /* width: 100vw; */
-    height: 92vh;
+    height: 90vh;
     width: auto;
   }
 
@@ -253,7 +252,7 @@
     align-items: center;
     justify-content: center;
     width: 90vw;
-    height: 92vh;
+    /* height: 90vh; */
     margin-left: 0vw;
 
   }
