@@ -31,6 +31,7 @@ const getAccessToken = async () => {
     params.append("grant_type", "client_credentials");
 
     const response = await axios.post(
+      // "https://api-preprod.phonepe.com/apis/pg-sandbox/v1/oauth/token",
       "https://api.phonepe.com/apis/identity-manager/v1/oauth/token",
       params,
       {
@@ -83,6 +84,7 @@ app.post("/initiate-payment", async (req, res) => {
     const token = await getAccessToken();
 
     const response = await axios.post(
+      // "https://api-preprod.phonepe.com/apis/pg-sandbox/checkout/v2/pay",
       "https://api.phonepe.com/apis/pg/checkout/v2/pay",
       payload,
       {
@@ -132,6 +134,7 @@ app.get("/payment-status", async (req, res) => {
   while (attempts < maxAttempts) {
     try {
       const response = await axios.get(
+        // `https://api-preprod.phonepe.com/apis/pg-sandbox/checkout/v2/order/${merchantOrderId}/status`,
         `https://api.phonepe.com/apis/pg/checkout/v2/order/${merchantOrderId}/status`,
         {
           headers: {
@@ -153,12 +156,17 @@ app.get("/payment-status", async (req, res) => {
         continue;
       }
     } catch (error) {
-      console.error("Payment status error:", error.response?.data || error.message);
+      console.error(
+        "Payment status error:",
+        error.response?.data || error.message
+      );
       break;
     }
   }
 
-  return res.status(202).json({ status: "PENDING", message: "Payment still processing" });
+  return res
+    .status(202)
+    .json({ status: "PENDING", message: "Payment still processing" });
 });
 
 // Health check
