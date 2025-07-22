@@ -64,8 +64,9 @@ app.post("/initiate-payment", async (req, res) => {
     }
 
     const merchantOrderId = `TXN_${Date.now()}`;
-    const redirectUrlWithPlan = `${SUCCESS_URL}?plan=${plan}`;
-    const failureUrlWithPlan = `${FAILURE_URL}?plan=${plan}`;
+    // const redirectUrlWithPlan = `${SUCCESS_URL}?plan=${plan}`;
+    // const failureUrlWithPlan = `${FAILURE_URL}?plan=${plan}`;
+    const redirectUrlWithPlan = `https://wegfxinteractive.onrender.com/payment-status?merchantOrderId=${merchantOrderId}&plan=${plan}&details=false`;
     const payload = {
       merchantOrderId,
       amount: amount * 100, // Convert to paise
@@ -74,7 +75,7 @@ app.post("/initiate-payment", async (req, res) => {
         message: `Payment for user ${userId} - Plan: ${plan}`,
         merchantUrls: {
           redirectUrl: redirectUrlWithPlan,
-          failureUrl: failureUrlWithPlan,
+          // failureUrl: failureUrlWithPlan,
         },
       },
     };
@@ -112,6 +113,48 @@ app.post("/initiate-payment", async (req, res) => {
     console.error("Payment Init Error:", error.response?.data || error.message);
     return res.status(500).json({
       error: "Payment initiation failed.",
+      details: error.response?.data || error.message,
+    });
+  }
+});
+
+app.get("/payment-status", async (req, res) => {
+  try {
+    const { merchantOrderId, plan } = req.query;
+
+    if (!merchantOrderId || !plan) {
+      return res.status(400).json({ error: "Missing merchantOrderId or plan" });
+    }
+
+    const token = await getAccessToken();
+
+    const response = await axios.get(
+      `https://api.phonepe.com/apis/pg/checkout/v2/order/${merchantOrderId}/status`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `O-Bearer ${token}`,
+        },
+      }
+    );
+    console.log(response, "responseresponse");
+
+    const paymentStatus = response.data?.state;
+
+    if (paymentStatus === "COMPLETED") {
+      return res.redirect(`${SUCCESS_URL}?status=success&plan=${plan}`);
+    } else if (paymentStatus === "FAILED" || paymentStatus === "CANCELLED") {
+      return res.redirect(`${FAILURE_URL}`);
+    } else {
+      return res.status(202).json({ status: paymentStatus });
+    }
+  } catch (error) {
+    console.error(
+      "Payment status error:",
+      error.response?.data || error.message
+    );
+    return res.status(500).json({
+      error: "Error fetching payment status.",
       details: error.response?.data || error.message,
     });
   }
