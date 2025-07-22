@@ -117,47 +117,48 @@ app.post("/initiate-payment", async (req, res) => {
     });
   }
 });
-
 app.get("/payment-status", async (req, res) => {
-  try {
-    const { merchantOrderId, plan } = req.query;
+  const { merchantOrderId, plan } = req.query;
 
-    if (!merchantOrderId || !plan) {
-      return res.status(400).json({ error: "Missing merchantOrderId or plan" });
-    }
-
-    const token = await getAccessToken();
-
-    const response = await axios.get(
-      `https://api.phonepe.com/apis/pg/checkout/v2/order/${merchantOrderId}/status`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `O-Bearer ${token}`,
-        },
-      }
-    );
-    console.log(response, "responseresponse");
-
-    const paymentStatus = response.data?.state;
-
-    if (paymentStatus === "COMPLETED") {
-      return res.redirect(`${SUCCESS_URL}?status=success&plan=${plan}`);
-    } else if (paymentStatus === "FAILED" || paymentStatus === "CANCELLED") {
-      return res.redirect(`${FAILURE_URL}`);
-    } else {
-      return res.status(202).json({ status: paymentStatus });
-    }
-  } catch (error) {
-    console.error(
-      "Payment status error:",
-      error.response?.data || error.message
-    );
-    return res.status(500).json({
-      error: "Error fetching payment status.",
-      details: error.response?.data || error.message,
-    });
+  if (!merchantOrderId || !plan) {
+    return res.status(400).json({ error: "Missing merchantOrderId or plan" });
   }
+
+  const token = await getAccessToken();
+  let attempts = 0;
+  const maxAttempts = 10; // Adjust as needed
+  const delayMs = 1000; // Poll every 2 seconds
+
+  while (attempts < maxAttempts) {
+    try {
+      const response = await axios.get(
+        `https://api.phonepe.com/apis/pg/checkout/v2/order/${merchantOrderId}/status`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `O-Bearer ${token}`,
+          },
+        }
+      );
+
+      const paymentStatus = response.data?.state;
+
+      if (paymentStatus === "COMPLETED") {
+        return res.redirect(`${SUCCESS_URL}?status=success&plan=${plan}`);
+      } else if (paymentStatus === "FAILED" || paymentStatus === "CANCELLED") {
+        return res.redirect(`${FAILURE_URL}`);
+      } else if (paymentStatus === "PENDING") {
+        attempts++;
+        await new Promise((resolve) => setTimeout(resolve, delayMs));
+        continue;
+      }
+    } catch (error) {
+      console.error("Payment status error:", error.response?.data || error.message);
+      break;
+    }
+  }
+
+  return res.status(202).json({ status: "PENDING", message: "Payment still processing" });
 });
 
 // Health check
