@@ -68,11 +68,20 @@ function PiePage() {
 
           const subjectCount = {};
           Object.values(questions).forEach((q) => {
-            const type = q.question_type;
-            if (type) {
-              subjectCount[type] = (subjectCount[type] || 0) + 1;
+            // Normalize the age group for both comparison values
+            const normalizeAge = (str) => str?.replace(/–/g, "-")?.trim();
+            const userAge = normalizeAge(Userdata?.ageGroup?.age);
+            const questionAge = normalizeAge(q.age_group);
+
+            // Filter by matching age group
+            if (userAge === questionAge) {
+              const type = q.question_type;
+              if (type) {
+                subjectCount[type] = (subjectCount[type] || 0) + 1;
+              }
             }
           });
+
           const chartData = Object.entries(subjectCount).map(
             ([name, value]) => ({
               name,
@@ -87,8 +96,11 @@ function PiePage() {
       }
     };
 
-    fetchQuestions();
-  }, []);
+    if (Userdata?.ageGroup?.age) {
+      fetchQuestions();
+    }
+  }, [Userdata]);
+
   const COLORS = [
     "#6a1b9a",
     "#e74c3c",
