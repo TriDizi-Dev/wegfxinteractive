@@ -275,7 +275,8 @@
     font-size: 1vw;
     border-radius: 5px;
     color: #333;
-    font-family: 'Londrina Solid, sans-serif';
+    font-family: 'Poppins', sans-serif;
+
 }
 
 
@@ -286,14 +287,16 @@
 .Welcome_Image {
     width: 11vw;
 }
+
 .learning-message {
     margin-bottom: 3vw;
 }
 
 @media (max-width: 780px) {
-    .pie{
-/* height: 130%; */
+    .pie {
+        /* height: 130%; */
     }
+
     .app-header {
         flex-direction: column;
         gap: 2vw;
@@ -403,7 +406,7 @@
         font-size: 5vw;
     }
 
-    .age-group-dropdown{
+    .age-group-dropdown {
         width: 82%;
         height: 9vw;
         padding: 1.83vw 1.5;
