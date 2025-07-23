@@ -119,7 +119,11 @@ function PiePage() {
         fill="white"
         textAnchor="middle"
         dominantBaseline="central"
-        style={{ fontWeight: "bold", fontSize: "13px" }}
+        style={{
+          fontWeight: "bold",
+          fontSize: "14px",
+          fontFamily: "'Poppins', sans-serif",
+        }}
       >
         {questionData[index].name}
       </text>

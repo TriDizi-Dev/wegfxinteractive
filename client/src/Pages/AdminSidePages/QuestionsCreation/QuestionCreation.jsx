@@ -54,6 +54,7 @@ const QuestionCreation = () => {
     option4: "",
     answer: "",
     question_type: "",
+    age_group: "",
   });
   const [error, setError] = useState("");
 
@@ -70,7 +71,8 @@ const QuestionCreation = () => {
       !data.option2 ||
       !data.option3 ||
       !data.option4 ||
-      !data.question_type
+      !data.question_type ||
+      !data.age_group
     ) {
       setError("All fields are required.");
       return false;
@@ -199,7 +201,7 @@ const QuestionCreation = () => {
                   required
                 />
               </Grid>
-              <Grid item  xs={12} sm={6}>
+              <Grid item xs={12} sm={6}>
                 <FormControl required>
                   <InputLabel id="type-label">Question Type</InputLabel>
                   <Select
@@ -211,12 +213,26 @@ const QuestionCreation = () => {
                   >
                     <MenuItem value="English">English</MenuItem>
                     <MenuItem value="Maths">Maths</MenuItem>
-                    <MenuItem value="Social">
-                       Social
-                    </MenuItem>
+                    <MenuItem value="Social">Social</MenuItem>
                     <MenuItem value="Science">Science</MenuItem>
                     <MenuItem value="Computers">Computers</MenuItem>
                     <MenuItem value="GK">GK</MenuItem>
+                  </Select>
+                </FormControl>
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <FormControl required>
+                  <InputLabel id="type-label">Age Group</InputLabel>
+                  <Select
+                    labelId="type-label"
+                    name="age_group"
+                    value={data.age_group}
+                    onChange={onChangeHandler}
+                    label="Type"
+                  >
+                    <MenuItem value="5-8">5 - 8</MenuItem>
+                    <MenuItem value="9-12">9 - 12</MenuItem>
+                    <MenuItem value="13-16">13 - 16</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>

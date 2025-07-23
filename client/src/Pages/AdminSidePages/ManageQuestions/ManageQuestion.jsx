@@ -19,7 +19,7 @@ const QuestionsManage = () => {
   const navigate = useNavigate();
   const isMobile = useMediaQuery("(max-width: 768px)");
   const [rows, setRows] = useState([]);
-  const [categoryCounts, setCategoryCounts] = useState({});
+  const [selectedAgeGroup, setSelectedAgeGroup] = useState("");
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -32,14 +32,6 @@ const QuestionsManage = () => {
           ...value,
         }));
         setRows(formattedData);
-
-        // 👉 Calculate category-wise counts
-        const counts = {};
-        formattedData.forEach((q) => {
-          const type = q.question_type || "Unknown";
-          counts[type] = (counts[type] || 0) + 1;
-        });
-        setCategoryCounts(counts);
       }
     };
 
@@ -50,79 +42,32 @@ const QuestionsManage = () => {
     try {
       await remove(ref(database, `questions/${id}`));
       setRows((prev) => prev.filter((row) => row.id !== id));
-
-      // Update category counts
-      setCategoryCounts((prev) => {
-        const deletedRow = rows.find((row) => row.id === id);
-        if (!deletedRow) return prev;
-        const category = deletedRow.question_type || "Unknown";
-        const newCounts = { ...prev };
-        newCounts[category] = (newCounts[category] || 1) - 1;
-        if (newCounts[category] <= 0) delete newCounts[category];
-        return newCounts;
-      });
     } catch (error) {
       console.error("Error deleting question:", error);
     }
   };
 
+  // Filtered rows by age group
+  const filteredRows = selectedAgeGroup
+    ? rows.filter((q) => q.age_group === selectedAgeGroup)
+    : rows;
+
+  // Compute category-wise counts from filtered rows
+  const categoryCounts = {};
+  filteredRows.forEach((q) => {
+    const type = q.question_type || "Unknown";
+    categoryCounts[type] = (categoryCounts[type] || 0) + 1;
+  });
+
   const columns = [
-    {
-      field: "question",
-      headerName: "Question",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      headerClassName: "super-app-theme--header",
-    },
-    {
-      field: "option1",
-      headerName: "Option 1",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      headerClassName: "super-app-theme--header",
-    },
-    {
-      field: "option2",
-      headerName: "Option 2",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      headerClassName: "super-app-theme--header",
-    },
-    {
-      field: "option3",
-      headerName: "Option 3",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      headerClassName: "super-app-theme--header",
-    },
-    {
-      field: "option4",
-      headerName: "Option 4",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      headerClassName: "super-app-theme--header",
-    },
-    {
-      field: "question_type",
-      headerName: "Type",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      headerClassName: "super-app-theme--header",
-    },
-    {
-      field: "answer",
-      headerName: "Answer",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      headerClassName: "super-app-theme--header",
-    },
+    { field: "question", headerName: "Question", flex: 1, headerAlign: "center", align: "center", headerClassName: "super-app-theme--header" },
+    { field: "option1", headerName: "Option 1", flex: 1, headerAlign: "center", align: "center", headerClassName: "super-app-theme--header" },
+    { field: "option2", headerName: "Option 2", flex: 1, headerAlign: "center", align: "center", headerClassName: "super-app-theme--header" },
+    { field: "option3", headerName: "Option 3", flex: 1, headerAlign: "center", align: "center", headerClassName: "super-app-theme--header" },
+    { field: "option4", headerName: "Option 4", flex: 1, headerAlign: "center", align: "center", headerClassName: "super-app-theme--header" },
+    { field: "question_type", headerName: "Type", flex: 1, headerAlign: "center", align: "center", headerClassName: "super-app-theme--header" },
+    { field: "answer", headerName: "Answer", flex: 1, headerAlign: "center", align: "center", headerClassName: "super-app-theme--header" },
+    { field: "age_group", headerName: "Age Group", flex: 1, headerAlign: "center", align: "center", headerClassName: "super-app-theme--header" },
     {
       field: "actions",
       headerName: "Actions",
@@ -135,10 +80,7 @@ const QuestionsManage = () => {
           <IconButton onClick={() => deleteQuestion(params.row.id)}>
             <DeleteIcon sx={{ "&:active": { color: "#FFBF00" } }} />
           </IconButton>
-          <IconButton
-            component={Link}
-            to={`/questionCreation/${params.row.id}`}
-          >
+          <IconButton component={Link} to={`/questionCreation/${params.row.id}`}>
             <EditIcon />
           </IconButton>
         </Box>
@@ -148,14 +90,7 @@ const QuestionsManage = () => {
 
   return (
     <div className="Question_Main_container">
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        padding="1.5rem"
-        flexWrap="wrap"
-        marginTop="-2vw"
-      >
+      <Box display="flex" justifyContent="space-between" alignItems="center" padding="1.5rem" flexWrap="wrap" marginTop="-2vw">
         <h2 className="manage-title">Manage Interview Questions</h2>
         <Button
           variant="contained"
@@ -181,6 +116,16 @@ const QuestionsManage = () => {
       <Box className="category-count-container">
         <Typography className="category-count-title">
           Category-wise Question Count
+          <select
+            className="Catogory_Selection_main"
+            onChange={(e) => setSelectedAgeGroup(e.target.value)}
+            value={selectedAgeGroup}
+          >
+            <option value="">All Age Groups</option>
+            <option value="5-8">5–8 years</option>
+            <option value="9-12">9–12 years</option>
+            <option value="13-16">13–16 years</option>
+          </select>
         </Typography>
         {Object.entries(categoryCounts).map(([cat, count]) => (
           <span className="category-count-item" key={cat}>
@@ -190,9 +135,9 @@ const QuestionsManage = () => {
       </Box>
 
       {!isMobile ? (
-        <Box m="1rem auto" height="66vh" width="95%" borderRadius="12px">
+        <Box m="1rem auto" height="64vh" width="95%" borderRadius="12px">
           <DataGrid
-            rows={rows}
+            rows={filteredRows}
             columns={columns}
             getRowId={(row) => row.id}
             rowHeight={40}
@@ -225,11 +170,8 @@ const QuestionsManage = () => {
         </Box>
       ) : (
         <Box m="1rem auto" width="95%">
-          {rows.map((row) => (
-            <Card
-              key={row.id}
-              sx={{ marginBottom: "1rem", background: "#fff3fc" }}
-            >
+          {filteredRows.map((row) => (
+            <Card key={row.id} sx={{ marginBottom: "1rem", background: "#fff3fc" }}>
               <CardContent>
                 <Typography variant="subtitle1" fontWeight={600}>
                   Q: {row.question}

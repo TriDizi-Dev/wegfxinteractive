@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 5000;
 // Environment Variables
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
-CLIENT_VERSION = 1;
+const CLIENT_VERSION = 1;
 const SUCCESS_URL = process.env.SUCCESS_URL;
 const FAILURE_URL = process.env.FAILURE_URL;
 
@@ -22,6 +22,7 @@ app.use(cors());
 app.use(helmet());
 app.use(bodyParser.json());
 
+// ------------------- TOKEN FUNCTION -------------------
 const getAccessToken = async () => {
   try {
     const params = new URLSearchParams();
@@ -31,7 +32,6 @@ const getAccessToken = async () => {
     params.append("grant_type", "client_credentials");
 
     const response = await axios.post(
-      // "https://api-preprod.phonepe.com/apis/pg-sandbox/v1/oauth/token",
       "https://api.phonepe.com/apis/identity-manager/v1/oauth/token",
       params,
       {
@@ -40,8 +40,6 @@ const getAccessToken = async () => {
         },
       }
     );
-    console.log(response.data, "tokennnn");
-
     return response.data.access_token;
   } catch (error) {
     console.error(
@@ -51,7 +49,8 @@ const getAccessToken = async () => {
     throw new Error("Unable to fetch access token");
   }
 };
-// Initiate Payment
+
+// ------------------- INITIATE PAYMENT -------------------
 app.post("/initiate-payment", async (req, res) => {
   try {
     const { userId, amount, mobile, plan } = req.body;
@@ -65,26 +64,68 @@ app.post("/initiate-payment", async (req, res) => {
     }
 
     const merchantOrderId = `TXN_${Date.now()}`;
-    // const redirectUrlWithPlan = `${SUCCESS_URL}?plan=${plan}`;
-    // const failureUrlWithPlan = `${FAILURE_URL}?plan=${plan}`;
     const redirectUrlWithPlan = `https://wegfxinteractive.onrender.com/payment-status?merchantOrderId=${merchantOrderId}&plan=${plan}&details=false`;
+
     const payload = {
       merchantOrderId,
-      amount: amount * 100, // Convert to paise
+      amount: amount * 100,
+      metaInfo: {
+        udf1: "additional-information-1",
+        udf2: "additional-information-2",
+        udf3: "additional-information-3",
+        udf4: "additional-information-4",
+        udf5: "additional-information-5",
+      },
       paymentFlow: {
         type: "PG_CHECKOUT",
         message: `Payment for user ${userId} - Plan: ${plan}`,
         merchantUrls: {
           redirectUrl: redirectUrlWithPlan,
-          // failureUrl: failureUrlWithPlan,
         },
+      },
+      paymentModeConfig: {
+        enabledPaymentModes: [
+          {
+            type: "UPI_INTENT",
+          },
+          {
+            type: "UPI_COLLECT",
+          },
+          {
+            type: "UPI_QR",
+          },
+          {
+            type: "NET_BANKING",
+          },
+          {
+            type: "CARD",
+            cardTypes: ["DEBIT_CARD", "CREDIT_CARD"],
+          },
+        ],
+        disabledPaymentModes: [
+          {
+            type: "UPI_INTENT",
+          },
+          {
+            type: "UPI_COLLECT",
+          },
+          {
+            type: "UPI_QR",
+          },
+          {
+            type: "NET_BANKING",
+          },
+          {
+            type: "CARD",
+            cardTypes: ["DEBIT_CARD", "CREDIT_CARD"],
+          },
+        ],
       },
     };
 
     const token = await getAccessToken();
 
     const response = await axios.post(
-      // "https://api-preprod.phonepe.com/apis/pg-sandbox/checkout/v2/pay",
       "https://api.phonepe.com/apis/pg/checkout/v2/pay",
       payload,
       {
@@ -95,9 +136,6 @@ app.post("/initiate-payment", async (req, res) => {
       }
     );
 
-    console.log("API Response:", JSON.stringify(response.data, null, 2));
-
-    // Try multiple possible redirect URL paths
     const redirectUrl =
       response.data?.data?.redirectUrl ||
       response.data?.data?.instrumentResponse?.redirectInfo?.url ||
@@ -119,6 +157,8 @@ app.post("/initiate-payment", async (req, res) => {
     });
   }
 });
+
+// ------------------- PAYMENT STATUS (Polling) -------------------
 app.get("/payment-status", async (req, res) => {
   const { merchantOrderId, plan } = req.query;
 
@@ -126,15 +166,14 @@ app.get("/payment-status", async (req, res) => {
     return res.status(400).json({ error: "Missing merchantOrderId or plan" });
   }
 
-  const token = await getAccessToken();
-  let attempts = 0;
-  const maxAttempts = 10; // Adjust as needed
-  const delayMs = 1000; // Poll every 2 seconds
+  try {
+    const token = await getAccessToken();
+    let attempts = 0;
+    const maxAttempts = 10;
+    const delayMs = 1000;
 
-  while (attempts < maxAttempts) {
-    try {
+    while (attempts < maxAttempts) {
       const response = await axios.get(
-        // `https://api-preprod.phonepe.com/apis/pg-sandbox/checkout/v2/order/${merchantOrderId}/status`,
         `https://api.phonepe.com/apis/pg/checkout/v2/order/${merchantOrderId}/status`,
         {
           headers: {
@@ -155,26 +194,62 @@ app.get("/payment-status", async (req, res) => {
         await new Promise((resolve) => setTimeout(resolve, delayMs));
         continue;
       }
-    } catch (error) {
-      console.error(
-        "Payment status error:",
-        error.response?.data || error.message
-      );
-      break;
     }
-  }
 
-  return res
-    .status(202)
-    .json({ status: "PENDING", message: "Payment still processing" });
+    return res
+      .status(202)
+      .json({ status: "PENDING", message: "Payment still processing" });
+  } catch (error) {
+    console.error(
+      "Payment status error:",
+      error.response?.data || error.message
+    );
+    return res.status(500).json({ error: "Unable to fetch payment status" });
+  }
 });
 
-// Health check
+// ------------------- WEBHOOK ROUTE -------------------
+app.post("/phonepe-webhook", (req, res) => {
+  const webhookData = req.body;
+
+  console.log("📩 Webhook Received:", JSON.stringify(webhookData, null, 2));
+
+  const {
+    merchantId,
+    merchantTransactionId,
+    transactionId,
+    state,
+    amount,
+    message,
+  } = webhookData;
+
+  // 👉 TODO: Update order in your DB using merchantTransactionId
+  // Example: mark order as COMPLETED or FAILED based on `state`
+
+  if (state === "COMPLETED") {
+    console.log(`✅ Payment SUCCESS: Order ID ${merchantTransactionId}`);
+    // Update your database: payment success
+  } else if (state === "FAILED" || state === "CANCELLED") {
+    console.log(
+      `❌ Payment FAILED/CANCELLED: Order ID ${merchantTransactionId}`
+    );
+    // Update your database: payment failed
+  } else {
+    console.log(
+      `⏳ Payment Status: ${state} - Order ID ${merchantTransactionId}`
+    );
+  }
+
+  // Always send 200 OK to acknowledge webhook
+  res.status(200).send("Webhook received");
+});
+
+// ------------------- HEALTH CHECK -------------------
 app.get("/", (req, res) => {
   res.send("✅ PhonePe Payment API is running");
 });
 
-// Start server
+// ------------------- START SERVER -------------------
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
 });

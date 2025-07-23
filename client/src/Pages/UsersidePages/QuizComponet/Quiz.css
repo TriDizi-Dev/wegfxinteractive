@@ -212,6 +212,7 @@
   margin-top: 20px;
   text-align: center;
   animation: fadeIn 0.6s ease;
+  font-family: 'Poppins', sans-serif;
 }
 
 
@@ -364,6 +365,14 @@
   margin: 0 auto;
 }
 
+.quiz-no-questions {
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2vw;
+  color: #043960;
+  text-align: center;
+}
+
 /* Mobile Responsive */
 @media screen and (max-width: 768px) {
   .quiz-congrats {
@@ -512,9 +521,9 @@
   }
 
   .quiz-header-center {
-   width: 80vw;
-  height: 15vw;
-  margin-top: 8vw;
+    width: 80vw;
+    height: 15vw;
+    margin-top: 8vw;
   }
 
   .quiz-categories {
@@ -531,4 +540,8 @@
     font-size: 4vw;
     text-align: center;
   }
+  .quiz-no-questions {
+  font-size: 3vw;
+  text-align: center;
+}
 }

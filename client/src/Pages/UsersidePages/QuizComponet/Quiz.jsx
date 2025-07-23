@@ -49,37 +49,13 @@ const QuizComponent = () => {
     if (!currentUser) return;
     get(ref(database, "questions")).then((snapshot) => {
       const catSet = new Set();
-      const questionsArray = [];
       snapshot.forEach((snap) => {
         const q = snap.val();
         if (q.question_type) catSet.add(q.question_type);
-        if (q.question_type === "Maths") {
-          questionsArray.push({ ...q, id: snap.key });
-        }
       });
       setCategories([...catSet]);
-      setQuestions(questionsArray);
-      setLoading(false);
     });
   }, [currentUser]);
-
-  // const fetchQuestions = async (cat) => {
-  //   setLoading(true);
-  //   const snap = await get(ref(database, "questions"));
-  //   const list = [];
-  //   snap.forEach((c) => {
-  //     const d = c.val();
-  //     if (d.question_type === cat) list.push({ ...d, id: c.key });
-  //   });
-  //   setCategory(cat);
-  //   setQuestions(list);
-  //   setCurrentIndex(0);
-  //   setSelectedOption("");
-  //   setFeedback("");
-  //   setScore(0);
-  //   setQuizOver(false);
-  //   setLoading(false);
-  // };
 
   const fetchQuestions = async (cat) => {
     setLoading(true);
@@ -90,39 +66,37 @@ const QuizComponent = () => {
     const allSnap = await get(ref(database, "questions"));
     const fullList = [];
 
-    // 1. Get all questions of the selected category
     allSnap.forEach((snap) => {
       const q = snap.val();
-      if (q.question_type === cat) {
+      const normalizeAgeGroup = (str) => str.replace(/–/g, "-");
+      if (
+        q.question_type === cat &&
+        normalizeAgeGroup(q.age_group) ===
+          normalizeAgeGroup(Userdata?.ageGroup?.age)
+      ) {
         fullList.push({ ...q, id: snap.key });
       }
     });
 
-    // 2. Fetch attempted question IDs from Firebase
     const trackingRef = ref(database, `users/${uid}/quizTracking/${cat}`);
     const trackingSnap = await get(trackingRef);
     const attemptedIds = trackingSnap.exists()
       ? trackingSnap.val().attempted || []
       : [];
 
-    // 3. Filter out attempted questions
     let unattempted = fullList.filter((q) => !attemptedIds.includes(q.id));
 
-    // 4. If fewer than 30 unattempted, reset attempts and reshuffle
     if (unattempted.length < 30) {
       unattempted = [...fullList];
-      await set(trackingRef, { attempted: [] }); // Reset tracking
+      await set(trackingRef, { attempted: [] });
     }
 
-    // 5. Shuffle and pick 30
     const shuffled = [...unattempted].sort(() => 0.5 - Math.random());
     const selected30 = shuffled.slice(0, 30);
 
-    // 6. Update Firebase with newly attempted question IDs
     const newAttemptedIds = [...attemptedIds, ...selected30.map((q) => q.id)];
     await set(trackingRef, { attempted: newAttemptedIds });
 
-    // 7. Set state
     setCategory(cat);
     setQuestions(selected30);
     setCurrentIndex(0);
@@ -154,7 +128,6 @@ const QuizComponent = () => {
   };
 
   const handleRestart = () => {
-    // fetchQuestions("Maths");
     fetchQuestions(category);
   };
 
@@ -168,13 +141,10 @@ const QuizComponent = () => {
     const newAttempted = questions.length;
 
     try {
-      // ✅ Always overwrite with latest values
       await set(statsRef, {
         correct: newCorrect,
         attempted: newAttempted,
       });
-
-      console.log("✅ Stats updated with latest attempt.");
     } catch (err) {
       console.error("❌ Failed to update quiz stats:", err);
     }
@@ -197,20 +167,10 @@ const QuizComponent = () => {
   return (
     <div className="quiz-wrapper">
       <Navbar />
-
-      {/* Header */}
       <div className="quiz-header-center">
         <img src={MainImage} alt="Think" />
-        {/* <div className="think-logo_Quiz">
-          <img src={think} alt="Think" />
-        </div>
-        <div className="quiz-header-text">
-          <h2>{Userdata?.ageGroup?.title}</h2>
-          <p>Age {Userdata?.ageGroup?.age || 0} years</p>
-        </div> */}
       </div>
 
-      {/* Categories */}
       <div className="quiz-categories">
         {categories.map((cat, i) => (
           <button
@@ -225,7 +185,6 @@ const QuizComponent = () => {
         ))}
       </div>
 
-      {/* Quiz Content */}
       {loading ? (
         <div className="quiz-loading">Loading...</div>
       ) : quizOver ? (
@@ -247,47 +206,48 @@ const QuizComponent = () => {
             Restart
           </button>
         </div>
+      ) : questions.length === 0 ? (
+        <div className="quiz-no-questions">
+          <h2>No questions available for this category and age group.</h2>
+        </div>
       ) : (
         <div className="quiz-question-box">
           <h3>
             Q{currentIndex + 1}: {questions[currentIndex]?.question}
           </h3>
-
-          {/* Options */}
           <div className="quiz-options">
-            {["option1", "option2", "option3", "option4"].map((opt, i) => {
-              const isCorrectOption =
-                questions[currentIndex][opt] === questions[currentIndex].answer;
-              const isSelected =
-                selectedOption === questions[currentIndex][opt];
+            {questions[currentIndex] &&
+              ["option1", "option2", "option3", "option4"].map((opt, i) => {
+                const currentQ = questions[currentIndex];
+                if (!currentQ[opt]) return null; // skip undefined options
 
-              const optionClass = selectedOption
-                ? isCorrectOption
-                  ? "correct"
-                  : isSelected
-                  ? "wrong"
-                  : ""
-                : "";
+                const isCorrectOption = currentQ[opt] === currentQ.answer;
+                const isSelected = selectedOption === currentQ[opt];
 
-              return (
-                <button
-                  key={i}
-                  className={`quiz-option-btn ${optionClass}`}
-                  onClick={() => handleAnswer(questions[currentIndex][opt])}
-                  disabled={!!selectedOption}
-                >
-                  <span className="option-label">
-                    {String.fromCharCode(65 + i)}.
-                  </span>
-                  <span className="option-text">
-                    {questions[currentIndex][opt]}
-                  </span>
-                </button>
-              );
-            })}
+                const optionClass = selectedOption
+                  ? isCorrectOption
+                    ? "correct"
+                    : isSelected
+                    ? "wrong"
+                    : ""
+                  : "";
+
+                return (
+                  <button
+                    key={i}
+                    className={`quiz-option-btn ${optionClass}`}
+                    onClick={() => handleAnswer(currentQ[opt])}
+                    disabled={!!selectedOption}
+                  >
+                    <span className="option-label">
+                      {String.fromCharCode(65 + i)}.
+                    </span>
+                    <span className="option-text">{currentQ[opt]}</span>
+                  </button>
+                );
+              })}
           </div>
 
-          {/* Feedback */}
           {selectedOption && (
             <div className="quiz-feedback-text">
               {feedback === "correct" ? (
@@ -301,7 +261,6 @@ const QuizComponent = () => {
             </div>
           )}
 
-          {/* Next Button */}
           <div className="Quiz_Next_Button">
             <button
               className="quiz-next-btn"
