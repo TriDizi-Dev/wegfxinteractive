@@ -44,6 +44,11 @@ const QuizComponent = () => {
     };
     fetchUser();
   }, []);
+  useEffect(() => {
+    if (Userdata?.ageGroup?.age) {
+      fetchQuestions("Maths");
+    }
+  }, [Userdata]);
 
   useEffect(() => {
     if (!currentUser) return;
@@ -106,7 +111,6 @@ const QuizComponent = () => {
     setQuizOver(false);
     setLoading(false);
   };
-
   const handleAnswer = (option) => {
     if (selectedOption) return;
     const current = questions[currentIndex];
