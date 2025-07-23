@@ -308,11 +308,10 @@
   .thinker-title {
     font-size: 5vw;
     margin-bottom: 2vw;
+    margin-top: 0vw;
+     width: 70vw;
   }
 
-  .thinker-title {
-    width: 70vw;
-  }
 
   .thinker-age {
     font-size: 4.2vw;
@@ -341,7 +340,6 @@
   .thinker-image1 {
     width: 30vw;
     height: auto;
-    margin-bottom: 3vw;
   }
 
   .thinker-image2 {
