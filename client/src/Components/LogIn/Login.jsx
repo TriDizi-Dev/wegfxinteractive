@@ -38,6 +38,51 @@ const LoginPage = () => {
   const [successmsg, setsuccessmsg] = useState("");
   const navigate = useNavigate();
 
+useEffect(() => {
+  const checkRedirectResult = async () => {
+    const redirected = sessionStorage.getItem("googleRedirect");
+    if (redirected !== "true") return;
+
+    try {
+      const result = await getRedirectResult(auth);
+      sessionStorage.removeItem("googleRedirect");
+
+      if (result && result.user) {
+        const user = result.user;
+        const email = user.email;
+
+        const methods = await fetchSignInMethodsForEmail(auth, email);
+        if (methods.includes("password")) {
+          setError("This email is already registered with Email/Password.");
+          await signOut(auth);
+          return;
+        }
+
+        const uid = user.uid;
+        const userRef = ref(database, `users/${uid}`);
+        const snapshot = await get(userRef);
+
+        if (!snapshot.exists()) {
+          const name = user.displayName || "User";
+          await set(userRef, { name, email, role: "user" });
+        }
+
+        const token = await user.getIdToken();
+        setStorageItem("authToken", token);
+        setStorageItem("userType", "user");
+
+        navigate("/select-age-group");
+      }
+    } catch (err) {
+      console.error("Redirect login error:", err);
+      setError("Google Sign-In Failed.");
+    }
+  };
+
+  checkRedirectResult();
+}, []);
+
+
   useEffect(() => {
     if (
       !redirectHandled &&
@@ -164,48 +209,44 @@ const LoginPage = () => {
       const provider = new GoogleAuthProvider();
       provider.setCustomParameters({ prompt: "select_account" });
 
-      if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+      const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
+
+      if (isMobile) {
         sessionStorage.setItem("googleRedirect", "true");
         await signInWithRedirect(auth, provider);
-      } else {
-        const result = await signInWithPopup(auth, provider);
-        const email = result.user.email;
-
-        const methods = await fetchSignInMethodsForEmail(auth, email);
-        if (methods.includes("password")) {
-          setError("This email is already registered with Email/Password.");
-          await signOut(auth);
-          return;
-        }
-
-        const uid = result.user.uid;
-        const userRef = ref(database, `users/${uid}`);
-        const snapshot = await get(userRef);
-
-        if (!snapshot.exists()) {
-          const name = result.user.displayName || "";
-          await set(userRef, { name, email, role: "user" });
-        }
-
-        const token = await result.user.getIdToken();
-        setStorageItem("authToken", token);
-        setStorageItem("userType", "user");
-        setTimeout(() => {
-          navigate("/select-age-group");
-        }, 1000);
-        // const planRef = ref(database, `users/${uid}/plan`);
-        // const planSnap = await get(planRef);
-        // const now = Date.now();
-
-        // if (planSnap.exists() && now < planSnap.val().endTime) {
-        //   navigate("/quiz");
-        // } else {
-        //   navigate("/slectPlanpage");
-        // }
+        return;
       }
+
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      const email = user.email;
+
+      const methods = await fetchSignInMethodsForEmail(auth, email);
+      if (methods.includes("password")) {
+        setError("This email is already registered with Email/Password.");
+        await signOut(auth);
+        return;
+      }
+
+      const uid = user.uid;
+      const userRef = ref(database, `users/${uid}`);
+      const snapshot = await get(userRef);
+
+      if (!snapshot.exists()) {
+        const name = user.displayName || "User";
+        await set(userRef, { name, email, role: "user" });
+      }
+
+      const token = await user.getIdToken();
+      setStorageItem("authToken", token);
+      setStorageItem("userType", "user");
+
+      setTimeout(() => {
+        navigate("/select-age-group");
+      }, 1000);
     } catch (err) {
       console.error("Google sign-in error:", err);
-      setError("Google Sign-In Failed.");
+      setError("Google Sign-In Failed. Please try again.");
     }
   };
 

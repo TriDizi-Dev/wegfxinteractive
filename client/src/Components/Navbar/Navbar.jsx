@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { auth, database } from "../../Firebase/firebase";
 import { get, ref } from "firebase/database"; // ✅ FIXED import
-import Logo from "../../assets/image.png";
-import LogoWhite from "../../assets/AllWebpAssets/image.png";
+import Logo from "../../assets/AllWebpAssets/WeGfx_black_logo.webp";
+import LogoWhite from "../../assets/AllWebpAssets/WeGfx_white_logo.webp";
 import { useLocation } from "react-router-dom";
 import "./Navbar.css";
 import { signOut } from "firebase/auth";

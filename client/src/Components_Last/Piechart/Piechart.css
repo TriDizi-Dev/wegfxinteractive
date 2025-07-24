@@ -14,7 +14,7 @@
 
 .think-logo-image {
     height: 5vw;
-    width: 10vw;
+    width: fit-content;
 }
 
 .app-header {

@@ -6,7 +6,7 @@
 }
 
 .quiz-user-info span {
-    font-size: 1.2vw;
+    font-size: 1.5vw;
     font-family: 'Calibri', sans-serif;
     color: #000000;
     font-weight: 600;
@@ -14,18 +14,21 @@
 }
 
 .user-avatar {
-    font-size: 2.5vw !important;
+    font-size: 3vw !important;
     color: #10699c;
     cursor: pointer;
     border-radius: 50%;
-   background-color: #ffffff;
+    background-color: #ffffff;
+    margin-right: .3vw;
 }
 
 .Main_NavBar_Css {
-    width: 95%;
+    width: 98.5%;
     display: flex;
     align-items: center;
+    /* align-items: flex-start; */
     justify-content: space-between;
+    margin-top: .5vw;
     margin: 0 auto;
 }
 
@@ -48,6 +51,7 @@
     z-index: 1000;
     padding: 8px 16px;
 }
+
 .logout-popup button {
     background-color: #06416a;
     color: white;
@@ -57,9 +61,11 @@
     cursor: pointer;
     font-family: 'Poppins', sans-serif;
 }
+
 .logout-popup button:hover {
     background-color: #06416a;
 }
+
 .back-arrow-btn {
     margin-top: 8px;
     padding: 6px 12px;
@@ -72,7 +78,9 @@
     transition: background-color 0.2s ease;
     position: relative;
     z-index: 1000;
+    margin-left: .5vw;
 }
+
 .back-arrow-btn:hover {
     background-color: #f0f0f0;
 }
@@ -82,24 +90,30 @@
         width: 22vw;
         height: 15vw;
     }
+
     .quiz-user-info span {
         font-size: 5vw;
         margin-top: -1vw;
     }
+
     .user-avatar {
         font-size: 8vw !important;
     }
+
     .pie-chart-section {
         margin: -14vw 0vw;
     }
+
     .logout-popup {
         top: 7vw;
         right: -.5vw;
     }
+
     .logout-popup button {
         font-size: 2.5vw;
         margin-top: 7vw;
     }
+
     .back-arrow-btn {
         margin-top: -2px;
         padding: 3px 6px;

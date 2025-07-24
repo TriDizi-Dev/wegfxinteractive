@@ -56,7 +56,7 @@
   gap: 3vw;
   flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 20px;
+  margin: .8vw 0 1.5vw 0;
   animation: slideInUp 0.5s ease;
   background-color: #cac5c5ac;
   padding: 1vw;
@@ -135,9 +135,12 @@
 
 .quiz-question-box h3 {
   font-family: 'Roboto', sans-serif;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   font-size: 20px;
   font-weight: 600;
+  padding: 0 !important;
+  margin: 0;
+  margin-bottom: 20px;
 }
 
 .quiz-options {
@@ -238,36 +241,29 @@
 } */
 
 .quiz-congrats .trophy-image {
-  width: 10vw;
-  margin: 0 auto 20px;
+  width: 13vw;
   animation: scaleIn 1s ease-in-out;
 }
 
 .quiz-congrats h2 {
   font-size: 1.5vw;
-  margin-bottom: 10px;
   font-weight: 600;
   text-align: left;
   font-family: 'Poppins', sans-serif;
-
+  margin: 0;
 }
 
 .quiz-congrats .user-name {
   font-size: 1.5vw;
   font-weight: bold;
-  margin: 10px 0;
   text-align: left;
   font-family: 'Poppins', sans-serif;
+  margin-bottom: -.5vw;
 
 }
 
 .quiz-congrats .score {
-  font-size: 1.5vw;
   color: #ffff99;
-  font-weight: 600;
-  margin-bottom: 20px;
-  text-align: left;
-  font-family: 'Poppins', sans-serif;
 
 }
 
@@ -305,6 +301,7 @@
 .quiz-header-center {
   width: 35vw;
   height: 6vw;
+  margin-top: -1vw;
 }
 
 .quiz-header-center img {
@@ -331,11 +328,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4vw;
+  gap: 2vw;
+  margin-top: -2vw;
 }
 
 .congrats-banner {
   width: 25vw;
+  margin-top: -1vw;
 }
 
 .quiz-feedback-text {
@@ -376,6 +375,10 @@
 
 /* Mobile Responsive */
 @media screen and (max-width: 768px) {
+  .Quiz_Complete_Buttom_Section {
+    flex-direction: column-reverse;
+  }
+
   .quiz-congrats {
     padding: 20px;
     border-radius: 18px;
@@ -383,22 +386,24 @@
   }
 
   .quiz-congrats .trophy-image {
-    width: 30vw;
+    width: 45vw;
   }
 
   .quiz-congrats h2 {
     font-size: 20px;
-    width: 40vw;
   }
 
   .quiz-congrats .user-name,
   .quiz-congrats .score {
-    font-size: 16px;
+    font-size: 5vw;
+    margin: 0;
+    margin-top: 2vw;
   }
 
   .quiz-congrats .restart-btn {
     width: 100%;
     font-size: 4vw;
+    margin-top: 2vw;
   }
 }
 
@@ -530,7 +535,7 @@
   .quiz-categories {
     padding: 2vw 1vw;
     width: 90vw;
-    margin-top: 8vw;
+    margin-top: 0vw;
   }
 
   .congrats-banner {
@@ -541,8 +546,9 @@
     font-size: 4vw;
     text-align: center;
   }
+
   .quiz-no-questions {
-  font-size: 3vw;
-  text-align: center;
-}
+    font-size: 3vw;
+    text-align: center;
+  }
 }

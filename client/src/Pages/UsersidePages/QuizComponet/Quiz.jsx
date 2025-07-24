@@ -198,7 +198,9 @@ const QuizComponent = () => {
             <div>
               <h2>You Completed the Objectives</h2>
               <p className="user-name">Name : {Userdata.name}</p>
-              <p className="score">
+              <p className="user-name">Age : {Userdata.ageGroup.age} years</p>
+              <p className="user-name">Foundation : {Userdata.ageGroup.title} years</p>
+              <p className="user-name score">
                 Score : {score * 10} / {questions.length * 10}
               </p>
             </div>
