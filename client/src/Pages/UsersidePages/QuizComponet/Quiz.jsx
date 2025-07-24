@@ -15,6 +15,8 @@ import Foundation from "../../../assets/AllWebpAssets/Asset5.webp";
 import Explosive from "../../../assets/AllWebpAssets/Asset6.webp";
 import FutureReaady from "../../../assets/AllWebpAssets/Asset7.webp";
 import congrates from "../../../assets/AllWebpAssets/Asset16.webp";
+import Correct from "../../../assets/AllWebpAssets/Correct_Answer.wav";
+import Wrong from "../../../assets/AllWebpAssets/wrong_answer.wav";
 
 const QuizComponent = () => {
   const { currentUser, loading: authLoading } = useAuth();
@@ -111,13 +113,30 @@ const QuizComponent = () => {
     setQuizOver(false);
     setLoading(false);
   };
+  useEffect(() => {
+    new Audio(Correct).load();
+    new Audio(Wrong).load();
+  }, []);
+
+  const playSound = (sound) => {
+    const audio = new Audio(sound);
+    audio.play().catch((err) => {
+      console.warn("Audio playback failed:", err);
+    });
+  };
+
   const handleAnswer = (option) => {
     if (selectedOption) return;
     const current = questions[currentIndex];
     const isCorrect = option === current.answer;
     setSelectedOption(option);
     setFeedback(isCorrect ? "correct" : "wrong");
-    if (isCorrect) setScore((prev) => prev + 1);
+    if (isCorrect) {
+      setScore((prev) => prev + 1);
+      playSound(Correct); // Play correct sound
+    } else {
+      playSound(Wrong); // Play wrong sound
+    }
   };
 
   const handleNext = async () => {
@@ -199,7 +218,9 @@ const QuizComponent = () => {
               <h2>You Completed the Objectives</h2>
               <p className="user-name">Name : {Userdata.name}</p>
               <p className="user-name">Age : {Userdata.ageGroup.age} years</p>
-              <p className="user-name">Foundation : {Userdata.ageGroup.title} years</p>
+              <p className="user-name">
+                Foundation : {Userdata.ageGroup.title} years
+              </p>
               <p className="user-name score">
                 Score : {score * 10} / {questions.length * 10}
               </p>
@@ -257,12 +278,16 @@ const QuizComponent = () => {
           {selectedOption && (
             <div className="quiz-feedback-text">
               {feedback === "correct" ? (
-                <p className="feedback-correct">✅ Correct Answer!</p>
+                <>
+                  <p className="feedback-correct">✅ Correct Answer!</p>
+                </>
               ) : (
-                <p className="feedback-wrong">
-                  ❌ Wrong Answer. The correct answer is:{" "}
-                  <strong>{questions[currentIndex].answer}</strong>
-                </p>
+                <>
+                  <p className="feedback-wrong">
+                    ❌ Wrong Answer. The correct answer is:{" "}
+                    <strong>{questions[currentIndex].answer}</strong>
+                  </p>
+                </>
               )}
             </div>
           )}

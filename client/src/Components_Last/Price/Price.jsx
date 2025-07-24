@@ -191,13 +191,13 @@ function Price() {
                     {/* <h3 className="plan-name">Starter Plan</h3> */}
                     <p className="price">
                       {" "}
-                      <span className="price-value">₹ 199</span>
+                      <span className="price-value">₹ 149</span>
                     </p>
                     <p className="duration">1 Week</p>
                   </div>
                 </div>
                 <div className="Price_Card_and_title">
-                  <p className="plan-label">Recommended</p>
+                  <p className="plan-label">Basic</p>
 
                   <div
                     className={`price-card recommended ${

@@ -125,7 +125,7 @@
 }
 
 .logo {
-  width: 8vw;
+  width: fit-content;
   height: 4vw;
 }
 
@@ -177,7 +177,8 @@
    font-size: 1.1vw;
   font-weight: 500;
   padding-left: 0.2vw;
-  font-family: 'Poppins', sans-serif
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
 }
 .form-login {
   margin-bottom: 0.5vw;
@@ -334,8 +335,9 @@
 
 .Login_submit_and_Create_account {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
+  margin-top: 4vw;
 }
 
 
@@ -406,11 +408,11 @@
     font-size: 8vw;
     cursor: pointer;
     margin-top: -8vw;
-    margin-bottom: 5vw;
+    margin-bottom: 1vw;
   }
 
   .logo {
-    width: 25vw;
+    width: fit-content;
     height: 15vw;
   }
 

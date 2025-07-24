@@ -61,8 +61,8 @@
 }
 
 .logo1 {
-  height: 4.7vw;
-  width: 10vw;
+  height: 5vw;
+  width: fit-content;
   /* margin-right: 15vw; */
 }
 
@@ -115,7 +115,8 @@
 .pricing-plans {
   display: flex;
   gap: 1.67vw;
-  margin-bottom: 2.5vw;
+  margin-top: -1vw;
+  /* margin-bottom: 2.5vw; */
   flex-wrap: wrap;
   justify-content: center;
   /* margin-left: 9vw; */
@@ -174,7 +175,7 @@
   font-size: 1.3vw;
   font-weight: bold;
   font-family: 'Poppins', sans-serif;
-  margin-bottom: -1vw;
+  margin-bottom: -.5vw;
 }
 
 .Wrong_Price span {
@@ -189,13 +190,14 @@
 }
 
 .trial-pack {
-
   background-color: #c80000;
   color: white;
   border-radius: 1.5vw;
   text-align: center;
-  /* padding: 0.83vw; */
-  Font-weight: bold
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  gap: .1vw;
 }
 
 .recommended {
@@ -203,7 +205,6 @@
   color: white;
   border-radius: 1.5vw;
   text-align: center;
-  /* padding: 0.83vw; */
   Font-weight: bold;
 }
 
@@ -212,7 +213,6 @@
   color: white;
   border-radius: 1.5vw;
   text-align: center;
-  /* padding: 0.83vw; */
   Font-weight: bold;
 }
 
@@ -228,14 +228,19 @@
 
 .payment-options {
   /* list-style: none; */
-  margin-left: -.5vw;
+  margin: 0;
+  margin-left: -1vw;
+  margin-top: .8vw;
   font-family: 'Poppins', sans-serif;
+
 
 }
 
 .Benifits_text {
   text-align: left;
+  margin: 0;
   margin-left: 1vw;
+  margin-top: .1vw;
   font-size: 1.5vw;
   font-weight: 700;
   font-family: 'Poppins', sans-serif;
@@ -261,11 +266,11 @@
 
 .Coupon_Container {
   text-align: left;
-  margin-top: -2vw;
   margin-left: .4vw;
   display: flex;
   align-items: center;
   gap: 1vw;
+  margin-top: .5vw;
 }
 
 .Apply_Coupon_btn {
