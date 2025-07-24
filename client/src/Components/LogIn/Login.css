@@ -342,8 +342,6 @@
 
 
 @media (max-width: 768px) {
-
-
   .login_box {
     flex-direction: column;
     align-items: center;
