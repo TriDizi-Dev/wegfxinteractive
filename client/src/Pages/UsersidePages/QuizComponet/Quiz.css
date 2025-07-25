@@ -475,7 +475,7 @@ color: #f5d504;
   }
 
   .quiz-wrapper {
-    padding: 15px;
+    padding: 0px 15px;
     width: 94%;
     height: fit-content;
     min-height: 100vh;

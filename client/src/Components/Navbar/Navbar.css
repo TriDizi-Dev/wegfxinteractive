@@ -46,7 +46,7 @@
 .logout-popup {
     position: absolute;
     top: 4vw;
-    right: 1vw;
+    right: 0vw;
     border-radius: 6px;
     z-index: 1000;
     padding: 8px 16px;
@@ -105,7 +105,7 @@
     }
 
     .logout-popup {
-        top: 7vw;
+        top: 5vw;
         right: -.5vw;
     }
 

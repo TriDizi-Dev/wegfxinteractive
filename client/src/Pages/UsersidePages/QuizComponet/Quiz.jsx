@@ -221,7 +221,7 @@ const QuizComponent = () => {
               </p>
               <p className="user-name">
                 <span>Group : </span>
-                {Userdata.ageGroup.title} years
+                {Userdata.ageGroup.title}
               </p>
               <p className="user-name score">
                 <span>Score :</span> {score * 10} / {questions.length * 10}
