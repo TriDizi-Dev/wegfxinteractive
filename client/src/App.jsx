@@ -123,8 +123,8 @@ function Layout() {
           path="/quiz"
           element={
             // <PlanBasedRoute>
-            <QuizComponent />
-            //  </PlanBasedRoute>
+              <QuizComponent />
+            // </PlanBasedRoute>
           }
         />
 

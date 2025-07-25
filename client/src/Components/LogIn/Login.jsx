@@ -332,7 +332,7 @@ useEffect(() => {
                     className="sign"
                     onClick={() => setShowChangePassword(true)}
                   >
-                    Forget Password
+                    Forgot password?
                   </span>
                 )}
               </h3>
