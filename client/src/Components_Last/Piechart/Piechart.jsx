@@ -11,20 +11,13 @@ import Welcome from "../../assets/AllWebpAssets/Asset9.webp"; // Import your log
 
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
-// const questionData = [
-//   { name: "English", value: 45 },
-//   { name: "GK", value: 20 },
-//   { name: "Maths", value: 15 },
-//   { name: "Social", value: 10 },
-//   { name: "Science", value: 10 },
-// ];
 
 function PiePage() {
   const [ageGroup, setAgeGroup] = useState("Beginner");
   const [Userdata, setUserdata] = useState({});
   const [outerRadius, setOuterRadius] = useState(180);
   const [questionData, setQuestionData] = useState([]);
-  console.log(Userdata, "UserdataUserdata");
+  console.log(questionData, "UserdataUserdata");
 
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
@@ -101,14 +94,14 @@ function PiePage() {
     }
   }, [Userdata]);
 
-  const COLORS = [
-    "#6a1b9a",
-    "#e74c3c",
-    "#3498db",
-    "#5dade2",
-    "#2ecc71",
-    "#C00000",
-  ];
+  const SUBJECT_COLOR_MAP = {
+    Maths: "#7B3FA3",
+    English: "#0072BC",
+    Social: "#00B7F1",
+    Science: "#00B050",
+    Computers: "#F7941E",
+    GK: "red",
+  };
 
   const CustomLabel = ({
     cx,
@@ -244,7 +237,7 @@ function PiePage() {
                     {questionData.map((entry, index) => (
                       <Cell
                         key={`cell-${index}`}
-                        fill={COLORS[index % COLORS.length]}
+                        fill={SUBJECT_COLOR_MAP[entry?.name]} // fallback color
                       />
                     ))}
                   </Pie>

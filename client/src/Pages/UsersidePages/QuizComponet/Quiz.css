@@ -88,29 +88,24 @@
   background-color: #7B3FA3;
 }
 
-/* Red-pink */
 .quiz-tab.color-1 {
   background-color: #0072BC;
 }
 
-/* Orange */
 .quiz-tab.color-2 {
   background-color: #00B7F1;
 }
 
-/* Yellow */
 .quiz-tab.color-3 {
   background-color: #00B050;
 }
 
-/* Green */
 .quiz-tab.color-4 {
   background-color: #F7941E;
 }
 
-/* Blue */
 .quiz-tab.color-5 {
-  background-color: #C00000;
+  background-color: red;
 }
 
 /* Purple-blue */
@@ -241,12 +236,12 @@
 } */
 
 .quiz-congrats .trophy-image {
-  width: 13vw;
+  width: 12vw;
   animation: scaleIn 1s ease-in-out;
 }
 
 .quiz-congrats h2 {
-  font-size: 1.5vw;
+  font-size: 1.4vw;
   font-weight: 600;
   text-align: left;
   font-family: 'Poppins', sans-serif;
@@ -254,17 +249,22 @@
 }
 
 .quiz-congrats .user-name {
-  font-size: 1.5vw;
+  font-size: 1.45vw;
   font-weight: bold;
   text-align: left;
   font-family: 'Poppins', sans-serif;
-  margin-bottom: -.5vw;
+  /* margin-bottom: -.5vw; */
+  margin: 0;
+  margin-top: .8vw;
 
 }
 
 .quiz-congrats .score {
-  color: #ffff99;
-
+  color: #f5d504;
+}
+.user-name span{
+  color: #eee8cd;
+  font-weight: 400;
 }
 
 .quiz-congrats .restart-btn {
@@ -299,7 +299,7 @@
 
 
 .quiz-header-center {
-  width: 35vw;
+  width: 32vw;
   height: 6vw;
   margin-top: -1vw;
 }
@@ -330,6 +330,9 @@
   align-items: center;
   gap: 2vw;
   margin-top: -2vw;
+}
+.Quiz_Complete_Buttom_Section h2{
+color: #f5d504;
 }
 
 .congrats-banner {
@@ -483,14 +486,15 @@
     border-radius: 16px;
     width: 80vw;
     height: auto;
-    /* margin: 9vw 0; */
+    margin-top: 2vw;
   }
 
   .quiz-tab {
     font-size: 4vw;
-    padding: 8px 14px;
+    padding: 1.5vw;
     height: auto;
     width: 28%;
+    text-align: center;
   }
 
   .quiz-option-btn {
@@ -527,15 +531,15 @@
   }
 
   .quiz-header-center {
-    width: 80vw;
+    width: 75vw;
     height: 15vw;
     margin-top: 8vw;
   }
 
   .quiz-categories {
-    padding: 2vw 1vw;
+    padding: 5vw 1vw;
     width: 90vw;
-    margin-top: 0vw;
+    margin-top:3vw 0vw;
   }
 
   .congrats-banner {

@@ -6,7 +6,7 @@
 }
 
 .quiz-user-info span {
-    font-size: 1.5vw;
+    font-size: 1.4vw;
     font-family: 'Calibri', sans-serif;
     color: #000000;
     font-weight: 600;
@@ -14,7 +14,7 @@
 }
 
 .user-avatar {
-    font-size: 3vw !important;
+    font-size: 2.7vw !important;
     color: #10699c;
     cursor: pointer;
     border-radius: 50%;
@@ -33,7 +33,7 @@
 }
 
 .Main_Logo_Image {
-    width: 10vw;
+    width: 8.5vw;
     height: 5vw;
 }
 
