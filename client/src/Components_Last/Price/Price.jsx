@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./price.css";
-import mobile from "../../assets/AllWebpAssets/Asset2.webp";
+import mobile from "../../assets/AllWebpAssets/AssetMobilePlans.webp";
 import Think from "../../assets/AllWebpAssets/Asset3.webp";
 import { auth, database } from "../../Firebase/firebase";
 import { ref, get, set } from "firebase/database";
@@ -257,12 +257,12 @@ function Price() {
                 <p className="Benifits_text">
                   Benifits of {userdata?.ageGroup?.title}
                 </p>
-                <ul className="payment-options">
+                <div className="payment-options">
                   {Array.isArray(BenifitsObj[userdata?.ageGroup?.title]) &&
                     BenifitsObj[userdata?.ageGroup?.title].map((item) => (
-                      <li>{item}</li>
+                      <p>{item}</p>
                     ))}
-                </ul>
+                </div>
               </div>
             </div>
           </div>

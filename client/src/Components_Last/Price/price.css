@@ -228,8 +228,9 @@
 
 .payment-options {
   /* list-style: none; */
+  text-align: left;
   margin: 0;
-  margin-left: -1vw;
+  margin-left: 5px;
   margin-top: .8vw;
   font-family: 'Poppins', sans-serif;
 
@@ -239,7 +240,7 @@
 .Benifits_text {
   text-align: left;
   margin: 0;
-  margin-left: 1vw;
+  margin-left: 5px;
   margin-top: .1vw;
   font-size: 1.5vw;
   font-weight: 700;
@@ -247,14 +248,25 @@
 
 }
 
-.payment-options li {
+.payment-options p {
   font-size: 1vw;
   color: #000;
+  margin: 0;
   margin-bottom: 0.67vw;
   font-weight: 500;
-  text-align: left;
   font-family: 'Poppins', sans-serif;
-
+  position: relative;
+  padding-left: 1vw;
+}
+.payment-options p::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.3em; /* vertically centers the bullet with the text */
+  height: .5vw;
+  width: .5vw;
+  border-radius: 50%;
+  background-color: #000;
 }
 
 .Price_Card_and_title {
