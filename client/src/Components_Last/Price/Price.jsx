@@ -133,7 +133,7 @@ function Price() {
 
     try {
       const res = await axios.post(
-        "https://wegfxinteractive.onrender.com/initiate-payment",
+        "https://api.think.wegfx.com/initiate-payment",
         {
           userId: uid,
           amount,

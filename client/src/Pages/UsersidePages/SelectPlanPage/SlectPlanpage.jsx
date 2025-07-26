@@ -129,7 +129,7 @@ const SlectPlanpage = () => {
 
   //   const amount = selectedPlan === "daily" ? 99 : 199;
   //   try {
-  //     const res = await axios.post("https://wegfxinteractive.onrender.com/initiate-payment", {
+  //     const res = await axios.post("https://api.think.wegfx.com/initiate-payment", {
   //       userId: uid,
   //       amount,
   //       mobile: "9999999999",
