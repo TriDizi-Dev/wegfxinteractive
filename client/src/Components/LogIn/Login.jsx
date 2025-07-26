@@ -11,14 +11,16 @@ import {
   signOut,
   sendPasswordResetEmail,
 } from "firebase/auth";
+// Assuming these are correctly imported from your Firebase config
 import { ref, set, get, database, auth } from "../../Firebase/firebase";
-import { GrGoogle, GrView } from "react-icons/gr";
+import { GrView } from "react-icons/gr"; // Only GrView is used
 import { BiHide } from "react-icons/bi";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import { Navbar } from "../Navbar/Navbar";
 import googleImg from "../../assets/AllWebpAssets/Asset8.webp";
 
+// Helper function to safely set storage item (sessionStorage preferred)
 const setStorageItem = (key, value) => {
   try {
     sessionStorage.setItem(key, value);
@@ -31,107 +33,84 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(""); // For password reset success
   const [showPassword, setShowPassword] = useState(false);
-  const [showChangePassword, setShowChangePassword] = useState(false);
-  const [redirectHandled, setRedirectHandled] = useState(false);
-  const [successmsg, setsuccessmsg] = useState("");
+  const [showChangePassword, setShowChangePassword] = useState(false); // To toggle between login and forgot password forms
+  const [successmsg, setsuccessmsg] = useState(""); // For login success message
   const navigate = useNavigate();
 
-useEffect(() => {
-  const checkRedirectResult = async () => {
-    const redirected = sessionStorage.getItem("googleRedirect");
-    if (redirected !== "true") return;
-
-    try {
-      const result = await getRedirectResult(auth);
-      sessionStorage.removeItem("googleRedirect");
-
-      if (result && result.user) {
-        const user = result.user;
-        const email = user.email;
-
-        const methods = await fetchSignInMethodsForEmail(auth, email);
-        if (methods.includes("password")) {
-          setError("This email is already registered with Email/Password.");
-          await signOut(auth);
-          return;
-        }
-
-        const uid = user.uid;
-        const userRef = ref(database, `users/${uid}`);
-        const snapshot = await get(userRef);
-
-        if (!snapshot.exists()) {
-          const name = user.displayName || "User";
-          await set(userRef, { name, email, role: "user" });
-        }
-
-        const token = await user.getIdToken();
-        setStorageItem("authToken", token);
-        setStorageItem("userType", "user");
-
-        navigate("/select-age-group");
-      }
-    } catch (err) {
-      console.error("Redirect login error:", err);
-      setError("Google Sign-In Failed.");
-    }
-  };
-
-  checkRedirectResult();
-}, []);
-
-
+  // Unified useEffect for handling Google redirect results
   useEffect(() => {
-    if (
-      !redirectHandled &&
-      sessionStorage.getItem("googleRedirect") === "true"
-    ) {
-      setRedirectHandled(true);
-      sessionStorage.removeItem("googleRedirect");
+    const handleGoogleRedirectResult = async () => {
+      // Check if a Google redirect was initiated
+      const redirected = sessionStorage.getItem("googleRedirect");
 
-      getRedirectResult(auth)
-        .then(async (result) => {
-          if (!result?.user) return;
-          const uid = result.user.uid;
-          const email = result.user.email;
+      if (redirected === "true") {
+        // Clear the flag immediately to prevent re-processing on subsequent renders
+        sessionStorage.removeItem("googleRedirect");
+        setError(""); // Clear previous errors
 
-          const userRef = ref(database, `users/${uid}`);
-          const snapshot = await get(userRef);
+        try {
+          const result = await getRedirectResult(auth);
 
-          if (!snapshot.exists()) {
-            const name = result.user.displayName || "";
-            await set(userRef, { name, email, role: "user" });
+          if (result && result.user) {
+            const user = result.user;
+            const userEmail = user.email;
+
+            // Check if this email is already registered with Email/Password
+            const methods = await fetchSignInMethodsForEmail(auth, userEmail);
+            if (methods.includes("password")) {
+              setError(
+                "This email is already registered with Email/Password. Please log in with your email and password or reset your password."
+              );
+              await signOut(auth); // Sign out the partially logged-in Google user
+              return;
+            }
+
+            const uid = user.uid;
+            const userRef = ref(database, `users/${uid}`);
+            const snapshot = await get(userRef);
+
+            // If user doesn't exist in our database, create a new entry
+            if (!snapshot.exists()) {
+              const name = user.displayName || "User"; // Use "User" if display name is not available
+              await set(userRef, { name, email: userEmail, role: "user" });
+            }
+
+            const token = await user.getIdToken();
+            setStorageItem("authToken", token);
+            setStorageItem("userType", "user");
+
+            setsuccessmsg("Google Sign-In Successful!");
+            setTimeout(() => {
+              navigate("/select-age-group");
+            }, 1000);
+          } else {
+            console.log("No user found after Google redirect result.");
           }
+        } catch (err) {
+          console.error("Google Redirect Sign-In Error:", err);
+          if (err.code === "auth/popup-closed-by-user") {
+            setError("Google sign-in was cancelled.");
+          } else if (err.code === "auth/cancelled-popup-request") {
+            setError("Google sign-in was cancelled.");
+          } else if (err.code === "auth/account-exists-with-different-credential") {
+            setError("An account with this email already exists but was signed in using a different method. Please use your original sign-in method.");
+          } else {
+            setError(`Google Sign-In Failed: ${err.message || "Unknown error."}`);
+          }
+        }
+      }
+    };
 
-          const token = await result.user.getIdToken();
-          setStorageItem("authToken", token);
-          setStorageItem("userType", "user");
-          setTimeout(() => {
-            navigate("/select-age-group");
-          }, 1000);
-          // const planRef = ref(database, `users/${uid}/plan`);
-          // const planSnap = await get(planRef);
-          // const now = Date.now();
-
-          // if (planSnap.exists() && now < planSnap.val().endTime) {
-          //   navigate("/select-age-group");
-          // } else {
-          //   navigate("/select-age-group");
-          // }
-        })
-        .catch((err) => {
-          console.error("Google Sign-In Failed:", err);
-          setError("Google Sign-In Failed");
-        });
-    }
-  }, [redirectHandled, navigate]);
+    handleGoogleRedirectResult();
+  }, []); // Empty dependency array ensures this runs only once on component mount
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
     setMessage("");
+    setsuccessmsg("");
 
     const trimmedEmail = email.trim();
     const trimmedPassword = password.trim();
@@ -148,11 +127,13 @@ useEffect(() => {
         trimmedPassword
       );
 
-      const snapshot = await get(
-        ref(database, `users/${userCredential.user.uid}`)
-      );
+      const userUid = userCredential.user.uid;
+      const snapshot = await get(ref(database, `users/${userUid}`));
+
+      // Prevent admin login through user interface
       if (snapshot.exists() && snapshot.val().role === "admin") {
         setError("Admins must log in through the Admin tab.");
+        await signOut(auth); // Sign out the admin if they tried to log in here
         return;
       }
 
@@ -160,93 +141,116 @@ useEffect(() => {
       setStorageItem("authToken", token);
       setStorageItem("userType", "user");
 
-      // const uid = userCredential.user.uid;
-      // const planRef = ref(database, `users/${uid}/plan`);
-      // const planSnap = await get(planRef);
-      // const now = Date.now();
       setsuccessmsg("Login Successful!");
 
       setTimeout(() => {
         navigate("/select-age-group");
       }, 2000);
     } catch (err) {
-      console.error(err);
-      if (err.code === "auth/invalid-email") setError("Invalid email format.");
-      else if (err.code === "auth/user-not-found") setError("User not found.");
-      else if (err.code === "auth/wrong-password")
+      console.error("Email/Password Login Error:", err);
+      if (err.code === "auth/invalid-email") {
+        setError("Invalid email format.");
+      } else if (err.code === "auth/user-not-found") {
+        setError("User not found with this email.");
+      } else if (err.code === "auth/wrong-password") {
         setError("Incorrect password.");
-      else setError("Login failed.");
+      } else if (err.code === "auth/invalid-credential") { // More general for wrong user/pass
+        setError("Invalid email or password.");
+      }
+      else {
+        setError("Login failed. Please check your credentials.");
+      }
     }
   };
 
   const handleSendResetEmail = async (e) => {
     e.preventDefault();
     setError("");
-    setMessage("");
+    setMessage(""); // Clear previous messages
 
     const trimmedEmail = email.trim();
 
     if (!trimmedEmail) {
-      setError("Please enter your email.");
+      setError("Please enter your email address to reset the password.");
       return;
     }
 
     try {
       await sendPasswordResetEmail(auth, trimmedEmail);
-      setMessage("Password reset email sent! Please check your inbox.");
+      setMessage("Password reset email sent! Please check your inbox (and spam folder).");
+      setEmail(""); // Clear email field after sending
+      setShowChangePassword(false); // Optionally go back to login form
     } catch (err) {
       console.error("Password reset error:", err);
       if (err.code === "auth/user-not-found") {
-        setError("No user found with this email.");
+        setError("No user found with this email address.");
+      } else if (err.code === "auth/invalid-email") {
+        setError("Please enter a valid email address.");
       } else {
-        setError("Failed to send password reset email.");
+        setError(`Failed to send password reset email: ${err.message || "Unknown error."}`);
       }
     }
   };
 
   const handleGoogleLogin = async () => {
+    setError(""); // Clear previous errors
+    setMessage("");
+    setsuccessmsg("");
+
     try {
       const provider = new GoogleAuthProvider();
-      provider.setCustomParameters({ prompt: "select_account" });
+      provider.setCustomParameters({ prompt: "select_account" }); // Forces account selection every time
 
-      const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent);
+      const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
       if (isMobile) {
-        sessionStorage.setItem("googleRedirect", "true");
+        sessionStorage.setItem("googleRedirect", "true"); // Set flag before redirect
         await signInWithRedirect(auth, provider);
-        return;
+      } else {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+        const userEmail = user.email;
+
+        const methods = await fetchSignInMethodsForEmail(auth, userEmail);
+        if (methods.includes("password")) {
+          setError(
+            "This email is already registered with Email/Password. Please log in with your email and password or reset your password."
+          );
+          await signOut(auth); // Sign out the Google user
+          return;
+        }
+
+        const uid = user.uid;
+        const userRef = ref(database, `users/${uid}`);
+        const snapshot = await get(userRef);
+
+        if (!snapshot.exists()) {
+          const name = user.displayName || "User";
+          await set(userRef, { name, email: userEmail, role: "user" });
+        }
+
+        const token = await user.getIdToken();
+        setStorageItem("authToken", token);
+        setStorageItem("userType", "user");
+
+        setsuccessmsg("Google Sign-In Successful!");
+        setTimeout(() => {
+          navigate("/select-age-group");
+        }, 1000);
       }
-
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      const email = user.email;
-
-      const methods = await fetchSignInMethodsForEmail(auth, email);
-      if (methods.includes("password")) {
-        setError("This email is already registered with Email/Password.");
-        await signOut(auth);
-        return;
-      }
-
-      const uid = user.uid;
-      const userRef = ref(database, `users/${uid}`);
-      const snapshot = await get(userRef);
-
-      if (!snapshot.exists()) {
-        const name = user.displayName || "User";
-        await set(userRef, { name, email, role: "user" });
-      }
-
-      const token = await user.getIdToken();
-      setStorageItem("authToken", token);
-      setStorageItem("userType", "user");
-
-      setTimeout(() => {
-        navigate("/select-age-group");
-      }, 1000);
     } catch (err) {
-      console.error("Google sign-in error:", err);
-      setError("Google Sign-In Failed. Please try again.");
+      console.error("Google sign-in error (popup or initial redirect attempt):", err);
+      if (err.code === "auth/popup-closed-by-user") {
+        setError("Google sign-in was cancelled by the user.");
+      } else if (err.code === "auth/cancelled-popup-request") {
+        setError("Multiple Google sign-in attempts detected. Please try again.");
+      } else if (err.code === "auth/popup-blocked") {
+        setError("Google sign-in popup was blocked. Please enable pop-ups for this site or try again on a mobile device.");
+      } else if (err.code === "auth/unauthorized-domain") {
+        setError("Your domain is not authorized for Google Sign-In. Please contact support.");
+      } else {
+        setError(`Google Sign-In Failed: ${err.message || "Unknown error."}`);
+      }
     }
   };
 
@@ -256,41 +260,46 @@ useEffect(() => {
 
       <div className="login_box">
         <div className="login-leftside">
-          <img src={image1} className="img1" />
+          <img src={image1} className="img1" alt="Login Illustration" />
         </div>
 
         <div className="login-rightside">
           <div className="head">
-            <img src={thinklogo} className="logo" alt="Logo" />
+            <img src={thinklogo} className="logo" alt="Think Logo" />
             <h2>User Login</h2>
           </div>
           <form
             onSubmit={showChangePassword ? handleSendResetEmail : handleLogin}
           >
             <div className="form-login">
-              <label>Email</label>
+              <label htmlFor="email">Email</label>
               <input
+                id="email"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                autoComplete="username" 
               />
             </div>
 
             {!showChangePassword && (
               <div className="form-login">
-                <label>Password</label>
+                <label htmlFor="password">Password</label>
                 <div className="password-wrapper">
                   <input
+                    id="password"
                     type={showPassword ? "text" : "password"}
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
+                    autoComplete="current-password" 
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
                     className="toggle-password"
+                    aria-label={showPassword ? "Hide password" : "Show password"}
                   >
                     {showPassword ? <GrView /> : <BiHide />}
                   </button>
@@ -300,7 +309,7 @@ useEffect(() => {
 
             {showChangePassword && (
               <p className="info-message">
-                We'll send a password reset link to your email.
+                Enter your email. We'll send a password reset link to your inbox.
               </p>
             )}
 
@@ -323,6 +332,7 @@ useEffect(() => {
                     onClick={() => {
                       setShowChangePassword(false);
                       setMessage("");
+                      setError(""); 
                     }}
                   >
                     Back to Login
@@ -330,7 +340,12 @@ useEffect(() => {
                 ) : (
                   <span
                     className="sign"
-                    onClick={() => setShowChangePassword(true)}
+                    onClick={() => {
+                      setShowChangePassword(true);
+                      setError(""); 
+                      setMessage(""); 
+                      setPassword(""); 
+                    }}
                   >
                     Forgot password?
                   </span>
@@ -342,9 +357,8 @@ useEffect(() => {
               {message && <p className="success-message">{message}</p>}
               {successmsg && <p className="success-message">{successmsg}</p>}
             </div>
-            <div onClick={handleGoogleLogin} className="btn-google">
-              <img src={googleImg} alt="googleImg" />
-              {/* <GrGoogle className="btn-google" /> */}
+            <div type="button" onClick={handleGoogleLogin} className="btn-google">
+              <img src={googleImg} alt="Google Logo" />
             </div>
           </form>
         </div>
