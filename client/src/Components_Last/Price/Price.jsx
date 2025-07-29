@@ -102,7 +102,7 @@ function Price() {
 
     switch (planType) {
       case "starter":
-        amount = 1; // Set base amount for starter
+        amount = 149; // Set base amount for starter
         break;
       case "pro":
         amount = 399; // Set base amount for pro
