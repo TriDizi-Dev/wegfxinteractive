@@ -255,7 +255,7 @@ function Price() {
                   )}
                 </div>
                 <p className="Benifits_text">
-                  Benifits of {userdata?.ageGroup?.title}
+                  Benefits of {userdata?.ageGroup?.title}
                 </p>
                 <div className="payment-options">
                   {Array.isArray(BenifitsObj[userdata?.ageGroup?.title]) &&
