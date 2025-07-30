@@ -28,6 +28,7 @@ import backgroundImageQuiz from "../src/assets/home/bg.jpg";
 import PieChart from "./Components_Last/Piechart/Piechart";
 import backgroundimagplan from "./assets/Pieimages/Baackground_last1.png";
 import backfroundImageKids from "./assets/AllWebpAssets/Asset10.webp";
+import ManageCoupons from "./Pages/AdminSidePages/ManageCoupons/ManageCoupons";
 
 function Layout() {
   const { loading } = useAuth();
@@ -93,6 +94,8 @@ function Layout() {
             </RoleBasedRoute>
           }
         />
+        <Route path="/manage-coupons" element={<RoleBasedRoute requiredRole="admin"><ManageCoupons /></RoleBasedRoute>} />
+
         <Route
           path="/questionCreation"
           element={

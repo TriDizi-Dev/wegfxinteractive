@@ -334,12 +334,12 @@
   }
 
   .heading h3 {
-    padding-left: 20.5vw;
     font-size: 4.5vw;
   }
 
   .para {
     font-size: 2vw;
+    align-items: center;
   }
 
   .toggle-password {

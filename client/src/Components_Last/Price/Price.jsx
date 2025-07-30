@@ -3,19 +3,16 @@ import "./price.css";
 import mobile from "../../assets/AllWebpAssets/AssetMobilePlans.webp";
 import Think from "../../assets/AllWebpAssets/Asset3.webp";
 import { auth, database } from "../../Firebase/firebase";
-import { ref, get, set } from "firebase/database";
-import { useNavigate } from "react-router-dom";
+import { ref, get, getDatabase } from "firebase/database";
 import axios from "axios";
 import { Navbar } from "../../Components/Navbar/Navbar";
 
 function Price() {
   const [userdata, setUserdata] = useState({});
   const [selectedPlan, setSelectedPlan] = useState(null);
-  const navigate = useNavigate();
   const [showCouponPopup, setShowCouponPopup] = useState(false);
   const [coupan, setcoupan] = useState("");
   const [couponStatus, setCouponStatus] = useState("");
-
   const BenifitsObj = {
     "Foundation Thinkers": [
       "Builds Critical Thinking Early",
@@ -115,21 +112,53 @@ function Price() {
         return;
     }
 
-    // Apply coupon
-    if (coupan) {
-      switch (coupan) {
-        case "COUP50":
-          amount = amount * 0.5; // or amount -= amount * 0.5;
-          break;
-        case "COUP20":
-          amount = amount * 0.8;
-          break;
-        default:
-          console.log("Invalid coupon code");
-      }
-    }
+     // Fetch and apply coupon
+  if (coupan) {
+    try {
+      const couponRef = ref(database, `coupons/${coupan}`);
+      const snapshot = await get(couponRef);
 
-    console.log("Final amount:", amount);
+      if (snapshot.exists()) {
+        const discount = snapshot.val().percentage;
+        if (typeof discount === "number" && discount > 0 && discount <= 100) {
+          const discountAmount = (amount * discount) / 100;
+          amount -= discountAmount;
+          console.log(`Coupon applied: -${discount}% → ₹${discountAmount} off`);
+            setCouponStatus("valid");
+                  setShowCouponPopup(false);
+               
+        } else {
+          console.log("Invalid discount value in DB.");
+        }
+      } else {
+                          setCouponStatus("invalid");
+
+        return;
+      }
+    } catch (error) {
+      console.error("Error fetching coupon:", error);
+      alert("Failed to apply coupon. Please try again.");
+      return;
+    }
+  }
+
+  console.log("Final amount:", amount);
+    // // Apply coupon
+    // if (coupan) {
+    //   switch (coupan) {
+    //     case "COUP50":
+    //       amount = amount * 0.5; // or amount -= amount * 0.5;
+    //       break;
+    //     case "COUP20":
+    //       amount = amount * 0.8;
+    //       break;
+    //     default:
+    //       console.log("Invalid coupon code");
+    //   }
+    // }
+
+    // console.log("Final amount:", amount);
+
 
     try {
       const res = await axios.post(
@@ -230,7 +259,6 @@ function Price() {
                       ₹ <span>1899</span>
                     </p>
 
-                    {/* <h3 className="plan-name">Elite Plan</h3> */}
                     <p className="price">
                       <span className="price-value">₹ 999</span>
                     </p>
@@ -276,22 +304,40 @@ function Price() {
             <input
               type="text"
               value={coupan}
-              onChange={(e) => setcoupan(e.target.value)}
+              onChange={(e) => setcoupan(e.target.value.toUpperCase())}
+
               placeholder="Enter Coupon Code"
             />
             <button
-              onClick={() => {
-                if (coupan === "COUP50" || coupan === "COUP20") {
-                  setcoupan(coupan);
-                  setCouponStatus("valid");
-                  setShowCouponPopup(false);
-                } else {
-                  setCouponStatus("invalid");
-                }
-              }}
-            >
-              Apply
-            </button>
+  onClick={async () => {
+    if (!coupan) return;
+
+    try {
+      const couponRef = ref(database, `coupons/${coupan}`);
+      const snapshot = await get(couponRef);
+
+      if (snapshot.exists()) {
+        const discount = snapshot.val().percentage;
+        console.log(discount,"discountdiscount");
+        
+        if (typeof discount === "number" && discount > 0 && discount <= 100) {
+          setCouponStatus("valid");
+          setShowCouponPopup(false);
+        } else {
+          setCouponStatus("invalid");
+        }
+      } else {
+        setCouponStatus("invalid");
+      }
+    } catch (error) {
+      console.error("Error validating coupon:", error);
+      setCouponStatus("invalid");
+    }
+  }}
+>
+  Apply
+</button>
+
             <button onClick={() => setShowCouponPopup(false)}>Close</button>
             {couponStatus === "valid" && (
               <p className="success">Coupon applied!</p>

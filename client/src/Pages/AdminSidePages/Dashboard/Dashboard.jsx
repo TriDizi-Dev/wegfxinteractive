@@ -60,6 +60,12 @@ const Dashboard = () => {
            Manage Questions
           </button>
           <button
+            onClick={() => navigate("/manage-coupons")}
+            className="btn dashboard-btn"
+          >
+           Manage Coupons
+          </button>
+          <button
             onClick={() => navigate("/userDetails")}
             className="btn dashboard-btn"
           >

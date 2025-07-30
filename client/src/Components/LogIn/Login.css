@@ -415,7 +415,6 @@
   }
   
   .head h2 {
-    padding-left: 17vw;
     font-size: 5vw;
     padding-top: 5vw;
   }
@@ -452,6 +451,9 @@
 
   .stars {
     display: none;
+  }
+  .Login_submit_and_Create_account{
+    align-items: center;
   }
 
 }
