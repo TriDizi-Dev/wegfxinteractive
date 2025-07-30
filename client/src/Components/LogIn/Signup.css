@@ -1,6 +1,6 @@
 .form-group label {
   color: white;
-  font-size: 1vw;
+  font-size: 1.1vw;
   font-family: 'Poppins', sans-serif
     /* font-family: 'Calibri', sans-serif; */
 }
@@ -49,10 +49,11 @@
   margin-bottom: 1vw;
 }
 
-.heading h3 {
-  /* padding-left: 10vw; */
-  /* font-family: 'Calibri', sans-serif; */
-  font-family: 'Poppins', sans-serif
+.heading h2 {
+    color: #ffffff;
+    font-size: 1.3vw;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
 }
 
 
@@ -335,7 +336,7 @@
 .heading{
   margin-bottom: 3vw;
 }
-  .heading h3 {
+  .heading h2 {
     font-size: 4.5vw;
   }
 

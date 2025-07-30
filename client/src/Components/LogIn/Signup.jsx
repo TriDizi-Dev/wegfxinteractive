@@ -202,7 +202,7 @@ const SignupPage = () => {
           <div className="signup-right">
             <div className="heading">
               <img src={ThinkLogo} className="logeimage" alt="Logo" />
-              <h3>Create an account</h3>
+              <h2>Create an account</h2>
             </div>
 
             <form onSubmit={handleUserSignup}>
