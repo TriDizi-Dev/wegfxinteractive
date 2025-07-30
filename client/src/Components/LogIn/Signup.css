@@ -352,9 +352,9 @@
 
   .btn-Sinup {
     font-size: 4vw;
-    padding: 3vw 2vw;
+    padding: 0vw 2vw;
     border-radius: 2vw;
-    height: fit-content;
+    height: 10vw;
   }
 
   .google {
