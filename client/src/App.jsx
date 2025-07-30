@@ -29,6 +29,7 @@ import PieChart from "./Components_Last/Piechart/Piechart";
 import backgroundimagplan from "./assets/Pieimages/Baackground_last1.png";
 import backfroundImageKids from "./assets/AllWebpAssets/Asset10.webp";
 import ManageCoupons from "./Pages/AdminSidePages/ManageCoupons/ManageCoupons";
+import NotFoundPage from "./Components_Last/NotfoundPage/NotFoundPage";
 
 function Layout() {
   const { loading } = useAuth();
@@ -74,6 +75,7 @@ function Layout() {
     <>
       <Routes>
         <Route path="/" element={<LoginPage />} />
+        <Route path="*" element={<NotFoundPage />} />
         <Route path="/admin-login" element={<AdminLoginPage />} />
         <Route path="/sign-up" element={<SignupPage />} />
 
@@ -125,9 +127,9 @@ function Layout() {
         <Route
           path="/quiz"
           element={
-            // <PlanBasedRoute>
+            <PlanBasedRoute>
               <QuizComponent />
-            // </PlanBasedRoute>
+             </PlanBasedRoute>
           }
         />
 

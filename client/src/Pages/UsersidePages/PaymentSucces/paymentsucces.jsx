@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { auth, database } from "../../../Firebase/firebase";
 import { ref, set } from "firebase/database";
+import "./PaymentSuccess.css"
 
 const PaymentSuccess = () => {
   const [params] = useSearchParams();
@@ -40,7 +41,11 @@ const PaymentSuccess = () => {
     return () => unsubscribe();
   }, []);
 
-  return <h2>Verifying payment and activating your plan...</h2>;
+  return (
+    <div className="payment-success-container">
+      <h2 className="payment-message">Verifying payment and activating your plan...</h2>
+    </div>
+  );
 };
 
 export default PaymentSuccess;
