@@ -236,9 +236,9 @@ function Price() {
                   >
                     <div></div>
 
-                    <p className="Wrong_Price">
+                    {/* <p className="Wrong_Price">
                       ₹ <span>599</span>
-                    </p>
+                    </p> */}
                     {/* <h3 className="plan-name">Pro Plan</h3> */}
                     <p className="price">
                       <span className="price-value">₹ 599</span>
@@ -255,9 +255,9 @@ function Price() {
                     }`}
                     onClick={() => handleProceed("elite")}
                   >
-                    <p className="Wrong_Price">
+                    {/* <p className="Wrong_Price">
                       ₹ <span>1899</span>
-                    </p>
+                    </p> */}
 
                     <p className="price">
                       <span className="price-value">₹ 1799</span>
