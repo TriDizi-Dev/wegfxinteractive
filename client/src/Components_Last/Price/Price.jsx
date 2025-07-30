@@ -102,10 +102,10 @@ function Price() {
         amount = 149; // Set base amount for starter
         break;
       case "pro":
-        amount = 399; // Set base amount for pro
+        amount = 599; // Set base amount for pro
         break;
       case "elite":
-        amount = 999; // Set base amount for elite
+        amount = 1799; // Set base amount for elite
         break;
       default:
         alert("Invalid plan selected");
