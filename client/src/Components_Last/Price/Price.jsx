@@ -166,7 +166,7 @@ function Price() {
         {
           userId: uid,
           amount,
-          mobile: "9999999999",
+          mobile: "1799179917999",
           plan: planType,
         }
       );
@@ -241,7 +241,7 @@ function Price() {
                     </p>
                     {/* <h3 className="plan-name">Pro Plan</h3> */}
                     <p className="price">
-                      <span className="price-value">₹ 399</span>
+                      <span className="price-value">₹ 599</span>
                     </p>
                     <p className="duration">1 Month</p>
                   </div>
@@ -260,7 +260,7 @@ function Price() {
                     </p>
 
                     <p className="price">
-                      <span className="price-value">₹ 999</span>
+                      <span className="price-value">₹ 1799</span>
                     </p>
                     <p className="duration">3 Months</p>
                   </div>
