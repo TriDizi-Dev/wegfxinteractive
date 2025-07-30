@@ -316,7 +316,7 @@
   }
 
   .form-group {
-    margin-bottom: 4vw;
+    margin-bottom: 2vw;
   }
 
   .signup-left h3 {
@@ -332,7 +332,9 @@
     padding: 5vw 3vw;
     border-radius: 2vw;
   }
-
+.heading{
+  margin-bottom: 3vw;
+}
   .heading h3 {
     font-size: 4.5vw;
   }
@@ -366,7 +368,7 @@
   }
 
   .signup-right {
-    padding: 3vw;
+    padding: 5vw;
     /* height: 130vw; */
     height: auto;
     border-radius: 4vw;

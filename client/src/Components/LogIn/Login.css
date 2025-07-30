@@ -413,10 +413,11 @@
     width: 35vw;
     height: 15vw;
   }
-  
+  .head{
+    margin-bottom: 3vw;
+  }
   .head h2 {
-    font-size: 5vw;
-    padding-top: 5vw;
+    font-size: 4.5vw;
   }
 
   .form-login label {
@@ -455,5 +456,7 @@
   .Login_submit_and_Create_account{
     align-items: center;
   }
-
+.form-login {
+  margin-bottom: 2vw;
+}
 }
