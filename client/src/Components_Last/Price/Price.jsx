@@ -72,7 +72,7 @@ function Price() {
   //   const now = Date.now();
   //   let expiry;
 
-  //   if (planType === "starter") {
+  //   if (planType === "Trial") {
   //     expiry = now + 7 * 24 * 60 * 60 * 1000; // 1 Week
   //   } else if (planType === "pro") {
   //     expiry = now + 30 * 24 * 60 * 60 * 1000; // 1 Month
@@ -103,7 +103,7 @@ function Price() {
 
     switch (planType) {
       case "starter":
-        amount = 149; // Set base amount for starter
+        amount = 149; // Set base amount for Trial
         break;
       case "pro":
         amount = 599; // Set base amount for pro
@@ -126,7 +126,7 @@ function Price() {
         const discount = snapshot.val().percentage;
         if (typeof discount === "number" && discount > 0 && discount <= 100) {
           const discountAmount = (amount * discount) / 100;
-          amount -= discountAmount;
+          Math.floor(amount -= discountAmount);
           console.log(`Coupon applied: -${discount}% → ₹${discountAmount} off`);
             setCouponStatus("valid");
             setShowCouponPopup(false);
@@ -221,7 +221,7 @@ function Price() {
                     }`}
                     onClick={() => handleProceed("starter")}
                   >
-                    {/* <h3 className="plan-name">Starter Plan</h3> */}
+                    {/* <h3 className="plan-name">Trial Plan</h3> */}
                     <p className="price">
                       {" "}
                       <span className="price-value">₹ 149</span>
@@ -245,7 +245,7 @@ function Price() {
 }
                     {/* <h3 className="plan-name">Pro Plan</h3> */}
                     <p className="price">
-                      <span className="price-value">{(couponStatus === "valid" && CouponDetails.category === "Basic") ? `₹ ${599-((599 * Discount) / 100)}` : "₹ 599"}</span>
+                      <span className="price-value">{(couponStatus === "valid" && CouponDetails.category === "Basic") ? `₹ ${Math.floor((599 - (599 * Discount) / 100))}` : "₹ 599"}</span>
                     </p>
                     <p className="duration">1 Month</p>
                   </div>
@@ -266,7 +266,7 @@ function Price() {
 }
 
                     <p className="price">
-                      <span className="price-value">{(couponStatus === "valid" && CouponDetails.category === "Super Saver") ? `₹ ${(1799 - (1799 * Discount) / 100)}` : "₹ 1799"}</span>
+                      <span className="price-value">{(couponStatus === "valid" && CouponDetails.category === "Super Saver") ? `₹ ${Math.floor((1799 - (1799 * Discount) / 100))}` : "₹ 1799"}</span>
                     </p>
                     <p className="duration">3 Months</p>
                   </div>
