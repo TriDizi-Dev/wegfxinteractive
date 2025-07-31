@@ -94,6 +94,8 @@ const SignupPage = () => {
       if (err.code === "auth/invalid-email") setError("Invalid email format.");
       else if (err.code === "auth/weak-password")
         setError("Password should be at least 6 characters.");
+      else if(err.code ==="auth/email-already-in-use")
+        setError("Email already Exist");
       else setError("Signup failed.");
     }
   };
