@@ -127,9 +127,6 @@
     font-weight: 700;
 }
 
-.learning-message {
-    margin-bottom: 3vw;
-}
 
 .foundation-title {
     font-size: 1.5vw;
@@ -290,6 +287,7 @@
 
 .learning-message {
     margin-bottom: 3vw;
+    margin-top: 1.8vw;
 }
 
 @media (max-width: 780px) {
@@ -405,7 +403,9 @@
     .learning-message {
         font-size: 5vw;
     }
-
+.learning-message{
+    margin-top: 5.5vw;
+}
     .age-group-dropdown {
         width: 82%;
         height: 9vw;

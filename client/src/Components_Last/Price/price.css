@@ -166,13 +166,13 @@
 }
 
 .price-value {
-  font-size: 2.3vw;
+  font-size: 2.2vw;
   font-weight: bold;
   font-family: 'Poppins', sans-serif;
 }
 
 .Wrong_Price {
-  font-size: 1.3vw;
+  font-size: 1.7vw;
   font-weight: bold;
   font-family: 'Poppins', sans-serif;
   margin-bottom: -.5vw;
@@ -183,10 +183,15 @@
 }
 
 .duration {
-  font-size: 1.33vw;
+  font-size: 1.23vw;
   margin-top: 0.42vw;
   font-family: 'Poppins', sans-serif;
 
+}
+.FinalPrice {
+  font-size: .8vw;
+  font-family: 'Poppins', sans-serif;
+margin: 0;
 }
 
 .trial-pack {
@@ -420,6 +425,9 @@ font-size: 1.5vw;
   .duration {
     font-size: 5vw;
   }
+  .FinalPrice{
+    font-size: 4vw;
+  }
 
   .flexible-options-text {
     font-size: 6vw;
@@ -488,7 +496,7 @@ padding-left: 5vw;
   }
 
   .Wrong_Price {
-    font-size: 5vw;
+    font-size: 5.5vw;
     margin-bottom: 0vw;
   }
 

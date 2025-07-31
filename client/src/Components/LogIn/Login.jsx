@@ -70,21 +70,35 @@ const LoginPage = () => {
             const uid = user.uid;
             const userRef = ref(database, `users/${uid}`);
             const snapshot = await get(userRef);
-
+ const userData = snapshot.val();
             // If user doesn't exist in our database, create a new entry
             if (!snapshot.exists()) {
               const name = user.displayName || "User"; // Use "User" if display name is not available
               await set(userRef, { name, email: userEmail, role: "user" });
             }
+  const { plan, ageGroup } = userData;
 
             const token = await user.getIdToken();
             setStorageItem("authToken", token);
             setStorageItem("userType", "user");
 
             setsuccessmsg("Google Sign-In Successful!");
-            setTimeout(() => {
-              navigate("/select-age-group");
-            }, 1000);
+       if(ageGroup){
+ if (plan && plan.endTime > currentTime) {
+   setTimeout(() => {
+              navigate("/report"); // Plan is active
+      }, 1000);
+    } else {
+       setTimeout(() => {
+        navigate("/plans");
+      }, 1000);
+       // Plan is expired or doesn't exist
+    }
+  }else{
+  setTimeout(() => {
+        navigate("/select-age-group");
+      }, 1000);
+  }
           } else {
             console.log("No user found after Google redirect result.");
           }
@@ -131,21 +145,35 @@ const LoginPage = () => {
       const snapshot = await get(ref(database, `users/${userUid}`));
 
       // Prevent admin login through user interface
-      if (snapshot.exists() && snapshot.val().role === "admin") {
+      const userData = snapshot.val();
+      if (snapshot.exists() && userData.role === "admin") {
         setError("Admins must log in through the Admin tab.");
         await signOut(auth); // Sign out the admin if they tried to log in here
         return;
       }
-
+  const { plan, ageGroup } = userData;
       const token = await userCredential.user.getIdToken();
+      console.log(plan,ageGroup,"tokentoken");
       setStorageItem("authToken", token);
       setStorageItem("userType", "user");
-
       setsuccessmsg("Login Successful!");
-
-      setTimeout(() => {
+      if(ageGroup){
+ if (plan && plan.endTime > currentTime) {
+   setTimeout(() => {
+              navigate("/report"); // Plan is active
+      }, 1000);
+    } else {
+       setTimeout(() => {
+        navigate("/plans");
+      }, 1000);
+       // Plan is expired or doesn't exist
+    }
+  }else{
+  setTimeout(() => {
         navigate("/select-age-group");
-      }, 2000);
+      }, 1000);
+  }
+    
     } catch (err) {
       console.error("Email/Password Login Error:", err);
       if (err.code === "auth/invalid-email") {
@@ -223,20 +251,35 @@ const LoginPage = () => {
         const uid = user.uid;
         const userRef = ref(database, `users/${uid}`);
         const snapshot = await get(userRef);
-
+ const userData = snapshot.val();
         if (!snapshot.exists()) {
           const name = user.displayName || "User";
           await set(userRef, { name, email: userEmail, role: "user" });
         }
+console.log(userData,"userData");
+  const { plan, ageGroup } = userData;
 
         const token = await user.getIdToken();
         setStorageItem("authToken", token);
         setStorageItem("userType", "user");
 
         setsuccessmsg("Google Sign-In Successful!");
-        setTimeout(() => {
-          navigate("/select-age-group");
-        }, 1000);
+      if(ageGroup){
+ if (plan && plan.endTime > currentTime) {
+   setTimeout(() => {
+              navigate("/report"); // Plan is active
+      }, 1000);
+    } else {
+       setTimeout(() => {
+        navigate("/plans");
+      }, 1000);
+       // Plan is expired or doesn't exist
+    }
+  }else{
+  setTimeout(() => {
+        navigate("/select-age-group");
+      }, 1000);
+  }
       }
     } catch (err) {
       console.error("Google sign-in error (popup or initial redirect attempt):", err);

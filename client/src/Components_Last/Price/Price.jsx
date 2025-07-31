@@ -13,6 +13,10 @@ function Price() {
   const [showCouponPopup, setShowCouponPopup] = useState(false);
   const [coupan, setcoupan] = useState("");
   const [couponStatus, setCouponStatus] = useState("");
+  const [Discount,setDiscount] = useState(null)
+  const [CouponDetails,setCouponDetails] = useState(null)
+  console.log(CouponDetails,"CouponDetails");
+  
   const BenifitsObj = {
     "Foundation Thinkers": [
       "Builds Critical Thinking Early",
@@ -125,13 +129,13 @@ function Price() {
           amount -= discountAmount;
           console.log(`Coupon applied: -${discount}% → ₹${discountAmount} off`);
             setCouponStatus("valid");
-                  setShowCouponPopup(false);
+            setShowCouponPopup(false);
                
         } else {
           console.log("Invalid discount value in DB.");
         }
       } else {
-                          setCouponStatus("invalid");
+        setCouponStatus("invalid");
 
         return;
       }
@@ -234,14 +238,14 @@ function Price() {
                     }`}
                     onClick={() => handleProceed("pro")}
                   >
-                    <div></div>
-
-                    {/* <p className="Wrong_Price">
+{(couponStatus === "valid" && CouponDetails.category === "Basic") &&
+                    <p className="Wrong_Price">
                       ₹ <span>599</span>
-                    </p> */}
+                    </p>
+}
                     {/* <h3 className="plan-name">Pro Plan</h3> */}
                     <p className="price">
-                      <span className="price-value">₹ 599</span>
+                      <span className="price-value">{(couponStatus === "valid" && CouponDetails.category === "Basic") ? `₹ ${599-((599 * Discount) / 100)}` : "₹ 599"}</span>
                     </p>
                     <p className="duration">1 Month</p>
                   </div>
@@ -255,12 +259,14 @@ function Price() {
                     }`}
                     onClick={() => handleProceed("elite")}
                   >
-                    {/* <p className="Wrong_Price">
-                      ₹ <span>1899</span>
-                    </p> */}
+                   {(couponStatus === "valid" && CouponDetails.category === "Super Saver") &&
+                    <p className="Wrong_Price">
+                      ₹ <span>1799</span>
+                    </p>
+}
 
                     <p className="price">
-                      <span className="price-value">₹ 1799</span>
+                      <span className="price-value">{(couponStatus === "valid" && CouponDetails.category === "Super Saver") ? `₹ ${(1799 - (1799 * Discount) / 100)}` : "₹ 1799"}</span>
                     </p>
                     <p className="duration">3 Months</p>
                   </div>
@@ -319,10 +325,12 @@ function Price() {
       if (snapshot.exists()) {
         const discount = snapshot.val().percentage;
         console.log(discount,"discountdiscount");
-        
+       const values = snapshot.val() 
+        setCouponDetails(values)
         if (typeof discount === "number" && discount > 0 && discount <= 100) {
           setCouponStatus("valid");
           setShowCouponPopup(false);
+          setDiscount(discount)
         } else {
           setCouponStatus("invalid");
         }

@@ -1,11 +1,6 @@
 import React, { useState } from "react";
-import image2 from "../../assets/Login/image2.png";
-import image3 from "../../assets/Login/image3.png";
 import image1 from "../../assets/Login/image1.svg";
 import ThinkLogo from "../../assets/AllWebpAssets/Asset3.webp";
-
-import image5 from "../../assets/Login/Picture10.png";
-import image6 from "../../assets/Login/Picture12.png";
 import { useNavigate } from "react-router-dom";
 // import pic1 from "../../assets/Login/Picture12.png"
 import {
@@ -15,6 +10,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signInWithRedirect,
+  signOut,
 } from "firebase/auth";
 import { ref, set, database, auth, get } from "../../Firebase/firebase";
 import { GrGoogle, GrView } from "react-icons/gr";
@@ -41,7 +37,7 @@ const SignupPage = () => {
   const [error, setError] = useState("");
   const [success, setsuccess] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [redirectHandled, setRedirectHandled] = useState(false);
+  // const [redirectHandled, setRedirectHandled] = useState(false);
   const navigate = useNavigate();
 
   const handleUserSignup = async (e) => {
@@ -99,43 +95,43 @@ const SignupPage = () => {
       else setError("Signup failed.");
     }
   };
-  if (!redirectHandled && sessionStorage.getItem("googleRedirect") === "true") {
-    setRedirectHandled(true);
-    sessionStorage.removeItem("googleRedirect");
+  // if (!redirectHandled && sessionStorage.getItem("googleRedirect") === "true") {
+  //   setRedirectHandled(true);
+  //   sessionStorage.removeItem("googleRedirect");
 
-    getRedirectResult(auth)
-      .then(async (result) => {
-        if (!result?.user) return;
-        const uid = result.user.uid;
-        const email = result.user.email;
+  //   getRedirectResult(auth)
+  //     .then(async (result) => {
+  //       if (!result?.user) return;
+  //       const uid = result.user.uid;
+  //       const email = result.user.email;
 
-        const userRef = ref(database, `users/${uid}`);
-        const snapshot = await get(userRef);
+  //       const userRef = ref(database, `users/${uid}`);
+  //       const snapshot = await get(userRef);
 
-        if (!snapshot.exists()) {
-          const name = result.user.displayName || "";
-          await set(userRef, { name, email, role: "user" });
-        }
+  //       if (!snapshot.exists()) {
+  //         const name = result.user.displayName || "";
+  //         await set(userRef, { name, email, role: "user" });
+  //       }
 
-        const token = await result.user.getIdToken();
-        setStorageItem("authToken", token);
-        setStorageItem("userType", "user");
+  //       const token = await result.user.getIdToken();
+  //       setStorageItem("authToken", token);
+  //       setStorageItem("userType", "user");
 
-        const planRef = ref(database, `users/${uid}/plan`);
-        const planSnap = await get(planRef);
-        const now = Date.now();
+  //       const planRef = ref(database, `users/${uid}/plan`);
+  //       const planSnap = await get(planRef);
+  //       const now = Date.now();
 
-        if (planSnap.exists() && now < planSnap.val().endTime) {
-          navigate("/quiz");
-        } else {
-          navigate("/slectPlanpage");
-        }
-      })
-      .catch((err) => {
-        console.error("Google Sign-In Failed:", err);
-        setError("Google Sign-In Failed");
-      });
-  }
+  //       if (planSnap.exists() && now < planSnap.val().endTime) {
+  //         navigate("/quiz");
+  //       } else {
+  //         navigate("/slectPlanpage");
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.error("Google Sign-In Failed:", err);
+  //       setError("Google Sign-In Failed");
+  //     });
+  // }
 
   const handleGoogleLogin = async () => {
     try {
@@ -159,18 +155,32 @@ const SignupPage = () => {
         const uid = result.user.uid;
         const userRef = ref(database, `users/${uid}`);
         const snapshot = await get(userRef);
-
+const userData = snapshot.val();
         if (!snapshot.exists()) {
           const name = result.user.displayName || "";
           await set(userRef, { name, email, role: "user" });
         }
+  const { plan, ageGroup } = userData;
 
         const token = await result.user.getIdToken();
         setStorageItem("authToken", token);
         setStorageItem("userType", "user");
-        setTimeout(() => {
-          navigate("/select-age-group");
-        }, 1000);
+             if(ageGroup){
+ if (plan && plan.endTime > currentTime) {
+  setTimeout(() => {
+        navigate("/report");
+      }, 1000);
+    } else {
+      setTimeout(() => {
+        navigate("/plans"); 
+      }, 1000);
+      // Plan is expired or doesn't exist
+    }
+  }else{
+  setTimeout(() => {
+        navigate("/select-age-group");
+      }, 1000);
+  }
       }
     } catch (err) {
       console.error("Google sign-in error:", err);
