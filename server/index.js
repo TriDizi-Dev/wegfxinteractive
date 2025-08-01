@@ -64,7 +64,8 @@ app.post("/initiate-payment", async (req, res) => {
     }
 
     const merchantOrderId = `TXN_${Date.now()}`;
-    const redirectUrlWithPlan = `https://api.think.wegfx.com/payment-status?merchantOrderId=${merchantOrderId}&plan=${plan}&details=false`;
+    // const redirectUrlWithPlan = `https://api.think.wegfx.com/payment-status?merchantOrderId=${merchantOrderId}&plan=${plan}&details=false`;
+    const redirectUrlWithPlan = `https://wegfxinteractive.onrender.com/payment-status?merchantOrderId=${merchantOrderId}&plan=${plan}&details=false`;
 
     const payload = {
       merchantOrderId,

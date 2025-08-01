@@ -11,23 +11,21 @@ import {
   signOut,
   sendPasswordResetEmail,
 } from "firebase/auth";
-// Assuming these are correctly imported from your Firebase config
 import { ref, set, get, database, auth } from "../../Firebase/firebase";
-import { GrView } from "react-icons/gr"; // Only GrView is used
+import { GrView } from "react-icons/gr"; 
 import { BiHide } from "react-icons/bi";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import { Navbar } from "../Navbar/Navbar";
 import googleImg from "../../assets/AllWebpAssets/Asset8.webp";
 
-// Helper function to safely set storage item (sessionStorage preferred)
-const setStorageItem = (key, value) => {
-  try {
-    sessionStorage.setItem(key, value);
-  } catch {
-    localStorage.setItem(key, value);
-  }
-};
+// const setStorageItem = (key, value) => {
+//   try {
+//     sessionStorage.setItem(key, value);
+//   } catch {
+//     localStorage.setItem(key, value);
+//   }
+// };
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -39,86 +37,148 @@ const LoginPage = () => {
   const [successmsg, setsuccessmsg] = useState(""); // For login success message
   const navigate = useNavigate();
 
-  // Unified useEffect for handling Google redirect results
-  useEffect(() => {
+useEffect(() => {
     const handleGoogleRedirectResult = async () => {
-      // Check if a Google redirect was initiated
-      const redirected = sessionStorage.getItem("googleRedirect");
-
-      if (redirected === "true") {
-        // Clear the flag immediately to prevent re-processing on subsequent renders
-        sessionStorage.removeItem("googleRedirect");
-        setError(""); // Clear previous errors
-
-        try {
-          const result = await getRedirectResult(auth);
-
-          if (result && result.user) {
-            const user = result.user;
-            const userEmail = user.email;
-
-            // Check if this email is already registered with Email/Password
-            const methods = await fetchSignInMethodsForEmail(auth, userEmail);
-            if (methods.includes("password")) {
-              setError(
-                "This email is already registered with Email/Password. Please log in with your email and password or reset your password."
-              );
-              await signOut(auth); // Sign out the partially logged-in Google user
-              return;
-            }
-
-            const uid = user.uid;
-            const userRef = ref(database, `users/${uid}`);
-            const snapshot = await get(userRef);
- const userData = snapshot.val();
-            // If user doesn't exist in our database, create a new entry
-            if (!snapshot.exists()) {
-              const name = user.displayName || "User"; // Use "User" if display name is not available
-              await set(userRef, { name, email: userEmail, role: "user" });
-            }
-  const { plan, ageGroup } = userData;
-
-            const token = await user.getIdToken();
-            setStorageItem("authToken", token);
-            setStorageItem("userType", "user");
-
-            setsuccessmsg("Google Sign-In Successful!");
-       if(ageGroup){
- if (plan && plan.endTime > currentTime) {
-   setTimeout(() => {
-              navigate("/report"); // Plan is active
-      }, 1000);
-    } else {
-       setTimeout(() => {
-        navigate("/plans");
-      }, 1000);
-       // Plan is expired or doesn't exist
-    }
-  }else{
-  setTimeout(() => {
-        navigate("/select-age-group");
-      }, 1000);
-  }
-          } else {
-            console.log("No user found after Google redirect result.");
-          }
-        } catch (err) {
-          console.error("Google Redirect Sign-In Error:", err);
-          if (err.code === "auth/popup-closed-by-user") {
-            setError("Google sign-in was cancelled.");
-          } else if (err.code === "auth/cancelled-popup-request") {
-            setError("Google sign-in was cancelled.");
-          } else if (err.code === "auth/account-exists-with-different-credential") {
-            setError("An account with this email already exists but was signed in using a different method. Please use your original sign-in method.");
-          } else {
-            setError(`Google Sign-In Failed: ${err.message || "Unknown error."}`);
-          }
+      setError("");
+      console.log("Attempting to get redirect result");
+      try {
+        const result = await getRedirectResult(auth);
+        if (result && result.user) {
+          console.log("Redirect result received:", result.user.email);
+          await processUser(result);
+        } else {
+          console.log("No redirect result found.");
         }
+      } catch (err) {
+        console.error("Google Redirect Sign-In Error:", {
+          code: err.code,
+          message: err.message,
+          details: err,
+        });
+        
       }
     };
 
     handleGoogleRedirectResult();
-  }, []); // Empty dependency array ensures this runs only once on component mount
+  }, [navigate]);
+
+  const processUser = async (result) => {
+    try {
+      if (!result.user) {
+        throw new Error("No user data in authentication result");
+      }
+      const user = result.user;
+      const userEmail = user.email;
+      console.log("Processing user:", userEmail);
+
+      const methods = await fetchSignInMethodsForEmail(auth, userEmail);
+      if (methods.includes("password")) {
+        setError(
+          "This email is already registered with Email/Password. Please log in with your email and password or reset your password."
+        );
+        await signOut(auth);
+        return;
+      }
+
+      const uid = user.uid;
+      const userRef = ref(database, `users/${uid}`);
+      const snapshot = await get(userRef);
+      console.log("Database snapshot:", snapshot.exists(), snapshot.val());
+      const userData = snapshot.val() || {};
+
+      if (!snapshot.exists()) {
+        const name = user.displayName || "User";
+        console.log("Creating new user in database:", { name, email: userEmail });
+        await set(userRef, { name, email: userEmail, role: "user" });
+      }
+
+      const { plan, ageGroup } = userData;
+      // if (isMounted) {
+        setsuccessmsg("Google Sign-In Successful!");
+        const currentTime = Date.now();
+        if (ageGroup) {
+          if (plan && plan.endTime > currentTime) {
+            console.log("Navigating to /report");
+            setTimeout(() => navigate("/report"), 1000);
+          } else {
+            console.log("Navigating to /plans");
+            setTimeout(() => navigate("/plans"), 1000);
+          }
+        } else {
+          console.log("Navigating to /select-age-group");
+          setTimeout(() => navigate("/select-age-group"), 1000);
+        }
+      // }
+    } catch (err) {
+      console.error("Error processing user:", {
+        code: err.code,
+        message: err.message,
+        details: err,
+      });
+    
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    setError("");
+    setMessage("");
+    setsuccessmsg("");
+    console.log("Starting Google Sign-In");
+
+    try {
+      const provider = new GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: "select_account" });
+      provider.addScope("email profile");
+
+      const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || window.innerWidth <= 768;
+      console.log("Is Mobile:", isMobile);
+
+      if (isMobile) {
+        console.log("Initiating Google Sign-In with Redirect");
+        try {
+          await signInWithRedirect(auth, provider);
+          console.log("Redirect initiated");
+        } catch (redirectErr) {
+          console.error("Redirect failed, falling back to popup:", {
+            code: redirectErr.code,
+            message: redirectErr.message,
+            details: redirectErr,
+          });
+         
+          const result = await signInWithPopup(auth, provider);
+          await processUser(result);
+        }
+      } else {
+        console.log("Initiating Google Sign-In with Popup");
+        const result = await signInWithPopup(auth, provider);
+        await processUser(result);
+      }
+    } catch (err) {
+      console.error("Google sign-in error:", {
+        code: err.code,
+        message: err.message,
+        details: err,
+      });
+      
+
+        if (err.code === "auth/popup-blocked") {
+          setError("Popup blocked. Please enable pop-ups or try on a different device.");
+        } else if (err.code === "auth/popup-closed-by-user") {
+          setError("Google sign-in was cancelled.");
+        } else if (err.code === "auth/redirect-error") {
+          setError("Google Sign-In redirect failed. Check your OAuth configuration or try a different browser.");
+        } else if (err.code === "auth/invalid-credential") {
+          setError("Invalid OAuth configuration. Please contact support.");
+        } else {
+          setError(
+            `Google Sign-In Failed: ${err.code || "Unknown error"} - ${
+              err.message || "No message"
+            }`
+          );
+        }
+      
+    }
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -152,13 +212,14 @@ const LoginPage = () => {
         return;
       }
   const { plan, ageGroup } = userData;
-      const token = await userCredential.user.getIdToken();
+      // const token = await userCredential.user.getIdToken();
       console.log(plan,ageGroup,"tokentoken");
-      setStorageItem("authToken", token);
-      setStorageItem("userType", "user");
+      // setStorageItem("authToken", token);
+      // setStorageItem("userType", "user");
       setsuccessmsg("Login Successful!");
       setError(""); 
       setMessage("");
+      const currentTime = Date.now();
       if(ageGroup){
  if (plan && plan.endTime > currentTime) {
    setTimeout(() => {
@@ -222,83 +283,83 @@ const LoginPage = () => {
     }
   };
 
-  const handleGoogleLogin = async () => {
-    setError(""); // Clear previous errors
-    setMessage("");
-    setsuccessmsg("");
+//   const handleGoogleLogin = async () => {
+//     setError(""); // Clear previous errors
+//     setMessage("");
+//     setsuccessmsg("");
 
-    try {
-      const provider = new GoogleAuthProvider();
-      provider.setCustomParameters({ prompt: "select_account" }); // Forces account selection every time
+//     try {
+//       const provider = new GoogleAuthProvider();
+//       provider.setCustomParameters({ prompt: "select_account" }); // Forces account selection every time
 
-      const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+//       const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-      if (isMobile) {
-        sessionStorage.setItem("googleRedirect", "true"); // Set flag before redirect
-        await signInWithRedirect(auth, provider);
-      } else {
-        const result = await signInWithPopup(auth, provider);
-        const user = result.user;
-        const userEmail = user.email;
+//       if (isMobile) {
+//         sessionStorage.setItem("googleRedirect", "true"); // Set flag before redirect
+//         await signInWithRedirect(auth, provider);
+//       } else {
+//         const result = await signInWithPopup(auth, provider);
+//         const user = result.user;
+//         const userEmail = user.email;
 
-        const methods = await fetchSignInMethodsForEmail(auth, userEmail);
-        if (methods.includes("password")) {
-          setError(
-            "This email is already registered with Email/Password. Please log in with your email and password or reset your password."
-          );
-          await signOut(auth); // Sign out the Google user
-          return;
-        }
+//         const methods = await fetchSignInMethodsForEmail(auth, userEmail);
+//         if (methods.includes("password")) {
+//           setError(
+//             "This email is already registered with Email/Password. Please log in with your email and password or reset your password."
+//           );
+//           await signOut(auth); // Sign out the Google user
+//           return;
+//         }
 
-        const uid = user.uid;
-        const userRef = ref(database, `users/${uid}`);
-        const snapshot = await get(userRef);
- const userData = snapshot.val();
-        if (!snapshot.exists()) {
-          const name = user.displayName || "User";
-          await set(userRef, { name, email: userEmail, role: "user" });
-        }
-console.log(userData,"userData");
-  const { plan, ageGroup } = userData;
+//         const uid = user.uid;
+//         const userRef = ref(database, `users/${uid}`);
+//         const snapshot = await get(userRef);
+//  const userData = snapshot.val();
+//         if (!snapshot.exists()) {
+//           const name = user.displayName || "User";
+//           await set(userRef, { name, email: userEmail, role: "user" });
+//         }
+// console.log(userData,"userData");
+//   const { plan, ageGroup } = userData;
 
-        const token = await user.getIdToken();
-        setStorageItem("authToken", token);
-        setStorageItem("userType", "user");
-setError(""); 
-                      setMessage("");
-        setsuccessmsg("Google Sign-In Successful!");
-      if(ageGroup){
- if (plan && plan.endTime > currentTime) {
-   setTimeout(() => {
-              navigate("/report"); // Plan is active
-      }, 1000);
-    } else {
-       setTimeout(() => {
-        navigate("/plans");
-      }, 1000);
-       // Plan is expired or doesn't exist
-    }
-  }else{
-  setTimeout(() => {
-        navigate("/select-age-group");
-      }, 1000);
-  }
-      }
-    } catch (err) {
-      console.error("Google sign-in error (popup or initial redirect attempt):", err);
-      if (err.code === "auth/popup-closed-by-user") {
-        setError("Google sign-in was cancelled by the user.");
-      } else if (err.code === "auth/cancelled-popup-request") {
-        setError("Multiple Google sign-in attempts detected. Please try again.");
-      } else if (err.code === "auth/popup-blocked") {
-        setError("Google sign-in popup was blocked. Please enable pop-ups for this site or try again on a mobile device.");
-      } else if (err.code === "auth/unauthorized-domain") {
-        setError("Your domain is not authorized for Google Sign-In. Please contact support.");
-      } else {
-        setError(`Google Sign-In Failed: ${err.message || "Unknown error."}`);
-      }
-    }
-  };
+//         const token = await user.getIdToken();
+//         setStorageItem("authToken", token);
+//         setStorageItem("userType", "user");
+// setError(""); 
+//                       setMessage("");
+//         setsuccessmsg("Google Sign-In Successful!");
+//       if(ageGroup){
+//  if (plan && plan.endTime > currentTime) {
+//    setTimeout(() => {
+//               navigate("/report"); // Plan is active
+//       }, 1000);
+//     } else {
+//        setTimeout(() => {
+//         navigate("/plans");
+//       }, 1000);
+//        // Plan is expired or doesn't exist
+//     }
+//   }else{
+//   setTimeout(() => {
+//         navigate("/select-age-group");
+//       }, 1000);
+//   }
+//       }
+//     } catch (err) {
+//       console.error("Google sign-in error (popup or initial redirect attempt):", err);
+//       if (err.code === "auth/popup-closed-by-user") {
+//         setError("Google sign-in was cancelled by the user.");
+//       } else if (err.code === "auth/cancelled-popup-request") {
+//         setError("Multiple Google sign-in attempts detected. Please try again.");
+//       } else if (err.code === "auth/popup-blocked") {
+//         setError("Google sign-in popup was blocked. Please enable pop-ups for this site or try again on a mobile device.");
+//       } else if (err.code === "auth/unauthorized-domain") {
+//         setError("Your domain is not authorized for Google Sign-In. Please contact support.");
+//       } else {
+//         setError(`Google Sign-In Failed: ${err.message || "Unknown error."}`);
+//       }
+//     }
+//   };
 
   return (
     <div>

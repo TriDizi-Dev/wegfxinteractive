@@ -33,8 +33,7 @@ export const Navbar = () => {
   const handleLogout = async () => {
     try {
       await signOut(auth);
-      // Optional: redirect to login page or show message
-      window.location.href = "/"; // Or your login route
+      window.location.href = "/";
     } catch (error) {
       console.error("Logout failed:", error);
     }

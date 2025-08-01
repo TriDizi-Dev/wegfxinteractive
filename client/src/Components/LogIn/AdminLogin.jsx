@@ -6,13 +6,13 @@ import { GrView } from "react-icons/gr";
 import { BiHide } from "react-icons/bi";
 import "./AdminLoginPage.css";
 
-const setStorageItem = (key, value) => {
-  try {
-    sessionStorage.setItem(key, value);
-  } catch {
-    localStorage.setItem(key, value);
-  }
-};
+// const setStorageItem = (key, value) => {
+//   try {
+//     sessionStorage.setItem(key, value);
+//   } catch {
+//     localStorage.setItem(key, value);
+//   }
+// };
 
 const AdminLoginPage = () => {
   const [email, setEmail] = useState("");
@@ -31,9 +31,9 @@ const AdminLoginPage = () => {
 
       const snapshot = await get(ref(database, `users/${uid}`));
       if (snapshot.exists() && snapshot.val().role === "admin") {
-        const token = await userCredential.user.getIdToken();
-        setStorageItem("authToken", token);
-        setStorageItem("userType", "admin");
+        // const token = await userCredential.user.getIdToken();
+        // setStorageItem("authToken", token);
+        // setStorageItem("userType", "admin");
         navigate("/dashboard");
       } else {
         setError("You are not authorized as admin.");

@@ -3,6 +3,7 @@ import "./Dashboard.css";
 import { useNavigate } from "react-router-dom";
 import { auth, database } from "../../../Firebase/firebase";
 import { ref, get } from "firebase/database";
+import { signOut } from "firebase/auth";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -32,17 +33,25 @@ const Dashboard = () => {
     fetchAdminInfo();
   }, [navigate]);
 
-  const handleLogout = () => {
-    try {
-      sessionStorage.removeItem("authToken");
-      localStorage.removeItem("authToken");
-      sessionStorage.removeItem("userType");
-      localStorage.removeItem("userType");
-    } catch (e) {
-      console.warn("Failed to clear session/local storage:", e);
-    }
-    navigate("/");
-  };
+  // const handleLogout = () => {
+  //   try {
+  //     sessionStorage.removeItem("authToken");
+  //     localStorage.removeItem("authToken");
+  //     sessionStorage.removeItem("userType");
+  //     localStorage.removeItem("userType");
+  //   } catch (e) {
+  //     console.warn("Failed to clear session/local storage:", e);
+  //   }
+  //   navigate("/");
+  // };
+   const handleLogout = async () => {
+      try {
+        await signOut(auth);
+        window.location.href = "/admin-login";
+      } catch (error) {
+        console.error("Logout failed:", error);
+      }
+    };
 
   return (
     <div className="dashboard-wrapper">

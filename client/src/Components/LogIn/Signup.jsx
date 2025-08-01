@@ -21,13 +21,13 @@ import { Navbar } from "../Navbar/Navbar";
 import googleImg from "../../assets/AllWebpAssets/Asset8.webp";
 
 
-const setStorageItem = (key, value) => {
-  try {
-    sessionStorage.setItem(key, value);
-  } catch {
-    localStorage.setItem(key, value);
-  }
-};
+// const setStorageItem = (key, value) => {
+//   try {
+//     sessionStorage.setItem(key, value);
+//   } catch {
+//     localStorage.setItem(key, value);
+//   }
+// };
 
 const SignupPage = () => {
   const [email, setEmail] = useState("");
@@ -163,9 +163,9 @@ const userData = snapshot.val();
         }
   const { plan, ageGroup } = userData;
 
-        const token = await result.user.getIdToken();
-        setStorageItem("authToken", token);
-        setStorageItem("userType", "user");
+        // const token = await result.user.getIdToken();
+        // setStorageItem("authToken", token);
+        // setStorageItem("userType", "user");
         setError(""); 
              if(ageGroup){
  if (plan && plan.endTime > currentTime) {

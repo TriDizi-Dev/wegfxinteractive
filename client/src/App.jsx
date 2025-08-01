@@ -6,11 +6,8 @@ import SignupPage from "./Components/LogIn/Signup";
 import Dashboard from "./Pages/AdminSidePages/Dashboard/Dashboard";
 import QuestionCreation from "./Pages/AdminSidePages/QuestionsCreation/QuestionCreation";
 import QuestionsManage from "./Pages/AdminSidePages/ManageQuestions/ManageQuestion";
-import SlectPlanpage from "./Pages/UsersidePages/SelectPlanPage/SlectPlanpage";
 import QuizComponent from "./Pages/UsersidePages/QuizComponet/Quiz";
 import UserDetails from "./Pages/AdminSidePages/userDetails/Userdetails";
-
-//✅ Import protection components
 import {
   RoleBasedRoute,
   PlanBasedRoute,
@@ -20,11 +17,8 @@ import { useAuth } from "./Components/AuthContext";
 import PaymentSuccess from "./Pages/UsersidePages/PaymentSucces/paymentsucces";
 import AdminLoginPage from "./Components/LogIn/AdminLogin";
 import { useEffect } from "react";
-// import backgroundImage from "../src/assets/Pieimages/Baackground_last.jpg";
 import backgroundImage from "../src/assets/AllWebpAssets/Asset13.webp";
 import backgroundImageQuiz from "../src/assets/home/bg.jpg";
-// import backfroundImageKids from "../src/assets/Pieimages/kidsimage.jpg";
-// import backfroundImageKids from "../src/assets/AllWebpAssets/Asset10.webp";
 import PieChart from "./Components_Last/Piechart/Piechart";
 import backgroundimagplan from "./assets/Pieimages/Baackground_last1.png";
 import backfroundImageKids from "./assets/AllWebpAssets/Asset10.webp";
@@ -79,7 +73,6 @@ function Layout() {
         <Route path="/admin-login" element={<AdminLoginPage />} />
         <Route path="/sign-up" element={<SignupPage />} />
 
-        {/* ✅ Admin Protected Routes */}
         <Route
           path="/dashboard"
           element={
@@ -123,23 +116,12 @@ function Layout() {
           }
         />
 
-        {/* ✅ Plan Protected User Routes */}
         <Route
           path="/quiz"
           element={
             <PlanBasedRoute>
               <QuizComponent />
               </PlanBasedRoute>
-          }
-        />
-
-        {/* ✅ Logged-in Users only (e.g., plan selection page) */}
-        <Route
-          path="/slectPlanpage"
-          element={
-            <PrivateRoute>
-              <SlectPlanpage />
-            </PrivateRoute>
           }
         />
         <Route
