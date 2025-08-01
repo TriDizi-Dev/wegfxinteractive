@@ -157,6 +157,8 @@ const LoginPage = () => {
       setStorageItem("authToken", token);
       setStorageItem("userType", "user");
       setsuccessmsg("Login Successful!");
+      setError(""); 
+      setMessage("");
       if(ageGroup){
  if (plan && plan.endTime > currentTime) {
    setTimeout(() => {
@@ -262,7 +264,8 @@ console.log(userData,"userData");
         const token = await user.getIdToken();
         setStorageItem("authToken", token);
         setStorageItem("userType", "user");
-
+setError(""); 
+                      setMessage("");
         setsuccessmsg("Google Sign-In Successful!");
       if(ageGroup){
  if (plan && plan.endTime > currentTime) {

@@ -84,6 +84,7 @@ const SignupPage = () => {
         navigate("/");
       }, 3000);
       // alert("Signup Successful");
+      setError(""); 
       setsuccess("Signup successful !");
     } catch (err) {
       console.error(err);
@@ -165,6 +166,7 @@ const userData = snapshot.val();
         const token = await result.user.getIdToken();
         setStorageItem("authToken", token);
         setStorageItem("userType", "user");
+        setError(""); 
              if(ageGroup){
  if (plan && plan.endTime > currentTime) {
   setTimeout(() => {
