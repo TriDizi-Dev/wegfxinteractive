@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ref, get } from "firebase/database";
+import { ref, get, remove } from "firebase/database";
 import { auth, database } from "../../../Firebase/firebase";
 import moment from "moment";
 import "./UserDetails.css";
@@ -57,6 +57,24 @@ const UserDetails = () => {
 
     fetchUsers();
   }, []);
+console.log(Object.entries(users),"fhfghvbnv");
+
+  const handleDeleteUser = async (uid) => {
+   
+
+    try {
+      await remove(ref(database, `users/${uid}`));
+
+      setUsers((prev) => {
+        const updated = { ...prev };
+        delete updated[uid];
+        return updated;
+      });
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      alert("Failed to delete user.");
+    }
+  };
 
   if (loading) return <p className="loading">🔄 Loading user data...</p>;
   if (error) return <p className="error-message">⚠️ {error}</p>;
@@ -64,22 +82,28 @@ const UserDetails = () => {
   return (
     <div className="admin-wrapper">
       <h1 className="admin-title">📋 User Activity Overview</h1>
+      <h1 className="admin-title">Total users : {Object.entries(users).length-1}</h1>
 
       {Object.entries(users)
         .filter(([uid]) => uid !== auth.currentUser?.uid)
         .map(([uid, user]) => (
           <div key={uid} className="user-card">
+            <div className="User_firstDetails">
+               <h2 className="user-email" title={user.email}>
+              👤 {user.name}
+            </h2>
             <h2 className="user-email" title={user.email}>
               📧 {user.email}
             </h2>
-
+           
+</div>
             <div className="info-grid">
               <div>
                 <p>
                   <strong>👤 Role:</strong> {user.role || "N/A"}
                 </p>
                 <p>
-                  <strong>💳 Plan Type:</strong> {user.plan?.type || "N/A"}
+                  <strong>💳 Plan Type:</strong> {user.plan?.type === "starter" ? "Trial Pack" : user.plan?.type === "pro" ? "Basic": user.plan?.type === "elite" ? "Super Saver" : "N/A"}
                 </p>
                 <p>
                   <strong>⏳ Start:</strong>{" "}
@@ -97,25 +121,27 @@ const UserDetails = () => {
 
               <div>
                 <p>
+                  <strong>🧮 Total Categories:</strong>{" "}
+                  {/* {Object.keys(user.quizStats || {}).length} */}
+                  6
+                </p>
+                <p>
                   <strong>📂 Categories Attempted:</strong>{" "}
-                  {Object.keys(user.attemptedQuestions || {}).join(", ") ||
+                  {Object.keys(user.quizStats || {}).join(", ") ||
                     "None"}
                 </p>
-                <p>
-                  <strong>🧮 Total Categories:</strong>{" "}
-                  {Object.keys(user.attemptedQuestions || {}).length}
-                </p>
-                <p>
+                
+                {/* <p>
                   <strong>🔁 Total Quiz Attempts:</strong>{" "}
-                  {Object.values(user.quizResults || {}).reduce(
+                  {Object.values(user.quizTracking || {}).reduce(
                     (total, cat) => total + Object.keys(cat || {}).length,
                     0
                   )}
-                </p>
+                </p> */}
               </div>
             </div>
 
-            <div className="quiz-section">
+            {/* <div className="quiz-section">
               <h3>📊 Quiz Results:</h3>
               {user.quizResults ? (
                 Object.entries(user.quizResults).map(([category, attempts]) => (
@@ -128,8 +154,9 @@ const UserDetails = () => {
                             {moment(result.date).format("DD MMM YYYY, h:mm A")}
                           </strong>{" "}
                           — ✅ {result.correctAnswers} /{" "}
-                          {result.totalQuestions} correct, ❌ {result.wrongAnswers} wrong,
-                          🧮 Total Score: {(result.correctAnswers)*10}
+                          {result.totalQuestions} correct, ❌{" "}
+                          {result.wrongAnswers} wrong, 🧮 Total Score:{" "}
+                          {result.correctAnswers * 10}
                         </li>
                       ))}
                     </ul>
@@ -138,9 +165,9 @@ const UserDetails = () => {
               ) : (
                 <p>No quiz results found.</p>
               )}
-            </div>
+            </div> */}
 
-            <div className="quiz-section">
+            {/* <div className="quiz-section">
               <h3>📝 Attempted Questions:</h3>
               {user.attemptedQuestions ? (
                 Object.entries(user.attemptedQuestions).map(
@@ -154,7 +181,12 @@ const UserDetails = () => {
               ) : (
                 <p>No questions attempted.</p>
               )}
-            </div>
+            </div> */}
+
+            {/* ✅ Delete button */}
+            <button className="delete-btn" onClick={() => handleDeleteUser(uid)}>
+              🗑️ Delete User
+            </button>
           </div>
         ))}
     </div>
