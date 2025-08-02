@@ -63,7 +63,7 @@ export const Navbar = () => {
             >
               {/* ← Back */}
               <button>
-              Logout
+              Sign Out
               </button>
             </div>
            )} 
