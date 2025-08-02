@@ -8,7 +8,6 @@ import { ref, get, set } from "firebase/database";
 import { useNavigate } from "react-router-dom";
 import { Navbar } from "../../Components/Navbar/Navbar";
 import Welcome from "../../assets/AllWebpAssets/Asset9.webp"; // Import your logo image
-
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
 
@@ -175,6 +174,9 @@ function PiePage() {
     navigate("/quiz");
     // Add navigation or other logic here
   };
+  const emailfun = ()=>{
+    window.location.href="mailto:info@wegfx.com"
+  }
 
   return (
     <div>
@@ -249,6 +251,7 @@ function PiePage() {
           </main>
         </div>
       </div>
+      <p className="Suppot_text">For any inquiries, please reach out via email : <span onClick={()=>emailfun()}>info@wegfx.com</span></p>
     </div>
   );
 }

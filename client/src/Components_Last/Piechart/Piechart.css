@@ -289,6 +289,17 @@
     margin-bottom: 3vw;
     margin-top: 1.8vw;
 }
+.Suppot_text{
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.2vw;
+    margin-top: -1vw;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+.Suppot_text span{
+    cursor: pointer;
+}
 
 @media (max-width: 780px) {
     .pie {
@@ -357,7 +368,7 @@
 
 
     .pie-chart-section {
-        height: 90vw;
+        height: 92vw;
         width: 100vw;
         margin-top: 0vw;
         margin-right: 0;
@@ -461,5 +472,10 @@
         text-align: center;
         margin-top: 6vw;
     }
+    .Suppot_text{
+    font-size: 3.9vw;
+    margin-top: 9vw;
+
+}
 
 }
