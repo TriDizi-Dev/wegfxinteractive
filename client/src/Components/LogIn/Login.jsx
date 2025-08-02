@@ -80,7 +80,8 @@ const LoginPage = () => {
       } else if (err.code === "auth/unauthorized-domain") {
         setError("Your domain is not authorized for Google Sign-In. Please contact support.");
       } else {
-        setError(`Google Sign-In Failed: ${err.message || "Unknown error."}`);
+        setError(`Google Sign-In Failed`);
+        console.log(err.message,"Error Msg");
       }
     }
       
