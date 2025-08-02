@@ -49,7 +49,7 @@ function Layout() {
       document.body.style.height = isMobile ? "124.5vh" : "";
       document.body.style.backgroundImage = `url(${backgroundimagplan})`;
     } else if (location.pathname === "/plans") {
-      document.body.style.height = isMobile ? "135vh" : "";
+      document.body.style.height = isMobile ? "130vh" : "";
       document.body.style.backgroundImage = `url(${backgroundimagplan})`;
     } else {
       document.body.style.background = `radial-gradient(circle at top left, #ede7f6, #d6d0f5, #e0dcff)`;

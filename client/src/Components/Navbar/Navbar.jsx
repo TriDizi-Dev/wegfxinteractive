@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { auth, database } from "../../Firebase/firebase";
-import { get, ref } from "firebase/database"; // ✅ FIXED import
+import { get, ref } from "firebase/database"; 
 import Logo from "../../assets/AllWebpAssets/WeGfx_black_logo.webp";
 import LogoWhite from "../../assets/AllWebpAssets/WeGfx_white_logo.webp";
 import { useLocation } from "react-router-dom";
@@ -13,14 +13,12 @@ export const Navbar = () => {
   const [Userdata, setUserdata] = useState({});
   const [showLogout, setShowLogout] = useState(false);
 
-  console.log(Userdata, "UserdataUserdata");
-
   useEffect(() => {
     const fetchUser = async () => {
       const user = auth.currentUser;
       if (user) {
         const uid = user.uid;
-        const userRef = ref(database, `users/${uid}`); // ✅ Make sure 'database' is from getDatabase()
+        const userRef = ref(database, `users/${uid}`); 
         const snapshot = await get(userRef);
         if (snapshot.exists()) {
           const data = snapshot.val();
@@ -41,7 +39,7 @@ export const Navbar = () => {
 
   const location = useLocation();
 
-  const hideBackButtonPaths = ["/select-age-group", "/", "/sign-up"];
+  const hideBackButtonPaths = ["/", "/sign-up"];
   const hideLogo = ["/", "/sign-up"];
 
   const shouldHideBackButton = hideBackButtonPaths.includes(location.pathname);
@@ -57,13 +55,18 @@ export const Navbar = () => {
         )}
         <div>
           {!shouldHideBackButton && (
-            <button
-              className="back-arrow-btn"
-              onClick={() => window.history.back()}
+            <div
+              // className="back-arrow-btn"
+              className="logout-popup"
+              // onClick={() => window.history.back()}
+              onClick={handleLogout}
             >
-              ← Back
-            </button>
-          )}
+              {/* ← Back */}
+              <button>
+              Logout
+              </button>
+            </div>
+           )} 
           {/* Other navbar content */}
         </div>
       </div>
@@ -78,14 +81,14 @@ export const Navbar = () => {
           </span>
           <div
             
-            onClick={() => setShowLogout(!showLogout)}
+            // onClick={() => setShowLogout(!showLogout)}
           >
             <AccountCircleIcon className="user-avatar"/>
-            {showLogout && (
+            {/* {showLogout && (
               <div className="logout-popup">
                 <button onClick={handleLogout}>Logout</button>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       )}

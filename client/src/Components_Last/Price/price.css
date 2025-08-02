@@ -490,8 +490,8 @@ padding-left: 5vw;
   .logo1 {
     height: 15vw;
     width: 30vw;
-    transform: translate(5vw, -4vw);
-    margin-top: 5vw;
+    transform: translate(0vw, -2vw);
+    margin-top: 1vw;
     /* margin-left: 10vw; */
   }
 
