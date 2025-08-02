@@ -139,10 +139,10 @@ const SignupPage = () => {
       const provider = new GoogleAuthProvider();
       provider.setCustomParameters({ prompt: "select_account" });
 
-      if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
-        sessionStorage.setItem("googleRedirect", "true");
-        await signInWithRedirect(auth, provider);
-      } else {
+      // if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+      //   sessionStorage.setItem("googleRedirect", "true");
+      //   await signInWithRedirect(auth, provider);
+      // } else {
         const result = await signInWithPopup(auth, provider);
         const email = result.user.email;
 
@@ -183,7 +183,7 @@ const userData = snapshot.val();
         navigate("/select-age-group");
       }, 1000);
   }
-      }
+      // }
     } catch (err) {
       console.error("Google sign-in error:", err);
       setError("Google Sign-In Failed.");
