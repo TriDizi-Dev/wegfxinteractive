@@ -99,9 +99,9 @@ console.log(Object.entries(users),"fhfghvbnv");
 </div>
             <div className="info-grid">
               <div>
-                <p>
+                {/* <p>
                   <strong>👤 Role:</strong> {user.role || "N/A"}
-                </p>
+                </p> */}
                 <p>
                   <strong>💳 Plan Type:</strong> {user.plan?.type === "starter" ? "Trial Pack" : user.plan?.type === "pro" ? "Basic": user.plan?.type === "elite" ? "Super Saver" : "N/A"}
                 </p>
