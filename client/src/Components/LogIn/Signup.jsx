@@ -96,53 +96,11 @@ const SignupPage = () => {
       else setError("Signup failed.");
     }
   };
-  // if (!redirectHandled && sessionStorage.getItem("googleRedirect") === "true") {
-  //   setRedirectHandled(true);
-  //   sessionStorage.removeItem("googleRedirect");
-
-  //   getRedirectResult(auth)
-  //     .then(async (result) => {
-  //       if (!result?.user) return;
-  //       const uid = result.user.uid;
-  //       const email = result.user.email;
-
-  //       const userRef = ref(database, `users/${uid}`);
-  //       const snapshot = await get(userRef);
-
-  //       if (!snapshot.exists()) {
-  //         const name = result.user.displayName || "";
-  //         await set(userRef, { name, email, role: "user" });
-  //       }
-
-  //       const token = await result.user.getIdToken();
-  //       setStorageItem("authToken", token);
-  //       setStorageItem("userType", "user");
-
-  //       const planRef = ref(database, `users/${uid}/plan`);
-  //       const planSnap = await get(planRef);
-  //       const now = Date.now();
-
-  //       if (planSnap.exists() && now < planSnap.val().endTime) {
-  //         navigate("/quiz");
-  //       } else {
-  //         navigate("/slectPlanpage");
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.error("Google Sign-In Failed:", err);
-  //       setError("Google Sign-In Failed");
-  //     });
-  // }
 
   const handleGoogleLogin = async () => {
     try {
       const provider = new GoogleAuthProvider();
       provider.setCustomParameters({ prompt: "select_account" });
-
-      // if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
-      //   sessionStorage.setItem("googleRedirect", "true");
-      //   await signInWithRedirect(auth, provider);
-      // } else {
         const result = await signInWithPopup(auth, provider);
         const email = result.user.email;
 
@@ -163,10 +121,9 @@ const userData = snapshot.val();
         }
   const { plan, ageGroup } = userData;
 
-        // const token = await result.user.getIdToken();
-        // setStorageItem("authToken", token);
-        // setStorageItem("userType", "user");
         setError(""); 
+                  setsuccess("Google Sign up Successful!");
+
              if(ageGroup){
  if (plan && plan.endTime > currentTime) {
   setTimeout(() => {
@@ -176,18 +133,26 @@ const userData = snapshot.val();
       setTimeout(() => {
         navigate("/plans"); 
       }, 1000);
-      // Plan is expired or doesn't exist
     }
   }else{
   setTimeout(() => {
         navigate("/select-age-group");
       }, 1000);
   }
-      // }
     } catch (err) {
-      console.error("Google sign-in error:", err);
-      setError("Google Sign-In Failed.");
+           if (err.code === "auth/popup-closed-by-user") {
+        setError("Google sign-in was cancelled by the user.");
+      } else if (err.code === "auth/cancelled-popup-request") {
+        setError("Multiple Google sign-in attempts detected. Please try again.");
+      } else if (err.code === "auth/popup-blocked") {
+        setError("Google sign-in popup was blocked. Please enable pop-ups for this site or try again on a mobile device.");
+      } else if (err.code === "auth/unauthorized-domain") {
+        setError("Your domain is not authorized for Google Sign-In. Please contact support.");
+      } else {
+        setError(`Google Sign-In Failed: ${err.message || "Unknown error."}`);
+      }
     }
+    
   };
 
   return (
@@ -197,19 +162,6 @@ const userData = snapshot.val();
       <div className="login-wrapper">
         <div className="login-box">
           <div className="signup-left">
-            {/* <img src={image2} alt="Cartoon" className="cartoon-touch" />
-          <img src={image3} className="image_3" alt="Decoration" />
-           <div className="stares">
-                      <img src={image6} className="image6"/>
-                      <img  src={image5} className="image5"/>
-                    </div>
-          <h2>
-            Unleash the <span className="star-text">Star</span> Within!
-          </h2>
-          <h3>
-            Boost your child’s confidence and social <br />
-            skills to unlock lifelong success.
-          </h3> */}
             <img src={image1} className="image1" />
           </div>
 
@@ -289,7 +241,6 @@ const userData = snapshot.val();
 
               <p onClick={handleGoogleLogin} className="google">
                  <img src={googleImg} alt="googleImg" />
-                {/* <GrGoogle className="google" /> */}
               </p>
             </form>
           </div>

@@ -75,10 +75,6 @@ function Kids() {
                 Foundation Thinkers
               </h2>
               <p className="thinker-age">Age 5–8 years</p>
-              {/* <p className="thinker-description">
-                Build strong roots of confidence <br />
-                and curiosity
-              </p> */}
             </div>
           </div>
 
@@ -101,10 +97,6 @@ function Kids() {
                 Explorative Thinkers
               </h2>
               <p className="thinker-age">Age 9–12 years</p>
-              {/* <p className="thinker-description">
-                Discover talents, sharpen <br />
-                thinking, and express freely
-              </p> */}
             </div>
           </div>
 
@@ -127,10 +119,6 @@ function Kids() {
                 Future - Ready Thinkers
               </h2>
               <p className="thinker-age">Age 13–16 years</p>
-              {/* <p className="thinker-description">
-                Prepare for real-world challenges <br />
-                with confidence & clarity
-              </p> */}
             </div>
           </div>
         </div>

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import "../../assets/Pieimages/Picture1.png";
 import "./Piechart.css"; // Make sure this path is correct for your CSS file
-// import logo from '../../assets/Pieimages/Think.png';
 import Think from "../../assets/AllWebpAssets/Asset3.webp"; // Import your logo image
 import { auth, database } from "../../Firebase/firebase";
 import { ref, get, set } from "firebase/database";
@@ -184,13 +182,10 @@ function PiePage() {
 
       <div className="pie">
         <div className="think-logo">
-          {/* <h1 className="think-text">Think</h1> */}
           <img src={Think} alt="Think" className="think-logo-image" />
         </div>
         <div className="app-container">
-          {/* Main Content */}
           <main className="app-main-content">
-            {/* Welcome Section */}
 
             <div className="welcome-section">
               <img
@@ -213,17 +208,6 @@ function PiePage() {
                 </div>
               </div>
             </div>
-            {/* <div className="pie-chart-section"> */}
-            {/* <div className="pie-chart-container">
-                {" "}
-                <div className="pie-chart">
-                  <span className="pie-label english-label">English</span>
-                  <span className="pie-label gk-label">GK</span>
-                  <span className="pie-label maths-label">Maths</span>
-                  <span className="pie-label social-label">Social</span>
-                  <span className="pie-label science-label">Science</span>
-                </div>
-              </div> */}
             <div className="pie-chart-section">
               <ResponsiveContainer>
                 <PieChart>

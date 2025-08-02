@@ -57,41 +57,6 @@ function Price() {
     fetchUser();
   }, []);
 
-  // const handleProceed = async (planType) => {
-  //   if (!planType) {
-  //     alert("Please select a plan to proceed.");
-  //     return;
-  //   }
-  //   setSelectedPlan(planType);
-  //   const uid = auth.currentUser?.uid;
-  //   if (!uid) {
-  //     alert("User not authenticated");
-  //     return;
-  //   }
-
-  //   const now = Date.now();
-  //   let expiry;
-
-  //   if (planType === "Trial") {
-  //     expiry = now + 7 * 24 * 60 * 60 * 1000; // 1 Week
-  //   } else if (planType === "pro") {
-  //     expiry = now + 30 * 24 * 60 * 60 * 1000; // 1 Month
-  //   } else if (planType === "elite") {
-  //     expiry = now + 90 * 24 * 60 * 60 * 1000; // 3 Months
-  //   } else {
-  //     alert("Invalid plan selected");
-  //     return;
-  //   }
-
-  //   const userPlanRef = ref(database, `users/${uid}/plan`);
-  //   await set(userPlanRef, {
-  //     type: planType,
-  //     startTime: now,
-  //     endTime: expiry,
-  //   });
-
-  //   navigate("/report", { state: { planType } });
-  // };
 
   const handleProceed = async (planType) => {
     if (!planType) return alert("Please select a plan.");
@@ -145,24 +110,6 @@ function Price() {
       return;
     }
   }
-
-  console.log("Final amount:", amount);
-    // // Apply coupon
-    // if (coupan) {
-    //   switch (coupan) {
-    //     case "COUP50":
-    //       amount = amount * 0.5; // or amount -= amount * 0.5;
-    //       break;
-    //     case "COUP20":
-    //       amount = amount * 0.8;
-    //       break;
-    //     default:
-    //       console.log("Invalid coupon code");
-    //   }
-    // }
-
-    // console.log("Final amount:", amount);
-
 
     try {
       const res = await axios.post(
@@ -273,10 +220,6 @@ function Price() {
                   </div>
                 </div>
               </div>
-
-              {/* <p className="flexible-options-text">
-                Simple Prices, Flexible Options
-              </p> */}
               <div className="Benifits_text_main_container">
                 <div className="Coupon_Container">
                   <p

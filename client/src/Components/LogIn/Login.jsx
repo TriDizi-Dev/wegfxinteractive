@@ -5,7 +5,6 @@ import {
   signInWithEmailAndPassword,
   GoogleAuthProvider,
   signInWithPopup,
-  signInWithRedirect,
   getRedirectResult,
   fetchSignInMethodsForEmail,
   signOut,
@@ -19,13 +18,6 @@ import { useNavigate } from "react-router-dom";
 import { Navbar } from "../Navbar/Navbar";
 import googleImg from "../../assets/AllWebpAssets/Asset8.webp";
 
-// const setStorageItem = (key, value) => {
-//   try {
-//     sessionStorage.setItem(key, value);
-//   } catch {
-//     localStorage.setItem(key, value);
-//   }
-// };
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -37,141 +29,62 @@ const LoginPage = () => {
   const [successmsg, setsuccessmsg] = useState(""); // For login success message
   const navigate = useNavigate();
 
-
-
-  // ✅ Run on mount — handle redirect result from Google (for mobile)
-  useEffect(() => {
-    let isMounted = true;
-
-    const handleGoogleRedirectResult = async () => {
-      setError("");
+    const handleGoogleLogin = async () => {
       try {
-        const result = await getRedirectResult(auth);
-        if (result && result.user) {
-          console.log("Redirect result received:", result.user.email);
-          if (isMounted) {
-            await processUser(result);
+        const provider = new GoogleAuthProvider();
+        provider.setCustomParameters({ prompt: "select_account" });
+          const result = await signInWithPopup(auth, provider);
+          const email = result.user.email;
+  
+          const methods = await fetchSignInMethodsForEmail(auth, email);
+          if (methods.includes("password")) {
+            setError("This email is already registered with Email/Password.");
+            await signOut(auth);
+            return;
           }
-        } else {
-          console.log("No redirect result found.");
-        }
-      } catch (err) {
-        console.error("Google Redirect Sign-In Error:", err);
-        if (isMounted) {
-          handleAuthError(err);
-        }
-      }
-    };
-
-    handleGoogleRedirectResult();
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
-  // ✅ Called from both popup and redirect result
-  const processUser = async (result) => {
-    try {
-      if (!result.user) throw new Error("No user data in authentication result");
-
-      const user = result.user;
-      const userEmail = user.email;
-      console.log("Processing user:", userEmail);
-
-      const methods = await fetchSignInMethodsForEmail(auth, userEmail);
-      if (methods.includes("password")) {
-        setError(
-          "This email is already registered with Email/Password. Please log in with your email and password or reset your password."
-        );
-        await signOut(auth);
-        return;
-      }
-
-      const uid = user.uid;
-      const userRef = ref(database, `users/${uid}`);
-      const snapshot = await get(userRef);
-      const userData = snapshot.val() || {};
-
-      if (!snapshot.exists()) {
-        const name = user.displayName || "User";
-        await set(userRef, { name, email: userEmail, role: "user" });
-      }
-
-      setsuccessmsg("Google Sign-In Successful!");
-      const { plan, ageGroup } = userData;
-      const currentTime = Date.now();
-
-      if (ageGroup) {
-        if (plan && plan.endTime > currentTime) {
-          setTimeout(() => navigate("/report"), 1000);
-        } else {
-          setTimeout(() => navigate("/plans"), 1000);
-        }
+  
+          const uid = result.user.uid;
+          const userRef = ref(database, `users/${uid}`);
+          const snapshot = await get(userRef);
+  const userData = snapshot.val();
+          if (!snapshot.exists()) {
+            const name = result.user.displayName || "";
+            await set(userRef, { name, email, role: "user" });
+          }
+    const { plan, ageGroup } = userData;
+  
+          setError(""); 
+          setsuccessmsg("Google Sign-In Successful!");
+               if(ageGroup){
+   if (plan && plan.endTime > currentTime) {
+    setTimeout(() => {
+          navigate("/report");
+        }, 1000);
       } else {
-        setTimeout(() => navigate("/select-age-group"), 1000);
+        setTimeout(() => {
+          navigate("/plans"); 
+        }, 1000);
       }
-    } catch (err) {
-      console.error("Error processing user:", err);
-      setError(
-        `Error processing user: ${err.code || "Unknown error"} - ${
-          err.message || "No message"
-        }`
-      );
+    }else{
+    setTimeout(() => {
+          navigate("/select-age-group");
+        }, 1000);
     }
-  };
-
-  // ✅ Handle Google Sign-In when login button is clicked
-  const handleGoogleLogin = async () => {
-    setError("");
-    setMessage("");
-    setsuccessmsg("");
-
-    try {
-      const provider = new GoogleAuthProvider();
-      provider.setCustomParameters({ prompt: "select_account" });
-      provider.addScope("email profile");
-
-      const isMobile =
-        /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ||
-        window.innerWidth <= 768;
-
-      // if (isMobile) {
-      //   console.log("Mobile detected – using redirect sign-in");
-      //   await signInWithRedirect(auth, provider); // Redirect to Google
-      // } else {
-        console.log("Desktop detected – using popup sign-in");
-        const result = await signInWithPopup(auth, provider); // Open popup
-        await processUser(result);
-      // }
-    } catch (err) {
-      console.error("Google sign-in error:", err);
-      handleAuthError(err);
+      } catch (err) {
+              if (err.code === "auth/popup-closed-by-user") {
+        setError("Google sign-in was cancelled by the user.");
+      } else if (err.code === "auth/cancelled-popup-request") {
+        setError("Multiple Google sign-in attempts detected. Please try again.");
+      } else if (err.code === "auth/popup-blocked") {
+        setError("Google sign-in popup was blocked. Please enable pop-ups for this site or try again on a mobile device.");
+      } else if (err.code === "auth/unauthorized-domain") {
+        setError("Your domain is not authorized for Google Sign-In. Please contact support.");
+      } else {
+        setError(`Google Sign-In Failed: ${err.message || "Unknown error."}`);
+      }
     }
-  };
-
-  // ✅ Error handler for Firebase Auth
-  const handleAuthError = (err) => {
-    if (err.code === "auth/popup-blocked") {
-      setError("Popup blocked. Please enable pop-ups or try a different browser.");
-    } else if (err.code === "auth/popup-closed-by-user") {
-      setError("Google sign-in was cancelled.");
-    } else if (err.code === "auth/redirect-cancelled-by-user") {
-      setError("Google sign-in was cancelled.");
-    } else if (err.code === "auth/redirect-error") {
-      setError(
-        "Google Sign-In redirect failed. Check your OAuth configuration or try a different browser."
-      );
-    } else if (err.code === "auth/invalid-credential") {
-      setError("Invalid OAuth configuration. Please contact support.");
-    } else {
-      setError(
-        `Google Sign-In Failed: ${err.code || "Unknown error"} - ${
-          err.message || "No message"
-        }`
-      );
-    }
-  };
+      
+    };
 
 
   const handleLogin = async (e) => {
@@ -206,10 +119,6 @@ const LoginPage = () => {
         return;
       }
   const { plan, ageGroup } = userData;
-      // const token = await userCredential.user.getIdToken();
-      console.log(plan,ageGroup,"tokentoken");
-      // setStorageItem("authToken", token);
-      // setStorageItem("userType", "user");
       setsuccessmsg("Login Successful!");
       setError(""); 
       setMessage("");
@@ -276,84 +185,6 @@ const LoginPage = () => {
       }
     }
   };
-
-//   const handleGoogleLogin = async () => {
-//     setError(""); // Clear previous errors
-//     setMessage("");
-//     setsuccessmsg("");
-
-//     try {
-//       const provider = new GoogleAuthProvider();
-//       provider.setCustomParameters({ prompt: "select_account" }); // Forces account selection every time
-
-//       const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-//       if (isMobile) {
-//         sessionStorage.setItem("googleRedirect", "true"); // Set flag before redirect
-//         await signInWithRedirect(auth, provider);
-//       } else {
-//         const result = await signInWithPopup(auth, provider);
-//         const user = result.user;
-//         const userEmail = user.email;
-
-//         const methods = await fetchSignInMethodsForEmail(auth, userEmail);
-//         if (methods.includes("password")) {
-//           setError(
-//             "This email is already registered with Email/Password. Please log in with your email and password or reset your password."
-//           );
-//           await signOut(auth); // Sign out the Google user
-//           return;
-//         }
-
-//         const uid = user.uid;
-//         const userRef = ref(database, `users/${uid}`);
-//         const snapshot = await get(userRef);
-//  const userData = snapshot.val();
-//         if (!snapshot.exists()) {
-//           const name = user.displayName || "User";
-//           await set(userRef, { name, email: userEmail, role: "user" });
-//         }
-// console.log(userData,"userData");
-//   const { plan, ageGroup } = userData;
-
-//         const token = await user.getIdToken();
-//         setStorageItem("authToken", token);
-//         setStorageItem("userType", "user");
-// setError(""); 
-//                       setMessage("");
-//         setsuccessmsg("Google Sign-In Successful!");
-//       if(ageGroup){
-//  if (plan && plan.endTime > currentTime) {
-//    setTimeout(() => {
-//               navigate("/report"); // Plan is active
-//       }, 1000);
-//     } else {
-//        setTimeout(() => {
-//         navigate("/plans");
-//       }, 1000);
-//        // Plan is expired or doesn't exist
-//     }
-//   }else{
-//   setTimeout(() => {
-//         navigate("/select-age-group");
-//       }, 1000);
-//   }
-//       }
-//     } catch (err) {
-//       console.error("Google sign-in error (popup or initial redirect attempt):", err);
-//       if (err.code === "auth/popup-closed-by-user") {
-//         setError("Google sign-in was cancelled by the user.");
-//       } else if (err.code === "auth/cancelled-popup-request") {
-//         setError("Multiple Google sign-in attempts detected. Please try again.");
-//       } else if (err.code === "auth/popup-blocked") {
-//         setError("Google sign-in popup was blocked. Please enable pop-ups for this site or try again on a mobile device.");
-//       } else if (err.code === "auth/unauthorized-domain") {
-//         setError("Your domain is not authorized for Google Sign-In. Please contact support.");
-//       } else {
-//         setError(`Google Sign-In Failed: ${err.message || "Unknown error."}`);
-//       }
-//     }
-//   };
 
   return (
     <div>
