@@ -86,7 +86,7 @@ export const Navbar = () => {
             <AccountCircleIcon className="user-avatar"/>
             {showLogout && (
               <div className="logout-popup">
-                <button onClick={handleLogout}>Logout</button>
+                <button onClick={handleLogout}>Sign Out</button>
               </div>
             )}
           </div>
