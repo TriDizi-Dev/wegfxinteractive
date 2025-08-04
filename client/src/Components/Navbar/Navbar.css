@@ -71,7 +71,7 @@
     padding: 6px 12px;
     font-size: 14px;
     background-color: #ffff;
-    /* color: #333; */
+    color: #333;
     border: 1px solid #ccc;
     border-radius: 6px;
     cursor: pointer;
@@ -120,12 +120,13 @@
         margin-top: -2px;
         padding: 3px 6px;
         font-size: 4vw;
-        background-color: transparent;
+        background-color: #ffff;
         color: #333;
         border: 1px solid #ccc;
         border-radius: 6px;
         cursor: pointer;
         transition: background-color 0.2s ease;
+        font-family: 'Poppins', sans-serif;
     }
 
 }
