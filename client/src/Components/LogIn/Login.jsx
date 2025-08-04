@@ -30,6 +30,7 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
     const handleGoogleLogin = async () => {
+      setError("")
       try {
         const provider = new GoogleAuthProvider();
         provider.setCustomParameters({ prompt: "select_account" });

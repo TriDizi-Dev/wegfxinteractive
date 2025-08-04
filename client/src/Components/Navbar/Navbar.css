@@ -45,8 +45,8 @@
 
 .logout-popup {
     position: absolute;
-    top: 4.5vw;
-    left: 0;
+    top: 4.3vw;
+    right: 0;
     border-radius: 6px;
     z-index: 1000;
     padding: 8px 16px;
@@ -67,11 +67,11 @@
 }
 
 .back-arrow-btn {
-    margin-top: 8px;
+    margin-top: 0px;
     padding: 6px 12px;
     font-size: 14px;
-    background-color: transparent;
-    color: #333;
+    background-color: #ffff;
+    /* color: #333; */
     border: 1px solid #ccc;
     border-radius: 6px;
     cursor: pointer;
@@ -79,6 +79,8 @@
     position: relative;
     z-index: 1000;
     margin-left: .5vw;
+    width: fit-content;
+    font-family: 'Poppins', sans-serif;
 }
 
 .back-arrow-btn:hover {
@@ -105,13 +107,13 @@
     }
 
     .logout-popup {
-        top: 7vw;
-        /* right: -vw; */
+        top: 13vw;
+        right: -2.8vw;
     }
 
     .logout-popup button {
         font-size: 2.5vw;
-        margin-top: 7vw;
+        /* margin-top: 7vw; */
     }
 
     .back-arrow-btn {

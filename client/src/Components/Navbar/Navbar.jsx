@@ -39,7 +39,7 @@ export const Navbar = () => {
 
   const location = useLocation();
 
-  const hideBackButtonPaths = ["/", "/sign-up"];
+  const hideBackButtonPaths = ["/", "/sign-up","/wselect-age-group"];
   const hideLogo = ["/", "/sign-up"];
 
   const shouldHideBackButton = hideBackButtonPaths.includes(location.pathname);
@@ -56,15 +56,15 @@ export const Navbar = () => {
         <div>
           {!shouldHideBackButton && (
             <div
-              // className="back-arrow-btn"
-              className="logout-popup"
-              // onClick={() => window.history.back()}
-              onClick={handleLogout}
+              className="back-arrow-btn"
+              
+              onClick={() => window.history.back()}
+
             >
-              {/* ← Back */}
-              <button>
+              ← Back
+              {/* <button>
               Sign Out
-              </button>
+              </button> */}
             </div>
            )} 
           {/* Other navbar content */}
@@ -81,14 +81,14 @@ export const Navbar = () => {
           </span>
           <div
             
-            // onClick={() => setShowLogout(!showLogout)}
+            onClick={() => setShowLogout(!showLogout)}
           >
             <AccountCircleIcon className="user-avatar"/>
-            {/* {showLogout && (
+            {showLogout && (
               <div className="logout-popup">
                 <button onClick={handleLogout}>Logout</button>
               </div>
-            )} */}
+            )}
           </div>
         </div>
       )}
