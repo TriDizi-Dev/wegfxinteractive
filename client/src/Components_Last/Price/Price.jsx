@@ -15,6 +15,8 @@ function Price() {
   const [couponStatus, setCouponStatus] = useState("");
   const [Discount,setDiscount] = useState(null)
   const [CouponDetails,setCouponDetails] = useState(null)
+  const [loading, setLoading] = useState(false);
+
   console.log(CouponDetails,"CouponDetails");
   
   const BenifitsObj = {
@@ -58,50 +60,63 @@ function Price() {
   }, []);
 
 
-  const handleProceed = async (planType) => {
-    if (!planType) return alert("Please select a plan.");
+const handleProceed = async (planType) => {
+  if (!planType) return alert("Please select a plan.");
 
-    const uid = auth.currentUser?.uid;
-    if (!uid) return alert("User not authenticated");
+  const uid = auth.currentUser?.uid;
+  if (!uid) return alert("User not authenticated");
 
-    let amount;
+  let amount;
 
-    switch (planType) {
-      case "starter":
-        amount = 149; // Set base amount for Trial
-        break;
-      case "pro":
-        amount = 599; // Set base amount for pro
-        break;
-      case "elite":
-        amount = 1799; // Set base amount for elite
-        break;
-      default:
-        alert("Invalid plan selected");
-        return;
-    }
+  switch (planType) {
+    case "starter":
+      amount = 149;
+      break;
+    case "pro":
+      amount = 599;
+      break;
+    case "elite":
+      amount = 1799;
+      break;
+    default:
+      alert("Invalid plan selected");
+      return;
+  }
 
-     // Fetch and apply coupon
+  // Mapping between your planType and coupon category
+  const planCategoryMap = {
+    starter: "",
+    pro: "Basic",
+    elite: "Super Saver",
+  };
+
   if (coupan) {
     try {
       const couponRef = ref(database, `coupons/${coupan}`);
       const snapshot = await get(couponRef);
+      console.log(snapshot.val(), "snapshot.val()");
 
       if (snapshot.exists()) {
-        const discount = snapshot.val().percentage;
-        if (typeof discount === "number" && discount > 0 && discount <= 100) {
-          const discountAmount = (amount * discount) / 100;
-          Math.floor(amount -= discountAmount);
-          console.log(`Coupon applied: -${discount}% → ₹${discountAmount} off`);
-            setCouponStatus("valid");
-            setShowCouponPopup(false);
-               
+        const couponData = snapshot.val();
+        const { category, percentage } = couponData;
+        const expectedCategory = planCategoryMap[planType];
+        if (category && category !== expectedCategory) {
+          alert(`This coupon is only valid for the ${category} plan.`);
+          return;
+        }
+
+        if (typeof percentage === "number" && percentage > 0 && percentage <= 100) {
+          const discountAmount = Math.floor((amount * percentage) / 100);
+          amount -= discountAmount; 
+          console.log(`Coupon applied: -${percentage}% → ₹${discountAmount} off`);
+
+          setCouponStatus("valid");
+          setShowCouponPopup(false);
         } else {
           console.log("Invalid discount value in DB.");
         }
       } else {
         setCouponStatus("invalid");
-
         return;
       }
     } catch (error) {
@@ -110,32 +125,35 @@ function Price() {
       return;
     }
   }
-
-    try {
-      const res = await axios.post(
-        // "https://api.think.wegfx.com/initiate-payment",
-        "https://wegfxinteractive.onrender.com/initiate-payment",
-        {
-          userId: uid,
-          amount,
-          mobile: "1799179917999",
-          plan: planType,
-        }
-      );
-
-      console.log("Full Response:", res);
-      console.log("Redirect URL:", res.data?.route);
-
-      if (res.data?.route) {
-        window.location.href = res.data.route;
-      } else {
-        alert("No redirect URL returned.");
+  setLoading(true);
+  try {
+    const res = await axios.post(
+      "https://wegfxinteractive.onrender.com/initiate-payment",
+      {
+        userId: uid,
+        amount,
+        mobile: "1799179917999",
+        plan: planType,
       }
-    } catch (err) {
-      console.error("Payment Error", err.response?.data || err.message);
-      alert("Failed to initiate payment.");
+    );
+
+    console.log("Full Response:", res);
+    console.log("Redirect URL:", res.data?.route);
+
+    if (res.data?.route) {
+      window.location.href = res.data.route;
+    } else {
+      alert("No redirect URL returned.");
+      setLoading(false);
     }
-  };
+  } catch (err) {
+    console.error("Payment Error", err.response?.data || err.message);
+    alert("Failed to initiate payment.");
+    setLoading(false);
+  }
+};
+
+
 
   return (
     <>
@@ -290,7 +308,7 @@ function Price() {
   Apply
 </button>
 
-            <button onClick={() => setShowCouponPopup(false)}>Close</button>
+            <button onClick={() => (setShowCouponPopup(false), setcoupan(""),setCouponStatus(""))}>Clear</button>
             {couponStatus === "valid" && (
               <p className="success">Coupon applied!</p>
             )}
@@ -300,6 +318,13 @@ function Price() {
           </div>
         </div>
       )}
+      {loading && (
+  <div className="loader-overlay">
+    <div className="loader"></div>
+    <p className="loader-text">Redirecting to PhonePe...</p>
+  </div>
+)}
+
     </>
   );
 }

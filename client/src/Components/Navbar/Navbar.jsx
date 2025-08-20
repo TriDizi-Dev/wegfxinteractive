@@ -56,10 +56,8 @@ export const Navbar = () => {
         <div>
           {!shouldHideBackButton && (
             <div
-              className="back-arrow-btn"
-              
+              className="back-arrow-btn"        
               onClick={() => window.history.back()}
-
             >
               ← Back
               {/* <button>
