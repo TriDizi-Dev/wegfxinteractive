@@ -46,7 +46,7 @@ function Layout() {
     } else if (location.pathname === "/select-age-group") {
       document.body.style.backgroundImage = `url(${backfroundImageKids})`;
     } else if (location.pathname === "/report") {
-      document.body.style.height = isMobile ? "124.5vh" : "98vh";
+      document.body.style.height = isMobile ? "124.5vh" : "97.8vh";
       document.body.style.backgroundImage = `url(${backgroundimagplan})`;
     } else if (location.pathname === "/plans") {
       document.body.style.height = isMobile ? "130vh" : "";
