@@ -14,7 +14,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { ref, get, set, remove, database } from "../../../Firebase/firebase";
 import "./ManageCoupons.css";
 
-const categoryOptions = ["Basic", "Super Saver"];
+const categoryOptions = ["Trial", "Basic", "Super Saver"];
 
 const ManageCoupons = () => {
   const [couponCode, setCouponCode] = useState("");
@@ -65,6 +65,8 @@ const ManageCoupons = () => {
       return copy;
     });
   };
+
+  
 
   return (
     <Box p={3} className="manage-coupons-container">

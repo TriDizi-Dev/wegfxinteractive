@@ -15,8 +15,6 @@ function Price() {
   const [couponStatus, setCouponStatus] = useState("");
   const [Discount,setDiscount] = useState(null)
   const [CouponDetails,setCouponDetails] = useState(null)
-  const [loading, setLoading] = useState(false);
-
   console.log(CouponDetails,"CouponDetails");
   
   const BenifitsObj = {
@@ -59,6 +57,41 @@ function Price() {
     fetchUser();
   }, []);
 
+  // const handleProceed = async (planType) => {
+  //   if (!planType) {
+  //     alert("Please select a plan to proceed.");
+  //     return;
+  //   }
+  //   setSelectedPlan(planType);
+  //   const uid = auth.currentUser?.uid;
+  //   if (!uid) {
+  //     alert("User not authenticated");
+  //     return;
+  //   }
+
+  //   const now = Date.now();
+  //   let expiry;
+
+  //   if (planType === "Trial") {
+  //     expiry = now + 7 * 24 * 60 * 60 * 1000; // 1 Week
+  //   } else if (planType === "pro") {
+  //     expiry = now + 30 * 24 * 60 * 60 * 1000; // 1 Month
+  //   } else if (planType === "elite") {
+  //     expiry = now + 90 * 24 * 60 * 60 * 1000; // 3 Months
+  //   } else {
+  //     alert("Invalid plan selected");
+  //     return;
+  //   }
+
+  //   const userPlanRef = ref(database, `users/${uid}/plan`);
+  //   await set(userPlanRef, {
+  //     type: planType,
+  //     startTime: now,
+  //     endTime: expiry,
+  //   });
+
+  //   navigate("/report", { state: { planType } });
+  // };
 
 const handleProceed = async (planType) => {
   if (!planType) return alert("Please select a plan.");
@@ -70,65 +103,53 @@ const handleProceed = async (planType) => {
 
   switch (planType) {
     case "starter":
-      amount = 149;
+      amount = 49;
       break;
     case "pro":
-      amount = 599;
+      amount = 199;
       break;
     case "elite":
-      amount = 1799;
+      amount = 599;
       break;
     default:
       alert("Invalid plan selected");
       return;
   }
 
-  // Mapping between your planType and coupon category
-  const planCategoryMap = {
-    starter: "",
-    pro: "Basic",
-    elite: "Super Saver",
-  };
-
-  if (coupan) {
-    try {
-      const couponRef = ref(database, `coupons/${coupan}`);
-      const snapshot = await get(couponRef);
-      console.log(snapshot.val(), "snapshot.val()");
-
-      if (snapshot.exists()) {
-        const couponData = snapshot.val();
-        const { category, percentage } = couponData;
-        const expectedCategory = planCategoryMap[planType];
-        if (category && category !== expectedCategory) {
-          alert(`This coupon is only valid for the ${category} plan.`);
-          return;
-        }
-
-        if (typeof percentage === "number" && percentage > 0 && percentage <= 100) {
-          const discountAmount = Math.floor((amount * percentage) / 100);
-          amount -= discountAmount; 
-          console.log(`Coupon applied: -${percentage}% → ₹${discountAmount} off`);
-
-          setCouponStatus("valid");
-          setShowCouponPopup(false);
-        } else {
-          console.log("Invalid discount value in DB.");
-        }
-      } else {
-        setCouponStatus("invalid");
-        return;
-      }
-    } catch (error) {
-      console.error("Error fetching coupon:", error);
-      alert("Failed to apply coupon. Please try again.");
-      return;
+  // ✅ Apply coupon rules
+  if (coupan && couponStatus === "valid") {
+    if (planType === "starter") {
+      amount = 0; // 49 → Free
+    } else if (planType === "pro") {
+      amount = 149; // 199 → 149
+    } else if (planType === "elite") {
+      amount = 399; // 599 → 399
     }
   }
-  setLoading(true);
+
+  console.log("Final amount:", amount);
+
+  // ✅ If Free → Skip payment and route directly
+  if (amount === 0) {
+    const now = Date.now();
+    const expiry = now + 7 * 24 * 60 * 60 * 1000; // 1 Week trial
+
+    const userPlanRef = ref(database, `users/${uid}/plan`);
+    await set(userPlanRef, {
+      type: planType,
+      startTime: now,
+      endTime: expiry,
+    });
+
+    // redirect without payment
+    window.location.href = "/report"; 
+    return;
+  }
+
+  // ✅ Otherwise → normal payment flow
   try {
     const res = await axios.post(
-      "https://wegfxinteractive.onrender.com/initiate-payment",
+      "https://api.think.wegfx.com/initiate-payment",
       {
         userId: uid,
         amount,
@@ -144,12 +165,10 @@ const handleProceed = async (planType) => {
       window.location.href = res.data.route;
     } else {
       alert("No redirect URL returned.");
-      setLoading(false);
     }
   } catch (err) {
     console.error("Payment Error", err.response?.data || err.message);
     alert("Failed to initiate payment.");
-    setLoading(false);
   }
 };
 
@@ -188,10 +207,13 @@ const handleProceed = async (planType) => {
                     onClick={() => handleProceed("starter")}
                   >
                     {/* <h3 className="plan-name">Trial Plan</h3> */}
-                    <p className="price">
-                      {" "}
-                      <span className="price-value">₹ 149</span>
-                    </p>
+                   <p className="price">
+  <span className="price-value">
+    {(couponStatus === "valid" && CouponDetails?.category === "Trial")
+      ? "Free"
+      : "₹ 49"}
+  </span>
+</p>
                     <p className="duration">1 Week</p>
                   </div>
                 </div>
@@ -206,13 +228,17 @@ const handleProceed = async (planType) => {
                   >
 {(couponStatus === "valid" && CouponDetails.category === "Basic") &&
                     <p className="Wrong_Price">
-                      ₹ <span>599</span>
+                      ₹ <span>199</span>
                     </p>
 }
                     {/* <h3 className="plan-name">Pro Plan</h3> */}
                     <p className="price">
-                      <span className="price-value">{(couponStatus === "valid" && CouponDetails.category === "Basic") ? `₹ ${Math.floor((599 - (599 * Discount) / 100))}` : "₹ 599"}</span>
-                    </p>
+  <span className="price-value">
+    {(couponStatus === "valid" && CouponDetails?.category === "Basic")
+      ? "₹ 149" // fixed discounted price
+      : "₹ 199"}
+  </span>
+</p>
                     <p className="duration">1 Month</p>
                   </div>
                 </div>
@@ -227,17 +253,25 @@ const handleProceed = async (planType) => {
                   >
                    {(couponStatus === "valid" && CouponDetails.category === "Super Saver") &&
                     <p className="Wrong_Price">
-                      ₹ <span>1799</span>
+                      ₹ <span>599</span>
                     </p>
 }
 
                     <p className="price">
-                      <span className="price-value">{(couponStatus === "valid" && CouponDetails.category === "Super Saver") ? `₹ ${Math.floor((1799 - (1799 * Discount) / 100))}` : "₹ 1799"}</span>
-                    </p>
+  <span className="price-value">
+    {(couponStatus === "valid" && CouponDetails?.category === "Super Saver")
+      ? "₹ 399"
+      : "₹ 599"}
+  </span>
+</p>
                     <p className="duration">3 Months</p>
                   </div>
                 </div>
               </div>
+
+              {/* <p className="flexible-options-text">
+                Simple Prices, Flexible Options
+              </p> */}
               <div className="Benifits_text_main_container">
                 <div className="Coupon_Container">
                   <p
@@ -308,7 +342,7 @@ const handleProceed = async (planType) => {
   Apply
 </button>
 
-            <button onClick={() => (setShowCouponPopup(false), setcoupan(""),setCouponStatus(""))}>Clear</button>
+            <button onClick={() => setShowCouponPopup(false)}>Close</button>
             {couponStatus === "valid" && (
               <p className="success">Coupon applied!</p>
             )}
@@ -318,13 +352,6 @@ const handleProceed = async (planType) => {
           </div>
         </div>
       )}
-      {loading && (
-  <div className="loader-overlay">
-    <div className="loader"></div>
-    <p className="loader-text">Redirecting to PhonePe...</p>
-  </div>
-)}
-
     </>
   );
 }
