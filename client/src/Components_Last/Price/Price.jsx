@@ -3,7 +3,9 @@ import "./price.css";
 import mobile from "../../assets/AllWebpAssets/AssetMobilePlans.webp";
 import Think from "../../assets/AllWebpAssets/Asset3.webp";
 import { auth, database } from "../../Firebase/firebase";
-import { ref, get, getDatabase } from "firebase/database";
+// import { ref, get, getDatabase } from "firebase/database";
+import { ref, get, set } from "firebase/database";
+
 import axios from "axios";
 import { Navbar } from "../../Components/Navbar/Navbar";
 
