@@ -137,16 +137,34 @@ const handleProceed = async (planType) => {
 if (amount === 0) {
   const uid = auth.currentUser?.uid;
 
-  await set(ref(database, `users/${uid}/subscription`), {
+  const subscriptionData = {
     plan: planType,
     amount: 0,
-    coupon: coupan,
+    coupon: coupan || null,
     activatedAt: new Date().toISOString(),
-  });
+    isPremiumUser: true,
+    paymentStatus: "success",
+  };
 
-  window.location.href = "/report";
+  // Store subscription in both places
+  await set(ref(database, `users/${uid}/subscription`), subscriptionData);
+  await set(ref(database, `users/${uid}/plan`), subscriptionData);
+
+  // ✅ update local state also
+  setUserdata((prev) => ({
+    ...prev,
+    subscription: subscriptionData,
+    plan: subscriptionData,
+  }));
+
+  // ✅ Small delay for DB write sync
+  setTimeout(() => {
+    window.location.href = "/report";
+  }, 500);
+
   return;
 }
+
 
 
   // Proceed with payment
