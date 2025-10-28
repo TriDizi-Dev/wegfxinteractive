@@ -132,10 +132,20 @@ const handleProceed = async (planType) => {
   }
 
   // Handle zero-price scenario
-  if (amount === 0) {
-    window.location.href = "/report"; // redirect to report page
-    return;
-  }
+if (amount === 0) {
+  const uid = auth.currentUser?.uid;
+
+  await set(ref(database, `users/${uid}/subscription`), {
+    plan: planType,
+    amount: 0,
+    coupon: coupan,
+    activatedAt: new Date().toISOString(),
+  });
+
+  window.location.href = "/report";
+  return;
+}
+
 
   // Proceed with payment
   setLoading(true);

@@ -91,7 +91,7 @@ const QuestionsManage = () => {
   return (
     <div className="Question_Main_container">
       <Box display="flex" justifyContent="space-between" alignItems="center" padding="1.5rem" flexWrap="wrap" marginTop="-2vw">
-        <h2 className="manage-title">Manage Interview Questions</h2>
+        <h2 className="manage-title">Think Customised Interview Questions</h2>
         <Button
           variant="contained"
           onClick={() => navigate("/questionCreation")}

@@ -170,7 +170,7 @@ function PiePage() {
   const handleStartClick = () => {
     console.log(`Starting with age group: ${ageGroup}`);
     navigate("/quiz");
-    // Add navigation or other logic here
+
   };
   const emailfun = ()=>{
     window.location.href="mailto:info@wegfx.com"
