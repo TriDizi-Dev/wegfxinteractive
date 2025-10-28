@@ -200,7 +200,7 @@ const LoginPage = () => {
         <div className="login-rightside">
           <div className="head">
             <img src={thinklogo} className="logo" alt="Think Logo" />
-            <h2>User Login</h2>
+            <h2>Usersss Login</h2>
           </div>
           <form
             onSubmit={showChangePassword ? handleSendResetEmail : handleLogin}
