@@ -119,7 +119,7 @@ const QuestionCreation = () => {
 
   return (
     <div className="interview">
-      <h1>Think Customised Questions Creation</h1>
+      <h1>Think Customised Questions</h1>
       <Container>
         <Box
           sx={{
